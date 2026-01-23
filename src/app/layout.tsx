@@ -12,10 +12,10 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "Memestructures | ",
+    default: "Memestructures | Structured Investing Across Asset Classes",
     template: "%s | My Next.js App",
   },
-  description: "Structured Investing Across Asset Classes",
+  description: "",
   icons: {
     icon: "/images/memestructuresfavicon.png",
   },

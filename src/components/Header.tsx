@@ -29,8 +29,8 @@ function Header() {
     ]
 
     return (
-        <section className="fixed w-full z-30 backdrop-blur-md glass bg-my-white">
-            <div className="w-full flex justify-between items-center bg-my-deep-black/70 lg:py-4 py-3 px-3 max-w-7xl mx-auto border border-my-blue relative">
+        <section className="fixed w-full z-30 backdrop-blur-xl bg-my-white/60">
+            <div className="w-full flex justify-between items-center lg:py-4 py-3 px-3 max-w-7xl mx-auto relative">
                 <Link href="/" className="">
                     <Image
                         src="/images/memestructureslogo.png"
@@ -66,13 +66,14 @@ function Header() {
                     <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                     <div className="h-0.5 w-4 bg-my-deep-blue rounded-b-full"></div>
                 </div>
-                <div onClick={toggleMenu} className={`mt-3 mr-2 duration-500 absolute top-full py-6 right-0 w-42 rounded-2xl bg-my-deep-black flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"} lg:hidden`}>
+
+                <div onClick={toggleMenu} className={`mt-3 mr-2 duration-500 top-full bg-my-white/60 backdrop-blur-3xl  absolute py-6 right-0 w-42 rounded-2xl flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"} lg:hidden`}>
                     {navLinks.map((link) => {
                         return (
                             <Link
                                 key={link.name}
                                 href={link.path}
-                                className="py-2 px-6 hover:bg-my-black"
+                                className="py-2 px-6 hover:bg-my-blue-white/30 transition-all"
                             >
                                 {link.name}
                             </Link>

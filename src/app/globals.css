@@ -9,14 +9,6 @@ body {
   --color-my-white: #f9fbff;
   --color-my-blue: #006de2;
   --color-my-deep-blue: #0F172A;
-  --color-my-gray: #393e4a;
+  --color-my-gray: #474b57;
   --color-my-blue-white: #deeafa;
-}
-
-.glass {
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  /*box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);*/
-
 }
