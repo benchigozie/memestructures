@@ -1,26 +1,46 @@
 
-type ButtonProps = { 
-    buttonText: string, 
+type ButtonProps = {
+    buttonText: string,
     btnType: "primary" | "secondary",
-    className?: string 
+    className?: string
+    bgColour?: string,
+    colour?: string,
 }
 
-function Button({ buttonText, btnType, className }: ButtonProps ) {
+function Button({ buttonText, btnType, className, bgColour, colour }: ButtonProps) {
 
-    const primaryStyle = "px-7 py-4 md:py-5 bg-my-blue text-white rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer";
-    const secondaryStyle = "px-7 py-4 md:py-5 bg-my-blue-white/40 text-my-blue rounded-xl md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer border border-my-blue-white";
-    
+    const primaryStyle = "px-7 py-4 md:py-5 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer";
+    const secondaryStyle = "px-7 py-4 md:py-5 text-my-blue rounded-xl md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer border border-my-blue-white";
+
     if (!className) {
         className = "";
     }
 
-  return (
-    <div>
-        <button className={btnType === "primary" ? primaryStyle + " " + className : secondaryStyle + " " + className }>
-            {buttonText}
-        </button>
-    </div>
-  )
+    if (!bgColour) {
+        if (btnType === "primary") {
+            bgColour = "bg-my-blue";
+        }
+        if (btnType === "secondary") {
+            bgColour = "bg-my-blue-white/40";
+        }
+    }
+
+    if (!colour) {
+        if (btnType === "primary") {
+            colour = "text-white";
+        }
+        if (btnType === "secondary") {
+            colour = "text-my-blue";
+        }
+    }
+
+    return (
+        <div>
+            <button className={`${btnType === "primary" ? primaryStyle : secondaryStyle} ${className} ${bgColour} ${colour}`}>
+                {buttonText}
+            </button>
+        </div>
+    )
 }
 
 export default Button

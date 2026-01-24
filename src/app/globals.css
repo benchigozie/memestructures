@@ -11,6 +11,7 @@ body {
   --color-my-deep-blue: #0F172A;
   --color-my-gray: #474b57;
   --color-my-blue-white: #deeafa;
+  --color-my-pure-white: #ffffff;
 }
 
 @keyframes pulse-ring {
