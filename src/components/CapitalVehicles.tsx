@@ -19,8 +19,8 @@ function CapitalVehicles() {
                             <p>Systematic exposure to early-stage narratives and low-cap momentum leaders. Best for capital expansion.</p>
                             <div className="flex justify-between">
                                 <p className="text-xs text-my-gray/70">TARGET: 40% ROI</p>
-                                <div className="py-1 px-2 flex items-end">
-                                    <p className="text-my-blue">Request Prospectus</p>
+                                <div className="py-1 px-2 flex justify-end items-end">
+                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>Request</span><span>Prospectus</span></p>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>
@@ -38,8 +38,8 @@ function CapitalVehicles() {
                             <p>Curated selection of high-liquidity meme assets with established market-making support.</p>
                             <div className="flex justify-between">
                                 <p className="text-xs text-my-gray/70">TARGET:  22% ROI</p>
-                                <div className="py-1 px-2 flex items-end">
-                                    <p className="text-my-blue">Request Prospectus</p>
+                                <div className="py-1 px-2 flex justify-end items-end">
+                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>Request</span><span>Prospectus</span></p>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>
