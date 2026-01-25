@@ -1,3 +1,4 @@
+import CapitalVehicles from "@/components/CapitalVehicles";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Results from "@/components/Results";
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <Results />
         <YieldStrategy />
+        <CapitalVehicles />
       </main>
     </div>
   );

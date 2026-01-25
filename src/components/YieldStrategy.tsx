@@ -41,31 +41,31 @@ function YieldStrategy() {
                         })
                     }
                 </div>
-                <div className="p-18 bg-my-blue rounded-4xl mt-14  md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="p-8 md:p-12 lg:p-18 bg-my-blue rounded-4xl mt-14  md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="flex flex-col gap-8 justify-center">
                         <div className="bg-my-white/30 px-5 py-1 rounded-full w-max">
                             <p className="text-white text-xs font-medium tracking-widest">ACTIVE FUND ANALYSIS</p>
                         </div>
                         <p className="text-my-white font-bold text-8xl tracking-tighter">DIMF</p>
                         <p className="text-my-blue-white text-xl">The Diversified Income Memecoin Fund: Capture yield from the foundational meme protocols.</p>
-                        <div className="flex gap-2">
-                            <Button buttonText="View Dashboard" btnType="secondary" className="w-max shadow-lg shadow-my-gray/20" bgColour="bg-my-white" colour="text-my-blue" />
-                            <Button buttonText="Audit Logs" btnType="secondary" className="w-max shadow-sm" bgColour="bg-my-white/30" colour="text-my-pure-white" />
+                        <div className="flex flex-col md:flex-row gap-2">
+                            <Button buttonText="View Dashboard" btnType="secondary" className="w-full md:w-max shadow-lg shadow-my-gray/20" bgColour="bg-my-white" colour="text-my-blue" />
+                            <Button buttonText="Audit Logs" btnType="secondary" className="w-full md:w-max shadow-sm" bgColour="bg-my-white/30" colour="text-my-pure-white" />
                         </div>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <div className="grid grid-cols-2 gap-5">
+                        <div className="grid grid-cols-2 gap-3 md:gap-5">
                             <div className="bg-my-white/30 p-10 rounded-4xl gap-2 flex flex-col items-center justify-center text-my-white">
                                 <p className="text-xs">LIVE RETURN</p>
-                                <p className="font-bold text-4xl md:text-5xl">+112%</p>
+                                <p className="font-bold text-3xl lg:text-5xl">+112%</p>
                             </div>
                             <div className="bg-my-white/30 p-10 rounded-4xl gap-2 flex flex-col items-center justify-center text-my-white">
                                 <p className="text-xs">SHARPE RATIO</p>
-                                <p className="font-bold text-4xl md:text-5xl">3.4</p>
+                                <p className="font-bold text-3xl lg:text-5xl">3.4</p>
                             </div>
                             <div className="bg-my-white/30 p-10 col-span-2 rounded-4xl gap-2 flex flex-col items-center justify-center text-my-white">
                                 <p className="text-xs">INVEST PERIOD</p>
-                                <p className="font-bold text-2xl md:text-3xl">Nov 2024 - 2025</p>
+                                <p className="font-bold text-2xl lg:text-3xl">Nov 2024 - 2025</p>
                             </div>
                         </div>
                     </div>
