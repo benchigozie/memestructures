@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 type Card = {
-    icon: string;
+    number: number;
     heading: string;
     text: string;
 }
@@ -9,9 +9,10 @@ type Card = {
 function OnboardingProcess() {
 
     const cards: Card[] = [
-        { icon: '/images/searchicon.png', heading: "Yield Seeking", text: "You want high-convexity returns without managing thousands of daily on-chain alerts." },
-        { icon: "/images/structure.png", heading: "Structure First", text: "You appreciate the alpha in memes but require the rigor of institutional fund structures." },
-        { icon: "/images/shield.png", heading: "Risk Intelligent", text: "You understand that in the meme economy, drawdown protection is the true source of profit." },
+        { number: 1 , heading: "KYC & Sign Up", text: "Secure verification and institutional-grade wallet link." },
+        { number: 2 , heading: "Strategy Review", text: "Consult our fund performance data and strategy whitepapers." },
+        { number: 3 , heading: "Allocate Capital", text: "Deploy funds into your selected MemeStructures vehicle." },
+        { number: 4 , heading: "Growth Tracking", text: "Real-time monitoring via your dedicated client portal." },
     ]
 
     return (
@@ -24,7 +25,7 @@ function OnboardingProcess() {
                             className='p-5 md:p-10 transition-all duration-300 flex flex-col gap-6 justify-center items-center text-center relative'
                         >
                             <div className="p-4 rounded-full bg-white shadow-md shadow-my-gray/20 w-max">
-                                <Image src={card.icon} alt="" width={40} height={40} />
+                               <p className='w-8 h-8 text-3xl text-my-blue font-semibold'>{card.number}</p>
                             </div>
                             <h3 className="mt-3 text-2xl text-my-deep-blue font-semibold">{card.heading}</h3>
                             <p>{card.text}</p>

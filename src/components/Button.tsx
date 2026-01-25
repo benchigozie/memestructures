@@ -9,8 +9,8 @@ type ButtonProps = {
 
 function Button({ buttonText, btnType, className, bgColour, colour }: ButtonProps) {
 
-    const primaryStyle = "px-7 py-4 md:py-5 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer";
-    const secondaryStyle = "px-7 py-4 md:py-5 text-my-blue rounded-xl md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer border border-my-blue-white";
+    const primaryStyle = "text-sm md:text-base px-4 md:px-7 py-3 md:py-4 md:py-5 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer";
+    const secondaryStyle = "text-sm md:text-base px-4 md:px-7 py-3 md:py-4 md:py-5 text-my-blue rounded-xl md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer border border-my-blue-white";
 
     if (!className) {
         className = "";

@@ -12,7 +12,7 @@ function CapitalVehicles() {
                         >
                             <div className="flex justify-between">
                                 <h3 className="text-my-deep-blue text-xl md:text-2xl">Growth Alpha Fund</h3>
-                                <div className="py-1 px-2 bg-red-100 rounded-md flex items-center">
+                                <div className="py-1 px-2 bg-red-100 rounded-md flex items-center h-max">
                                     <p className="text-xs text-red-600">AGGRESSIVE</p>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@ function CapitalVehicles() {
                         >
                             <div className="flex justify-between">
                                 <h3 className="text-my-deep-blue text-xl md:text-2xl">Stability Basket</h3>
-                                <div className="py-1 px-2 bg-green-100 rounded-md flex items-center">
+                                <div className="py-1 px-2 bg-green-100 rounded-md flex items-center h-max">
                                     <p className="text-xs text-green-600">BALANCED</p>
                                 </div>
                             </div>
