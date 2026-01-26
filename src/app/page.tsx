@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="bg-my-white">
       <main>
-      <FixedCTA />
+        <FixedCTA />
         <Hero />
         <Results />
         <YieldStrategy />
