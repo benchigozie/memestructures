@@ -1,4 +1,5 @@
 import AboutHero from "@/components/AboutHero";
+import Team from "@/components/Team";
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ function page() {
     return (
         <div>
             <AboutHero />
-            
+            <Team />
         </div>
     )
 }
