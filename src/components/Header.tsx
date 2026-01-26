@@ -23,13 +23,13 @@ function Header() {
     const navLinks: NavLink[] = [
         { name: "Home", path: "/" },
         { name: "Invest", path: "/invest" },
-        { name: "About Us", path: "/events" },
+        { name: "About Us", path: "/about" },
         { name: "Team", path: "/services" },
         { name: "Blog", path: "/blogs" },
     ]
 
     return (
-        <section className="fixed w-full z-30 backdrop-blur-xl bg-my-white/60">
+        <section className="fixed top-0 w-full z-30 backdrop-blur-xl bg-my-white/60">
             <div className="w-full flex justify-between items-center lg:py-4 py-3 px-3 max-w-7xl mx-auto relative">
                 <Link href="/" className="">
                     <Image
@@ -48,7 +48,7 @@ function Header() {
                                 key={link.name}
                                 href={link.path}
                                 className={`px-4 py-2 rounded-full transition-all duration-300 ${isActive
-                                    ? "bg-my-black border" : ""
+                                    ? "border border-my-gray/40" : ""
                                     }`}
                             >
                                 {link.name}

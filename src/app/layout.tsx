@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import { Metadata } from "next";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -13,7 +15,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: {
     default: "Memestructures | Structured Investing Across Asset Classes",
-    template: "%s | My Next.js App",
+    template: "%s | Memestructures",
   },
   description: "",
   icons: {
@@ -32,7 +34,9 @@ export default function RootLayout({
       <body
        className={outfit.variable}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
