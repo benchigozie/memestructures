@@ -1,8 +1,12 @@
-import BlogHero from "@/components/BlogHero"
 import LatestBlog from "@/components/LatestBlog"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Blog posts",
+    description: "",
+  };
 
 function page() {
-    //decide what to do with blog hero
     return (
         <div>       
             <LatestBlog />

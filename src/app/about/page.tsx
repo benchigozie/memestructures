@@ -4,7 +4,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
     title: "About Us",
-    description: "",
+    description: "Learn More About MemeStructures - Our Mission, Vision, and the Team Behind the Platform",
   };
 
 function page() {
