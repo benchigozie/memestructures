@@ -5,6 +5,7 @@ import type { PortableTextComponents } from "@portabletext/react";
 import { sanityClient } from "@/lib/sanityClient";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanityImage";
+import ShareButton from "@/components/ShareButton";
 
 type Category = {
     _id: string;
@@ -21,7 +22,7 @@ type Post = {
     _id: string;
     title: string;
     publishedAt: string;
-    excerpt: string;
+    description: string;
     views: number;
     mainImage: any;
     body: PortableTextBlock[];
@@ -40,7 +41,7 @@ const postQuery = `
   publishedAt,
   body,
   mainImage,
-  excerpt,
+  description,
   "author": author->{
     name,
     role,
@@ -106,6 +107,9 @@ async function page({ params }: PageProps) {
                 </div>
                 <div className="prose text-green-gray prose-strong:text-my-gray prose-ul:marker:text-my-deep-blue prose-ol:marker:text-my-deep-blue max-w-none mt-6 text-lg">
                     <PortableText value={post.body} components={ptComponents} />
+                </div>
+                <div>
+                    <ShareButton title={post.title} text={post.description} />
                 </div>
             </div>
         </section>
