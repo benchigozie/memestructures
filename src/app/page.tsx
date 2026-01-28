@@ -3,6 +3,7 @@ import CTA from "@/components/CTA";
 import FixedCTA from "@/components/FixedCTA";
 import Hero from "@/components/Hero";
 import InvestorProfile from "@/components/InvestorProfile";
+import JoinCommunity from "@/components/JoinCommunity";
 import OnboardingProcess from "@/components/OnboardingProcess";
 import Results from "@/components/Results";
 import YieldStrategy from "@/components/YieldStrategy";
@@ -19,6 +20,7 @@ export default function Home() {
         <InvestorProfile />
         <OnboardingProcess />
         <CTA />
+        <JoinCommunity />
       </main>
     </div>
   );

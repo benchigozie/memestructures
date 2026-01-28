@@ -21,6 +21,7 @@ function InvestorProfile() {
                 <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
                  { cards.map((card) => (
                     <div
+                        key={card.heading}
                         className='overflow-clip group bg-my-white hover:shadow-md ring ring-my-gray/10 hover:-translate-y-3 hover:ring-my-gray/20 hover:shadow-my-gray/10 rounded-3xl p-5 md:p-10 transition-all duration-300 flex flex-col gap-6 justify-center items-center text-center relative'
                     >
                        <div className="p-4 rounded-2xl bg-my-blue-white/60 w-max">

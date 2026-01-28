@@ -48,7 +48,7 @@ function Header() {
                                 key={link.name}
                                 href={link.path}
                                 className={`px-4 py-2 rounded-full transition-all duration-300 ${isActive
-                                    ? "border border-my-gray/40" : ""
+                                    ? "border border-my-gray/30 shadow-lg shadow-my-gray/5" : ""
                                     }`}
                             >
                                 {link.name}
@@ -67,7 +67,7 @@ function Header() {
                     <div className="h-0.5 w-4 bg-my-deep-blue rounded-b-full"></div>
                 </div>
 
-                <div onClick={toggleMenu} className={`mt-3 mr-2 duration-500 top-full bg-my-white/60 backdrop-blur-3xl  absolute py-6 right-0 w-42 rounded-2xl flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"} lg:hidden`}>
+                <div onClick={toggleMenu} className={`mt-3 mr-2 duration-500 top-full bg-my-white  absolute py-6 right-0 w-42 rounded-2xl flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"} lg:hidden`}>
                     {navLinks.map((link) => {
                         return (
                             <Link

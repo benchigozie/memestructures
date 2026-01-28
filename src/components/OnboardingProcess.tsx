@@ -22,6 +22,7 @@ function OnboardingProcess() {
                 <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                     {cards.map((card) => (
                         <div
+                            key={card.number}
                             className='p-5 md:p-10 transition-all duration-300 flex flex-col gap-6 justify-center items-center text-center relative'
                         >
                             <div className="p-4 rounded-full bg-white shadow-md shadow-my-gray/20 w-max">

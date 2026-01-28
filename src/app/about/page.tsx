@@ -1,4 +1,5 @@
 import AboutHero from "@/components/AboutHero";
+import JoinCommunity from "@/components/JoinCommunity";
 import Team from "@/components/Team";
 import { Metadata } from "next"
 
@@ -12,6 +13,7 @@ function page() {
         <div>
             <AboutHero />
             <Team />
+            <JoinCommunity />
         </div>
     )
 }
