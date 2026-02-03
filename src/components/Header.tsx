@@ -29,7 +29,7 @@ function Header() {
 
     return (
         <section className="fixed top-0 w-full z-30 backdrop-blur-xl bg-my-white/60">
-            <div className="w-full flex justify-between items-center lg:py-4 py-3 px-3 max-w-7xl mx-auto relative">
+            <div className="w-full flex justify-between items-center lg:py-4 py-2 px-3 max-w-7xl mx-auto relative">
                 <Link href="/" className="">
                     <Image
                         src="/images/memestructureslogo.png"
