@@ -7,12 +7,14 @@ function Footer() {
             <div className='max-w-7xl mx-auto px-4'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-28 border-t border-b border-my-gray/15 md:px-3 py-10 md:py-20'>
                     <div className="flex flex-col">
-                        <Image
-                            src="/images/memestructureslogo.png"
-                            alt="Meme Structures Logo"
-                            width={300}
-                            height={50}
-                        />
+                        <div className='w-60 md:w-76'>
+                            <Image
+                                src="/images/memestructureslogo.png"
+                                alt="Meme Structures Logo"
+                                width={300}
+                                height={50}
+                            />
+                        </div>
                         <p className='max-w-lg text-[15px]'>Transforming speculative energy into structured wealth. We apply private equity discipline to the most dynamic asset class in history.</p>
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
@@ -37,13 +39,23 @@ function Footer() {
                             <h5 className='font-semibold'>CONTACT</h5>
                             <ul className='mt-3 space-y-1'>
                                 <li>
-                                    <Link href="">Facebook</Link>
+                                    <a href="https://facebook.com/memestructures">Facebook</a>
                                 </li>
-                                <li>Instagram</li>
-                                <li>Discord</li>
-                                <li>Linkedin</li>
-                                <li>Telegram</li>
-                                <li>X</li>
+                                <li>
+                                    <a href="https://instagram.com/memestructures">Instagram</a>
+                                </li>
+                                <li>
+                                    <a href="https://discord.com/channels/@me/1402087469561938133">Discord</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/memestructures/">Linkedin</a>
+                                </li>
+                                <li>
+                                    <a href="https://t.me/memestructures">Telegram</a>
+                                </li>
+                                <li>
+                                    <a href=" https://x.com/memestructures">X</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
