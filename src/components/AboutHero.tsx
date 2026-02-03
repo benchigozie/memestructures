@@ -3,7 +3,7 @@ function AboutHero() {
   return (
     <section className='bg-my-white pt-17 md:pt-24' >
             <div className='max-w-6xl mx-auto px-4'>
-                <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold mt-24 text-center'>About Us</h1>
+                <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold text-center mt-5'>About Us</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16">
                     <div className="px-5">
                         <p>MemeStructures was created to bring structure, discipline, and accountability to one of the most volatile corners of the crypto market. In an environment often driven by speculation and short-term hype, we focus on building a systematic approach to memecoin investing. An approach that prioritizes research, risk management, and long-term capital preservation.</p>
