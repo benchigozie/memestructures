@@ -1,6 +1,6 @@
 function page() {
     return (
-        <section className='bg-my-white px-3' >
+        <section className='bg-my-white px-6' >
             <div className="flex flex-col gap-4 max-w-5xl mx-auto mt-16 md:mt-24 rounded-3xl p-4 md:p-12 shadow-lg shadow-my-gray/20">
                 <div className="flex flex-col items-center">
                     <div className='w-62 h-62 rounded-full bg-my-gray' />
