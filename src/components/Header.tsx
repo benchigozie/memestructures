@@ -22,9 +22,8 @@ function Header() {
 
     const navLinks: NavLink[] = [
         { name: "Home", path: "/" },
-        { name: "Invest", path: "/invest" },
         { name: "About Us", path: "/about" },
-        { name: "Team", path: "/services" },
+        { name: "Team", path: "/about#team" },
         { name: "Blog", path: "/blog" },
     ]
 
@@ -39,7 +38,7 @@ function Header() {
                         height={50}
                     />
                 </Link>
-                <div className="max-w-100 w-full lg:flex justify-between hidden">
+                <div className="max-w-86 w-full lg:flex justify-between hidden">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.path;
 

@@ -32,7 +32,7 @@ async function LatestBlog() {
         sanityClient.fetch(latestPostsQuery, {}, {
             next: {
                 //tags: ["posts"],
-                revalidate: 3600
+                revalidate: 60
             }
         }),
     ]);

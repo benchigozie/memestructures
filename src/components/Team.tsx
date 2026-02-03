@@ -2,7 +2,7 @@ import Link from "next/link"
 
 function Team() {
     return (
-        <section className='bg-my-white mt-16 md:mt-24' >
+        <section className='bg-my-white mt-16 md:mt-24' id="team" >
             <div className='max-w-6xl mx-auto px-4'>
                 <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Meet The Team</h2>
                 <div className="mt-10 flex flex-col gap-4 md:gap-7">

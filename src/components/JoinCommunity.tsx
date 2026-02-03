@@ -137,7 +137,7 @@ function JoinCommunity() {
                         )}
                     </Formik>
 
-                    {callResponse && <p className='text-lg'>{callResponse}</p>}
+                    {callResponse && <p className='text-lg text-center'>{callResponse}</p>}
                 </div>
             </div>
         </section>
