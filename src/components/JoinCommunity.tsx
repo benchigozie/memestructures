@@ -25,7 +25,7 @@ function JoinCommunity() {
     const [submitState, setSubmitState] = useState<"form" | "submitting" | "submitted">("form");
 
     return (
-        <section className='bg-my-white mt-14 md:mt-24'>
+        <section className='bg-my-white pt-14 md:pt-24'>
             <div className='max-w-6xl mx-auto px-4 '>
                 <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Join Our Community</h2>
                 <p className='text-lg mt-4 max-w-2xl text-center mx-auto'>Join a growing community of disciplined investors, builders, and thinkers who believe that
