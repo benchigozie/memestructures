@@ -74,64 +74,67 @@ function JoinCommunity() {
                                         <PuffLoader size={50} color='#006de2' />
                                     </div>
                                 }
-                                { submitState === "form" &&
-                                <div className="space-y-6">
-                                    <div>
+                                {submitState === "form" &&
+                                    <div className="space-y-6">
+                                        <div>
+                                            <Field
+                                                name="name"
+                                                placeholder="Your name"
+                                                autoComplete="name"
+                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                            />
+                                            <ErrorMessage
+                                                name="name"
+                                                component="p"
+                                                className="text-sm text-red-400 mt-1"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <Field
+                                                name="email"
+                                                type="email"
+                                                placeholder="Email address"
+                                                autoComplete="email"
+                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                            />
+                                            <ErrorMessage
+                                                name="email"
+                                                component="p"
+                                                className="text-sm text-red-400 mt-1"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <Field
+                                                name="phone"
+                                                placeholder="Phone number"
+                                                autoComplete="tel"
+                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                            />
+                                            <ErrorMessage
+                                                name="phone"
+                                                component="p"
+                                                className="text-sm text-red-400 mt-1"
+                                            />
+                                        </div>
                                         <Field
-                                            name="name"
-                                            placeholder="Your name"
-                                            className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                            type="text"
+                                            name="company"
+                                            className="hidden"
+                                            tabIndex={-1}
+                                            autoComplete="off"
                                         />
-                                        <ErrorMessage
-                                            name="name"
-                                            component="p"
-                                            className="text-sm text-red-400 mt-1"
-                                        />
+
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                                        >
+                                            Join Community
+                                        </button>
+
                                     </div>
-
-                                    <div>
-                                        <Field
-                                            name="email"
-                                            type="email"
-                                            placeholder="Email address"
-                                            className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
-                                        />
-                                        <ErrorMessage
-                                            name="email"
-                                            component="p"
-                                            className="text-sm text-red-400 mt-1"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <Field
-                                            name="phone"
-                                            placeholder="Phone number"
-                                            className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
-                                        />
-                                        <ErrorMessage
-                                            name="phone"
-                                            component="p"
-                                            className="text-sm text-red-400 mt-1"
-                                        />
-                                    </div>
-                                    <Field
-                                        type="text"
-                                        name="company"
-                                        className="hidden"
-                                        tabIndex={-1}
-                                        autoComplete="off"
-                                    />
-
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
-                                    >
-                                        Join Community
-                                    </button>
-
-                                </div>
                                 }
                             </Form>
                         )}
