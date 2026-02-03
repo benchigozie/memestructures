@@ -1,7 +1,7 @@
 
 function AboutHero() {
   return (
-    <section className='bg-my-white mt-16 md:mt-24' >
+    <section className='bg-my-white mt-20 md:mt-24' >
             <div className='max-w-6xl mx-auto px-4'>
                 <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>About Us</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16">

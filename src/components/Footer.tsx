@@ -36,7 +36,9 @@ function Footer() {
                         <div>
                             <h5 className='font-semibold'>CONTACT</h5>
                             <ul className='mt-3 space-y-1'>
-                                <li>Facebook</li>
+                                <li>
+                                    <Link href="">Facebook</Link>
+                                </li>
                                 <li>Instagram</li>
                                 <li>Discord</li>
                                 <li>Linkedin</li>
