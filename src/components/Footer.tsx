@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 function Footer() {
     return (
@@ -16,21 +17,31 @@ function Footer() {
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                         <div>
-                            <h5 className='font-semibold'>PLATFORM</h5>
+                            <h5 className='font-semibold'>LINKS</h5>
                             <ul className='mt-3 space-y-1'>
-                                <li>Performance</li>
-                                <li>Audit Report</li>
-                                <li>Risk Engine</li>
-                                <li>Client Portal</li>
+                                <li>
+                                    <Link href="/">Home</Link>
+                                </li>
+                                <li>
+                                    <Link href="/about">About Us</Link>
+                                </li>
+                                <li>
+                                    <Link href="/about#team">Team</Link>
+                                </li>
+                                <li>
+                                    <Link href="/blog">Blog</Link>
+                                </li>
                             </ul>
                         </div>
                         <div>
                             <h5 className='font-semibold'>CONTACT</h5>
                             <ul className='mt-3 space-y-1'>
-                                <li>Twitter</li>
+                                <li>Facebook</li>
+                                <li>Instagram</li>
                                 <li>Discord</li>
-                                <li>Email Support</li>
-                                <li>Whitepaper</li>
+                                <li>Linkedin</li>
+                                <li>Telegram</li>
+                                <li>X</li>
                             </ul>
                         </div>
                     </div>
