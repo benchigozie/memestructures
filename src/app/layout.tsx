@@ -32,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-       className={outfit.variable}
+        className={outfit.variable}
       >
         <Header />
-        {children}
+        <main className="bg-my-white">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

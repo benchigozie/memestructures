@@ -11,7 +11,7 @@ import YieldStrategy from "@/components/YieldStrategy";
 export default function Home() {
   return (
     <div className="bg-my-white">
-      <main>
+      
         <FixedCTA />
         <Hero />
         <Results />
@@ -21,7 +21,7 @@ export default function Home() {
         <OnboardingProcess />
         <CTA />
         <JoinCommunity />
-      </main>
+     
     </div>
   );
 }
