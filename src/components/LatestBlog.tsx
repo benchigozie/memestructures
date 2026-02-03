@@ -42,7 +42,7 @@ async function LatestBlog() {
     return (
         <section className='bg-my-white mt-17 md:mt-24' >
             <div className='max-w-6xl mx-auto px-6'>
-                <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold mt-5 text-center'>Blog Posts</h1>
+                <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold mt-24 text-center'>Blog Posts</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16">
                     <div className="bg-my-deep-blue rounded-3xl mr-0 md:mr-4 h-80">
                         <img
