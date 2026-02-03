@@ -40,7 +40,7 @@ async function LatestBlog() {
     const recentPost: Post = trimmedLatestPosts[0];
 
     return (
-        <section className='bg-my-white mt-17 md:mt-24' >
+        <section className='bg-my-white pt-17 md:pt-24' >
             <div className='max-w-6xl mx-auto px-6'>
                 <h1 className='text-4xl md:text-6xl text-my-deep-blue font-bold mt-24 text-center'>Blog Posts</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16">

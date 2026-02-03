@@ -35,7 +35,7 @@ export default function RootLayout({
         className={outfit.variable}
       >
         <Header />
-        <main className="bg-my-white">
+        <main>
           {children}
         </main>
         <Footer />
