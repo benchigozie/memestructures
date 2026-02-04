@@ -9,13 +9,13 @@ function Results() {
                     <div className='bg-my-white shadow-my-gray/20 shadow-2xl rounded-3xl p-10'>
                         <div className='w-max flex gap-3'>
                             <ChartNoAxesColumn size={17} className='text-my-blue' />
-                            <p className='text-xs'>GROWTH ALPHA PERFORMANCE</p>
+                            <p className='text-xs'>ASSET CLASS PERFORMANCE</p>
                         </div>
                         <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5'>Alpha Generation</h2>
                         <div className='text-sm flex gap-16 text-center mt-24 justify-center'>
                             <div className='flex flex-col gap-5 pt-10'>
                                 <p>30%</p>
-                                <p>Projected <br />Annual ROI</p>
+                                <p>Projected <br />Return</p>
                             </div>
                             <div className='flex flex-col gap-10'>
                                 <div className='py-1 px-3 bg-my-blue rounded-xl w-max'>
@@ -29,9 +29,9 @@ function Results() {
                                 <div className=' absolute z-0 w-2.5 h-2.5 bg-my-gray/60 rounded-full animate-pulse-ring'>
                                 </div>
                             </div>
-                            <p className='text-my-deep-blue font-bold text-xs md:text-sm'>+9% Net Alpha vs. Projections</p>
+                            <p className='text-my-deep-blue font-bold text-xs md:text-sm'>Outperformed Projections by +9%</p>
                         </div>
-                        <p className='text-xs'>*Verified on-chain performance comparing initial algorithmic projections against finalized fund outcomes for Q3-Q4 2024.</p>
+                        <p className='text-xs'>*Verified on-chain. Executed with structure, not speculation.</p>
                     </div>
                     <div className='bg-my-white shadow-my-gray/20 shadow-2xl rounded-3xl p-10 flex flex-col gap-8 justify-center'>
                         <div className='flex justify-between'>

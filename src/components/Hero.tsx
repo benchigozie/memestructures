@@ -13,7 +13,7 @@ function Hero() {
                             <div className=' absolute z-0 w-2.5 h-2.5 bg-my-gray/60 rounded-full animate-pulse-ring'>
                             </div>
                         </div>
-                        <p className='text-my-blue text-xs md:text-sm'>INSTITUTIONAL GRADE MEME ASSET</p>
+                        <p className='text-my-blue text-xs md:text-sm'>INSTITUTIONAL GRADE ASSET CLASSES</p>
                     </div>
                     <h1 className='text-5xl md:text-7xl font-bold text-my-deep-blue'>Invest <span className='italic text-my-blue mr-1'>Smarter</span> in the Meme Economy.</h1>
                     <p className='max-w-4xl text-lg' >MemeStructures provides sophisticated access to high-growth memecoin funds, powered by professional risk management and on-chain intelligence.</p>

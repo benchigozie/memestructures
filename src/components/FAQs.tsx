@@ -1,6 +1,9 @@
 "use client"
 
+import { X } from 'lucide-react'
 import { useState } from 'react'
+import { CircleMinus } from 'lucide-react'
+
 type Card = {
     question: string,
     answer: string,
@@ -35,11 +38,16 @@ const FAQs = () => {
                                     key={card.question}
                                     onClick={() => toggle(i)}
                                 >
-                                    <h3 className="text-lg md:text-xl text-my-deep-blue font-bold">{card.question}</h3>
+                                    <div className='flex justify-between'>
+                                        <h3 className="text-lg md:text-xl text-my-deep-blue font-bold">{card.question}</h3>
+                                        <div className={`rounded-full flex items-center justify-center transition-all duration-300 ${ openIndex === i ? 'rotate-90': ''}`}>
+                                            <CircleMinus size={25} />
+                                        </div>
+                                    </div>
                                     <div
                                         className={`grid transition-all duration-300 ease-in-out ${openIndex === i
-                                                ? "grid-rows-[1fr] opacity-100 mt-4"
-                                                : "grid-rows-[0fr] opacity-0"
+                                            ? "grid-rows-[1fr] opacity-100 mt-4"
+                                            : "grid-rows-[0fr] opacity-0"
                                             }`}
                                     >
                                         <div className="overflow-hidden">

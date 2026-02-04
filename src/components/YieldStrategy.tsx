@@ -50,7 +50,6 @@ function YieldStrategy() {
                         <p className="text-my-blue-white text-xl">The Diversified Income Memecoin Fund: Capture yield from the foundational meme protocols.</p>
                         <div className="flex flex-col md:flex-row gap-2">
                             <Button buttonText="View Dashboard" btnType="secondary" className="w-full md:w-max shadow-lg shadow-my-gray/20" bgColour="bg-my-white" colour="text-my-blue" />
-                            <Button buttonText="Audit Logs" btnType="secondary" className="w-full md:w-max shadow-sm" bgColour="bg-my-white/30" colour="text-my-pure-white" />
                         </div>
                     </div>
                     <div className="flex flex-col justify-center">

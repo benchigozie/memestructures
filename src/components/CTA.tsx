@@ -19,8 +19,7 @@ function CTA() {
                     <h2 className="text-my-white text-3xl md:text-5xl font-bold max-w-xl">Secure your seat in the meme economy.</h2>
                     <p className="text-xl max-w-3xl text-my-white/60">Join a community of sophisticated investors who treat memecoins as a structured asset class. Professional management. Quant precision.</p>
                     <div className="mt-4 flex gap-2">
-                        <Button buttonText="Get Started" btnType="primary"/>
-                        <Button buttonText="Download Strategy" btnType="secondary" bgColour="bg-my-white/10" colour="text-my-white"/>
+                        <Button buttonText="Join Community" btnType="primary"/>
                     </div>
                 </div>
             </div>
