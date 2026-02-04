@@ -1,5 +1,6 @@
 import { ChartNoAxesColumn, TrendingUp } from 'lucide-react'
 import ProgressBar from './ProgressBar'
+import Image from 'next/image'
 
 function Results() {
     return (
@@ -11,18 +12,9 @@ function Results() {
                             <ChartNoAxesColumn size={17} className='text-my-blue' />
                             <p className='text-xs'>ASSET CLASS PERFORMANCE</p>
                         </div>
-                        <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5'>Alpha Generation</h2>
-                        <div className='text-sm flex gap-16 text-center mt-24 justify-center'>
-                            <div className='flex flex-col gap-5 pt-10'>
-                                <p>30%</p>
-                                <p>Projected <br />Return</p>
-                            </div>
-                            <div className='flex flex-col gap-10'>
-                                <div className='py-1 px-3 bg-my-blue rounded-xl w-max'>
-                                    <p className='text-my-white'>+39%</p>
-                                </div>
-                                <p className='text-my-blue'>Actual <br />Performance</p>
-                            </div>
+                        <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5'>Performance Snapshot</h2>
+                        <div className='text-sm flex gap-16 text-center justify-center mt-10'>
+                           <Image src="/images/memechart.png" alt='' width={600} height={600} className='h-80 object-cover rounded-3xl overflow-clip'/>
                         </div>
                         <div className='flex items-center gap-3 py-2 w-max pt-11'>
                             <div className='z-10 w-2.5 relative h-2.5 bg-my-blue rounded-full'>
