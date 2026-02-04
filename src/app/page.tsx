@@ -1,5 +1,6 @@
 import CapitalVehicles from "@/components/CapitalVehicles";
 import CTA from "@/components/CTA";
+import FAQs from "@/components/FAQs";
 import FixedCTA from "@/components/FixedCTA";
 import Hero from "@/components/Hero";
 import InvestorProfile from "@/components/InvestorProfile";
@@ -20,6 +21,7 @@ export default function Home() {
         <InvestorProfile />
         <OnboardingProcess />
         <CTA />
+        <FAQs />
         <JoinCommunity />
      
     </div>

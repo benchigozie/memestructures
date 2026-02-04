@@ -18,8 +18,8 @@ function Hero() {
                     <h1 className='text-5xl md:text-7xl font-bold text-my-deep-blue'>Invest <span className='italic text-my-blue mr-1'>Smarter</span> in the Meme Economy.</h1>
                     <p className='max-w-4xl text-lg' >MemeStructures provides sophisticated access to high-growth memecoin funds, powered by professional risk management and on-chain intelligence.</p>
                     <div className='flex md:items-center flex-col md:flex-row justify-center gap-3 mt-5'>
-                        <Button buttonText="Open Account" btnType="primary" className='w-full' />
-                        <Button buttonText="View Performance" btnType="secondary" className='shadow-sm w-full' />
+                        <Button buttonText="Invest Now" btnType="primary" className='w-full' />
+                        <Button buttonText="Join Community" btnType="secondary" className='shadow-sm w-full' />
                     </div>
                 </div>
                 <HeroCards />

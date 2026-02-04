@@ -9,7 +9,8 @@ function HeroCards() {
         { value: "39%", label: "ROI DELIVERED" },
         { value: "$1M+", label: "TOTAL PROFIT" },
         { value: "51.6%", label: "CAGR" },
-        { value: "$14.2M", label: "FUNDS UNDER MGMT" },
+        //{ value: "$14.2M", label: "FUNDS UNDER MGMT" },
+        { value: "550k+", label: "Single Investment" },
     ]
 
     return (
