@@ -75,7 +75,9 @@ async function AllBlogs({ searchParams }: { searchParams: Promise<{ page?: strin
                         </div>
                     ))}
                 </div>
-                <p className="text-center text-lg font-medium underline underline-offset-5 mt-12 md:mt-18 hover:cursor-pointer hover:text-my-blue hover:scale-103 transition-all duration-300">See More Blogs</p>
+                <div>
+                    
+                </div>
             </div>
         </section>
     )
