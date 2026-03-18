@@ -81,8 +81,6 @@ async function page({ params }: PageProps) {
         }
     );
 
-    console.log("this is slug", slug);
-    console.log("this is post", post);
 
     if (!post) {
         return <div className="pt-40 text-center mt-24">Post not found</div>;
