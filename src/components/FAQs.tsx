@@ -15,7 +15,7 @@ const cards: Card[] = [
     { question: 'Does Memestructures recommend investments?', answer: 'All investment asset class decisions are made solely at the discretion of the investors and MemeStructures does not provide exclusive recommendations to investors on which asset class to choose.' },
     { question: 'Who should invest in the asset class categories?', answer: 'The Asset class categories on MemeStructures are best suited for conservative investors and aggressive investors.' },
     { question: 'Why is there a minimum investment amount', answer: "The minimum investment is set to ensure that only committed investors participate in our Asset class which will help maintain a focused investor base, which is critical for the success of each developer's project." },
-    { question: 'What risks are associated with memecoin investments', answer: 'Investing in Alternative Asset Classes can be highly speculative and involves substantial risks but with MemeStructures, fixed potential returns are assured on each asset class category due to our in-depth analytical understanding of the Cryptocosm.' },
+    { question: 'What risks are associated with alternative asset investments', answer: 'Investing in Alternative Asset Classes can be highly speculative and involves substantial risks but with MemeStructures, fixed potential returns are assured on each asset class category due to our in-depth analytical understanding of the Cryptocosm.' },
 ]
 
 const FAQs = () => {
