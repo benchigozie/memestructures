@@ -16,8 +16,8 @@ function CTA() {
                             height={50}
                         />
                     </div>
-                    <h2 className="text-my-white text-3xl md:text-5xl font-bold max-w-xl">Secure your seat in the meme economy.</h2>
-                    <p className="text-xl max-w-3xl text-my-white/60">Join a community of sophisticated investors who treat memecoins as a structured asset class. Professional management. Quant precision.</p>
+                    <h2 className="text-my-white text-3xl md:text-5xl font-bold max-w-xl">Secure your slot and start investing today.</h2>
+                    <p className="text-xl max-w-3xl text-my-white/60">Join a community of sophisticated investors who invest with structure in alternative assets  and benefit from Professional management.</p>
                     <div className="mt-4 flex gap-2">
                         <Button buttonText="Join Community" btnType="primary"/>
                     </div>

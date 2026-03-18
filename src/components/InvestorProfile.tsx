@@ -10,8 +10,8 @@ function InvestorProfile() {
 
     const cards: Card[] = [
         { icon: '/images/searchicon.png', heading: "Yield Seeking", text: "You want high-convexity returns without managing thousands of daily on-chain alerts." },
-        { icon: "/images/structure.png", heading: "Structure First", text: "You appreciate the alpha in memes but require the rigor of institutional fund structures."},
-        { icon: "/images/shield.png", heading: "Risk Intelligent", text: "You understand that in the meme economy, drawdown protection is the true source of profit."},    
+        { icon: "/images/structure.png", heading: "Structure First", text: "You appreciate the potential in alternative assets but require the rigor of institutional fund structures."},
+        { icon: "/images/shield.png", heading: "Risk Intelligent", text: "You understand that with alternative assets, drawdown protection is the true source of profit."},    
     ]
 
     return (

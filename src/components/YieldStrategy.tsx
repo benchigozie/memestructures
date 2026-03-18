@@ -15,7 +15,7 @@ function YieldStrategy() {
 
     const cards: Card[] = [
         { icon: ArrowUpFromLine, heading: "The 1:3 Risk-Reward Mandate", text: "Our quant models only green-light positions where the validated upside is triple the maximum calculated drawdown. We don't bet; we structure." },
-        { icon: RefreshCw, heading: "Narrative Rotation Engine", text: 'Memecoins move in waves. Our rotation engine identifies fading narratives and shifts liquidity into emerging "zero-to-one" trends before retail entry.' },
+        { icon: RefreshCw, heading: "Narrative Rotation Engine", text: 'Alternative assets move in waves. Our rotation engine identifies fading narratives and shifts liquidity into emerging "zero-to-one" trends before retail entry.' },
     ]
 
     return (
@@ -46,8 +46,8 @@ function YieldStrategy() {
                         <div className="bg-my-white/30 px-5 py-1 rounded-full w-max">
                             <p className="text-white text-xs font-medium tracking-widest">ACTIVE FUND ANALYSIS</p>
                         </div>
-                        <p className="text-my-white font-bold text-8xl tracking-tighter">DIMF</p>
-                        <p className="text-my-blue-white text-xl">The Diversified Income Memecoin Fund: Capture yield from the foundational meme protocols.</p>
+                        <p className="text-my-white font-bold text-8xl tracking-tighter">DIF</p>
+                        <p className="text-my-blue-white text-xl">The Diversified Investment Fund: Capture yield from the foundational investment protocols.</p>
                         <div className="flex flex-col md:flex-row gap-2">
                             <Button buttonText="View Dashboard" btnType="secondary" className="w-full md:w-max shadow-lg shadow-my-gray/20" bgColour="bg-my-white" colour="text-my-blue" />
                         </div>
