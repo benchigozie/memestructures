@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 function CapitalVehicles() {
     return (
@@ -25,7 +26,7 @@ function CapitalVehicles() {
                                     <p className="text-sm text-my-gray/75">Target Return: 50% ROI per cycle</p>
                                 </div>
                                 <div className="py-1 px-2 flex justify-end items-end">
-                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p>
+                                <Link href="/blog/diversified-investment-fund-dif"><p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p></Link>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>
@@ -49,7 +50,7 @@ function CapitalVehicles() {
                                     <p className="text-sm text-my-gray/75">Target Return: 0.25% Weekly Passive Income</p>
                                 </div>
                                 <div className="py-1 px-2 flex justify-end items-end">
-                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p>
+                                <Link href="/blog/diversified-income-asset-fund-diaf"><p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p></Link>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>
@@ -73,7 +74,7 @@ function CapitalVehicles() {
                                     <p className="text-sm text-my-gray/75">Target Return: 50% ROI per cycle</p>
                                 </div>
                                 <div className="py-1 px-2 flex justify-end items-end">
-                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p>
+                                <Link href="/blog/equity-and-digital-growth-fund-edf"><p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p></Link>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>
@@ -97,7 +98,7 @@ function CapitalVehicles() {
                                     <p className="text-sm text-my-gray/75">Target Return: 15% ROI per cycle</p>
                                 </div>
                                 <div className="py-1 px-2 flex justify-end items-end">
-                                    <p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p>
+                                <Link href="/blog/emerging-markets-strategy-fund-emsf"><p className="text-my-blue flex flex-col lg:flex-row gap-1"><span>See</span><span>More</span></p></Link>
                                     <Image src="/images/rightarrow.png" alt="" width={15} height={15} className="ml-3" />
                                 </div>
                             </div>

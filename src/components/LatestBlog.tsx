@@ -72,8 +72,8 @@ async function LatestBlog() {
                     {trimmedLatestPosts.map((post: Post) =>
                     (
                         <div className="flex flex-col gap-4" key={post._id}>
-                            <div className="bg-my-deep-blue h-56 rounded-2xl">
-                                <Image src={urlFor(post.mainImage).width(400).height(200).url()} alt="Blog placeholder" width={300} height={200} className="rounded-2xl w-full h-50 object-cover" />
+                            <div className="bg-my-deep-blue h-max rounded-2xl">
+                                <Image src={urlFor(post.mainImage).width(600).height(400).url()} alt="Blog placeholder" width={300} height={200} className="rounded-2xl w-full object-cover" />
                             </div>
                             <div className="flex flex-col gap-4">
                                 <h3 className="text-xl text-my-deep-blue">{post.title}</h3>

@@ -90,7 +90,7 @@ async function page({ params }: PageProps) {
 
 
     return (
-        <section className='bg-my-white px-3' >
+        <section className='bg-my-white px-3 py-4' >
             <div className="flex flex-col gap-4 max-w-3xl mx-auto mt-16 md:mt-24 rounded-3xl p-4 md:p-12 shadow-lg shadow-my-gray/20">
                 <div className="flex flex-col gap-7">
                     <h1 className="text-my-deep-blue text-2xl md:text-4xl font-bold mt-4">{post.title}</h1>
