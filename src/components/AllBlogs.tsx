@@ -31,9 +31,9 @@ async function AllBlogs({ searchParams }: { searchParams: Promise<{ page?: strin
     const params = await searchParams;
 
     const numberOfPosts = 24;
-    const page = Number(params.page) || 1;
+    const page = Math.max(1, Number(params.page) || 1);
     const start = (page - 1) * numberOfPosts;
-    const end = start + numberOfPosts;
+    const end = start + numberOfPosts + 1;
 
     const [latestPosts] = await Promise.all([
         sanityClient.fetch(latestPostsQuery, { start, end }, {
@@ -43,9 +43,9 @@ async function AllBlogs({ searchParams }: { searchParams: Promise<{ page?: strin
             }
         }),
     ]);
-    const trimmedLatestPosts: Post[] = latestPosts.slice(0, 6);
+    const trimmedLatestPosts: Post[] = latestPosts.slice(0, numberOfPosts);
 
-    
+
 
     return (
         <section className='bg-my-white pt-17 md:pt-24' >
@@ -55,8 +55,8 @@ async function AllBlogs({ searchParams }: { searchParams: Promise<{ page?: strin
                     {trimmedLatestPosts.map((post: Post) =>
                     (
                         <div className="flex flex-col gap-4" key={post._id}>
-                            <div className="bg-my-deep-blue h-56 rounded-2xl">
-                                <img src={urlFor(post.mainImage).width(400).height(200).url()} alt="Blog placeholder" width={300} height={200} className="rounded-2xl w-full h-50 object-cover" />
+                            <div className="bg-my-deep-blue h-max rounded-2xl">
+                                <Image src={urlFor(post.mainImage).width(600).height(400).url()} alt="Blog placeholder" width={300} height={200} className="rounded-2xl w-full object-cover" />
                             </div>
                             <div className="flex flex-col gap-4">
                                 <h3 className="text-xl text-my-deep-blue">{post.title}</h3>
@@ -69,15 +69,34 @@ async function AllBlogs({ searchParams }: { searchParams: Promise<{ page?: strin
                                     })}
                                 </p>
                                 <Link href={`/blog/${post.slug}`}>
-                                    <button className="mt-3 hover:cursor-pointer hover:bg-my-deep-blue hover:text-my-white transition-colors dutation-300 text-my-deep-blue px-3 md:px-5 py-2 md:py-3 border border-my-deep-blue rounded-2xl w-max">Read More</button>
+                                    <button className="mt-3 hover:cursor-pointer hover:bg-my-deep-blue hover:text-my-white transition-colors duration-300 text-my-deep-blue px-3 md:px-5 py-2 md:py-3 border border-my-deep-blue rounded-2xl w-max">Read More</button>
                                 </Link>
                             </div>
                         </div>
                     ))}
                 </div>
-                <div>
-                    
-                </div>
+                <div className="flex justify-center items-center gap-4 mt-16">
+
+  {page > 1 && (
+    <Link href={`/blog?page=${page - 1}`}>
+      <button className="px-4 py-2 border border-my-deep-blue rounded-xl hover:bg-my-deep-blue hover:text-my-white transition">
+        Prev
+      </button>
+    </Link>
+  )}
+
+  <span className="text-my-deep-blue ring-1 ring-my-deep-blue px-4 py-2 rounded-xl">
+    {page}
+  </span>
+
+  {latestPosts.length > numberOfPosts && (
+    <Link href={`/blog?page=${page + 1}`}>
+      <button className="px-4 py-2 border border-my-deep-blue rounded-xl hover:bg-my-deep-blue hover:text-my-white transition">
+        Next
+      </button>
+    </Link>
+  )}
+</div>
             </div>
         </section>
     )
