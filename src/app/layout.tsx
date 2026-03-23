@@ -34,11 +34,9 @@ export default function RootLayout({
       <body
         className={outfit.variable}
       >
-        <Header />
         <main>
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );
