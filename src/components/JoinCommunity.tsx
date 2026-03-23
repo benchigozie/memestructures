@@ -75,13 +75,13 @@ function JoinCommunity() {
                                     </div>
                                 }
                                 {submitState === "form" &&
-                                    <div className="space-y-6">
+                                    <div className="space-y-4">
                                         <div>
                                             <Field
                                                 name="name"
-                                                placeholder="Your name"
+                                                placeholder="Your Name"
                                                 autoComplete="name"
-                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                                className="w-full rounded-xl outline outline-my-blue/20 focus:outline-my-blue/50 px-4 py-3"
                                             />
                                             <ErrorMessage
                                                 name="name"
@@ -96,7 +96,7 @@ function JoinCommunity() {
                                                 type="email"
                                                 placeholder="Email address"
                                                 autoComplete="email"
-                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                                className="w-full rounded-xl outline outline-my-blue/20 focus:outline-my-blue/50 px-4 py-3"
                                             />
                                             <ErrorMessage
                                                 name="email"
@@ -108,9 +108,9 @@ function JoinCommunity() {
                                         <div>
                                             <Field
                                                 name="phone"
-                                                placeholder="Phone number"
+                                                placeholder="Phone mnmnmn number"
                                                 autoComplete="tel"
-                                                className="w-full rounded-xl outline outline-my-blue focus:outline-my-deep-blue px-4 py-3"
+                                                className="w-full rounded-xl outline outline-my-blue/20 focus:outline-my-blue/50 px-4 py-3"
                                             />
                                             <ErrorMessage
                                                 name="phone"
