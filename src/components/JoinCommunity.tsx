@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { PuffLoader } from 'react-spinners';
@@ -108,7 +108,7 @@ function JoinCommunity() {
                                         <div>
                                             <Field
                                                 name="phone"
-                                                placeholder="Phone mnmnmn number"
+                                                placeholder="Phone number"
                                                 autoComplete="tel"
                                                 className="w-full rounded-xl outline outline-my-blue/20 focus:outline-my-blue/50 px-4 py-3"
                                             />

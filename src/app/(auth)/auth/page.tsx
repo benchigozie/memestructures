@@ -9,7 +9,7 @@ const page = () => {
   const [page, setPage] = useState<"login" | "signup">("signup");
 
   return (
-    <section className='bg-my-white pt-14 md:pt-18'>
+    <section className='bg-my-white py-14'>
       {
         page === "signup" ?
           <div className="text-center flex flex-col gap-3">
@@ -22,8 +22,8 @@ const page = () => {
             <p className="text-lg">Login to your account to continue.</p>
           </div>
       }
-      <div className='max-w-6xl mx-auto px-4 '>
-        <div className='bg-my-white rounded-3xl max-w-3xl p-5 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-14'>
+      <div className='max-w-6xl mx-auto px-4'>
+        <div className='bg-my-white rounded-3xl max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10'>
           {
             page === "signup" ?
               <SignUp goToLogin={() => setPage("login")} /> :
