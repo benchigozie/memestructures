@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { prisma } from "@/lib/prisma";
-import { generateAccessToken, generateRefreshToken } from "@/lib/jwt";
+import prisma from "@/lib/prisma";
+import { generateAccessToken, generateEmailVerificationLink, generateRefreshToken } from "@/lib/jwt";
+import { sendVerificationEmail } from "@/lib/email";
 
 
 export async function POST(req: Request) {
@@ -66,8 +67,14 @@ export async function POST(req: Request) {
             }
         });
 
+        console.log("New user created:", { id: user.id, email: user.email });
+
         const accessToken = generateAccessToken({ id: user.id, email: user.email });
         const refreshToken = generateRefreshToken({ id: user.id });
+        const emailVerificationLink=generateEmailVerificationLink(( user.id ));
+
+        await sendVerificationEmail(user.email, emailVerificationLink);
+        console.log("Verification email sent to:", user.email);
 
         const response = NextResponse.json(
             {

@@ -1,25 +1,44 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { prisma } from "@/lib/prisma";
+import  prisma  from "@/lib/prisma";
 import { generateAccessToken, generateRefreshToken } from "@/lib/jwt";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { email, password } = body;
+        const { identifier, password } = body;
 
-        if (!email || !password) {
+        console.log("this is the login request body:", body);
+
+        if (!identifier || !password) {
             return NextResponse.json(
-                { success: false, error: "Email and password are required" },
+                { success: false, error: "Email/Username and password are required" },
                 { status: 400 }
             );
         }
 
-        const normalizedEmail = email.trim().toLowerCase();
+        const normalizedIdentifier = identifier.trim().toLowerCase();
 
-        const user = await prisma.user.findUnique({
-            where: { email: normalizedEmail },
-        });
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        let user;
+
+        if (emailRegex.test(normalizedIdentifier)) {
+            user = await prisma.user.findUnique({
+              where: { email: normalizedIdentifier },
+            });
+          } else {
+            user = await prisma.user.findUnique({
+              where: { username: normalizedIdentifier },
+            });
+          }
+
+        if (user && !user?.emailVerified) {
+            return NextResponse.json(
+              { success: false, error: "Your email is not verified",  user: { email: user.email } },
+              { status: 403 }
+            );
+        }
 
         if (!user) {
             return NextResponse.json(

@@ -35,5 +35,14 @@ export function generateEmailVerificationLink(userId: string) {
       { expiresIn: "1h" } 
     );
   
-    return `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email?token=${token}`;
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verify-email?token=${token}`;
+  }
+
+  export function verifyEmailToken(token: string) {
+    try {
+        return jwt.verify(token, process.env.EMAIL_VERIFICATION_SECRET!);
+      } catch (err: any) {
+        if (err.name === "TokenExpiredError") throw new Error("EXPIRED");
+        throw new Error("INVALID");
+      }
   }
