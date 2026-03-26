@@ -23,6 +23,31 @@ const Login = ({ goToSignup }: Props) => {
     setIsPasswordVisible(!isPasswordVisible);
   }
 
+  const handleLogin = async (values: { email: string; password: string }) => {
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+  
+      const result = await res.json();
+  
+      if (result.success) {
+        // store access token in memory (state/context)
+        //setAccessToken(result.accessToken);
+  
+        // redirect to dashboard
+        //router.push("/dashboard");
+      } else {
+        console.error(result.error);
+        // show error to user
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
       <Formik
@@ -31,11 +56,9 @@ const Login = ({ goToSignup }: Props) => {
         onSubmit={async (values, { resetForm, setSubmitting }) => {
 
           try {
-            const response = await fetch("/api/lead", {
+            const response = await fetch("/api/login", {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify(values),
             });
 
@@ -43,11 +66,17 @@ const Login = ({ goToSignup }: Props) => {
             const result = await response.json();
 
             if (result.success) {
-
               resetForm();
+              // store access token in memory (state/context)
+              //setAccessToken(result.accessToken);
+        
+              // redirect to dashboard
+              //router.push("/dashboard");
             } else {
-
+              console.error(result.error);
+              // show error to user
             }
+        
           } catch (err) {
             console.error(err);
 

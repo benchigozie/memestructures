@@ -45,22 +45,24 @@ const SignUp = ({ goToLogin }: Props) => {
         onSubmit={async (values, { resetForm, setSubmitting }) => {
 
           try {
-            const response = await fetch("/api/lead", {
+            const response = await fetch("/api/user/signup", {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify(values),
             });
-
 
             const result = await response.json();
 
             if (result.success) {
-
               resetForm();
-            } else {
+              // store access token in memory (state/context)
+              //setAccessToken(result.accessToken);
 
+              // redirect to dashboard
+              //router.push("/dashboard");
+            } else {
+              console.error(result.error);
+              // show error to user
             }
           } catch (err) {
             console.error(err);
