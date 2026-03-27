@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
+
 const loginSchema = Yup.object({
   identifier: Yup.string()
     .required("Email or username is required"),
@@ -22,6 +23,7 @@ const page = () => {
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
   const [responseType, setResponseType] = useState<"generic" | "unverified" | null>(null);
+  const [ userEmail, setUserEmail] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -88,7 +90,7 @@ const page = () => {
           <div className='bg-my-white rounded-3xl max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10'>
             {formState === "idle" &&
               <Formik
-                initialValues={{ email: "", password: "" }}
+                initialValues={{ identifier: "", password: "" }}
                 validationSchema={loginSchema}
                 onSubmit={async (values, { resetForm, setSubmitting }) => {
 
@@ -101,8 +103,14 @@ const page = () => {
 
 
                     const result = await response.json();
+                    console.log("Login response ooooooooo:", result);
+                    
+                    if (result.error === "Your email is not verified") {
+                    setUserEmail(result.user.email);
+                    }
 
                     if (result.success) {
+                      
                       resetForm();
                       // store access token in memory (state/context)
                       //setAccessToken(result.accessToken);
@@ -123,6 +131,7 @@ const page = () => {
                   } catch (err) {
                     setResponseMessage("An unexpected error occurred. Please try again.");
                     setToError();
+                    console.error("Login error:", err);
                     console.error(err);
 
                   } finally {
@@ -145,7 +154,7 @@ const page = () => {
                           className="mt-1 w-full rounded-xl outline outline-my-blue/15 focus:outline-my-blue/40 px-4 py-3"
                         />
                         <ErrorMessage
-                          name="email"
+                          name="identifier"
                           component="p"
                           className="text-sm text-red-400 mt-1"
                         />
@@ -210,6 +219,7 @@ const page = () => {
                         Login
                       </button>
                       <p className="mt-2 text-center">Dont have an account? <span className="text-my-blue cursor-pointer"><Link href="/register">Create Account</Link></span></p>
+                      <p className="mt-2 text-sm text-center text-my-gray/70">Forgot Password? <span className="text-my-blue/80 cursor-pointer"><Link href="/forgot-password">Reset</Link></span></p>
                     </div>
                   </Form>
                 )}
@@ -229,7 +239,7 @@ const page = () => {
                       <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
                       <p className="text-center text-xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
-                      <Link href={`/verify-account?email=`}>
+                      <Link href={`/resend-verification?email=${userEmail}`} className="flex justify-center">
                         <div className="bg-my-blue text-sm md:text-base px-4 md:px-7 py-3 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer">
                           Resend
                         </div>

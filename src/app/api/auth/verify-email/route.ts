@@ -1,57 +1,75 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { generateEmailVerificationLink } from "@/lib/jwt";
-import { sendVerificationEmail } from "@/lib/email";
+import { verifyEmailToken } from "@/lib/jwt";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email } = body;
+    const { token } = body;
 
-    if (!email) {
+    if (!token) {
       return NextResponse.json(
-        { success: false, error: "Email is required" },
+        { success: false, error: "Verification token is required" },
         { status: 400 }
       );
     }
 
-    const normalizedEmail = email.trim().toLowerCase();
+    let payload;
+
+    try {
+      payload = verifyEmailToken(token);
+    } catch (err: any) {
+      if (err.message === "EXPIRED") {
+        return NextResponse.json(
+          { success: false, error: "Verification link has expired. Please request a new one." },
+          { status: 400 }
+        );
+      }
+
+      return NextResponse.json(
+        { success: false, error: "Invalid verification link." },
+        { status: 400 }
+      );
+    }
+
+    const userId = (payload as any).id;
 
     const user = await prisma.user.findUnique({
-      where: { email: normalizedEmail },
+      where: { id: userId },
     });
 
     if (!user) {
       return NextResponse.json(
-        { success: false, error: "User not found" },
+        { success: false, error: "User account not found." },
         { status: 404 }
       );
     }
 
     if (user.emailVerified) {
       return NextResponse.json(
-        { success: false, error: "Email already verified" },
+        { success: false, error: "Email already verified." },
         { status: 400 }
       );
     }
 
-    const verificationLink = generateEmailVerificationLink(user.id);
-
-    await sendVerificationEmail(user.email, verificationLink);
+    await prisma.user.update({
+      where: { id: userId },
+      data: { emailVerified: true },
+    });
 
     return NextResponse.json(
       {
         success: true,
-        message: "Verification email sent successfully",
+        message: "Your email has been verified successfully.",
       },
       { status: 200 }
     );
 
   } catch (error) {
-    console.error("Resend verification error:", error);
+    console.error("Email verification error:", error);
 
     return NextResponse.json(
-      { success: false, error: "Internal server error" },
+      { success: false, error: "Internal server error." },
       { status: 500 }
     );
   }

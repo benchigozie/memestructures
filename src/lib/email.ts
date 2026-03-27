@@ -16,8 +16,8 @@ export async function sendVerificationEmail(to: string, link: string) {
     to,
     subject: "Verify Your Email Address",
     html: `
-      <p>!</p>
-      <p>Your Memestructures account was successfully created. Click the link below to verify your email address</p>
+      <h1 style="color:#0F172A;">Welcome to Memestructures!</h1>
+      <p>Your Memestructures account was successfully created. Click the link below to verify your email address.</p>
       <a href="${link}" style="background:#006de2;color:white;padding:10px 20px;border-radius:10px;text-decoration:none;">Verify Email</a>
       <p>This link will expire in 1 hour.</p>
     `,
@@ -29,5 +29,26 @@ export async function sendVerificationEmail(to: string, link: string) {
   } catch (err) {
     console.error("Error sending verification email:", err);
     throw new Error("Could not send verification email");
+  }
+};
+
+export async function sendResetEmail(to: string, link: string) {
+  const mailOptions = {
+    from: `"Memestructures" <${process.env.SMTP_USER}>`,
+    to,
+    subject: "Reset Your Password",
+    html: `
+      <p>A request was made to reset your password. Click the link below reset your password</p>
+      <a href="${link}" style="background:#006de2;color:white;padding:10px 20px;border-radius:10px;text-decoration:none;">Reset Password</a>
+      <p>If you did not make this request, you can safely ignore</p>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("reset email sent:", info.messageId);
+  } catch (err) {
+    console.error("Error sending reset email:", err);
+    throw new Error("Could not send reset email");
   }
 }

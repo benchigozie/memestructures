@@ -40,6 +40,7 @@ export async function POST(req: Request) {
             );
         }
 
+        console.log("User found in database:", user);   
         if (!user) {
             return NextResponse.json(
                 { success: false, error: "User not found" },
@@ -50,9 +51,11 @@ export async function POST(req: Request) {
         const PEPPER = process.env.BCRYPT_PEPPER;
         const passwordMatches = await bcrypt.compare(password + PEPPER, user.password);
 
+        console.log("Password match result:", passwordMatches);
+
         if (!passwordMatches) {
             return NextResponse.json(
-                { success: false, error: "Password is incorrect" },
+                { success: false, error: "The password you entered is incorrect" },
                 { status: 401 }
             );
         }
