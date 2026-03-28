@@ -7,8 +7,8 @@ export async function middleware(req: NextRequest) {
   const logger = loggerMiddleware(req);
   if (logger) return logger;
 
-  const rateLimit = await rateLimitMiddleware(req);
-  if (rateLimit) return rateLimit;
+  //const rateLimit = await rateLimitMiddleware(req);
+  //if (rateLimit) return rateLimit;
 
   return NextResponse.next();
 }
