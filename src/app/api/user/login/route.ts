@@ -68,10 +68,16 @@ export async function POST(req: Request) {
                 success: true,
                 message: "Logged in successfully",
                 user: { id: user.id, email: user.email },
-                accessToken,
             },
             { status: 200 }
         );
+
+        response.cookies.set("accessToken", accessToken, {
+            httpOnly: true,
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 5 * 60,
+          });
 
         response.cookies.set("refreshToken", refreshToken, {
             httpOnly: true,

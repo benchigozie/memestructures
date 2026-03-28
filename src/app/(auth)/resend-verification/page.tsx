@@ -12,7 +12,7 @@ export default function VerifyAccountPage() {
   const [responseMessage, setResponseMessage] = useState("");
   const [viewState, setViewState] = useState<"initial" | "submitting" | "success" | "error">("initial");
   const params = useSearchParams();
-  const email = params.get("email");
+  const email = params.get("email") ?? "";
 
   const resendVerification = async () => {
 

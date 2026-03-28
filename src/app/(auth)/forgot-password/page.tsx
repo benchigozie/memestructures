@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useState } from 'react';
 
 const schema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -11,6 +12,9 @@ const schema = Yup.object({
 
 
 const page = () => {
+
+    const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
+    const [responseMessage, setResponseMessage] = useState("");
     return (
         <section className='py-14 bg-my-white w-full'>
             <div className='max-w-6xl mx-auto px-4 bg-my-white items-center flex flex-col'>

@@ -1,13 +1,15 @@
 "use client"
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { Eye, EyeClosed, CircleCheckBig, XCircle, } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 
 const loginSchema = Yup.object({
@@ -20,10 +22,12 @@ const loginSchema = Yup.object({
 
 const page = () => {
 
+  const router = useRouter();
+  const { user, setUser } = useAuth();
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
   const [responseType, setResponseType] = useState<"generic" | "unverified" | null>(null);
-  const [ userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -46,6 +50,12 @@ const page = () => {
   const setToSuccess = () => {
     setFormState("success");
   }
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, [user, router]);
 
   const handleResendVerification = async () => {
     try {
@@ -74,20 +84,20 @@ const page = () => {
   return (
     <section className='bg-my-white py-14'>
       <div className="flex flex-col gap-3">
-        <div className="text-center items-center flex flex-col gap-3">
-          <Link href="/">
-            <Image
-              src="/images/memestructureslogo.png"
-              alt="Meme Structures Logo"
-              width={250}
-              height={70}
-            />
-          </Link>
-          <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Welcome Back</h2>
-          <p className="text-lg">Login to your account to continue.</p>
-        </div>
-        <div className='max-w-6xl mx-auto px-4'>
-          <div className='bg-my-white rounded-3xl max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10'>
+        <div className='max-w-6xl w-full mx-auto px-4'>
+          <div className='bg-my-white rounded-3xl max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col gap-10'>
+            <div className="text-center items-center flex flex-col gap-3">
+              <Link href="/">
+                <Image
+                  src="/images/memestructureslogo.png"
+                  alt="Meme Structures Logo"
+                  width={250}
+                  height={70}
+                />
+              </Link>
+              <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Welcome Back</h2>
+              <p className="text-lg">Login to your account to continue.</p>
+            </div>
             {formState === "idle" &&
               <Formik
                 initialValues={{ identifier: "", password: "" }}
@@ -104,28 +114,29 @@ const page = () => {
 
                     const result = await response.json();
                     console.log("Login response ooooooooo:", result);
-                    
+
                     if (result.error === "Your email is not verified") {
-                    setUserEmail(result.user.email);
+                      setUserEmail(result.user.email);
                     }
 
                     if (result.success) {
-                      
-                      resetForm();
-                      // store access token in memory (state/context)
-                      //setAccessToken(result.accessToken);
 
-                      // redirect to dashboard
-                      //router.push("/dashboard");
+                      resetForm();
+                      setUser(result.user);
 
                       setToSuccess();
+
+                      setTimeout(() => {
+                        router.push("/dashboard");
+                      }, 800);
+
                       console.log("Login successful:", result);
                       console.log("redirecting to dashboard enshiii");
                     } else {
                       setFormState("error");
                       setResponseMessage(result.error);
                       console.error(result.error);
-                      // show error to user
+
                     }
 
                   } catch (err) {
@@ -219,7 +230,7 @@ const page = () => {
                         Login
                       </button>
                       <p className="mt-2 text-center">Dont have an account? <span className="text-my-blue cursor-pointer"><Link href="/register">Create Account</Link></span></p>
-                      <p className="mt-2 text-sm text-center text-my-gray/70">Forgot Password? <span className="text-my-blue/80 cursor-pointer"><Link href="/forgot-password">Reset</Link></span></p>
+                      <p className="mt-2 text-sm text-center text-my-gray/70">Forgot Your Password? <span className="text-my-blue/80 cursor-pointer"><Link href="/forgot-password">Reset</Link></span></p>
                     </div>
                   </Form>
                 )}
@@ -232,30 +243,30 @@ const page = () => {
               </div>)
             }
             {
-              formState === "error" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
+              formState === "error" && (<div className="flex flex-col gap-5 items-center">
                 {
                   responseMessage === "Your email is not verified" ?
-                    <div>
-                      <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
-                      <p className="text-center text-xl">{responseMessage}</p>
+                    <div className="py-10 px-10 flex flex-col gap-6 items-center">
+                      <XCircle size={60} color="#006de2" className="mx-auto" />
+                      <p className="text-center text-2xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
-                      <Link href={`/resend-verification?email=${userEmail}`} className="flex justify-center">
-                        <div className="bg-my-blue text-sm md:text-base px-4 md:px-7 py-3 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer">
+                      <Link href={`/resend-verification?email=${userEmail}`} className="flex justify-center w-full">
+                        <div className="mt-6 w-full text-center rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
                           Resend
                         </div>
                       </Link>
                     </div>
                     :
-                    <div>
-                      <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
+                    <div className="py-10 px-10 flex flex-col gap-6 items-center w-full">
+                      <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-xl">{responseMessage}</p>
-                      <button onClick={setToIdle} className="bg-my-blue text-sm md:text-base px-4 md:px-7 py-3 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer">Back to Form</button>
+                      <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
                     </div>
                 }
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
+              formState === "success" && (<div className="flex flex-col gap-6 items-center py-10 px-10">
                 <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
                 <p className="text-center text-xl">Logging In</p>
               </div>)

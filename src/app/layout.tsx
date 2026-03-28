@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { AuthProvider } from "@/context/AuthContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -34,9 +35,11 @@ export default function RootLayout({
       <body
         className={outfit.variable}
       >
-        <main className="bg-my-white">
-          {children}
-        </main>
+        <AuthProvider>
+          <main className="bg-my-white">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

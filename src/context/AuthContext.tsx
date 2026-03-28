@@ -1,0 +1,70 @@
+"use client";
+
+import { createContext, useContext, useEffect, useState } from "react";
+
+type User = {
+  id: string;
+  email: string;
+};
+
+type AuthContextType = {
+  user: User | null;
+  loading: boolean;
+  setUser: (user: User | null) => void;
+  logout: () => void;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const logout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    setUser(null);
+  };
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch("/api/auth/me");
+
+        if (!res.ok) {
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+
+        const data = await res.json();
+        console.log("Auth check response data:", data);
+        setUser(data.user);
+
+      } catch {
+        setUser(null);
+      }
+
+      setLoading(false);
+    }
+
+    checkAuth();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, loading, setUser, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
+
+  return context;
+};

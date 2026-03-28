@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -8,7 +8,8 @@ import * as Yup from "yup";
 import { Eye, EyeClosed, CircleCheckBig, XCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PuffLoader } from "react-spinners";
-
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 
 const signUpSchema = Yup.object({
@@ -33,6 +34,15 @@ const signUpSchema = Yup.object({
 });
 
 const page = () => {
+
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, [user]);
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "response" | "success">("idle");
   const [responseMessage, setResponseMessage] = useState("");
@@ -60,21 +70,21 @@ const page = () => {
 
   return (
     <section className='py-14 bg-my-white w-full'>
-      <div className="text-center items-center flex flex-col gap-3">
-        <Link href="/">
-          <Image
-            src="/images/memestructureslogo.png"
-            alt="Meme Structures Logo"
-            width={250}
-            height={70}
-          />
-        </Link>
-        <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1'>Create Your Account</h2>
-        <p className="text-lg">Create your profile to get started.</p>
-      </div>
-      <div className='max-w-6xl mx-auto px-4 bg-my-white'>
-        <div className='bg-my-white rounded-3xl max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10'>
-          <div>
+      <div className='max-w-6xl w-full mx-auto px-4 bg-my-white'>
+        <div className='bg-my-white rounded-3xl w-full max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10'>
+          <div className="flex flex-col gap-10">
+            <div className="text-center items-center flex flex-col gap-3">
+              <Link href="/">
+                <Image
+                  src="/images/memestructureslogo.png"
+                  alt="Meme Structures Logo"
+                  width={250}
+                  height={70}
+                />
+              </Link>
+              <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1'>Create Your Account</h2>
+              <p className="text-lg">Create your profile to get started.</p>
+            </div>
             {formState === "idle" && <Formik
               initialValues={{ fullName: "", email: "", password: "", phone: "", company: "", referralCode: "" }}
               validationSchema={signUpSchema}
@@ -251,17 +261,17 @@ const page = () => {
               </div>)
             }
             {
-              formState === "response" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
+              formState === "response" && (<div className="flex flex-col gap-5 items-center py-10 px-10">
                 <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
                 <p className="text-center text-xl">{responseMessage}</p>
-                <button onClick={setToIdle} className="bg-my-blue text-sm md:text-base px-4 md:px-7 py-3 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer">Back to Form</button>
+                <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
+              formState === "success" && (<div className="flex flex-col gap-5 items-center py-10 px-10">
                 <CircleCheckBig size={60} color="#006de2" className="mx-auto mt-5" />
                 <p className="text-center text-xl">Your account has been created successfully! Check your Email for your verification link.</p>
-                <button onClick={setToIdle} className="bg-my-blue text-sm md:text-base px-4 md:px-7 py-3 rounded-xl  md:rounded-3xl font-semibold transition-all duration-300 hover:scale-103 hover:cursor-pointer">Back to Form</button>
+                <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
               </div>)
             }
           </div>
