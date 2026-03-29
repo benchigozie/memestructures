@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "postinstall": "prisma generate",
     "lint": "eslint",
     "prisma:studio:dev": "prisma studio --env-file .env.local",
     "prisma:studio:prod": "prisma studio --env-file .env.production",

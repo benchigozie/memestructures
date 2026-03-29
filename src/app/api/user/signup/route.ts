@@ -73,6 +73,8 @@ export async function POST(req: Request) {
         const refreshToken = generateRefreshToken({ id: user.id });
         const emailVerificationLink=generateEmailVerificationLink(( user.id ));
 
+        console.log("Generated tokens and verification link for user" )
+
         await sendVerificationEmail(user.email, emailVerificationLink);
         console.log("Verification email sent to:", user.email);
 

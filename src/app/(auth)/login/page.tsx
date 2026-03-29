@@ -159,7 +159,7 @@ const page = () => {
                         <label htmlFor="identifier" className="text-my-gray/85 text-[15px]">Enter Your Email or Username</label>
                         <Field
                           name="identifier"
-                          type="text"
+                          type="password"
                           id="identifier"
                           placeholder="Email or Username"
                           className="mt-1 w-full rounded-xl outline outline-my-blue/15 focus:outline-my-blue/40 px-4 py-3"

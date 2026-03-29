@@ -15,7 +15,7 @@ export default function Dashboard () {
 
   return (
     <div>
-      <h1>Welcome {user?.email}</h1>
+      <h1>Welcome Mr Barbie</h1>
 
       <button onClick={logout}>
         Logout

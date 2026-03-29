@@ -56,9 +56,11 @@ function Header() {
                     })}
                 </div>
                 <div className="lg:flex hidden">
-                    <button className="px-5 py-3 bg-my-blue-white text-my-blue rounded-full font-semibold transition-colors duration-300 hover:cursor-pointer">
-                        Client Login
-                    </button>
+                    <Link href="/register">
+                        <button className="px-5 py-3 bg-my-blue-white text-my-blue rounded-full font-semibold transition-colors duration-300 hover:cursor-pointer">
+                            Sign Up
+                        </button>
+                    </Link>
                 </div>
                 <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer lg:hidden items-end mr-5">
                     <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
