@@ -62,7 +62,7 @@ export default function VerifyEmailPage() {
             {status === "success" && (
                 <div className="text-center">
                     <CircleCheckBig size={60} color="#006de2" className="mx-auto mb-4" />
-                    <h1 className="text-2xl font-bold">{message || "Email verified successfully!"}</h1>
+                    <h1 className="text-xl font-bold">{message || "Email verified successfully!"}</h1>
                     <Link href="/login" className="mt-4 inline-block bg-my-blue text-white px-6 py-3 rounded-xl">
                         Go to Login
                     </Link>
@@ -71,7 +71,7 @@ export default function VerifyEmailPage() {
             {status === "error" && (
                 <div className="text-center">
                     <XCircle size={60} color="#E02424" className="mx-auto mb-4" />
-                    <h1 className="text-2xl font-bold">{message || "Verification failed."}</h1>
+                    <h1 className="text-xl font-bold">{message || "Verification failed."}</h1>
                     <Link href="/login" className="mt-4 inline-block bg-my-blue text-white px-6 py-3 rounded-xl">
                         Back to Login
                     </Link>

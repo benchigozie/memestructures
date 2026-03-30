@@ -10,6 +10,7 @@ import { Eye, EyeClosed } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 
+
 const schema = Yup.object({
     password: Yup.string()
         .min(8, "Password must be at least 8 characters")
