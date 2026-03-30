@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 function FixedCTA() {
     return (
@@ -18,8 +19,10 @@ function FixedCTA() {
                     <p className="text-xl text-my-blue">+39.4% YTD</p>
                 </div>
                 <button className="bg-my-blue text-sm text-my-white font-semibold px-6 py-4 rounded-full shadow-lg hover:shadow-my-gray/30 transition-shadow duration-300 flex gap-2">
-                    <p>Invest Now</p>
-                    <Image src="/images/bluewhitearrow.png" alt="" width={16} height={16} className="inline-block self-end" />
+                    <Link href="/register">
+                        <p>Invest Now</p>
+                        <Image src="/images/bluewhitearrow.png" alt="" width={16} height={16} className="inline-block self-end" />
+                    </Link>
                 </button>
             </div>
         </div>
