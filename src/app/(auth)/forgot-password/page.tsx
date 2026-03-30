@@ -37,9 +37,9 @@ const page = () => {
                             <div className="flex flex-col gap-5 items-center pb-6 w-full">
                                 <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
                                 <p className="text-center text-xl">{responseMessage}</p>
-                                <div className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+                                <button className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
                                     <Link href="/login">Back to Login</Link>
-                                </div>
+                                </button>
                             </div>
                         )
                     }
@@ -48,11 +48,11 @@ const page = () => {
                         (<div className="flex flex-col gap-5 items-center pb-6 w-full">
                             <CircleCheckBig size={60} color="#006de2" className="mx-auto mt-5" />
                             <p className="text-center text-xl">{responseMessage}</p>
-                            <Link href="/login">
-                                <div className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+                            <button className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+                                <Link href="/login">
                                     Back to Login
-                                </div>
-                            </Link>
+                                </Link>
+                            </button>
                         </div>)
                     }
                     {
