@@ -37,7 +37,13 @@ export async function POST(req: Request) {
 
     const verificationLink = generateEmailVerificationLink(user.id);
 
-    await sendVerificationEmail(user.email, verificationLink);
+    sendVerificationEmail(user.email, verificationLink)
+      .then(() => {
+        console.log("Verification email sent to:", user.email);
+      })
+      .catch((err) => {
+        console.error("Verification email failed:", err);
+      });
 
     return NextResponse.json(
       {

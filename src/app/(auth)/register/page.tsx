@@ -69,11 +69,11 @@ const page = () => {
   }
 
   return (
-    <section className='py-14 bg-my-white w-full'>
+    <section className='py-8 bg-my-white w-full min-h-screen flex justify-center'>
       <div className='max-w-6xl w-full mx-auto px-4 bg-my-white'>
         <div className='bg-my-white rounded-3xl w-full max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10'>
-          <div className="flex flex-col gap-10">
-            <div className="text-center items-center flex flex-col gap-3">
+          <div className="flex flex-col gap-6">
+            <div className="text-center items-center flex flex-col gap-1">
               <Link href="/">
                 <Image
                   src="/images/memestructureslogo.png"
@@ -82,7 +82,7 @@ const page = () => {
                   height={70}
                 />
               </Link>
-              <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1'>Create Your Account</h2>
+              <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1'>Create Your Account</h2>
               <p className="text-lg">Create your profile to get started.</p>
             </div>
             {formState === "idle" && <Formik
@@ -232,7 +232,7 @@ const page = () => {
                           className="text-sm text-red-400 mt-1"
                         />
                       </div>
-                      <div className="absolute left-2499.75">
+                      <div className="sr-only">
                         <Field
                           type="text"
                           name="company"
@@ -255,21 +255,21 @@ const page = () => {
               )}
             </Formik>}
             {
-              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
-                <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
+              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-8 px-10">
+                <PuffLoader color="#006de2" size={60} className="mx-auto" />
                 <p className="text-center text-xl">Submitting your information, please wait</p>
               </div>)
             }
             {
-              formState === "response" && (<div className="flex flex-col gap-5 items-center py-10 px-10">
-                <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
+              formState === "response" && (<div className="flex flex-col gap-5 items-center py-4 px-10">
+                <XCircle size={60} color="#006de2" className="mx-auto" />
                 <p className="text-center text-xl">{responseMessage}</p>
                 <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-5 items-center py-10 px-10">
-                <CircleCheckBig size={60} color="#006de2" className="mx-auto mt-5" />
+              formState === "success" && (<div className="flex flex-col gap-5 items-center py-4 px-10">
+                <CircleCheckBig size={60} color="#006de2" className="mx-auto" />
                 <p className="text-center text-xl">Your account has been created successfully! Check your Email for your verification link.</p>
                 <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
               </div>)

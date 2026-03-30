@@ -16,7 +16,7 @@ const page = () => {
     const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
     const [responseMessage, setResponseMessage] = useState("");
     return (
-        <section className='py-14 bg-my-white w-full'>
+        <section className='py-14 bg-my-white w-full min-h-screen'>
             <div className='max-w-6xl mx-auto px-4 bg-my-white items-center flex flex-col'>
                 <div className='bg-my-white rounded-3xl max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10 flex flex-col items-center gap-3'>
                     <Link href="/">
@@ -27,11 +27,12 @@ const page = () => {
                             height={70}
                         />
                     </Link>
-                    <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1'>Reset Password</h2>
+                    <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1'>Reset Password</h2>
                     <Formik
                         initialValues={{ email: "" }}
                         validationSchema={schema}
                         onSubmit={async (values, { setSubmitting }) => {
+                            console.log('in submit func');
                             try {
                                 const res = await fetch("/api/auth/forgot-password", {
                                     method: "POST",
@@ -68,7 +69,7 @@ const page = () => {
                                     />
                                 </div>
 
-                                <button className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300" type="submit" disabled={isSubmitting}>
+                                <button onClick={() => {console.log("bluuu huu")}} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300" type="submit" disabled={isSubmitting}>
                                     Send Reset Link
                                 </button>
                             </Form>

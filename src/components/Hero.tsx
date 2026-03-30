@@ -1,4 +1,5 @@
 
+import Link from 'next/link'
 import Button from './Button'
 import HeroCards from './HeroCards'
 
@@ -18,7 +19,9 @@ function Hero() {
                     <h1 className='text-5xl md:text-7xl font-bold text-my-deep-blue'>Invest  <span className='italic text-my-blue mr-1'>Smarter</span> In Alternative Asset Classes.</h1>
                     <p className='max-w-4xl text-lg' >MemeStructures provides sophisticated access to high-growth alternative asset classes, powered by professional risk management and on-chain intelligence.</p>
                     <div className='flex md:items-center flex-col md:flex-row justify-center gap-3 mt-5'>
-                        <Button buttonText="Invest Now" btnType="primary" className='w-full' />
+                        <Link href="/register">
+                            <Button buttonText="Invest Now" btnType="primary" className='w-full' />
+                        </Link>
                         <Button buttonText="Join Community" btnType="secondary" className='shadow-sm w-full' />
                     </div>
                 </div>

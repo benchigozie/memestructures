@@ -82,11 +82,11 @@ const page = () => {
   }
 
   return (
-    <section className='bg-my-white py-14'>
+    <section className='bg-my-white py-8 min-h-screen flex justify-center'>
       <div className="flex flex-col gap-3">
         <div className='max-w-6xl w-full mx-auto px-4'>
-          <div className='bg-my-white rounded-3xl max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col gap-10'>
-            <div className="text-center items-center flex flex-col gap-3">
+          <div className='bg-my-white rounded-3xl w-full max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col gap-5'>
+            <div className="text-center items-center flex flex-col gap-1">
               <Link href="/">
                 <Image
                   src="/images/memestructureslogo.png"
@@ -95,7 +95,7 @@ const page = () => {
                   height={70}
                 />
               </Link>
-              <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Welcome Back</h2>
+              <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Welcome Back</h2>
               <p className="text-lg">Login to your account to continue.</p>
             </div>
             {formState === "idle" &&
@@ -103,6 +103,8 @@ const page = () => {
                 initialValues={{ identifier: "", password: "" }}
                 validationSchema={loginSchema}
                 onSubmit={async (values, { resetForm, setSubmitting }) => {
+
+                  setFormState("submitting");
 
                   try {
                     const response = await fetch("/api/user/login", {
@@ -159,7 +161,7 @@ const page = () => {
                         <label htmlFor="identifier" className="text-my-gray/85 text-[15px]">Enter Your Email or Username</label>
                         <Field
                           name="identifier"
-                          type="password"
+                          type="text"
                           id="identifier"
                           placeholder="Email or Username"
                           className="mt-1 w-full rounded-xl outline outline-my-blue/15 focus:outline-my-blue/40 px-4 py-3"
@@ -213,7 +215,7 @@ const page = () => {
                         />
                       </div>
 
-                      <div className="absolute left-2499.75">
+                      <div className="sr-only">
                         <Field
                           type="text"
                           name="company"
@@ -237,8 +239,8 @@ const page = () => {
               </Formik>
             }
             {
-              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-15 px-10">
-                <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
+              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-5 px-10">
+                <PuffLoader color="#006de2" size={60} className="mx-auto" />
                 <p className="text-center text-xl">Submitting your information, please wait</p>
               </div>)
             }
@@ -246,7 +248,7 @@ const page = () => {
               formState === "error" && (<div className="flex flex-col gap-5 items-center">
                 {
                   responseMessage === "Your email is not verified" ?
-                    <div className="py-10 px-10 flex flex-col gap-6 items-center">
+                    <div className="py-3 px-10 flex flex-col gap-3 items-center">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-2xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
@@ -257,7 +259,7 @@ const page = () => {
                       </Link>
                     </div>
                     :
-                    <div className="py-10 px-10 flex flex-col gap-6 items-center w-full">
+                    <div className="py-10 px-10 flex flex-col gap-3 items-center w-full">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-xl">{responseMessage}</p>
                       <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>

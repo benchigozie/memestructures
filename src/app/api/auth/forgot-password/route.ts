@@ -5,7 +5,7 @@ import { sendResetEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
 
-    const start = Date.now();
+  const start = Date.now();
 
   try {
     const body = await req.json();
@@ -47,7 +47,13 @@ export async function POST(req: Request) {
 
     const resetLink = generatePasswordResetLink(user.id);
 
-    await sendResetEmail(user.email, resetLink);
+    sendResetEmail(user.email, resetLink)
+      .then(() => {
+        console.log("Reset email sent to:", user.email);
+      })
+      .catch((err) => {
+        console.error("Reset email send failed:", err);
+      });
 
     console.log("Password reset email sent to:", user.email);
 
