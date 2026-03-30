@@ -78,13 +78,7 @@ export async function POST(req: Request) {
 
         console.log("Generated tokens and verification link for user")
 
-        sendVerificationEmail(user.email, emailVerificationLink)
-            .then(() => {
-                console.log("Verification email sent to:", user.email);
-            })
-            .catch((err) => {
-                console.error("Email send failed:", err);
-            });
+        await sendVerificationEmail(user.email, emailVerificationLink);
 
         const response = NextResponse.json(
             {
