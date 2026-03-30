@@ -15,10 +15,10 @@ export async function POST(req: Request) {
 
         if (company) {
             return NextResponse.json(
-              { success: false, error: "Invalid submission" },
-              { status: 400 }
+                { success: false, error: "Invalid submission" },
+                { status: 400 }
             );
-          }
+        }
 
         if (!fullName || !email || !password || !phone) {
             return NextResponse.json(
@@ -57,6 +57,9 @@ export async function POST(req: Request) {
         }
 
         const PEPPER = process.env.BCRYPT_PEPPER;
+        if (!PEPPER) {
+            throw new Error("Missing Password Pepper");
+        }
         const hashedPassword = await bcrypt.hash(password + PEPPER, 10);
 
         const user = await prisma.user.create({
@@ -71,12 +74,17 @@ export async function POST(req: Request) {
 
         const accessToken = generateAccessToken({ id: user.id, email: user.email });
         const refreshToken = generateRefreshToken({ id: user.id });
-        const emailVerificationLink=generateEmailVerificationLink(( user.id ));
+        const emailVerificationLink = generateEmailVerificationLink((user.id));
 
-        console.log("Generated tokens and verification link for user" )
+        console.log("Generated tokens and verification link for user")
 
-        await sendVerificationEmail(user.email, emailVerificationLink);
-        console.log("Verification email sent to:", user.email);
+        sendVerificationEmail(user.email, emailVerificationLink)
+            .then(() => {
+                console.log("Verification email sent to:", user.email);
+            })
+            .catch((err) => {
+                console.error("Email send failed:", err);
+            });
 
         const response = NextResponse.json(
             {
