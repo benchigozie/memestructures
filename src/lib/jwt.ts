@@ -8,7 +8,7 @@ export function generateAccessToken(payload: object) {
 
 export function generateRefreshToken(payload: object) {
     return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {
-        expiresIn: "30m",
+        expiresIn: "3h", //set this back to 30min
     });
 }
 

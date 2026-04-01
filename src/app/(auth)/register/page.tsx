@@ -78,8 +78,8 @@ const page = () => {
                 <Image
                   src="/images/memestructureslogo.png"
                   alt="Meme Structures Logo"
-                  width={250}
-                  height={70}
+                  width={210}
+                  height={60}
                 />
               </Link>
               <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1'>Create Your Account</h2>
@@ -103,11 +103,6 @@ const page = () => {
 
                   if (result.success) {
                     resetForm();
-                    // store access token in memory (state/context)
-                    //setAccessToken(result.accessToken);
-
-                    // redirect to dashboard
-                    //router.push("/dashboard");
 
                     console.log("Signup successful:", result);
                     setToSuccess();

@@ -5,6 +5,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 type User = {
   id: string;
   email: string;
+  name: string;
+  username?: string;
+  accountType: "INDIVIDUAL" | "ENTERPRISE" | "ADMIN" | "DEV";
+  kycStatus: "UNVERIFIED" | "VERIFIED" | "PENDING" | "REJECTED";
 };
 
 type AuthContextType = {

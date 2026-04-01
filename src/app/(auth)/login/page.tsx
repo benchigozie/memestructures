@@ -91,8 +91,8 @@ const page = () => {
                 <Image
                   src="/images/memestructureslogo.png"
                   alt="Meme Structures Logo"
-                  width={250}
-                  height={70}
+                  width={210}
+                  height={60}
                 />
               </Link>
               <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Welcome Back</h2>
@@ -239,7 +239,7 @@ const page = () => {
               </Formik>
             }
             {
-              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-5 px-10">
+              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-5 px-10 w-full">
                 <PuffLoader color="#006de2" size={60} className="mx-auto" />
                 <p className="text-center text-xl">Submitting your information, please wait</p>
               </div>)
@@ -248,7 +248,7 @@ const page = () => {
               formState === "error" && (<div className="flex flex-col gap-5 items-center">
                 {
                   responseMessage === "Your email is not verified" ?
-                    <div className="py-3 px-10 flex flex-col gap-3 items-center">
+                    <div className="py-3 px-10 flex flex-col gap-3 items-center w-full">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-2xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
@@ -268,7 +268,7 @@ const page = () => {
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-6 items-center py-10 px-10">
+              formState === "success" && (<div className="flex flex-col gap-6 items-center py-10 px-10 w-full">
                 <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
                 <p className="text-center text-xl">Logging In</p>
               </div>)

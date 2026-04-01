@@ -32,15 +32,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={outfit.variable}
-      >
-        <AuthProvider>
-          <main className="bg-my-white">
+      <AuthProvider>
+        <body
+          className={outfit.variable}
+        >
+          <div className="bg-my-white">
             {children}
-          </main>
-        </AuthProvider>
-      </body>
+          </div>
+        </body>
+      </AuthProvider>
     </html>
   );
 }
