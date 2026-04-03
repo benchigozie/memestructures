@@ -1,12 +1,21 @@
 import jwt from "jsonwebtoken";
 
-export function generateAccessToken(payload: object) {
+interface AccessTokenPayload {
+    id: string;
+    email: string;
+}
+
+interface RefreshTokenPayload {
+    id: string;
+}
+
+export function generateAccessToken(payload: AccessTokenPayload) {
     return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET!, {
         expiresIn: "5m",
     });
 }
 
-export function generateRefreshToken(payload: object) {
+export function generateRefreshToken(payload: RefreshTokenPayload) {
     return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {
         expiresIn: "3h", //set this back to 30min
     });
@@ -65,6 +74,7 @@ export function verifyPasswordResetToken(token: string) {
         if (payload.type !== "password-reset") {
             throw new Error("INVALID");
         }
+        
         console.log("Token is valid, user ID, about to return:", payload.id);
         return payload;
     } catch (err: any) {

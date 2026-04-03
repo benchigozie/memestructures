@@ -3,14 +3,15 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import ChooseUsername from "@/components/ChooseUsername";
-import Loading
-  from "@/components/Loading";
+//import InProgress from "@/components/InProgress";
+import AccountType from "@/components/AccountType";
+import KYC from "@/components/KYC";
 export default function Dashboard() {
 
   const { user, loading, logout } = useAuth();
   const Router = useRouter();
 
-  if (loading) return <Loading />;
+  //if (loading) return < />;
 
   if (!user) {
     Router.replace("/login");
@@ -22,7 +23,13 @@ export default function Dashboard() {
   }
 
   if (!user.accountType) {
-    return
+    return <AccountType />;
+  }
+
+  if (user.kycStatus !== "VERIFIED") {
+    return (
+      <KYC />
+    );
   }
 
  
