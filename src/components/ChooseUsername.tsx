@@ -3,9 +3,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react";
+import { useState, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import InProgress from "./InProgress";
+import ErrorResponse from "./ErrorResponse";
+import SuccessResponse from "./SuccessResponse";
+import { debounce } from "@/utils/debounce";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+
 
 const usernameSchema = Yup.object({
     username: Yup.string()
@@ -17,34 +23,80 @@ const usernameSchema = Yup.object({
 
 
 
+
 const ChooseUsername = () => {
 
-    const { user, logout, setUser } = useAuth();
-    const [formState, setFormState] = useState<"idle" | "submitting" | "response">("idle");
+    const { user, setUser } = useAuth();
+    const debouncedCheck = useMemo(
+        () => debounce(checkUsername, 1000),
+        []
+    );
+
+    const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
     const [responseMessage, setResponseMessage] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [usernameStatus, setUsernameStatus] = useState<"idle" | "checking" | "available" | "taken">("idle");
 
     console.log("Rendering ChooseUsername, user:", user);
+
+    const currentController = useRef<AbortController | null>(null);
+
+    async function checkUsername(username: string) {
+
+        if (username.length < 3) return;
+
+        currentController.current?.abort();
+
+        currentController.current = new AbortController();
+
+        setUsernameStatus("checking");
+
+        try {
+
+            const res = await fetchWithAuth("/api/user/check-username", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username }),
+                signal: currentController.current!.signal,
+            });
+
+            const data = await res.json();
+
+            if (data.available) {
+                setUsernameStatus("available");
+            } else {
+                setUsernameStatus("taken");
+            }
+
+        } catch (err: any) {
+            if (err.name === "AbortError") {
+                return;
+            }
+            setUsernameStatus("idle");
+        }
+    }
 
     async function generateUsername(email: string) {
 
         const name = user?.name ? user.name.split(" ")[0] : email.split("@")[0];
-       
+
         try {
-            const res = await fetch("/api/user/suggest-username", {
+            const res = await fetchWithAuth("/api/user/suggest-username", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name : name }),
-              });
+                body: JSON.stringify({ name: name }),
+            });
 
-              if (!res.ok) {
+            if (!res.ok) {
                 throw new Error("Failed to fetch suggestions");
-              } 
+            }
 
-              const data = await res.json();
+            const data = await res.json();
 
-              setSuggestions(data.suggestions);
-              console.log("Username suggestions:", data.suggestions);
+            setSuggestions(data.suggestions);
+            console.log("Username suggestions:", data.suggestions);
 
         } catch (err) {
             console.error("Suggestion error:", err);
@@ -56,7 +108,7 @@ const ChooseUsername = () => {
 
         try {
 
-            const res = await fetch("/api/user/set-username", {
+            const res = await fetchWithAuth("/api/user/set-username", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username }),
@@ -66,18 +118,21 @@ const ChooseUsername = () => {
 
             if (result.success) {
 
+                setFormState("success");
+                setResponseMessage("Username set successfully!");
+
                 setUser(result.user);
 
             } else {
 
-                setFormState("response");
+                setFormState("error");
                 setResponseMessage(result.error);
 
             }
 
         } catch (err) {
 
-            setFormState("response");
+            setFormState("error");
             setResponseMessage("Something went wrong");
 
         }
@@ -100,48 +155,14 @@ const ChooseUsername = () => {
                             <h2 className='text-2xl md:text-3xl text-my-deep-blue font-medium mt-1'>Welcome Back {user?.name?.split(" ")[0]}</h2>
                             <p className="text-lg">Choose your Username to continue.</p>
                         </div>
-                        <button onClick={logout}>Log out</button>
                         {formState === "idle" && (
 
                             <Formik
                                 initialValues={{ username: "" }}
                                 validationSchema={usernameSchema}
                                 onSubmit={async (values, { setSubmitting }) => {
-
-                                    setFormState("submitting");
-
-                                    try {
-
-                                        const res = await fetch("/api/user/set-username", {
-                                            method: "POST",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify(values),
-                                        });
-
-                                        const result = await res.json();
-
-                                        if (result.success) {
-
-                                            //setUser(result.user);
-
-                                        } else {
-
-                                            setFormState("response");
-                                            setResponseMessage(result.error);
-
-                                        }
-
-                                    } catch (err) {
-
-                                        setFormState("response");
-                                        setResponseMessage("Something went wrong");
-
-                                    } finally {
-
-                                        setSubmitting(false);
-
-                                    }
-
+                                    await setUsername(values.username);
+                                    setSubmitting(false);
                                 }}
                             >
 
@@ -160,6 +181,12 @@ const ChooseUsername = () => {
                                                     name="username"
                                                     placeholder="choose a username"
                                                     className="mt-1 flex-1 w-full rounded-xl outline outline-my-blue/15 focus:outline-my-deep-blue/40 px-4 py-3"
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                        const value = e.target.value;
+                                                        setFieldValue("username", value);
+                                                        if (!value) setUsernameStatus("idle")
+                                                        else debouncedCheck(value);
+                                                    }}
                                                 />
 
                                                 <button
@@ -178,6 +205,19 @@ const ChooseUsername = () => {
                                                 component="p"
                                                 className="text-red-400 text-sm mt-1"
                                             />
+                                        </div>
+                                        <div>
+                                            {usernameStatus === "checking" && (
+                                                <p className="text-gray-400 text-sm mt-1">Checking availability...</p>
+                                            )}
+
+                                            {usernameStatus === "available" && (
+                                                <p className="text-green-400 text-sm mt-1">Username available ✓</p>
+                                            )}
+
+                                            {usernameStatus === "taken" && (
+                                                <p className="text-red-500 text-sm mt-1">Username already taken</p>
+                                            )}
                                         </div>
                                         <div>
                                             {
@@ -199,7 +239,7 @@ const ChooseUsername = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            disabled={isSubmitting}
+                                            disabled={isSubmitting || usernameStatus === "taken" || usernameStatus === "checking"}
                                             className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
                                         >
                                             Continue
@@ -213,17 +253,18 @@ const ChooseUsername = () => {
                         )}
 
                         {formState === "submitting" && (
-                            <p className="text-center">Saving username...</p>
+                            <InProgress message="Setting your username, please wait..." />
                         )}
 
-                        {formState === "response" && (
-                            <div className="text-center">
-                                <p>{responseMessage}</p>
-                                <button onClick={() => setFormState("idle")}>
-                                    Try again
-                                </button>
-                            </div>
+                        {formState === "error" && (
+                            <ErrorResponse message={responseMessage} callableFunction={() => setFormState("idle")} />
                         )}
+
+                        {
+                            formState === "success" && (
+                                <SuccessResponse message={responseMessage} />
+                            )
+                        }
 
                     </div>
                 </div>

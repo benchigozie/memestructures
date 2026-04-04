@@ -6,6 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import ErrorResponse from "./ErrorResponse";
 import SuccessResponse from "./SuccessResponse";
 import InProgress from "./InProgress";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 const AccountType = () => {
 
@@ -22,7 +23,7 @@ const AccountType = () => {
 
         try {
 
-            const response = await fetch("/api/user/update-account-type", {
+            const response = await fetchWithAuth("/api/user/update-account-type", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

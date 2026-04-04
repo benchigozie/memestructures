@@ -2,21 +2,32 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import ChooseUsername from "@/components/ChooseUsername";
 //import InProgress from "@/components/InProgress";
 import AccountType from "@/components/AccountType";
 import KYC from "@/components/KYC";
+import InProgress from "@/components/InProgress";
+
+
 export default function Dashboard() {
 
   const { user, loading, logout } = useAuth();
-  const Router = useRouter();
+  const router = useRouter();
 
-  //if (loading) return < />;
 
-  if (!user) {
-    Router.replace("/login");
-    return null;
-  }
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
+
+  if (loading) return (
+    <InProgress message="Loading your dashboard"/>
+  );
+
+
+  console.log("this is user in dashboard: ", user);
 
   if (!user?.username) {
     return <ChooseUsername />;
@@ -32,7 +43,7 @@ export default function Dashboard() {
     );
   }
 
- 
+
 
   return (
     <div>

@@ -13,7 +13,9 @@
     "prisma:migrate:dev": "dotenv -e .env.local -- prisma migrate dev --name",
     "prisma:migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "test": "jest",
-    "db:reset": "npx prisma db seed"
+    "db:reset:dev": "ENV_FILE=.env.local prisma db seed",
+    "db:reset:prod": "ENV_FILE=.env.production prisma db seed"
+
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.5.0",

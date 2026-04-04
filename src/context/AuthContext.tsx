@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
@@ -41,9 +42,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           return;
         }
 
+
         const data = await res.json();
         console.log("Auth check response data:", data);
         setUser(data.user);
+        setLoading(false);
 
       } catch {
         setUser(null);

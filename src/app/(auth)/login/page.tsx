@@ -55,7 +55,7 @@ const page = () => {
     if (user) {
       router.replace("/dashboard");
     }
-  }, [user, router]);
+  }, [user]);
 
   const handleResendVerification = async () => {
     try {
@@ -83,9 +83,9 @@ const page = () => {
 
   return (
     <section className='bg-my-white py-8 min-h-screen flex justify-center'>
-      <div className="flex flex-col gap-3">
-        <div className='max-w-6xl w-full mx-auto px-4'>
-          <div className='bg-my-white rounded-3xl w-full max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col gap-5'>
+      <div className="flex flex-col gap-3 w-full">
+        <div className='w-full mx-auto px-4'>
+          <div className='bg-my-white max-w-2xl rounded-3xl w-full p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col gap-5'>
             <div className="text-center items-center flex flex-col gap-1">
               <Link href="/">
                 <Image
@@ -248,7 +248,7 @@ const page = () => {
               formState === "error" && (<div className="flex flex-col gap-5 items-center">
                 {
                   responseMessage === "Your email is not verified" ?
-                    <div className="py-3 px-10 flex flex-col gap-3 items-center w-full">
+                    <div className="py-3 flex flex-col gap-3 items-center w-full">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-2xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
@@ -259,7 +259,7 @@ const page = () => {
                       </Link>
                     </div>
                     :
-                    <div className="py-10 px-10 flex flex-col gap-3 items-center w-full">
+                    <div className="py-3 flex flex-col gap-3 items-center w-full">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-xl">{responseMessage}</p>
                       <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
@@ -268,7 +268,7 @@ const page = () => {
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-6 items-center py-10 px-10 w-full">
+              formState === "success" && (<div className="flex flex-col gap-6 items-center py-3 w-full">
                 <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
                 <p className="text-center text-xl">Logging In</p>
               </div>)
