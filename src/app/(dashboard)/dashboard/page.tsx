@@ -6,8 +6,9 @@ import { useEffect } from "react";
 import ChooseUsername from "@/components/ChooseUsername";
 //import InProgress from "@/components/InProgress";
 import AccountType from "@/components/AccountType";
-import KYC from "@/components/KYC";
+import IndividualKYC from "@/components/IndividualKYC";
 import InProgress from "@/components/InProgress";
+import EnterpriseKYC from "@/components/EnterpriseKYC";
 
 
 export default function Dashboard() {
@@ -26,22 +27,31 @@ export default function Dashboard() {
     <InProgress message="Loading your dashboard"/>
   );
 
+  if (!user) router.replace("/login");
 
   console.log("this is user in dashboard: ", user);
 
-  if (!user?.username) {
+  
+  if (user && !user?.username) {
     return <ChooseUsername />;
   }
 
-  if (!user.accountType) {
+  if (!user?.accountType) {
     return <AccountType />;
   }
 
-  if (user.kycStatus !== "VERIFIED") {
+  if (user.kycStatus !== "VERIFIED" && user.accountType === "INDIVIDUAL") {
     return (
-      <KYC />
+      <EnterpriseKYC/>
     );
   }
+
+  if (user.kycStatus !== "VERIFIED" && user.accountType === "ENTERPRISE") {
+    return (
+      <EnterpriseKYC />
+    );
+  }
+
 
 
 

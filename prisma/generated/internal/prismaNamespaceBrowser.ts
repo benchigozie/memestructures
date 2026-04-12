@@ -53,7 +53,11 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Organization: 'Organization',
-  Membership: 'Membership'
+  Membership: 'Membership',
+  IndividualKyc: 'IndividualKyc',
+  OrganizationKyc: 'OrganizationKyc',
+  OrganizationMember: 'OrganizationMember',
+  OrganizationDocument: 'OrganizationDocument'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -78,11 +82,11 @@ export const UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-  accountType: 'accountType',
   accountStatus: 'accountStatus',
   kycStatus: 'kycStatus',
   emailVerified: 'emailVerified',
   imageUrl: 'imageUrl',
+  accountType: 'accountType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -109,6 +113,76 @@ export const MembershipScalarFieldEnum = {
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
+
+
+export const IndividualKycScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  dob: 'dob',
+  gender: 'gender',
+  idType: 'idType',
+  idNumber: 'idNumber',
+  idFrontPath: 'idFrontPath',
+  idBackPath: 'idBackPath',
+  selfieWithIdPath: 'selfieWithIdPath',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  address: 'address',
+  residenceType: 'residenceType',
+  residenceDocPath: 'residenceDocPath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IndividualKycScalarFieldEnum = (typeof IndividualKycScalarFieldEnum)[keyof typeof IndividualKycScalarFieldEnum]
+
+
+export const OrganizationKycScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  companyName: 'companyName',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationKycScalarFieldEnum = (typeof OrganizationKycScalarFieldEnum)[keyof typeof OrganizationKycScalarFieldEnum]
+
+
+export const OrganizationMemberScalarFieldEnum = {
+  id: 'id',
+  kycId: 'kycId',
+  role: 'role',
+  fullName: 'fullName',
+  idType: 'idType',
+  idNumber: 'idNumber',
+  idFrontPath: 'idFrontPath',
+  idBackPath: 'idBackPath',
+  address: 'address',
+  proofOfAddressType: 'proofOfAddressType',
+  proofOfAddressPath: 'proofOfAddressPath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationMemberScalarFieldEnum = (typeof OrganizationMemberScalarFieldEnum)[keyof typeof OrganizationMemberScalarFieldEnum]
+
+
+export const OrganizationDocumentScalarFieldEnum = {
+  id: 'id',
+  kycId: 'kycId',
+  type: 'type',
+  filePath: 'filePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationDocumentScalarFieldEnum = (typeof OrganizationDocumentScalarFieldEnum)[keyof typeof OrganizationDocumentScalarFieldEnum]
 
 
 export const SortOrder = {

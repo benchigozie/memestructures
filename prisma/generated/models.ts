@@ -11,4 +11,8 @@
 export type * from './models/User'
 export type * from './models/Organization'
 export type * from './models/Membership'
+export type * from './models/IndividualKyc'
+export type * from './models/OrganizationKyc'
+export type * from './models/OrganizationMember'
+export type * from './models/OrganizationDocument'
 export type * from './commonInputTypes'

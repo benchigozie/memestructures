@@ -386,7 +386,11 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Organization: 'Organization',
-  Membership: 'Membership'
+  Membership: 'Membership',
+  IndividualKyc: 'IndividualKyc',
+  OrganizationKyc: 'OrganizationKyc',
+  OrganizationMember: 'OrganizationMember',
+  OrganizationDocument: 'OrganizationDocument'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "organization" | "membership"
+    modelProps: "user" | "organization" | "membership" | "individualKyc" | "organizationKyc" | "organizationMember" | "organizationDocument"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -628,6 +632,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    IndividualKyc: {
+      payload: Prisma.$IndividualKycPayload<ExtArgs>
+      fields: Prisma.IndividualKycFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IndividualKycFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IndividualKycFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        findFirst: {
+          args: Prisma.IndividualKycFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IndividualKycFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        findMany: {
+          args: Prisma.IndividualKycFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>[]
+        }
+        create: {
+          args: Prisma.IndividualKycCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        createMany: {
+          args: Prisma.IndividualKycCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IndividualKycCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>[]
+        }
+        delete: {
+          args: Prisma.IndividualKycDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        update: {
+          args: Prisma.IndividualKycUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        deleteMany: {
+          args: Prisma.IndividualKycDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IndividualKycUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IndividualKycUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>[]
+        }
+        upsert: {
+          args: Prisma.IndividualKycUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IndividualKycPayload>
+        }
+        aggregate: {
+          args: Prisma.IndividualKycAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIndividualKyc>
+        }
+        groupBy: {
+          args: Prisma.IndividualKycGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IndividualKycGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IndividualKycCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IndividualKycCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationKyc: {
+      payload: Prisma.$OrganizationKycPayload<ExtArgs>
+      fields: Prisma.OrganizationKycFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationKycFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationKycFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationKycFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationKycFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationKycFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationKycCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationKycCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationKycCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationKycDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        update: {
+          args: Prisma.OrganizationKycUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationKycDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationKycUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationKycUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationKycUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationKycPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationKycAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationKyc>
+        }
+        groupBy: {
+          args: Prisma.OrganizationKycGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationKycGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationKycCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationKycCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationMember: {
+      payload: Prisma.$OrganizationMemberPayload<ExtArgs>
+      fields: Prisma.OrganizationMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        update: {
+          args: Prisma.OrganizationMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationMember>
+        }
+        groupBy: {
+          args: Prisma.OrganizationMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationDocument: {
+      payload: Prisma.$OrganizationDocumentPayload<ExtArgs>
+      fields: Prisma.OrganizationDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        update: {
+          args: Prisma.OrganizationDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationDocument>
+        }
+        groupBy: {
+          args: Prisma.OrganizationDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -673,11 +973,11 @@ export const UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-  accountType: 'accountType',
   accountStatus: 'accountStatus',
   kycStatus: 'kycStatus',
   emailVerified: 'emailVerified',
   imageUrl: 'imageUrl',
+  accountType: 'accountType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -704,6 +1004,76 @@ export const MembershipScalarFieldEnum = {
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
+
+
+export const IndividualKycScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  dob: 'dob',
+  gender: 'gender',
+  idType: 'idType',
+  idNumber: 'idNumber',
+  idFrontPath: 'idFrontPath',
+  idBackPath: 'idBackPath',
+  selfieWithIdPath: 'selfieWithIdPath',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  address: 'address',
+  residenceType: 'residenceType',
+  residenceDocPath: 'residenceDocPath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IndividualKycScalarFieldEnum = (typeof IndividualKycScalarFieldEnum)[keyof typeof IndividualKycScalarFieldEnum]
+
+
+export const OrganizationKycScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  companyName: 'companyName',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationKycScalarFieldEnum = (typeof OrganizationKycScalarFieldEnum)[keyof typeof OrganizationKycScalarFieldEnum]
+
+
+export const OrganizationMemberScalarFieldEnum = {
+  id: 'id',
+  kycId: 'kycId',
+  role: 'role',
+  fullName: 'fullName',
+  idType: 'idType',
+  idNumber: 'idNumber',
+  idFrontPath: 'idFrontPath',
+  idBackPath: 'idBackPath',
+  address: 'address',
+  proofOfAddressType: 'proofOfAddressType',
+  proofOfAddressPath: 'proofOfAddressPath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationMemberScalarFieldEnum = (typeof OrganizationMemberScalarFieldEnum)[keyof typeof OrganizationMemberScalarFieldEnum]
+
+
+export const OrganizationDocumentScalarFieldEnum = {
+  id: 'id',
+  kycId: 'kycId',
+  type: 'type',
+  filePath: 'filePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationDocumentScalarFieldEnum = (typeof OrganizationDocumentScalarFieldEnum)[keyof typeof OrganizationDocumentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -751,20 +1121,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'AccountType'
- */
-export type EnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType'>
-    
-
-
-/**
- * Reference to a field of type 'AccountType[]'
- */
-export type ListEnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType[]'>
-    
-
-
-/**
  * Reference to a field of type 'AccountStatus'
  */
 export type EnumAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountStatus'>
@@ -800,6 +1156,20 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'AccountType'
+ */
+export type EnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountType[]'
+ */
+export type ListEnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -824,6 +1194,34 @@ export type EnumOrgRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
  * Reference to a field of type 'OrgRole[]'
  */
 export type ListEnumOrgRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrgRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'KycRole'
+ */
+export type EnumKycRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'KycRole'>
+    
+
+
+/**
+ * Reference to a field of type 'KycRole[]'
+ */
+export type ListEnumKycRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'KycRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrganizationDocumentType'
+ */
+export type EnumOrganizationDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationDocumentType'>
+    
+
+
+/**
+ * Reference to a field of type 'OrganizationDocumentType[]'
+ */
+export type ListEnumOrganizationDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationDocumentType[]'>
     
 
 
@@ -938,6 +1336,10 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   organization?: Prisma.OrganizationOmit
   membership?: Prisma.MembershipOmit
+  individualKyc?: Prisma.IndividualKycOmit
+  organizationKyc?: Prisma.OrganizationKycOmit
+  organizationMember?: Prisma.OrganizationMemberOmit
+  organizationDocument?: Prisma.OrganizationDocumentOmit
 }
 
 /* Types for Logging */

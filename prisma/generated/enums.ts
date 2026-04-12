@@ -9,16 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const AccountType = {
-  INDIVIDUAL: 'INDIVIDUAL',
-  ENTERPRISE: 'ENTERPRISE',
-  ADMIN: 'ADMIN',
-  DEV: 'DEV'
-} as const
-
-export type AccountType = (typeof AccountType)[keyof typeof AccountType]
-
-
 export const AccountStatus = {
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED',
@@ -31,12 +21,23 @@ export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
 
 export const KycStatus = {
   UNVERIFIED: 'UNVERIFIED',
+  UNCOMPLETED: 'UNCOMPLETED',
   VERIFIED: 'VERIFIED',
   PENDING: 'PENDING',
   REJECTED: 'REJECTED'
 } as const
 
 export type KycStatus = (typeof KycStatus)[keyof typeof KycStatus]
+
+
+export const AccountType = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  ENTERPRISE: 'ENTERPRISE',
+  ADMIN: 'ADMIN',
+  DEV: 'DEV'
+} as const
+
+export type AccountType = (typeof AccountType)[keyof typeof AccountType]
 
 
 export const OrgRole = {
@@ -46,3 +47,21 @@ export const OrgRole = {
 } as const
 
 export type OrgRole = (typeof OrgRole)[keyof typeof OrgRole]
+
+
+export const KycRole = {
+  UBO: 'UBO',
+  DIRECTOR: 'DIRECTOR',
+  OPERATOR: 'OPERATOR'
+} as const
+
+export type KycRole = (typeof KycRole)[keyof typeof KycRole]
+
+
+export const OrganizationDocumentType = {
+  CERTIFICATE_OF_INCORPORATION: 'CERTIFICATE_OF_INCORPORATION',
+  MEMORANDUM_OF_ASSOCIATION: 'MEMORANDUM_OF_ASSOCIATION',
+  PROOF_OF_BUSINESS_ADDRESS: 'PROOF_OF_BUSINESS_ADDRESS'
+} as const
+
+export type OrganizationDocumentType = (typeof OrganizationDocumentType)[keyof typeof OrganizationDocumentType]

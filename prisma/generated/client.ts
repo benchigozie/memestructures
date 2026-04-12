@@ -56,3 +56,23 @@ export type Organization = Prisma.OrganizationModel
  * 
  */
 export type Membership = Prisma.MembershipModel
+/**
+ * Model IndividualKyc
+ * 
+ */
+export type IndividualKyc = Prisma.IndividualKycModel
+/**
+ * Model OrganizationKyc
+ * 
+ */
+export type OrganizationKyc = Prisma.OrganizationKycModel
+/**
+ * Model OrganizationMember
+ * 
+ */
+export type OrganizationMember = Prisma.OrganizationMemberModel
+/**
+ * Model OrganizationDocument
+ * 
+ */
+export type OrganizationDocument = Prisma.OrganizationDocumentModel

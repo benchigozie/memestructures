@@ -42,7 +42,7 @@ const page = () => {
     if (user) {
       router.replace("/dashboard");
     }
-  }, [user]);
+  }, [user, router]);
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "response" | "success">("idle");
   const [responseMessage, setResponseMessage] = useState("");
@@ -124,7 +124,7 @@ const page = () => {
             >
               {({ isSubmitting }) => (
                 <div>
-                  <Form>
+                  <Form autoComplete="off">
                     <div className="space-y-2">
                       <div>
                         <label htmlFor="fullName" className="text-my-gray/85 text-[15px]">Your Full Name</label>

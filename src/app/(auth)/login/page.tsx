@@ -55,7 +55,7 @@ const page = () => {
     if (user) {
       router.replace("/dashboard");
     }
-  }, [user]);
+  }, [user, router]);
 
   const handleResendVerification = async () => {
     try {
