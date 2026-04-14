@@ -135,6 +135,14 @@ export async function POST(req: Request) {
       })),
     });
 
+    await tx.membership.create({
+      data: {
+        userId: user.id,
+        organizationId: org.id,
+        role: "OWNER", 
+      },
+    });
+
     await tx.organizationDocument.createMany({
       data: [
         {

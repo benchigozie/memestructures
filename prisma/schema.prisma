@@ -71,8 +71,8 @@ model Membership {
   organizationId String
   role           OrgRole
 
-  user           User         @relation(fields: [userId], references: [id])
-  organization   Organization @relation(fields: [organizationId], references: [id])
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id],  onDelete: Cascade)
 
   @@unique([userId, organizationId])
 }
@@ -106,7 +106,7 @@ model IndividualKyc {
   residenceType String
   residenceDocPath String?
 
-  user      User @relation(fields: [userId], references: [id])
+  user      User @relation(fields: [userId], references: [id],  onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -120,7 +120,7 @@ model OrganizationKyc {
 
   status           KycStatus @default(UNVERIFIED)
 
-  organization     Organization @relation(fields: [organizationId], references: [id])
+  organization     Organization @relation(fields: [organizationId], references: [id],  onDelete: Cascade)
 
   members          OrganizationMember[]
   documents        OrganizationDocument[]
@@ -153,7 +153,7 @@ model OrganizationMember {
   proofOfAddressType String?
   proofOfAddressPath String?
 
-  kyc         OrganizationKyc @relation(fields: [kycId], references: [id])
+  kyc         OrganizationKyc @relation(fields: [kycId], references: [id],  onDelete: Cascade)
 
   createdAt   DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -172,7 +172,7 @@ model OrganizationDocument {
   type        OrganizationDocumentType
   filePath     String
 
-  kyc         OrganizationKyc @relation(fields: [kycId], references: [id])
+  kyc         OrganizationKyc @relation(fields: [kycId], references: [id],  onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

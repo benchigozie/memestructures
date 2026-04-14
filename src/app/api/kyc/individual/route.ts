@@ -1,190 +1,78 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
-import { uploadFile } from "@/utils/uploadFile";
 import prisma from "@/lib/prisma";
-import { KycRole } from "../../../../../prisma/generated/enums";
+import { uploadFile } from "@/utils/uploadFile";
 
 export async function POST(req: Request) {
-
   try {
     const cookieStore = await cookies();
-    const accessToken = cookieStore.get("accessToken")?.value;
+    const token = cookieStore.get("accessToken")?.value;
 
-    if (!accessToken) {
+    if (!token) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    let user;
+    const user = verifyToken(token, "access") as { id: string };
 
-    try {
-      user = verifyToken(accessToken, "access") as { id: string; email: string };
-    } catch (err: any) {
-      return NextResponse.json(
-        { error: err.message === "EXPIRED" ? "Token expired" : "Invalid token" },
-        { status: 401 }
-      );
+    const formData = await req.formData();
+
+    const idFront = formData.get("idFront") as File;
+    const idBack = formData.get("idBack") as File;
+    const selfie = formData.get("selfieWithId") as File;
+    const residenceDoc = formData.get("residenceDoc") as File;
+
+    console.log("this is form data: ", formData)
+
+    if (!(idFront && idBack && selfie && residenceDoc)) {
+      throw new Error("Missing required files");
     }
 
-    const formData = await req.formData()
+    const idFrontPath = await uploadFile(idFront, "individual");
+    const idBackPath = await uploadFile(idBack, "individual");
+    const selfiePath = await uploadFile(selfie, "individual");
+    const residenceDocPath = await uploadFile(residenceDoc, "residence");
 
-    const companyName = formData.get("companyName")
-    const certificate = formData.get("certificateOfIncorporation") as File
-    const memorandum = formData.get("memorandumOfAssociation") as File
-
-    if (
-      !(certificate instanceof File) ||
-      !(memorandum instanceof File)
-    ) {
-      throw new Error("Missing required company documents")
-    }
-
-    const directors = JSON.parse(formData.get("directors") as string)
-    const operator = JSON.parse(formData.get("operator") as string)
-
-    console.log("Received directors:", directors)
-    console.log("Received operator:", operator)
-
-    const directorsWithFiles = directors.map((d: any, i: number) => {
-      const idFront = formData.get(`director_${i}_idFront`) as File
-      const idBack = formData.get(`director_${i}_idBack`) as File
-      const proofOfAddressDoc = formData.get(`director_${i}_proofOfAddressDoc`) as File
-
-      return {
-        ...d,
-        idFront,
-        idBack,
-        proofOfAddressDoc
-      }
-    })
-
-    console.log("bluhuuu: ", directorsWithFiles[0].idBack)
-
-    const operatorWithFiles = {
-      ...operator,
-      idFront: formData.get("operator_idFront") as File,
-      idBack: formData.get("operator_idBack") as File,
-      proofOfAddressDoc: formData.get("operator_proofOfAddressDoc") as File,
-    }
-
-    if (
-      !(operatorWithFiles.idFront instanceof File) ||
-      !(operatorWithFiles.idBack instanceof File) ||
-      !(operatorWithFiles.proofOfAddressDoc instanceof File)
-    ) {
-      throw new Error("Missing required operator files")
-    }
-
-    const certificatePath = await uploadFile(certificate, "enterprise");
-    const memorandumPath = await uploadFile(memorandum, "enterprise");
-
-    const directorsUploaded = await Promise.all(
-      directorsWithFiles.map(async (d: any) => {
-
-        if (
-          !(d.idFront instanceof File) ||
-          !(d.idBack instanceof File) ||
-          !(d.proofOfAddressDoc instanceof File)
-        ) {
-          throw new Error("Missing required director files")
-        }
-
-        const idFrontPath = await uploadFile(d.idFront, "enterprise");
-        const idBackPath = await uploadFile(d.idBack, "enterprise");
-        const proofOfAddressPath = await uploadFile(d.proofOfAddressDoc, "enterprise");
-
-        return {
-          role: KycRole.DIRECTOR,
-          firstName: d.firstName,
-          lastName: d.lastName,
-          dob: new Date(d.dob),
-          email: d.email || null,
-          phone: d.phone || null,
-          idType: d.idType,
-          idNumber: d.idNumber,
-          address: d.address,
-          idFrontPath,
-          idBackPath,
-          proofOfAddressPath,
-        };
-      })
-    );
-
-    const operatorIdFrontPath = await uploadFile(operatorWithFiles.idFront, "enterprise");
-    const operatorIdBackPath = await uploadFile(operatorWithFiles.idBack, "enterprise");
-    const operatorProofPath = await uploadFile(operatorWithFiles.proofOfAddressDoc, "enterprise");
-
-    const operatorUploaded = {
-      role: KycRole.OPERATOR,
-      firstName: operatorWithFiles.firstName,
-      lastName: operatorWithFiles.lastName,
-      dob: new Date(operatorWithFiles.dob),
-      email: operatorWithFiles.email || null,
-      phone: operatorWithFiles.phone || null,
-      idType: operatorWithFiles.idType,
-      idNumber: operatorWithFiles.idNumber,
-      address: operatorWithFiles.address,
-      idFrontPath: operatorIdFrontPath,
-      idBackPath: operatorIdBackPath,
-      proofOfAddressType: operatorWithFiles.proofOfAddressType,
-      proofOfAddressPath: operatorProofPath,
-    };
-
-    const result = await prisma.$transaction(async (tx) => {
-      const org = await tx.organization.create({
-        data: {
-          name: companyName as string,
-        },
-      });
-
-      const orgKyc = await tx.organizationKyc.create({
-        data: {
-          organizationId: org.id,
-          companyName: companyName as string,
-        },
-      });
-
-      await tx.organizationMember.createMany({
-        data: [
-          ...directorsUploaded,
-          operatorUploaded,
-        ].map((m) => ({
-          ...m,
-          kycId: orgKyc.id,
-        })),
-      });
-
-      await tx.organizationDocument.createMany({
-        data: [
-          {
-            type: "CERTIFICATE_OF_INCORPORATION",
-            filePath: certificatePath,
-            kycId: orgKyc.id,
-          },
-          {
-            type: "MEMORANDUM_OF_ASSOCIATION",
-            filePath: memorandumPath,
-            kycId: orgKyc.id,
-          },
-        ],
-      });
-
-      return orgKyc;
+    const result = await prisma.individualKyc.create({
+      data: {
+        userId: user.id,
+    
+        firstName: formData.get("firstName") as string,
+        lastName: formData.get("lastName") as string,
+        email: formData.get("email") as string,
+        phone: formData.get("phone") as string,
+    
+        dob: new Date(formData.get("dob") as string),
+        gender: formData.get("gender") as string,
+    
+        idType: formData.get("idType") as string,
+        idNumber: formData.get("idNumber") as string,
+    
+        country: formData.get("country") as string,
+        state: formData.get("state") as string,
+        city: formData.get("city") as string,
+        address: formData.get("address") as string,
+    
+        idFrontPath,
+        idBackPath,
+        selfieWithIdPath: selfiePath,
+    
+        // 🔥 REQUIRED FIELD (this fixes your error)
+        residenceType: formData.get("residenceType") as string,
+        residenceDocPath,
+      },
     });
 
-    console.log("Enterprise KYC data saved to database for user ID:", user.id)
-    console.log("Database transaction result:", result)
-
-    return Response.json({
+    return NextResponse.json({
       success: true,
-      message: "Enterprise KYC submitted"
+      data: result,
     });
 
-  } catch (error: any) {
-    console.error("ENTERPRISE KYC ERROR:", error);
+  } catch (err: any) {
+    console.error(err);
 
     return NextResponse.json(
-      { error: error.message },
+      { success: false, error: err.message },
       { status: 500 }
     );
   }

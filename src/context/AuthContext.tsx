@@ -36,17 +36,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const res = await fetchWithAuth("/api/auth/me");
 
+
         if (!res.ok) {
           setUser(null);
+          //logout();
           setLoading(false);
+          
           return;
         }
 
 
         const data = await res.json();
-        console.log("Auth check response data:", data);
         setUser(data.user);
         setLoading(false);
+
 
       } catch {
         setUser(null);

@@ -1,6 +1,6 @@
 import { PuffLoader } from 'react-spinners'
 
-const InProgress = ({ message } : { message: string }) => {
+const InProgress = ({ message } : { message?: string }) => {
     return (
         <div className="flex flex-col gap-4 items-center py-8 px-10">
             <PuffLoader color="#006de2" size={50} className="mx-auto" />

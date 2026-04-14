@@ -18,8 +18,22 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (loading) return;
+  
+    console.log("Dashboard useEffect - user:", user);
+
+    if (!user) {
       router.replace("/login");
+      return;
+    }
+  
+    if (user.accountType === "ADMIN" || user.accountType === "DEV") {
+      router.replace("/dashboard/admin");
+      return;
+    }
+  
+    if (user.username && user.accountType && user.kycStatus === "VERIFIED") {
+      router.replace("/dashboard/user");
     }
   }, [user, loading, router]);
 
@@ -27,12 +41,13 @@ export default function Dashboard() {
     <InProgress message="Loading your dashboard"/>
   );
 
-  if (!user) router.replace("/login");
+
+  if (!user) return null;
 
   console.log("this is user in dashboard: ", user);
 
   
-  if (user && !user?.username) {
+  if (user && (user.accountType === "INDIVIDUAL" || user.accountType === "ENTERPRISE" ) && !user?.username) {
     return <ChooseUsername />;
   }
 
@@ -42,7 +57,7 @@ export default function Dashboard() {
 
   if (user.kycStatus !== "VERIFIED" && user.accountType === "INDIVIDUAL") {
     return (
-      <EnterpriseKYC/>
+      <IndividualKYC/>
     );
   }
 
@@ -54,14 +69,5 @@ export default function Dashboard() {
 
 
 
-
-  return (
-    <div>
-      <h1>Welcome {user?.email}</h1>
-
-      <button onClick={logout}>
-        Logout
-      </button>
-    </div>
-  );
+  return  null;
 };
