@@ -6,8 +6,10 @@ import { createSignedUrl } from "@/utils/createSignedUrl";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+
+    const params = await context.params;
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
