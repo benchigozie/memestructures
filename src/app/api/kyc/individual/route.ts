@@ -33,34 +33,44 @@ export async function POST(req: Request) {
     const selfiePath = await uploadFile(selfie, "individual");
     const residenceDocPath = await uploadFile(residenceDoc, "residence");
 
-    const result = await prisma.individualKyc.create({
-      data: {
-        userId: user.id,
+    const result = await prisma.$transaction(async (tx) => {
+      const kyc = await tx.individualKyc.create({
+        data: {
+          userId: user.id,
     
-        firstName: formData.get("firstName") as string,
-        lastName: formData.get("lastName") as string,
-        email: formData.get("email") as string,
-        phone: formData.get("phone") as string,
+          firstName: formData.get("firstName") as string,
+          lastName: formData.get("lastName") as string,
+          email: formData.get("email") as string,
+          phone: formData.get("phone") as string,
     
-        dob: new Date(formData.get("dob") as string),
-        gender: formData.get("gender") as string,
+          dob: new Date(formData.get("dob") as string),
+          gender: formData.get("gender") as string,
     
-        idType: formData.get("idType") as string,
-        idNumber: formData.get("idNumber") as string,
+          idType: formData.get("idType") as string,
+          idNumber: formData.get("idNumber") as string,
     
-        country: formData.get("country") as string,
-        state: formData.get("state") as string,
-        city: formData.get("city") as string,
-        address: formData.get("address") as string,
+          country: formData.get("country") as string,
+          state: formData.get("state") as string,
+          city: formData.get("city") as string,
+          address: formData.get("address") as string,
     
-        idFrontPath,
-        idBackPath,
-        selfieWithIdPath: selfiePath,
+          idFrontPath,
+          idBackPath,
+          selfieWithIdPath: selfiePath,
     
-        // 🔥 REQUIRED FIELD (this fixes your error)
-        residenceType: formData.get("residenceType") as string,
-        residenceDocPath,
-      },
+          residenceType: formData.get("residenceType") as string,
+          residenceDocPath,
+        },
+      });
+    
+      await tx.user.update({
+        where: { id: user.id },
+        data: {
+          kycStatus: "PENDING",
+        },
+      });
+    
+      return kyc;
     });
 
     return NextResponse.json({

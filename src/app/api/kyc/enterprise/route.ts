@@ -122,6 +122,7 @@ export async function POST(req: Request) {
       data: {
         organizationId: org.id,
         companyName: companyName as string,
+        status: "PENDING",
       },
     });
 
@@ -156,6 +157,13 @@ export async function POST(req: Request) {
           kycId: orgKyc.id,
         },
       ],
+    });
+
+    await tx.user.update({
+      where: { id: user.id },
+      data: {
+        kycStatus: "PENDING",
+      },
     });
 
     return orgKyc;

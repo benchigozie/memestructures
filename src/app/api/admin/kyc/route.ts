@@ -58,24 +58,28 @@ export async function GET(req: Request) {
     const type = searchParams.get("type");
 
     let result: any[] = [];
+    let total = 0;
 
     if (type === "INDIVIDUAL") {
-      const individualKycs = await prisma.individualKyc.findMany({
-        skip,
-        take: limit,
-        include: {
-          user: {
-            select: { kycStatus: true },
+      const [individualKycs, count] = await Promise.all([
+        prisma.individualKyc.findMany({
+          skip,
+          take: limit,
+          orderBy: { createdAt: "asc" }, // older first
+          include: {
+            user: { select: { kycStatus: true } },
           },
-        },
-        where: status
-          ? {
-            user: {
-              kycStatus: status as KycStatus,
-            },
-          }
-          : undefined,
-      });
+          where: status
+            ? { user: { kycStatus: status as KycStatus } }
+            : undefined,
+        }),
+
+        prisma.individualKyc.count({
+          where: status
+            ? { user: { kycStatus: status as KycStatus } }
+            : undefined,
+        }),
+      ]);
 
       result = individualKycs.map((kyc) => ({
         id: kyc.id,
@@ -85,34 +89,39 @@ export async function GET(req: Request) {
         email: kyc.email,
         createdAt: kyc.createdAt,
       }));
+
+      total = count;
     }
 
     else if (type === "ENTERPRISE") {
-      const enterpriseKycs = await prisma.organizationKyc.findMany({
-        skip,
-        take: limit,
-        include: {
-          organization: {
-            include: {
-              members: {
-                where: {
-                  role: OrgRole.OWNER,
-                },
-                include: {
-                  user: {
-                    select: { email: true },
+      const [enterpriseKycs, count] = await Promise.all([
+        prisma.organizationKyc.findMany({
+          skip,
+          take: limit,
+          orderBy: { createdAt: "asc" },
+          include: {
+            organization: {
+              include: {
+                members: {
+                  where: { role: OrgRole.OWNER },
+                  include: {
+                    user: { select: { email: true } },
                   },
                 },
               },
             },
           },
-        },
-        where: status
-          ? {
-            status: status as KycStatus,
-          }
-          : undefined,
-      });
+          where: status
+            ? { status: status as KycStatus }
+            : undefined,
+        }),
+
+        prisma.organizationKyc.count({
+          where: status
+            ? { status: status as KycStatus }
+            : undefined,
+        }),
+      ]);
 
       result = enterpriseKycs.map((kyc) => {
         const owner = kyc.organization.members[0];
@@ -126,12 +135,14 @@ export async function GET(req: Request) {
           createdAt: kyc.createdAt,
         };
       });
+
+      total = count;
     }
 
     else {
-      const query = await prisma.$queryRawUnsafe<UnifiedKycRow[]>(`
+      const query = await prisma.$queryRawUnsafe<any[]>(`
         SELECT * FROM (
-          
+    
           SELECT 
             i.id AS id,
             'INDIVIDUAL' AS type,
@@ -141,10 +152,9 @@ export async function GET(req: Request) {
             i."createdAt" AS "createdAt"
           FROM "IndividualKyc" i
           JOIN "User" u ON u.id = i."userId"
-          ${status ? `WHERE u."kycStatus" = '${status}'` : ""}
-      
+    
           UNION ALL
-      
+    
           SELECT 
             o.id AS id,
             'ENTERPRISE' AS type,
@@ -154,23 +164,51 @@ export async function GET(req: Request) {
             o."createdAt" AS "createdAt"
           FROM "OrganizationKyc" o
           LEFT JOIN "Organization" org ON org.id = o."organizationId"
-          LEFT JOIN "Membership" mem ON mem."organizationId" = org.id AND mem.role = 'OWNER'
+          LEFT JOIN "Membership" mem 
+            ON mem."organizationId" = org.id 
+            AND mem.role = 'OWNER'
           LEFT JOIN "User" m ON m.id = mem."userId"
-      
+    
         ) AS combined
-      
+    
+        WHERE 1=1
+        ${status ? `AND combined.status = '${status}'` : ""}
+    
         ORDER BY combined."createdAt" ASC
         LIMIT ${limit}
         OFFSET ${skip};
       `);
+    
+      const countResult = await prisma.$queryRawUnsafe<{ count: number }[]>(`
+        SELECT COUNT(*)::int AS count FROM (
+    
+          SELECT i.id
+          FROM "IndividualKyc" i
+          JOIN "User" u ON u.id = i."userId"
+    
+          UNION ALL
+    
+          SELECT o.id
+          FROM "OrganizationKyc" o
+    
+        ) AS total
+      `);
+    
       result = query;
+      total = countResult[0]?.count || 0;
     }
 
-    console.log("Fetched KYC entries:", result);
+    const totalPages = Math.ceil(total / limit);
 
     return NextResponse.json({
       success: true,
       data: result,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages,
+      },
     });
   } catch (error: any) {
     console.error("KYC FETCH ERROR:", error);
