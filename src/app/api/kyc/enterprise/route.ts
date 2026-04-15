@@ -3,11 +3,19 @@ import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
 import { uploadFile } from "@/utils/uploadFile";
 import prisma from "@/lib/prisma";
-import { KycRole } from "../../../../../prisma/generated/enums";
+//import { KycRole, KycStatus } from "@/generated/prisma/enums";
+
+const KycRole = {
+  UBO: 'UBO',
+  DIRECTOR: 'DIRECTOR',
+  OPERATOR: 'OPERATOR',
+} as const;
+
 
 
 export async function POST(req: Request) {
 
+  
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
 
