@@ -5,6 +5,7 @@ import { uploadFile } from "@/utils/uploadFile";
 import prisma from "@/lib/prisma";
 //import { KycRole, KycStatus } from "@/generated/prisma/enums";
 
+
 const KycRole = {
   UBO: 'UBO',
   DIRECTOR: 'DIRECTOR',
