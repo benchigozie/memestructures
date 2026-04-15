@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import InProgress from "@/components/InProgress";
+import { RenderFile } from "@/components/RenderFile";
+import { ArrowLeft } from "lucide-react";
 
 export default function EnterpriseKycPage() {
   const { id } = useParams();
@@ -11,6 +13,33 @@ export default function EnterpriseKycPage() {
 
   const [kyc, setKyc] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  const updateStatus = async (status: "VERIFIED" | "REJECTED") => {
+    try {
+      const res = await fetchWithAuth(
+        `/api/admin/kyc/enterprise/${id}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status }),
+          credentials: "include",
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        setKyc((prev: any) => ({
+          ...prev,
+          status,
+        }));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchKyc = async () => {
@@ -26,6 +55,7 @@ export default function EnterpriseKycPage() {
 
         if (data.success) {
           setKyc(data.data);
+          console.log("Fetched KYC data:", data.data);
         }
       } catch (err) {
         console.error(err);
@@ -37,57 +67,88 @@ export default function EnterpriseKycPage() {
     if (id) fetchKyc();
   }, [id]);
 
-  if (loading) return <InProgress message="Loading Enterprise KYC..." />;
-
-  if (!kyc) return <p className="p-4 md:p-6">KYC not found</p>;
+  if (loading) return <InProgress message="Loading Enterprise KYC" />;
+  if (!kyc) return <p className="p-4">KYC not found</p>;
 
   return (
-    <div className="p-6 space-y-8">
-      <div className="flex justify-between items-center">
+    <div className="p-4 md:p-6 space-y-6">
+
+      <div className="flex justify-between items-start">
         <button
           onClick={() => router.back()}
-          className="text-sm text-gray-500 hover:text-white"
+          className="hidden md:flex gap-1 items-center text-sm bg-my-blue text-white px-4 py-2 rounded"
         >
-          ← Back
+          <ArrowLeft size={16} />
+          Back
         </button>
 
-        <span className="text-sm px-3 py-1 rounded bg-gray-800">
+        <span className="text-xs px-4 py-2 rounded bg-gray-800 text-white">
           {kyc.status}
         </span>
       </div>
-
       <div>
-        <h2 className="text-xl font-semibold">{kyc.companyName}</h2>
+        <h1 className="text-2xl font-bold text-my-deep-blue">Company</h1>
       </div>
 
       <div>
-        <h3 className="font-semibold mb-2">Members</h3>
+        <div className="flex gap-1 items-center">
+          <h2 className="font-medium">Company Name: </h2>
+          <p>{kyc.companyName}</p>
+        </div>
+        <h2 className="font-medium">Documents:</h2>
+        <div className="space-y-4 mt-4">
+          {kyc.documents.map((doc: any) => (
+            <RenderFile
+              key={doc.id}
+              url={doc.url}
+              label={doc.type}
+            />
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold text-my-deep-blue">Members</h2>
 
-        <div className="space-y-4">
-          {kyc.members.map((m: any) => (
-            <div
-              key={m.id}
-              className="p-4 border border-gray-800 rounded-lg"
-            >
-              <p className="font-medium">{m.fullName}</p>
-              <p className="text-sm text-gray-400">{m.role}</p>
-              <p className="text-sm">{m.idType} - {m.idNumber}</p>
-              <p className="text-sm">{m.address}</p>
+        <div className="space-y-6 mt-4">
+          {kyc.members.map((member: any) => (
+            <div key={member.id} className="outline outline-my-gray/10 p-4 rounded-lg space-y-2">
+
+              <p><span className="font-medium">Role:</span> {member.role}</p>
+              <p><span className="font-medium">Name:</span> {member.fullName}</p>
+              <p><span className="font-medium">ID Type:</span> {member.idType}</p>
+              <p><span className="font-medium">ID Number:</span> {member.idNumber}</p>
+              <p><span className="font-medium">Address:</span> {member.address}</p>
+
+              <div className="space-y-2">
+                <RenderFile url={member.idBackUrl} label="ID Front" />
+                <RenderFile url={member.idFrontUrl} label="ID Back" />
+                {member.proofOfAddressPath && (
+                  <RenderFile
+                    url={member.proofOfAddressUrl}
+                    label="Proof of Address"
+                  />
+                )}
+              </div>
+
             </div>
           ))}
         </div>
       </div>
 
-      <div>
-        <h3 className="font-semibold mb-2">Documents</h3>
+      <div className="flex gap-2">
+        <button
+          onClick={() => updateStatus("VERIFIED")}
+          className="px-4 py-2 bg-green-400 text-white rounded cursor-pointer transition-colors duration-300 hover:bg-green-600"
+        >
+          Verify
+        </button>
 
-        <div className="space-y-2">
-          {kyc.documents.map((doc: any) => (
-            <p key={doc.id}>
-              {doc.type} → {doc.filePath}
-            </p>
-          ))}
-        </div>
+        <button
+          onClick={() => updateStatus("REJECTED")}
+          className="px-4 py-2 bg-red-400 text-white rounded cursor-pointer transition-colors duration-300 hover:bg-red-600"
+        >
+          Reject
+        </button>
       </div>
     </div>
   );

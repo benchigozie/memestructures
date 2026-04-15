@@ -1,8 +1,11 @@
 import { Suspense } from "react";
 import VerifyEmailPage from "@/components/VerifyEmail";
+import InProgress from "@/components/InProgress";
 const page = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={
+      <InProgress message="Loading" />
+    }>
       <VerifyEmailPage />
     </Suspense>
   )

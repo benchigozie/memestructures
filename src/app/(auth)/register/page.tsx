@@ -10,6 +10,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PuffLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import InProgress from "@/components/InProgress";
+import ErrorResponse from "@/components/ErrorResponse";
+import SuccessResponse from "@/components/SuccessResponse";
 
 
 const signUpSchema = Yup.object({
@@ -72,7 +75,7 @@ const page = () => {
     <section className='py-8 bg-my-white w-full min-h-screen flex justify-center'>
       <div className='max-w-6xl w-full mx-auto px-4 bg-my-white'>
         <div className='bg-my-white rounded-3xl w-full max-w-2xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10'>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <div className="text-center items-center flex flex-col gap-1">
               <Link href="/">
                 <Image
@@ -250,24 +253,13 @@ const page = () => {
               )}
             </Formik>}
             {
-              formState === "submitting" && (<div className="flex flex-col gap-5 items-center py-8 px-10">
-                <PuffLoader color="#006de2" size={60} className="mx-auto" />
-                <p className="text-center text-xl">Submitting your information, please wait</p>
-              </div>)
+              formState === "submitting" && <InProgress message="Creating your account" />
             }
             {
-              formState === "response" && (<div className="flex flex-col gap-5 items-center py-4 px-10">
-                <XCircle size={60} color="#006de2" className="mx-auto" />
-                <p className="text-center text-xl">{responseMessage}</p>
-                <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
-              </div>)
+              formState === "response" && (<ErrorResponse message={responseMessage} callableFunction={setToIdle} />)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-5 items-center py-4 px-10">
-                <CircleCheckBig size={60} color="#006de2" className="mx-auto" />
-                <p className="text-center text-xl">Your account has been created successfully! Check your Email for your verification link.</p>
-                <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
-              </div>)
+              formState === "success" && (<SuccessResponse message="Your account has been created successfully! Check your Email for your verification link." callableFunction={setToIdle} />)
             }
           </div>
         </div>

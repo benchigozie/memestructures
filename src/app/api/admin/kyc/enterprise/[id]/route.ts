@@ -8,8 +8,8 @@ export async function GET(
   req: Request,
   context: { params: Promise<{ id: string }> }
 ) {
+  const params = await context.params;
 
-    const params = await context.params;
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -33,11 +33,25 @@ export async function GET(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    // 🔥 signed URLs for documents
     const documents = await Promise.all(
       kyc.documents.map(async (doc) => ({
         ...doc,
         url: await createSignedUrl(doc.filePath),
+      }))
+    );
+
+    const members = await Promise.all(
+      kyc.members.map(async (member) => ({
+        ...member,
+        idFrontUrl: member.idFrontPath
+          ? await createSignedUrl(member.idFrontPath)
+          : null,
+        idBackUrl: member.idBackPath
+          ? await createSignedUrl(member.idBackPath)
+          : null,
+        proofOfAddressUrl: member.proofOfAddressPath
+          ? await createSignedUrl(member.proofOfAddressPath)
+          : null,
       }))
     );
 
@@ -46,8 +60,10 @@ export async function GET(
       data: {
         ...kyc,
         documents,
+        members, // ✅ override with signed versions
       },
     });
+
   } catch (err: any) {
     return NextResponse.json(
       { success: false, error: err.message },

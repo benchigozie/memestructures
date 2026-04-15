@@ -34,7 +34,7 @@ async function main() {
     SALT_ROUNDS
   );
 
-    await prisma.user.create({
+  /*  await prisma.user.create({
       data: {
         name: "Ben Developer",
         email: "bennchigozie@gmail.com",
@@ -56,7 +56,7 @@ async function main() {
           
         }
       });
-        console.log("Seed user4 inserted.");
+        console.log("Seed user4 inserted.");*/
 }
 
 main()

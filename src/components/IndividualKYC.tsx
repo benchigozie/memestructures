@@ -54,6 +54,8 @@ const stepThreeSchema = Yup.object({
 
 const IndividualKYC = () => {
 
+  const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
+
   async function submitKYC(values: any) {
     const formData = new FormData()
 
@@ -109,89 +111,94 @@ const IndividualKYC = () => {
                 <p className='text-sm text-center'>Residence</p>
               </div>
             </div>
-            <Formik
-              initialValues={{
-                firstName: "",
-                lastName: "",
-                dob: "",
-                gender: "",
-                email: "",
-                phoneCode: "+234",
-                phone: "",
+            {
+              formState === "idle" && (
+                <Formik
+                  initialValues={{
+                    firstName: "",
+                    lastName: "",
+                    dob: "",
+                    gender: "",
+                    email: "",
+                    phoneCode: "+234",
+                    phone: "",
 
-                idType: "",
-                idNumber: "",
-                idFront: null,
-                idBack: null,
-                selfieWithId: null,
+                    idType: "",
+                    idNumber: "",
+                    idFront: null,
+                    idBack: null,
+                    selfieWithId: null,
 
-                country: "",
-                state: "",
-                city: "",
-                residenceType: "",
-                address: "",
-                residenceDoc: null
-              }}
+                    country: "",
+                    state: "",
+                    city: "",
+                    residenceType: "",
+                    address: "",
+                    residenceDoc: null
+                  }}
 
-              validationSchema={
-                step === 1 ? stepOneSchema :
-                  step === 2 ? stepTwoSchema :
-                    stepThreeSchema
-              }
+                  validationSchema={
+                    step === 1 ? stepOneSchema :
+                      step === 2 ? stepTwoSchema :
+                        stepThreeSchema
+                  }
 
-              onSubmit={(values) => {
-                console.log(values)
-                submitKYC(values);
-              }}
-            >
+                  onSubmit={(values) => {
+                    console.log(values)
+                    submitKYC(values);
+                  }}
+                >
 
-              {({ setFieldValue, values }) => (
-                <Form className="space-y-4">
+                  {({ setFieldValue, values }) => (
+                    <Form className="space-y-4">
 
-                  {step === 1 && <StepOneI />}
+                      {step === 1 && <StepOneI />}
 
-                  {step === 2 && (
-                    <StepTwoI values={values} setFieldValue={setFieldValue} />
+                      {step === 2 && (
+                        <StepTwoI values={values} setFieldValue={setFieldValue} />
+                      )}
+
+                      {step === 3 && (
+                        <StepThreeI values={values} setFieldValue={setFieldValue} />
+                      )}
+
+                      <div className={`grid ${step === 1 ? "grid-cols-1" : "grid-cols-2"} gap-4 pt-6`}>
+
+                        {step > 1 && (
+                          <button
+                            type="button"
+                            onClick={prevStep}
+                            className="mt-2 w-full rounded-xl bg-gray-100 hover:cursor-pointer hover:bg-my-blue-white text-my-gray/70 py-3 font-medium hover:opacity-90 transition-all duration-300"
+                          >
+                            Back
+                          </button>
+                        )}
+
+                        {step < 3 ? (
+                          <button
+                            type="button"
+                            onClick={nextStep}
+                            className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                          >
+                            Next
+                          </button>
+                        ) : (
+                          <button
+                            type="submit"
+                            className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                          >
+                            Submit KYC
+                          </button>
+                        )}
+
+                      </div>
+
+                    </Form>
                   )}
+                </Formik>
+              )
+            }
 
-                  {step === 3 && (
-                    <StepThreeI values={values} setFieldValue={setFieldValue} />
-                  )}
-
-                  <div className={`grid ${step === 1 ? "grid-cols-1" : "grid-cols-2"} gap-4 pt-6`}>
-
-                    {step > 1 && (
-                      <button
-                        type="button"
-                        onClick={prevStep}
-                        className="mt-2 w-full rounded-xl bg-gray-100 hover:cursor-pointer hover:bg-my-blue-white text-my-gray/70 py-3 font-medium hover:opacity-90 transition-all duration-300"
-                      >
-                        Back
-                      </button>
-                    )}
-
-                    {step < 3 ? (
-                      <button
-                        type="button"
-                        onClick={nextStep}
-                        className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
-                      >
-                        Next
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
-                      >
-                        Submit KYC
-                      </button>
-                    )}
-
-                  </div>
-
-                </Form>
-              )}
-            </Formik>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default function VerifyAccountPage() {
   const [responseMessage, setResponseMessage] = useState("");
   const [viewState, setViewState] = useState<"initial" | "submitting" | "success" | "error">("initial");
   const params = useSearchParams();
-  const email = params.get("email") ?? ""; // alater return an error if email param isnt there. resend ver, reset p, verify email.
+  const email = params.get("email") ?? "";
 
   const resendVerification = async () => {
 
@@ -37,7 +37,7 @@ export default function VerifyAccountPage() {
   return (
     <section className='py-14 bg-my-white w-full min-h-screen flex'>
       <div className='max-w-6xl mx-auto px-4 bg-my-white text-center items-center flex flex-col'>
-        <div className='bg-my-white rounded-3xl max-w-2xl w-full p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10 flex flex-col items-center gap-3'>
+        <div className='bg-my-white rounded-3xl max-w-2xl w-full p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 flex flex-col items-center gap-3'>
           <Link href="/">
             <Image
               src="/images/memestructureslogo.png"
@@ -46,23 +46,23 @@ export default function VerifyAccountPage() {
               height={70}
             />
           </Link>
-          <h2 className='text-2xl md:text-4xl text-my-deep-blue font-bold mt-1'>Resend Verification Link</h2>
+          <h2 className='text-2xl md:text-4xl text-my-deep-blue font-bold'>Resend Verification Link</h2>
           {
             viewState === "error" && (
-              <div className="flex flex-col gap-5 items-center pb-6 w-full">
-                <XCircle size={60} color="#006de2" className="mx-auto mt-5" />
+              <div className="flex flex-col gap-3 items-center w-full">
+                <XCircle size={50} color="#006de2" className="mx-auto mt-2" />
                 <p className="text-center text-xl">{responseMessage}</p>
-                <div className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+                <div className="mt-1 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
                   <Link href="/login">Back to Login</Link>
                 </div>
               </div>
             )
           }
           {viewState === "success" &&
-            (<div className="flex flex-col gap-5 items-center pb-6 w-full">
-              <CircleCheckBig size={60} color="#006de2" className="mx-auto mt-5" />
-              <p className="text-center text-xl">{responseMessage}</p>
-              <div className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+            (<div className="flex flex-col gap-3 items-center w-full">
+              <CircleCheckBig size={50} color="#006de2" className="mx-auto mt-2" />
+              <p className="text-center text-lg">{responseMessage}</p>
+              <div className="mt-1 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
                 <Link href="/login">Back to Login</Link>
               </div>
             </div>)
@@ -70,9 +70,9 @@ export default function VerifyAccountPage() {
           {
             viewState === "initial" &&
             (
-              <div className="flex flex-col gap-5 items-center pb-6 w-full">
+              <div className="flex flex-col gap-3 items-center w-full">
                 <p className="text-lg">A new verification link will be sent to your email.</p>
-                <button onClick={resendVerification} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
+                <button onClick={resendVerification} className="mt-1 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">
                   Send Link
                 </button>
               </div>
@@ -80,9 +80,9 @@ export default function VerifyAccountPage() {
           }
           {
             viewState === "submitting" && (
-              <div className="flex flex-col gap-5 items-center pb-6 w-full">
-                <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
-                <p className="text-center text-xl">Submitting your information, please wait</p>
+              <div className="flex flex-col gap-3 items-center pb-6 w-full">
+                <PuffLoader color="#006de2" size={50} className="mx-auto mt-5" />
+                <p className="text-center text-xl">Submitting, please wait</p>
               </div>
             )
           }

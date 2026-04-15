@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import InProgress from "@/components/InProgress";
 
 
 const loginSchema = Yup.object({
@@ -248,7 +249,7 @@ const page = () => {
               formState === "error" && (<div className="flex flex-col gap-5 items-center">
                 {
                   responseMessage === "Your email is not verified" ?
-                    <div className="py-3 flex flex-col gap-3 items-center w-full">
+                    <div className="py-3 flex flex-col gap-4 items-center w-full">
                       <XCircle size={60} color="#006de2" className="mx-auto" />
                       <p className="text-center text-2xl">{responseMessage}</p>
                       <p className="text-center">Check your email inbox for your verification link. You can also request for a new link by clicking below.</p>
@@ -260,18 +261,15 @@ const page = () => {
                     </div>
                     :
                     <div className="py-3 flex flex-col gap-3 items-center w-full">
-                      <XCircle size={60} color="#006de2" className="mx-auto" />
-                      <p className="text-center text-xl">{responseMessage}</p>
+                      <XCircle size={50} color="#006de2" className="mx-auto" />
+                      <p className="text-center text-lg">{responseMessage}</p>
                       <button onClick={setToIdle} className="mt-6 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
                     </div>
                 }
               </div>)
             }
             {
-              formState === "success" && (<div className="flex flex-col gap-6 items-center py-3 w-full">
-                <PuffLoader color="#006de2" size={60} className="mx-auto mt-5" />
-                <p className="text-center text-xl">Logging In</p>
-              </div>)
+              formState === "success" && (<InProgress message="Logging in" />)
             }
 
           </div>

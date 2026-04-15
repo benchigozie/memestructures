@@ -39,7 +39,7 @@ function Header() {
                         height={50}
                     />
                 </Link>
-                <div className="max-w-86 w-full lg:flex justify-between hidden">
+                <div className="max-w-110 w-full lg:flex justify-between hidden">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.path;
 
