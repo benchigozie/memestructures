@@ -2,7 +2,26 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import { KycStatus, OrgRole } from "@/generated/prisma/enums";
+//import { KycStatus, OrgRole } from "@/generated/prisma/enums";
+
+
+const OrgRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER'
+} as const;
+
+const KycStatus = {
+  UNVERIFIED: 'UNVERIFIED',
+  UNCOMPLETED: 'UNCOMPLETED',
+  VERIFIED: 'VERIFIED',
+  PENDING: 'PENDING',
+  REJECTED: 'REJECTED'
+} as const;
+
+type KycStatus = typeof KycStatus[keyof typeof KycStatus];
+
+
 
 type UnifiedKycRow = {
   id: string;
