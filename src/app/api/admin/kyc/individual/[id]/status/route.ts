@@ -2,7 +2,17 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
-import { KycStatus } from "@/generated/prisma/enums";
+//import { KycStatus } from "@/generated/prisma/enums";
+
+const KycStatus = {
+    UNVERIFIED: 'UNVERIFIED',
+    UNCOMPLETED: 'UNCOMPLETED',
+    VERIFIED: 'VERIFIED',
+    PENDING: 'PENDING',
+    REJECTED: 'REJECTED'
+  } as const;
+  
+  type KycStatus = typeof KycStatus[keyof typeof KycStatus];
 
 export async function PATCH(
     req: Request,
