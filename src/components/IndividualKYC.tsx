@@ -7,6 +7,9 @@ import StepOneI from './StepOneI';
 import StepTwoI from './StepTwoI';
 import StepThreeI from './StepThreeI';
 import { fetchWithAuth } from '@/utils/fetchWithAuth';
+import InProgress from './InProgress';
+import ErrorResponse from './ErrorResponse';
+import SuccessResponse from './SuccessResponse';
 
 
 const stepOneSchema = Yup.object({
@@ -55,8 +58,11 @@ const stepThreeSchema = Yup.object({
 const IndividualKYC = () => {
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
+  const [responseMessage, setResponseMessage] = useState("");
 
   async function submitKYC(values: any) {
+
+    setFormState("submitting");
     const formData = new FormData()
 
     Object.entries(values).forEach(([key, value]) => {
@@ -69,10 +75,31 @@ const IndividualKYC = () => {
 
     })
 
-    await fetchWithAuth("/api/kyc/individual", {
-      method: "POST",
-      body: formData
-    })
+    try {
+
+      const res = await fetchWithAuth("/api/kyc/individual", {
+        method: "POST",
+        body: formData
+      })
+
+      const data = await res.json();
+
+      console.log("KYC submission response:", data);
+
+      if (data.success) {
+        setFormState("success");
+        setResponseMessage(data.message || "KYC submitted successfully!");
+      }
+      else {
+        setFormState("error");
+        setResponseMessage(data.error || "An error occurred while submitting your KYC. Please try again later.");
+      }
+    }
+    catch (err) {
+      setFormState("error");
+      setResponseMessage("An unexpected error occurred. Please try again later.");
+      console.error(err);
+    }
   }
 
   const [step, setStep] = useState(1);
@@ -97,20 +124,24 @@ const IndividualKYC = () => {
               <h2 className='text-2xl md:text-3xl text-my-deep-blue font-medium mt-1'>KYC Verification</h2>
               <p className="text-lg">Enter your authentic details for verification.</p>
             </div>
-            <div className='grid grid-cols-3 gap-1.5 text-my-deep-blue/90'>
-              <div className='flex flex-col gap-1.5'>
-                <div className={`h-1 bg-my-blue rounded-full`}></div>
-                <p className='text-sm text-center'>Personal Info</p>
-              </div>
-              <div className='flex flex-col gap-1.5'>
-                <div className={`h-1 ${step >= 2 ? "bg-my-blue" : "bg-my-gray/10"} rounded-full`}></div>
-                <p className='text-center text-sm'>Identity</p>
-              </div>
-              <div className='flex flex-col gap-1.5'>
-                <div className={`h-1 ${step >= 3 ? "bg-my-blue" : "bg-my-gray/10"} reunded-full`}></div>
-                <p className='text-sm text-center'>Residence</p>
-              </div>
-            </div>
+            {
+              formState === "idle" && (
+                <div className='grid grid-cols-3 gap-1.5 text-my-deep-blue/90'>
+                  <div className='flex flex-col gap-1.5'>
+                    <div className={`h-1 bg-my-blue rounded-full`}></div>
+                    <p className='text-sm text-center'>Personal Info</p>
+                  </div>
+                  <div className='flex flex-col gap-1.5'>
+                    <div className={`h-1 ${step >= 2 ? "bg-my-blue" : "bg-my-gray/10"} rounded-full`}></div>
+                    <p className='text-center text-sm'>Identity</p>
+                  </div>
+                  <div className='flex flex-col gap-1.5'>
+                    <div className={`h-1 ${step >= 3 ? "bg-my-blue" : "bg-my-gray/10"} reunded-full`}></div>
+                    <p className='text-sm text-center'>Residence</p>
+                  </div>
+                </div>
+              )
+            }
             {
               formState === "idle" && (
                 <Formik
@@ -199,11 +230,28 @@ const IndividualKYC = () => {
               )
             }
 
+            {
+              formState === "submitting" && (
+                <InProgress message="Submitting your KYC, please wait" />
+              )
+            }
+            {
+              formState === "error" && (
+                <ErrorResponse message={responseMessage} />
+              )
+            }
+            {
+              formState === "success" && (
+                <SuccessResponse message={responseMessage} />
+              )
+            }
+
           </div>
         </div>
       </div>
     </section>
   )
 }
+
 
 export default IndividualKYC

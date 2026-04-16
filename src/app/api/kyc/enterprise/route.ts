@@ -185,7 +185,7 @@ export async function POST(req: Request) {
 
   return Response.json({
     success: true,
-    message: "Enterprise KYC submitted"
+    message: "Your KYC has been submitted, we will review it and get back to you shortly.",
   });
 
 }

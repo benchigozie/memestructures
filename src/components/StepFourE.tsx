@@ -1,12 +1,15 @@
 "use client"
 
+import { ErrorMessage } from "formik";
+
 interface StepFourProps {
-  values: any
+  values: any;
+  setFieldValue: (field: string, value: any) => void;
 }
 
-const StepFourReview = ({ values }: StepFourProps) => {
+const StepFourReview = ({ values, setFieldValue }: StepFourProps) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <h3 className="text-my-deep-blue font-semibold text-xl">
         Review Your Submission
       </h3>
@@ -15,11 +18,11 @@ const StepFourReview = ({ values }: StepFourProps) => {
         <h4 className="font-semibold mb-1">Company Documents</h4>
         <p><span className="font-semibold">Company Name: </span>{values.companyName}</p>
         <p>
-        <span className="font-medium">Certificate of Incorporation: </span>
+          <span className="font-medium">Certificate of Incorporation: </span>
           {values.certificateOfIncorporation?.name || "Not uploaded"}
         </p>
         <p>
-        <span className="font-medium">Memorandum of Association: </span>
+          <span className="font-medium">Memorandum of Association: </span>
           {values.memorandumOfAssociation?.name || "Not uploaded"}
         </p>
       </div>
@@ -31,7 +34,7 @@ const StepFourReview = ({ values }: StepFourProps) => {
           <div key={index} className="outline outline-dashed outline-my-blue/25 rounded-xl p-4 my-2">
             <p><span className="font-medium">Name: </span> {director.fullName}</p>
             <p>
-            <span className="font-medium">Address: </span>
+              <span className="font-medium">Address: </span>
               {
                 (director.address && director.city && director.state && director.country) ?
                   `${director.address}, ${director.city}, ${director.state}, ${director.country}`
@@ -55,7 +58,7 @@ const StepFourReview = ({ values }: StepFourProps) => {
         <p><span className="font-medium">Name: </span> {values.operator?.fullName}</p>
 
         <p>
-        <span className="font-medium">Address: </span>
+          <span className="font-medium">Address: </span>
           {
             (values.operator.address && values.operator.city && values.operator.state && values.operator.country) ?
               `${values.operator.address}, ${values.operator.city}, ${values.operator.state}, ${values.operator.country}`
@@ -73,10 +76,28 @@ const StepFourReview = ({ values }: StepFourProps) => {
 
         <p><span className="font-medium">Proof Type: </span> {values.operator?.proofOfAddressType}</p>
         <p>
-        <span className="font-medium">Proof Doc: </span>
+          <span className="font-medium">Proof Doc: </span>
           {values.operator?.proofOfAddressDoc?.name || "Not uploaded"}
         </p>
       </div>
+      <div className="flex items-center gap-2 pt-4">
+        <input
+          type="checkbox"
+          checked={values.confirmSubmission}
+          onChange={(e) => {
+            setFieldValue("confirmSubmission", e.target.checked);
+            console.log("Checkbox value:", e.target.checked);
+          }
+          }
+           className="h-4 w-4  accent-my-blue cursor-pointer rounded"
+        />
+        <p className="text-sm text-my-blue">
+          I confirm that all provided information is accurate and I am authorized
+          to submit this KYC.
+        </p>
+        
+      </div>
+      <ErrorMessage name="confirmSubmission" component="div" className="text-red-400 text-sm" />
     </div>
   )
 }

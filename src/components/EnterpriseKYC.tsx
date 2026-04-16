@@ -11,6 +11,9 @@ import StepTwoUBO from './StepTwoE';
 import StepThreeOperator from './StepThreeE';
 import StepFourReview from './StepFourE';
 import { fetchWithAuth } from '@/utils/fetchWithAuth';
+import InProgress from './InProgress';
+import ErrorResponse from './ErrorResponse';
+import SuccessResponse from './SuccessResponse';
 
 
 const stepOneSchema = Yup.object({
@@ -51,92 +54,137 @@ const operatorSchema = Yup.object({
     proofOfAddressDoc: Yup.mixed().required("Proof of address document required"),
 })
 
+const reviewSchema = Yup.object({
+    confirmSubmission: Yup.boolean()
+        .oneOf([true], "You must confirm before submitting")
+        .required("Confirmation is required"),
+});
+
+const getSchema = (step: number) => {
+    switch (step) {
+        case 1:
+            return stepOneSchema;
+        case 2:
+            return directorSchema;
+        case 3:
+            return operatorSchema;
+        default:
+            return reviewSchema;
+    }
+};
+
 const EnterpriseKYC = () => {
 
+    const [formState, setFormState] = useState<"idle" | "submitting" | "error" | "success">("idle");
+    const [responseMessage, setResponseMessage] = useState("");
+
     async function submitEnterpriseKYC(values: any) {
+
+
+        setFormState("submitting");
         const formData = new FormData()
 
         formData.append("companyName", values.companyName)
-      
+
         if (values.certificateOfIncorporation) {
-          formData.append(
-            "certificateOfIncorporation",
-            values.certificateOfIncorporation
-          )
+            formData.append(
+                "certificateOfIncorporation",
+                values.certificateOfIncorporation
+            )
         }
-      
+
         if (values.memorandumOfAssociation) {
-          formData.append(
-            "memorandumOfAssociation",
-            values.memorandumOfAssociation
-          )
+            formData.append(
+                "memorandumOfAssociation",
+                values.memorandumOfAssociation
+            )
         }
-      
+
         formData.append(
-          "directors",
-          JSON.stringify(
-            values.directors.map((d: any) => ({
-              fullName: d.fullName,
-              address: d.address,
-              country: d.country,
-              state: d.state,
-              city: d.city,
-              idType: d.idType,
-              idNumber: d.idNumber,
-              proofOfAddressType: d.proofOfAddressType,
-            }))
-          )
+            "directors",
+            JSON.stringify(
+                values.directors.map((d: any) => ({
+                    fullName: d.fullName,
+                    address: d.address,
+                    country: d.country,
+                    state: d.state,
+                    city: d.city,
+                    idType: d.idType,
+                    idNumber: d.idNumber,
+                    proofOfAddressType: d.proofOfAddressType,
+                }))
+            )
         )
 
         values.directors.forEach((director: any, index: number) => {
             if (director.idFront) {
-              formData.append(`director_${index}_idFront`, director.idFront)
+                formData.append(`director_${index}_idFront`, director.idFront)
             }
-          
+
             if (director.idBack) {
-              formData.append(`director_${index}_idBack`, director.idBack)
+                formData.append(`director_${index}_idBack`, director.idBack)
             }
-          
+
             if (director.proofOfAddressDoc) {
-              formData.append(`director_${index}_proofOfAddressDoc`, director.proofOfAddressDoc)
+                formData.append(`director_${index}_proofOfAddressDoc`, director.proofOfAddressDoc)
             }
-          })
-      
+        })
+
         formData.append(
-          "operator",
-          JSON.stringify({
-            fullName: values.operator.fullName,
-            address: values.operator.address,
-            country: values.operator.country,
-            state: values.operator.state,
-            city: values.operator.city,
-            idType: values.operator.idType,
-            idNumber: values.operator.idNumber,
-            proofOfAddressType: values.operator.proofOfAddressType,
-          })
+            "operator",
+            JSON.stringify({
+                fullName: values.operator.fullName,
+                address: values.operator.address,
+                country: values.operator.country,
+                state: values.operator.state,
+                city: values.operator.city,
+                idType: values.operator.idType,
+                idNumber: values.operator.idNumber,
+                proofOfAddressType: values.operator.proofOfAddressType,
+            })
         )
-      
+
         if (values.operator.idFront) {
             formData.append("operator_idFront", values.operator.idFront)
-          }
-          
-          if (values.operator.idBack) {
-            formData.append("operator_idBack", values.operator.idBack)
-          }
-          
-          if (values.operator.proofOfAddressDoc) {
-            formData.append("operator_proofOfAddressDoc", values.operator.proofOfAddressDoc)
-          }
+        }
 
-        await fetchWithAuth("/api/kyc/enterprise", {
-          method: "POST",
-          body: formData,
-        })
-      }
+        if (values.operator.idBack) {
+            formData.append("operator_idBack", values.operator.idBack)
+        }
+
+        if (values.operator.proofOfAddressDoc) {
+            formData.append("operator_proofOfAddressDoc", values.operator.proofOfAddressDoc)
+        }
+
+        try {
+
+            const res = await fetchWithAuth("/api/kyc/enterprise", {
+                method: "POST",
+                body: formData,
+            })
+
+            const data = await res.json();
+
+            if (data.success) {
+                setFormState("success");
+                setResponseMessage(data.message || "KYC submitted successfully!");
+            }
+            else {
+                setFormState("error");
+                setResponseMessage(data.error || "An error occurred while submitting your KYC. Please try again later.");
+            }
+        } catch (err) {
+            setFormState("error");
+            setResponseMessage("An error occurred while submitting your KYC. Please try again later.");
+        }
+    }
 
     const [step, setStep] = useState(1)
 
-    const nextStep = () => setStep(prev => prev + 1)
+    const nextStep = () => {
+        console.log("Moving to next step:", step + 1)
+        setStep(prev => prev + 1)
+    }
     const prevStep = () => setStep(prev => prev - 1)
 
     const initialValues = {
@@ -172,7 +220,9 @@ const EnterpriseKYC = () => {
             idBack: null,
             proofOfAddressType: "",
             proofOfAddressDoc: null,
-        }
+        },
+
+        confirmSubmission: false,
     }
 
     return (
@@ -188,70 +238,91 @@ const EnterpriseKYC = () => {
                             <p className="text-lg">Complete your organization verification.</p>
                         </div>
 
-                        <div className='grid grid-cols-4 gap-1.5 text-my-deep-blue/90'>
-                            {["Company", "Directors", "Operator", "Review"].map((label, idx) => (
-                                <div key={idx} className='flex flex-col gap-1.5'>
-                                    <div className={`h-1 ${step > idx ? "bg-my-blue" : "bg-my-gray/10"} rounded-full`}></div>
-                                    <p className='text-sm text-center'>{label}</p>
+                        {
+                            formState === "idle" && (
+                                <div className='grid grid-cols-4 gap-1.5 text-my-deep-blue/90'>
+                                    {["Company", "Directors", "Operator", "Review"].map((label, idx) => (
+                                        <div key={idx} className='flex flex-col gap-1.5'>
+                                            <div className={`h-1 ${step > idx ? "bg-my-blue" : "bg-my-gray/10"} rounded-full`}></div>
+                                            <p className='text-sm text-center'>{label}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                            )
+                        }
 
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={
-                                step === 1 ? stepOneSchema :
-                                    step === 2 ? directorSchema :
-                                        step === 3 ? operatorSchema :
-                                            null
-                            }
-                            onSubmit={(values) => {
-                                console.log("Enterprise KYC Submission:", values)
-                                submitEnterpriseKYC(values);
-                            }}
-                        >
-                            {({ values, setFieldValue }) => (
-                                <Form className="space-y-4">
 
-                                    {step === 1 && <StepOneEnterprise values={values} setFieldValue={setFieldValue} />}
-                                    {step === 2 && <StepTwoUBO values={values} setFieldValue={setFieldValue} />}
-                                    {step === 3 && <StepThreeOperator values={values} setFieldValue={setFieldValue} />}
-                                    {step === 4 && <StepFourReview values={values} />}
+                        {
+                            formState === "idle" &&
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={getSchema(step)}
+                                onSubmit={(values) => {
+                                    console.log("Enterprise KYC Submission:", values)
+                                    submitEnterpriseKYC(values);
+                                }}
+                            >
+                                {({ values, setFieldValue }) => (
+                                    <div>
 
-                                    <div className={`grid ${step === 1 ? "grid-cols-1" : "grid-cols-2"} gap-4 pt-6`}>
+                                        <Form className="space-y-4">
 
-                                        {step > 1 && (
-                                            <button
-                                                type="button"
-                                                onClick={prevStep}
-                                                className="mt-2 w-full rounded-xl bg-gray-100 hover:cursor-pointer hover:bg-my-blue-white text-my-gray/70 py-3 font-medium hover:opacity-90 transition-all duration-300"
-                                            >
-                                                Back
-                                            </button>
-                                        )}
+                                            {step === 1 && <StepOneEnterprise values={values} setFieldValue={setFieldValue} />}
+                                            {step === 2 && <StepTwoUBO values={values} setFieldValue={setFieldValue} />}
+                                            {step === 3 && <StepThreeOperator values={values} setFieldValue={setFieldValue} />}
+                                            {step === 4 && <StepFourReview values={values} setFieldValue={setFieldValue} />}
 
-                                        {step < 4 ? (
-                                            <button
-                                                type="button"
-                                                onClick={nextStep}
-                                                className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
-                                            >
-                                                Next
-                                            </button>
-                                        ) : (
-                                            <button
-                                                type="submit"
-                                                className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
-                                            >
-                                                Submit KYC
-                                            </button>
-                                        )}
+                                            <div className={`grid ${step === 1 ? "grid-cols-1" : "grid-cols-2"} gap-4 pt-6`}>
 
+                                                {step > 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={prevStep}
+                                                        className="mt-2 w-full rounded-xl bg-gray-100 hover:cursor-pointer hover:bg-my-blue-white text-my-gray/70 py-3 font-medium hover:opacity-90 transition-all duration-300"
+                                                    >
+                                                        Back
+                                                    </button>
+                                                )}
+
+                                                {step < 4 ? (
+                                                    <button
+                                                        type="button"
+                                                        onClick={nextStep}
+                                                        className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                                                    >
+                                                        Next
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        type="submit"
+                                                        className="mt-2 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                                                    >
+                                                        Submit KYC
+                                                    </button>
+                                                )}
+
+                                            </div>
+
+                                        </Form>
                                     </div>
-
-                                </Form>
-                            )}
-                        </Formik>
+                                )}
+                            </Formik>
+                        }
+                        {
+                            formState === "submitting" && (
+                                <InProgress message="Submitting your KYC, please wait" />
+                            )
+                        }
+                        {
+                            formState === "error" && (
+                                <ErrorResponse message={responseMessage} />
+                            )
+                        }
+                        {
+                            formState === "success" && (
+                                <SuccessResponse message={responseMessage} />
+                            )
+                        }
 
                     </div>
                 </div>

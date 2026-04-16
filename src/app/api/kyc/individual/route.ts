@@ -76,6 +76,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       data: result,
+      message: "Your KYC has been submitted successfully, we will review it and get back to you shortly."
     });
 
   } catch (err: any) {
