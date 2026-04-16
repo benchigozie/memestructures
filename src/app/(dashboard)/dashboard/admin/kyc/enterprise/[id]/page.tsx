@@ -6,6 +6,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import InProgress from "@/components/InProgress";
 import { RenderFile } from "@/components/RenderFile";
 import { ArrowLeft } from "lucide-react";
+import PopUp from "@/components/PopUp";
 
 export default function EnterpriseKycPage() {
   const { id } = useParams();
@@ -13,6 +14,10 @@ export default function EnterpriseKycPage() {
 
   const [kyc, setKyc] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState("");
+  const [pendingStatus, setPendingStatus] = useState<"VERIFIED" | "REJECTED" | null>(null);
 
   const updateStatus = async (status: "VERIFIED" | "REJECTED") => {
     try {
@@ -136,20 +141,45 @@ export default function EnterpriseKycPage() {
       </div>
 
       <div className="flex gap-2">
-        <button
-          onClick={() => updateStatus("VERIFIED")}
-          className="px-4 py-2 bg-green-400 text-white rounded cursor-pointer transition-colors duration-300 hover:bg-green-600"
-        >
-          Verify
-        </button>
+                    <button
+                         onClick={() => {
+                            setPendingStatus("VERIFIED");
+                            setPopUpMessage("Are you sure you want to verify this KYC?");
+                            setShowPopUp(true);
+                        }}
+                        className="px-4 py-2 bg-green-400 text-white rounded-xl hover:bg-green-600 cursor-pointer"
+                    >
+                        Verify
+                    </button>
 
-        <button
-          onClick={() => updateStatus("REJECTED")}
-          className="px-4 py-2 bg-red-400 text-white rounded cursor-pointer transition-colors duration-300 hover:bg-red-600"
-        >
-          Reject
-        </button>
-      </div>
+                    <button
+                        onClick={() => {
+                            setPendingStatus("REJECTED");
+                            setPopUpMessage("Are you sure you want to reject this KYC?");
+                            setShowPopUp(true);
+                        }}
+                        className="px-4 py-2 bg-red-400 text-white rounded-xl hover:bg-red-600 cursor-pointer"
+                    >
+                        Reject
+                    </button>
+                </div>
+      {
+                showPopUp && (
+                    <PopUp
+                        title="Confirm Action"
+                        message={popUpMessage}
+                        onConfirm={() => {
+                            console.log("Confirmed action with status:", pendingStatus);
+                            if (pendingStatus) {
+                                updateStatus(pendingStatus);
+                            }
+                            setShowPopUp(false);
+                            setPendingStatus(null);
+                        }}
+                        onClose={() => setShowPopUp(false)}
+                    />
+                )
+            }
     </div>
   );
 }

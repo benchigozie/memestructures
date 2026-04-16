@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     console.error(err);
 
     return NextResponse.json(
-      { success: false, error: err.message },
+      { success: false, error: "Sorry An Error Occured" },
       { status: 500 }
     );
   }

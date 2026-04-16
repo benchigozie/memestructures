@@ -53,6 +53,8 @@ export async function PATCH(
     const body = await req.json();
     const { status } = body as { status: KycStatus };
 
+    console.log("Updating KYC status to: ", status)
+
     if (!["VERIFIED", "REJECTED"].includes(status)) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
     }

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config({
-    path: process.env.ENV_FILE || ".env.local",
+    path: process.env.ENV_FILE , //|| ".env.local",
   });
   
 import { defineConfig, env } from 'prisma/config'

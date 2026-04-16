@@ -60,11 +60,12 @@ export async function GET(
       data: {
         ...kyc,
         documents,
-        members, // ✅ override with signed versions
+        members, 
       },
     });
 
   } catch (err: any) {
+    console.log("this is error: ", err.message);
     return NextResponse.json(
       { success: false, error: err.message },
       { status: 500 }

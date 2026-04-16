@@ -230,7 +230,7 @@ const EnterpriseKYC = () => {
             <div className='max-w-6xl w-full mx-auto px-4'>
                 <div className='bg-my-white rounded-3xl w-full max-w-3xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10'>
                     <div className="flex flex-col gap-6">
-                        <div className="text-center flex flex-col gap-1">
+                        <div className="text-center flex flex-col gap-1 items-center">
                             <Link href="/">
                                 <Image src="/images/memestructureslogo.png" alt="Logo" width={210} height={60} />
                             </Link>
