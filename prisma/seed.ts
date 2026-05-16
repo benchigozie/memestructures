@@ -22,8 +22,9 @@ async function main() {
   const SALT_ROUNDS = 10;
 
   const rawPassword = "Mrbarbie1";
-  const rawPassword2 = "Mrbarbie1";
-  const rawPassword3 = "Mrbarbie1"
+  const rawPassword2 = "Admin123";
+  const rawPassword3 = "enterprise123";
+  const rawPassword4 = "individual123";
 
   const hashedPassword = await bcrypt.hash(
     rawPassword + PEPPER,
@@ -40,6 +41,11 @@ async function main() {
     SALT_ROUNDS
   );
 
+  const hashedPassword4 = await bcrypt.hash(
+    rawPassword4 + PEPPER,
+    SALT_ROUNDS
+  );
+
   await prisma.user.create({
     data: {
       name: "Ben Developer",
@@ -50,30 +56,45 @@ async function main() {
 
     }
   });
-  console.log("Seed admin inserted.");
+  console.log("Dev User inserted.");
 
   await prisma.user.create({
     data: {
-      name: "Benedict Meow",
-      email: "asoyabenedict@gmail.com",
+      name: "memestructures admin",
+      email: "admin@gmail.com",
       password: hashedPassword2,
+      accountType: "ADMIN",
+      emailVerified: true,
+
+    }
+  });
+
+  console.log("Admin User inserted.");
+
+  await prisma.user.create({
+    data: {
+      name: "memestructures enterprise",
+      email: "enterprise@gmail.com",
+      password: hashedPassword3,
       accountType: "ENTERPRISE",
       emailVerified: true,
 
     }
   });
 
+  console.log("Enterprise User inserted.");
+
   await prisma.user.create({
     data: {
-      name: "Meow Benedict",
-      email: "benmarrk@gmail.com",
-      password: hashedPassword2,
+      name: "memestructures individual",
+      email: "individual@gmail.com",
+      password: hashedPassword4,
       accountType: "INDIVIDUAL",
       emailVerified: true,
 
     }
   });
-  console.log("Seed user4 inserted.");
+  console.log("Seed user inserted.");
 }
 
 main()

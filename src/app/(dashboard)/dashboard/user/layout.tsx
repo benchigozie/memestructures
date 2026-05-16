@@ -1,0 +1,36 @@
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import UserNav from "@/components/UserNav";
+
+export default function UserLayout({ children }: { children: React.ReactNode }) {
+    const { user, loading } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!loading) {
+            const isAllowed =
+                user?.accountType === "INDIVIDUAL";
+
+            if (!user || !isAllowed) {
+                router.replace("/login");
+            }
+        }
+    }, [user, loading, router]);
+
+    if (loading) return null;
+
+    const isAllowed =
+        user?.accountType === "INDIVIDUAL";
+
+    if (!user || !isAllowed) return null;
+
+    return (
+        <>
+            <UserNav />
+            <main className="md:ml-56 mt-14 md:mt-0">{children}</main>
+        </>
+    );
+}
