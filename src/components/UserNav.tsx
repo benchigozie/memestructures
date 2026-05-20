@@ -17,7 +17,7 @@ const UserNav = () => {
 
     const navLinks = [
         { name: "overview", href: "/dashboard/user" },
-        { name: "Asset Categories", href: "/dashboard/user/asset-categories" },
+        { name: "Asset Categories", href: "/dashboard/user/assets" },
     ]
 
     return (
