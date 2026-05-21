@@ -15,7 +15,7 @@ const DEFAULT_ALLOWED_TYPES = [
     const maxSize = (options?.maxSizeMB ?? 5) * 1024 * 1024
   
     if (!allowedTypes.includes(file.type)) {
-      throw new Error(`Invalid file type: ${file.type}`)
+      throw new Error("Invalid file type. Only JPG, PNG, PDF allowed.");
     }
   
     if (file.size > maxSize) {

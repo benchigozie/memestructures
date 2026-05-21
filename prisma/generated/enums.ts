@@ -49,6 +49,15 @@ export const OrgRole = {
 export type OrgRole = (typeof OrgRole)[keyof typeof OrgRole]
 
 
+export const InvestmentStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type InvestmentStatus = (typeof InvestmentStatus)[keyof typeof InvestmentStatus]
+
+
 export const KycRole = {
   UBO: 'UBO',
   DIRECTOR: 'DIRECTOR',

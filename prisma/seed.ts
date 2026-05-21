@@ -78,7 +78,7 @@ async function main() {
       password: hashedPassword3,
       accountType: "ENTERPRISE",
       emailVerified: true,
-
+      kycStatus: "VERIFIED",
     }
   });
 
@@ -91,7 +91,7 @@ async function main() {
       password: hashedPassword4,
       accountType: "INDIVIDUAL",
       emailVerified: true,
-
+      kycStatus: "VERIFIED",
     }
   });
   console.log("Seed user inserted.");

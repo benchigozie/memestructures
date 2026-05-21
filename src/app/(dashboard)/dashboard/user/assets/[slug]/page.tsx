@@ -2,10 +2,9 @@
 
 import { funds } from "@/data/funds";
 import { notFound } from "next/navigation";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import * as Yup from "yup";
-import { Asset } from "next/font/google";
+
 import AssetInvestment from "@/components/AssetInvestment";
 
 const getSchema = (fund: any) =>

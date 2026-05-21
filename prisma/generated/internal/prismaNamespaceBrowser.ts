@@ -51,6 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Investment: 'Investment',
   User: 'User',
   Organization: 'Organization',
   Membership: 'Membership',
@@ -74,6 +75,25 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const InvestmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fundName: 'fundName',
+  amount: 'amount',
+  fee: 'fee',
+  total: 'total',
+  coin: 'coin',
+  network: 'network',
+  walletAddress: 'walletAddress',
+  proofPath: 'proofPath',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvestmentScalarFieldEnum = (typeof InvestmentScalarFieldEnum)[keyof typeof InvestmentScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

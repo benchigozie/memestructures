@@ -35,6 +35,34 @@ enum OrgRole {
   MEMBER
 }
 
+enum InvestmentStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+}
+
+model Investment {
+  id          String   @id @default(cuid())
+  userId      String
+
+  fundName    String
+  amount      Float
+  fee         Float
+  total       Float
+
+  coin        String
+  network     String
+  walletAddress String
+
+  proofPath   String
+
+  status      InvestmentStatus @default(PENDING)
+
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
  model User {
   id            String   @id @default(cuid())
@@ -47,6 +75,7 @@ enum OrgRole {
   emailVerified Boolean  @default(false)
   imageUrl      String?
   memberships   Membership[]
+  investments Investment[]
   individualKyc IndividualKyc?
   accountType   AccountType?
   createdAt     DateTime @default(now())
