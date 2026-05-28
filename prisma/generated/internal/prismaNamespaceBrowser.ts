@@ -51,14 +51,18 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Investment: 'Investment',
   User: 'User',
   Organization: 'Organization',
   Membership: 'Membership',
   IndividualKyc: 'IndividualKyc',
   OrganizationKyc: 'OrganizationKyc',
   OrganizationMember: 'OrganizationMember',
-  OrganizationDocument: 'OrganizationDocument'
+  OrganizationDocument: 'OrganizationDocument',
+  Wallet: 'Wallet',
+  Fund: 'Fund',
+  Position: 'Position',
+  WalletTransaction: 'WalletTransaction',
+  Investment: 'Investment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,25 +79,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const InvestmentScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  fundName: 'fundName',
-  amount: 'amount',
-  fee: 'fee',
-  total: 'total',
-  coin: 'coin',
-  network: 'network',
-  walletAddress: 'walletAddress',
-  proofPath: 'proofPath',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type InvestmentScalarFieldEnum = (typeof InvestmentScalarFieldEnum)[keyof typeof InvestmentScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -203,6 +188,76 @@ export const OrganizationDocumentScalarFieldEnum = {
 } as const
 
 export type OrganizationDocumentScalarFieldEnum = (typeof OrganizationDocumentScalarFieldEnum)[keyof typeof OrganizationDocumentScalarFieldEnum]
+
+
+export const WalletScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  balance: 'balance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
+
+
+export const FundScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  minInvestment: 'minInvestment',
+  maxInvestment: 'maxInvestment',
+  isActive: 'isActive'
+} as const
+
+export type FundScalarFieldEnum = (typeof FundScalarFieldEnum)[keyof typeof FundScalarFieldEnum]
+
+
+export const PositionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fundId: 'fundId',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
+
+
+export const WalletTransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  type: 'type',
+  intent: 'intent',
+  amount: 'amount',
+  reference: 'reference',
+  status: 'status',
+  proofPath: 'proofPath',
+  createdAt: 'createdAt'
+} as const
+
+export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
+
+
+export const InvestmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fundId: 'fundId',
+  method: 'method',
+  amount: 'amount',
+  fee: 'fee',
+  total: 'total',
+  coin: 'coin',
+  network: 'network',
+  walletAddress: 'walletAddress',
+  proofPath: 'proofPath',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvestmentScalarFieldEnum = (typeof InvestmentScalarFieldEnum)[keyof typeof InvestmentScalarFieldEnum]
 
 
 export const SortOrder = {

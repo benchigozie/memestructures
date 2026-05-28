@@ -49,15 +49,6 @@ export const OrgRole = {
 export type OrgRole = (typeof OrgRole)[keyof typeof OrgRole]
 
 
-export const InvestmentStatus = {
-  PENDING: 'PENDING',
-  CONFIRMED: 'CONFIRMED',
-  REJECTED: 'REJECTED'
-} as const
-
-export type InvestmentStatus = (typeof InvestmentStatus)[keyof typeof InvestmentStatus]
-
-
 export const KycRole = {
   UBO: 'UBO',
   DIRECTOR: 'DIRECTOR',
@@ -74,3 +65,48 @@ export const OrganizationDocumentType = {
 } as const
 
 export type OrganizationDocumentType = (typeof OrganizationDocumentType)[keyof typeof OrganizationDocumentType]
+
+
+export const WalletTransactionType = {
+  DEPOSIT: 'DEPOSIT',
+  WITHDRAWAL: 'WITHDRAWAL',
+  RETURN: 'RETURN'
+} as const
+
+export type WalletTransactionType = (typeof WalletTransactionType)[keyof typeof WalletTransactionType]
+
+
+export const InvestmentStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type InvestmentStatus = (typeof InvestmentStatus)[keyof typeof InvestmentStatus]
+
+
+export const TransactionIntent = {
+  WALLET_FUNDING: 'WALLET_FUNDING',
+  DIRECT_INVESTMENT: 'DIRECT_INVESTMENT',
+  WITHDRAWAL_REQUEST: 'WITHDRAWAL_REQUEST'
+} as const
+
+export type TransactionIntent = (typeof TransactionIntent)[keyof typeof TransactionIntent]
+
+
+export const InvestmentMethod = {
+  WALLET: 'WALLET',
+  DIRECT: 'DIRECT'
+} as const
+
+export type InvestmentMethod = (typeof InvestmentMethod)[keyof typeof InvestmentMethod]
+
+
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]

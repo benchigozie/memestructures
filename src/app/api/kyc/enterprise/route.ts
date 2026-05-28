@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
-import { uploadFile } from "@/utils/uploadFile";
+import { uploadKYCFile } from "@/utils/uploadFile";
 import prisma from "@/lib/prisma";
 //import { KycRole, KycStatus } from "@/generated/prisma/enums";
 
@@ -78,14 +78,14 @@ export async function POST(req: Request) {
     operatorWithFiles
   })
 
-  const certificatePath = await uploadFile(certificate, "enterprise");
-  const memorandumPath = await uploadFile(memorandum, "enterprise");
+  const certificatePath = await uploadKYCFile(certificate, "enterprise");
+  const memorandumPath = await uploadKYCFile(memorandum, "enterprise");
 
   const directorsUploaded = await Promise.all(
     directorsWithFiles.map(async (d: any) => {
-      const idFrontPath = await uploadFile(d.idFront, "enterprise");
-      const idBackPath = await uploadFile(d.idBack, "enterprise");
-      const proofOfAddressPath = await uploadFile(d.proofOfAddressDoc, "enterprise");
+      const idFrontPath = await uploadKYCFile(d.idFront, "enterprise");
+      const idBackPath = await uploadKYCFile(d.idBack, "enterprise");
+      const proofOfAddressPath = await uploadKYCFile(d.proofOfAddressDoc, "enterprise");
 
 
       return {
@@ -102,9 +102,9 @@ export async function POST(req: Request) {
     })
   );
 
-  const operatorIdFrontPath = await uploadFile(operatorWithFiles.idFront, "enterprise");
-  const operatorIdBackPath = await uploadFile(operatorWithFiles.idBack, "enterprise");
-  const operatorProofPath = await uploadFile(operatorWithFiles.proofOfAddressDoc, "enterprise");
+  const operatorIdFrontPath = await uploadKYCFile(operatorWithFiles.idFront, "enterprise");
+  const operatorIdBackPath = await uploadKYCFile(operatorWithFiles.idBack, "enterprise");
+  const operatorProofPath = await uploadKYCFile(operatorWithFiles.proofOfAddressDoc, "enterprise");
 
 
 

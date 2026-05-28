@@ -18,11 +18,6 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Investment
- * 
- */
-export type Investment = Prisma.InvestmentModel
-/**
  * Model User
  * 
  */
@@ -57,3 +52,28 @@ export type OrganizationMember = Prisma.OrganizationMemberModel
  * 
  */
 export type OrganizationDocument = Prisma.OrganizationDocumentModel
+/**
+ * Model Wallet
+ * 
+ */
+export type Wallet = Prisma.WalletModel
+/**
+ * Model Fund
+ * 
+ */
+export type Fund = Prisma.FundModel
+/**
+ * Model Position
+ * 
+ */
+export type Position = Prisma.PositionModel
+/**
+ * Model WalletTransaction
+ * 
+ */
+export type WalletTransaction = Prisma.WalletTransactionModel
+/**
+ * Model Investment
+ * 
+ */
+export type Investment = Prisma.InvestmentModel

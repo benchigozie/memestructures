@@ -77,7 +77,6 @@ const page = () => {
                   </div>
                 </div>
 
-                {/* CTA */}
                 <Link
                   href={`/dashboard/user/assets/${fund.slug}`}
                   className="rounded-lg hover:bg-blue-100 hover:text-my-blue text-my-white text-sm font-medium py-3 text-center bg-my-blue transition-colors duration-300"

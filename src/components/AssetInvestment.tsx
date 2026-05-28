@@ -114,7 +114,7 @@ const AssetInvestment = ({ fund }: { fund: any }) => {
                     <h2 className="text-xl font-semibold text-my-deep-blue mb-4">
                         Fund Overview
                     </h2>
-                    { formState === "idle" &&
+                    {formState === "idle" &&
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <span className="text-xs">MIN INVESTMENT</span>
@@ -312,7 +312,7 @@ const AssetInvestment = ({ fund }: { fund: any }) => {
                                         <button
                                             type="submit"
                                             disabled={!isValid || !dirty}
-                                            className="mt-4 w-full bg-my-blue text-white py-3 rounded-lg disabled:opacity-50"
+                                            className="mt-4 w-full bg-my-blue hover:bg-my-deep-blue text-white py-3 rounded-lg disabled:opacity-50 duration-300 transition-colors cursor-pointer"
                                         >
                                             Submit Investment
                                         </button>
@@ -327,11 +327,29 @@ const AssetInvestment = ({ fund }: { fund: any }) => {
                     )}
 
                     {formState === "error" && (
-                        <ErrorResponse message={responseMessage} />
+                        <div>
+                            <ErrorResponse message={responseMessage} />
+                            <button
+                                onClick={() => setFormState("idle")}
+                                className="mt-4 w-full bg-my-blue hover:bg-my-deep-blue text-white py-3 rounded-lg disabled:opacity-50 duration-300 transition-colors cursor-pointer"
+                            >
+                                Back to Investment Page
+                            </button>
+                        </div>
+
                     )}
 
                     {formState === "success" && (
-                        <SuccessResponse message={responseMessage} />
+                        <div>
+                            <SuccessResponse message={responseMessage} />
+                            <button
+                                onClick={() => setFormState("idle")}
+                               className="mt-4 w-full bg-my-blue hover:bg-my-deep-blue text-white py-3 rounded-lg disabled:opacity-50 duration-300 transition-colors cursor-pointer"
+                            >
+                                Back to Investment Page
+                            </button>
+                        </div>
+
                     )}
 
                 </section>

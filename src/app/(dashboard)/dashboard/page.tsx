@@ -33,7 +33,7 @@ export default function Dashboard() {
     }
   
     if (user.username && user.accountType && user.kycStatus === "VERIFIED") {
-      router.replace("/dashboard/user");
+      router.replace("/dashboard/user/overview");
     }
   }, [user, loading, router]);
 

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import { uploadFile } from "@/utils/uploadFile";
+import { uploadKYCFile } from "@/utils/uploadFile";
 
 export async function POST(req: Request) {
   try {
@@ -28,10 +28,10 @@ export async function POST(req: Request) {
       throw new Error("Missing required files");
     }
 
-    const idFrontPath = await uploadFile(idFront, "individual");
-    const idBackPath = await uploadFile(idBack, "individual");
-    const selfiePath = await uploadFile(selfie, "individual");
-    const residenceDocPath = await uploadFile(residenceDoc, "residence");
+    const idFrontPath = await uploadKYCFile(idFront, "individual");
+    const idBackPath = await uploadKYCFile(idBack, "individual");
+    const selfiePath = await uploadKYCFile(selfie, "individual");
+    const residenceDocPath = await uploadKYCFile(residenceDoc, "residence");
 
     const result = await prisma.$transaction(async (tx) => {
       const kyc = await tx.individualKyc.create({

@@ -8,7 +8,6 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Investment'
 export type * from './models/User'
 export type * from './models/Organization'
 export type * from './models/Membership'
@@ -16,4 +15,9 @@ export type * from './models/IndividualKyc'
 export type * from './models/OrganizationKyc'
 export type * from './models/OrganizationMember'
 export type * from './models/OrganizationDocument'
+export type * from './models/Wallet'
+export type * from './models/Fund'
+export type * from './models/Position'
+export type * from './models/WalletTransaction'
+export type * from './models/Investment'
 export type * from './commonInputTypes'

@@ -1,0 +1,90 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+
+const page = () => {
+  const [balance, setBalance] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchWallet = async () => {
+      try {
+        setLoading(true);
+
+        const res = await fetchWithAuth("/api/user/wallet");
+        const data = await res.json();
+
+        if (data.success) {
+          setBalance(data.wallet.balance);
+        }
+      } catch (err) {
+        console.error("Failed to fetch wallet:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWallet();
+  }, []);
+
+  return (
+    <div className="p-4 md:p-8">
+      <div className="max-w-xl">
+        <section className="flex flex-col gap-4 mb-6">
+          <h1 className="text-xl md:text-3xl text-my-deep-blue font-bold mb-1 text-center">
+            Available Balance
+          </h1>
+
+          <div className="text-3xl md:text-5xl text-my-white mb-1 text-center p-12 bg-linear-to-r from-my-blue to-my-deep-blue rounded-xl shadow-lg">
+            <p>
+              {loading
+                ? "Loading..."
+                : `$${balance.toLocaleString()}`}
+            </p>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+            <Link
+              href="/dashboard/user/wallet/fund-wallet"
+              className="text-center rounded-lg bg-my-deep-blue p-2 text-my-white hover:bg-my-blue duration-300 transition-colors cursor-pointer"
+            >
+              Fund Wallet
+            </Link>
+
+            <Link
+              href="/dashboard/user/wallet/fund-asset"
+              className="text-center rounded-lg bg-my-deep-blue p-2 text-my-white hover:bg-my-blue duration-300 transition-colors cursor-pointer"
+            >
+              Fund Asset Class
+            </Link>
+
+            <Link
+              href="/dashboard/user/wallet/withdraw"
+              className="text-center rounded-lg bg-my-deep-blue p-2 text-my-white hover:bg-my-blue duration-300 transition-colors cursor-pointer"
+            >
+              Withdraw
+            </Link>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4 mb-6">
+          <div>
+            <h2 className="text-lg md:text-xl text-my-deep-blue font-medium mb-2">
+              Transaction History
+            </h2>
+
+            <div className="bg-my-white rounded-lg shadow-md shadow-my-gray/10 p-4 md:p-6 border border-gray-100">
+              <p className="text-gray-600">No transactions yet.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default page;

@@ -35,35 +35,6 @@ enum OrgRole {
   MEMBER
 }
 
-enum InvestmentStatus {
-  PENDING
-  CONFIRMED
-  REJECTED
-}
-
-model Investment {
-  id          String   @id @default(cuid())
-  userId      String
-
-  fundName    String
-  amount      Float
-  fee         Float
-  total       Float
-
-  coin        String
-  network     String
-  walletAddress String
-
-  proofPath   String
-
-  status      InvestmentStatus @default(PENDING)
-
-  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
  model User {
   id            String   @id @default(cuid())
   name          String
@@ -76,6 +47,8 @@ model Investment {
   imageUrl      String?
   memberships   Membership[]
   investments Investment[]
+  wallet        Wallet? 
+  position      Position[]   
   individualKyc IndividualKyc?
   accountType   AccountType?
   createdAt     DateTime @default(now())
@@ -206,3 +179,116 @@ model OrganizationDocument {
   updatedAt DateTime @updatedAt
 }
 
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+
+  balance   Float    @default(0)
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Fund {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  minInvestment  Float
+  maxInvestment  Float?
+
+  positions      Position[]   
+  investments    Investment[]
+  isActive       Boolean  @default(true)
+}
+
+model Position {
+  id        String   @id @default(cuid())
+  userId    String
+  fundId    String
+
+  amount    Float    @default(0)
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fund      Fund @relation(fields: [fundId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, fundId]) 
+}
+
+model WalletTransaction {
+  id        String   @id @default(cuid())
+  walletId String
+
+  type      WalletTransactionType
+  intent    TransactionIntent 
+
+  amount    Float
+
+  reference String? 
+  status    TransactionStatus @default(PENDING)
+  proofPath   String?
+
+  createdAt DateTime @default(now())
+
+  wallet    Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+}
+
+enum WalletTransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  RETURN
+}
+
+enum InvestmentStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+}
+
+enum TransactionIntent {
+  WALLET_FUNDING
+  DIRECT_INVESTMENT
+  WITHDRAWAL_REQUEST
+}
+
+enum InvestmentMethod {
+  WALLET
+  DIRECT
+}
+
+model Investment {
+  id          String   @id @default(cuid())
+  userId      String
+  fundId      String
+
+  method      InvestmentMethod
+
+  amount      Float
+  fee         Float
+  total       Float
+
+  coin        String?
+  network     String?
+  walletAddress String?
+  proofPath   String?
+
+  status      InvestmentStatus @default(PENDING)
+
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fund        Fund @relation(fields: [fundId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REJECTED
+}

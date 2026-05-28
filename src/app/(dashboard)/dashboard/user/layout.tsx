@@ -30,7 +30,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
     return (
         <>
             <UserNav />
-            <main className="md:ml-56 mt-14 md:mt-0">{children}</main>
+            <main className="md:ml-56 mt-15">{children}</main>
         </>
     );
 }

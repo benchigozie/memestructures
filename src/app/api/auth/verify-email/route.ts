@@ -52,10 +52,23 @@ export async function POST(req: Request) {
       );
     }
 
-    await prisma.user.update({
-      where: { id: userId },
-      data: { emailVerified: true },
-    });
+    await prisma.$transaction([
+      prisma.user.update({
+        where: { id: userId },
+        data: { emailVerified: true },
+      }),
+    
+      prisma.wallet.upsert({
+        where: {
+          userId: userId,
+        },
+        update: {},
+        create: {
+          userId: userId,
+          balance: 0,
+        },
+      }),
+    ]);
 
     return NextResponse.json(
       {
