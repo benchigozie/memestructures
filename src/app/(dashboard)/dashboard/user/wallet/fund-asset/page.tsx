@@ -261,7 +261,7 @@ const AssetInvestment = () => {
                                         )}
 
                                         {amount > 0 && insufficientBalance && (
-                                            <p className="text-red-500 text-sm mt-2">
+                                            <p className="text-red-500 bg-red-100 mt-2 p-6 rounded-lg">
                                                 Insufficient wallet balance
                                             </p>
                                         )}
