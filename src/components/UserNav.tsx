@@ -17,7 +17,7 @@ const UserNav = () => {
     }
 
     const navLinks = [
-        { name: "Overview", href: "/dashboard/user", whiteIcon: "/images/kycwhite.png", blueIcon: "/images/kycblue.png" },
+        { name: "Overview", href: "/dashboard/user/overview", whiteIcon: "/images/kycwhite.png", blueIcon: "/images/kycblue.png" },
         { name: "Asset Categories", href: "/dashboard/user/assets", whiteIcon: "/images/assetwhite.png", blueIcon: "/images/assetblue.png" },
         { name: "Wallet", href: "/dashboard/user/wallet", whiteIcon: "/images/walletwhite.png", blueIcon: "/images/walletblue.png" },
     ]
