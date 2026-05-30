@@ -1,4 +1,10 @@
-/*
+sed -i 's/CREATE TYPE "WalletTransactionType" AS ENUM/CREATE TYPE IF NOT EXISTS "WalletTransactionType" AS ENUM/g' prisma/migrations/20260524204430/migration.sql
+
+sed -i 's/CREATE TYPE "TransactionIntent" AS ENUM/CREATE TYPE IF NOT EXISTS "TransactionIntent" AS ENUM/g' prisma/migrations/20260524204430/migration.sql
+
+sed -i 's/CREATE TYPE "InvestmentMethod" AS ENUM/CREATE TYPE IF NOT EXISTS "InvestmentMethod" AS ENUM/g' prisma/migrations/20260524204430/migration.sql
+
+sed -i 's/CREATE TYPE "TransactionStatus" AS ENUM/CREATE TYPE IF NOT EXISTS "TransactionStatus" AS ENUM/g' prisma/migrations/20260524204430/migration.sql/*
   Warnings:
 
   - You are about to drop the column `fundName` on the `Investment` table. All the data in the column will be lost.
@@ -7,18 +13,7 @@
 
 */
 -- CreateEnum
-CREATE TYPE "WalletTransactionType" AS ENUM ('DEPOSIT', 'WITHDRAWAL', 'RETURN');
 
--- CreateEnum
-CREATE TYPE "TransactionIntent" AS ENUM ('WALLET_FUNDING', 'DIRECT_INVESTMENT', 'WITHDRAWAL_REQUEST');
-
--- CreateEnum
-CREATE TYPE "InvestmentMethod" AS ENUM ('WALLET', 'DIRECT');
-
--- CreateEnum
-CREATE TYPE "TransactionStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED', 'REJECTED');
-
-TRUNCATE TABLE "Investment";
 
 -- AlterTable
 ALTER TABLE "Investment" DROP COLUMN "fundName",

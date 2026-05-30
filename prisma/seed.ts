@@ -130,7 +130,7 @@ async function main() {
 
   const user = await prisma.user.findUnique({
     where: {
-      email: "asoyabenedict@gmail.com",
+      email: "benmarrk@gmail.com",
     },
   });
   
@@ -142,7 +142,7 @@ async function main() {
     },
     data: {
       balance: {
-        increment: 40_000_000,
+        increment: 400_000_000,
       },
     },
   });

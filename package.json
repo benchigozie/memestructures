@@ -11,7 +11,7 @@
     "prisma:studio:dev": "prisma studio --env-file .env.local",
     "prisma:studio:prod": "prisma studio --env-file .env.production",
     "prisma:migrate:dev": "dotenv -e .env.local -- prisma migrate dev --name",
-    "prisma:migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
+    "prisma:migrate:prod": "env ENV_FILE=.env.production prisma migrate deploy",
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
     "test": "jest",
     "db:reset:dev": "ENV_FILE=.env.local prisma db seed",

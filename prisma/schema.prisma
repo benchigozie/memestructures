@@ -265,7 +265,7 @@ enum InvestmentMethod {
 model Investment {
   id          String   @id @default(cuid())
   userId      String
-  fundId      String
+  fundId      String?
 
   method      InvestmentMethod
 
