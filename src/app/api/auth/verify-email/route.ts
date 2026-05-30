@@ -7,6 +7,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { token } = body;
 
+    console.log("Email verification request body:", body);
+
     if (!token) {
       return NextResponse.json(
         { success: false, error: "Verification token is required" },
