@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import  prisma  from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { generateAccessToken, generateRefreshToken } from "@/lib/jwt";
+import { createNotification } from "@/lib/mail/sendNotification";
+import { sendEmail } from "@/lib/mail/sendEmail";
+import { notificationTemplate } from "@/lib/mail/templates/notificationTemplate";
 
 export async function POST(req: Request) {
     try {
@@ -25,25 +28,25 @@ export async function POST(req: Request) {
 
         if (emailRegex.test(normalizedIdentifier)) {
             user = await prisma.user.findUnique({
-              where: { email: normalizedIdentifier },
+                where: { email: normalizedIdentifier },
             });
-          } else {
+        } else {
             user = await prisma.user.findUnique({
-              where: { username: normalizedIdentifier },
+                where: { username: normalizedIdentifier },
             });
-          }
+        }
 
-        if (user && !user?.emailVerified) {
+        if (user && !user.emailVerified) {
             return NextResponse.json(
-              { success: false, error: "Your email is not verified",  user: { email: user.email } },
-              { status: 403 }
+                { success: false, error: "Your email is not verified", user: { email: user.email } },
+                { status: 403 }
             );
         }
 
-        console.log("User found in database:", user);   
+        console.log("User found in database:", user);
         if (!user) {
             return NextResponse.json(
-                { success: false, error: "User not found" },
+                { success: false, error: "Invalid credentials provided" },
                 { status: 401 }
             );
         }
@@ -63,11 +66,50 @@ export async function POST(req: Request) {
         const accessToken = generateAccessToken({ id: user.id, email: user.email });
         const refreshToken = generateRefreshToken({ id: user.id });
 
+        const ip =
+            req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+            req.headers.get("x-real-ip") ||
+            "Unknown";
+
+        const userAgent =
+            req.headers.get("user-agent") || "Unknown device";
+
+        const loginTime = new Date().toLocaleString();
+
+        console.log(`Login successful for user ${user.email}. About to sned notification and email. IP: ${ip}, User Agent: ${userAgent}, Time: ${loginTime}`);
+        createNotification({
+            userId: user.id,
+            title: "Login Successful",
+            message: `Your account was accessed successfully from ${ip}.`,
+            type: "INFO",
+            link: "/dashboard",
+        }).catch(console.error);
+
+        sendEmail({
+            to: user.email,
+            subject: "New Login Detected",
+            html: notificationTemplate({
+                title: "New Login Detected",
+                message: `
+                    We detected a successful login to your Memestructures account.<br /><br />
+              
+                    <strong>IP Address:</strong> ${ip}<br />
+                    <strong>Device:</strong> ${userAgent}<br />
+                    <strong>Time:</strong> ${loginTime}<br /><br />  
+
+                    If this was you, no further action is required.
+                    If you do not recognize this activity, please change your password immediately and contact support.
+                  `,
+                buttonText: "Open Dashboard",
+                buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
+            }),
+        }).catch(console.error);
+
         const response = NextResponse.json(
             {
                 success: true,
                 message: "Logged in successfully",
-                user: { id: user.id, name: user.name,  email: user.email, username: user.username, kycStatus: user.kycStatus, accountType: user.accountType },
+                user: { id: user.id, name: user.name, email: user.email, username: user.username, kycStatus: user.kycStatus, accountType: user.accountType },
             },
             { status: 200 }
         );
@@ -77,7 +119,7 @@ export async function POST(req: Request) {
             path: "/",
             secure: process.env.NODE_ENV === "production",
             maxAge: 5 * 60,
-          });
+        });
 
         response.cookies.set("refreshToken", refreshToken, {
             httpOnly: true,

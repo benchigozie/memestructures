@@ -251,6 +251,7 @@ export type UserWhereInput = {
   wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
   position?: Prisma.PositionListRelationFilter
   individualKyc?: Prisma.XOR<Prisma.IndividualKycNullableScalarRelationFilter, Prisma.IndividualKycWhereInput> | null
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -272,6 +273,7 @@ export type UserOrderByWithRelationInput = {
   wallet?: Prisma.WalletOrderByWithRelationInput
   position?: Prisma.PositionOrderByRelationAggregateInput
   individualKyc?: Prisma.IndividualKycOrderByWithRelationInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -296,6 +298,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
   position?: Prisma.PositionListRelationFilter
   individualKyc?: Prisma.XOR<Prisma.IndividualKycNullableScalarRelationFilter, Prisma.IndividualKycWhereInput> | null
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -355,6 +358,7 @@ export type UserCreateInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   position?: Prisma.PositionCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -376,6 +380,7 @@ export type UserUncheckedCreateInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -397,6 +402,7 @@ export type UserUpdateInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -418,6 +424,7 @@ export type UserUncheckedUpdateInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -623,6 +630,20 @@ export type UserUpdateOneRequiredWithoutInvestmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInvestmentsInput, Prisma.UserUpdateWithoutInvestmentsInput>, Prisma.UserUncheckedUpdateWithoutInvestmentsInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type UserCreateWithoutMembershipsInput = {
   id?: string
   name: string
@@ -641,6 +662,7 @@ export type UserCreateWithoutMembershipsInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   position?: Prisma.PositionCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -661,6 +683,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -697,6 +720,7 @@ export type UserUpdateWithoutMembershipsInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -717,6 +741,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIndividualKycInput = {
@@ -737,6 +762,7 @@ export type UserCreateWithoutIndividualKycInput = {
   investments?: Prisma.InvestmentCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   position?: Prisma.PositionCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIndividualKycInput = {
@@ -757,6 +783,7 @@ export type UserUncheckedCreateWithoutIndividualKycInput = {
   investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIndividualKycInput = {
@@ -793,6 +820,7 @@ export type UserUpdateWithoutIndividualKycInput = {
   investments?: Prisma.InvestmentUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIndividualKycInput = {
@@ -813,6 +841,7 @@ export type UserUncheckedUpdateWithoutIndividualKycInput = {
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWalletInput = {
@@ -833,6 +862,7 @@ export type UserCreateWithoutWalletInput = {
   investments?: Prisma.InvestmentCreateNestedManyWithoutUserInput
   position?: Prisma.PositionCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWalletInput = {
@@ -853,6 +883,7 @@ export type UserUncheckedCreateWithoutWalletInput = {
   investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutUserInput
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWalletInput = {
@@ -889,6 +920,7 @@ export type UserUpdateWithoutWalletInput = {
   investments?: Prisma.InvestmentUpdateManyWithoutUserNestedInput
   position?: Prisma.PositionUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalletInput = {
@@ -909,6 +941,7 @@ export type UserUncheckedUpdateWithoutWalletInput = {
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPositionInput = {
@@ -929,6 +962,7 @@ export type UserCreateWithoutPositionInput = {
   investments?: Prisma.InvestmentCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPositionInput = {
@@ -949,6 +983,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPositionInput = {
@@ -985,6 +1020,7 @@ export type UserUpdateWithoutPositionInput = {
   investments?: Prisma.InvestmentUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionInput = {
@@ -1005,6 +1041,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInvestmentsInput = {
@@ -1025,6 +1062,7 @@ export type UserCreateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   position?: Prisma.PositionCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInvestmentsInput = {
@@ -1045,6 +1083,7 @@ export type UserUncheckedCreateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInvestmentsInput = {
@@ -1081,6 +1120,7 @@ export type UserUpdateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvestmentsInput = {
@@ -1101,6 +1141,107 @@ export type UserUncheckedUpdateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  username?: string | null
+  email: string
+  password: string
+  accountStatus?: $Enums.AccountStatus
+  kycStatus?: $Enums.KycStatus
+  emailVerified?: boolean
+  imageUrl?: string | null
+  accountType?: $Enums.AccountType | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  investments?: Prisma.InvestmentCreateNestedManyWithoutUserInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
+  position?: Prisma.PositionCreateNestedManyWithoutUserInput
+  individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  username?: string | null
+  email: string
+  password: string
+  accountStatus?: $Enums.AccountStatus
+  kycStatus?: $Enums.KycStatus
+  emailVerified?: boolean
+  imageUrl?: string | null
+  accountType?: $Enums.AccountType | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutUserInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
+  position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
+  individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountType?: Prisma.NullableEnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  investments?: Prisma.InvestmentUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
+  position?: Prisma.PositionUpdateManyWithoutUserNestedInput
+  individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountType?: Prisma.NullableEnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
+  position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
+  individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -1112,12 +1253,14 @@ export type UserCountOutputType = {
   memberships: number
   investments: number
   position: number
+  notifications: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   investments?: boolean | UserCountOutputTypeCountInvestmentsArgs
   position?: boolean | UserCountOutputTypeCountPositionArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1151,6 +1294,13 @@ export type UserCountOutputTypeCountPositionArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.PositionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1171,6 +1321,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   wallet?: boolean | Prisma.User$walletArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   individualKyc?: boolean | Prisma.User$individualKycArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1229,6 +1380,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   wallet?: boolean | Prisma.User$walletArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   individualKyc?: boolean | Prisma.User$individualKycArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1242,6 +1394,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     wallet: Prisma.$WalletPayload<ExtArgs> | null
     position: Prisma.$PositionPayload<ExtArgs>[]
     individualKyc: Prisma.$IndividualKycPayload<ExtArgs> | null
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1656,6 +1809,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   wallet<T extends Prisma.User$walletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$walletArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   position<T extends Prisma.User$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$positionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   individualKyc<T extends Prisma.User$individualKycArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$individualKycArgs<ExtArgs>>): Prisma.Prisma__IndividualKycClient<runtime.Types.Result.GetResult<Prisma.$IndividualKycPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2198,6 +2352,30 @@ export type User$individualKycArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.IndividualKycInclude<ExtArgs> | null
   where?: Prisma.IndividualKycWhereInput
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

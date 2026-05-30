@@ -101,3 +101,8 @@ export type WalletTransaction = Prisma.WalletTransactionModel
  * 
  */
 export type Investment = Prisma.InvestmentModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

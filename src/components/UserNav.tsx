@@ -3,13 +3,27 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Bell } from "lucide-react"
-
-
+import PopUp from "@/components/PopUp";
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react"
+import { useRouter } from "next/navigation";
 
 const UserNav = () => {
     const [currentPage, setCurrentPage] = useState<"overview" | "">("overview");
     const [menuState, setMenuState] = useState<boolean>(false);
+    const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
+    const { logout } = useAuth();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            router.push("/login");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     const toggleMenu = () => {
         console.log("toggling menu");
@@ -25,7 +39,7 @@ const UserNav = () => {
     return (
         <section >
             <div className="h-screen hidden md:block fixed top-0 left-0 w-56 bg-my-white/80 backdrop-blur-sm border-r border-gray-200 p-4">
-                <div>
+                <div className="flex flex-col justify-between h-full">
                     <nav className="mt-14 flex py-4 gap-2 flex-col">
                         {
                             navLinks.map((page) => (
@@ -62,6 +76,14 @@ const UserNav = () => {
                         }
 
                     </nav>
+                    <div
+                        className="py-2 px-4 cursor-pointer hover:bg-my-gray/10 outline outline-my-deep-blue/30 rounded-lg mt-auto"
+                        onClick={() => setShowLogoutPopup(true)}
+                    >
+                        <button>
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
             <section className="fixed top-0 w-full z-30 backdrop-blur-xl bg-my-white/60">
@@ -105,6 +127,16 @@ const UserNav = () => {
                     </div>
 
                 </div>
+                {
+                    showLogoutPopup && (
+                        <PopUp
+                            title="Confirm Logout"
+                            message="Are you sure you want to log out of your account?"
+                            onClose={() => setShowLogoutPopup(false)}
+                            onConfirm={handleLogout}
+                        />
+                    )
+                }
             </section>
         </section>
     )
