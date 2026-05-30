@@ -7,7 +7,7 @@ import { seedFunds } from "./fundSeed";
 
 async function main() {
 
-  await seedFunds();
+  /*await seedFunds();
   console.log("Clearing database...");
 
   await prisma.walletTransaction.deleteMany();
@@ -126,6 +126,26 @@ async function main() {
   console.log("Individual wallet funded with $400,000.");
 
   console.log("Seeding complete.");
+  */
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: "asoyabenedict@gmail.com",
+    },
+  });
+  
+  if (!user) throw new Error("User not found");
+  
+  await prisma.wallet.update({
+    where: {
+      userId: user.id,
+    },
+    data: {
+      balance: {
+        increment: 40_000_000,
+      },
+    },
+  });
 }
 
 main()

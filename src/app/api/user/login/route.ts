@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
 import { generateAccessToken, generateRefreshToken } from "@/lib/jwt";
-import { createNotification } from "@/lib/mail/sendNotification";
+import { sendNotification } from "@/lib/mail/sendNotification";
 import { sendEmail } from "@/lib/mail/sendEmail";
 import { notificationTemplate } from "@/lib/mail/templates/notificationTemplate";
 
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
         const loginTime = new Date().toLocaleString();
 
         console.log(`Login successful for user ${user.email}. About to sned notification and email. IP: ${ip}, User Agent: ${userAgent}, Time: ${loginTime}`);
-        createNotification({
+        sendNotification({
             userId: user.id,
             title: "Login Successful",
             message: `Your account was accessed successfully from ${ip}.`,

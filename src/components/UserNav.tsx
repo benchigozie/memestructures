@@ -5,13 +5,43 @@ import Link from "next/link"
 import { Bell } from "lucide-react"
 import PopUp from "@/components/PopUp";
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react"
+import { useEffect, useState } from "react";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 
 const UserNav = () => {
     const [currentPage, setCurrentPage] = useState<"overview" | "">("overview");
     const [menuState, setMenuState] = useState<boolean>(false);
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    useEffect(() => {
+        fetchUnreadCount();
+
+    }, []);
+
+    const fetchUnreadCount = async () => {
+        try {
+            const res = await fetchWithAuth("/api/notifications/unread-count");
+
+            if (!res.ok) return;
+
+            const data = await res.json();
+            setUnreadCount(data.count);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const markAsRead = async () => {
+        try {
+            await fetchWithAuth("/api/notifications/mark-read", {
+                method: "PATCH",
+            });
+            setUnreadCount?.(0);
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const { logout } = useAuth();
     const router = useRouter();
@@ -99,10 +129,18 @@ const UserNav = () => {
                     <div className="flex items-center gap-3">
                         <div className="flex items-center gap-3">
                             <div className="text-my-deep-blue relative">
-                                <Link href={"/dashboard/user/notifications"}>
-                                    <Bell size={28} className="cursor-pointer" />
-                                </Link>
-                                <div className="w-4 h-4 rounded-full bg-my-blue absolute -top-0.5 right-0.5 text-[10px] text-my-white flex text-center items-center"><p className="text-center w-full">5</p></div>
+                                <div onClick={markAsRead}>
+                                    <Link href={"/dashboard/user/notifications"}>
+                                        <Bell size={28} className="cursor-pointer" />
+                                    </Link>
+                                </div>
+                                {unreadCount > 0 && (
+                                    <div className="w-4 h-4 rounded-full bg-my-blue absolute -top-0.5 right-px text-[10px] text-my-white flex items-center justify-center">
+                                        <p className="w-full text-center">
+                                            {unreadCount > 99 ? "99" : unreadCount}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                             <div className="bg-my-deep-blue w-11 rounded-full h-11"></div>
                         </div>

@@ -67,7 +67,7 @@ const AssetInvestment = ({ fund }: { fund: any }) => {
         console.log("Submitting form with values: ", formData);
 
         try {
-            const res = await fetchWithAuth("/api/investments", {
+            const res = await fetchWithAuth("/api/investment/direct", {
                 method: "POST",
                 body: formData,
             });

@@ -19,7 +19,7 @@ type NotificationParams = {
   link?: string;
 };
 
-export async function createNotification({
+export async function sendNotification({
   userId,
   title,
   message,

@@ -105,7 +105,7 @@ const AssetInvestment = () => {
         setFormState("submitting");
 
         try {
-            const res = await fetchWithAuth("/api/investments", {
+            const res = await fetchWithAuth("/api/investment/wallet", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

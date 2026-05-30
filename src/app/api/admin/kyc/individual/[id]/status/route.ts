@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
-//import { KycStatus } from "@/generated/prisma/enums";
+import { sendNotification } from "@/lib/mail/sendNotification";
+import { sendEmail } from "@/lib/mail/sendEmail";
+import { notificationTemplate } from "@/lib/mail/templates/notificationTemplate";
 
 const KycStatus = {
     UNVERIFIED: 'UNVERIFIED',
@@ -83,6 +85,56 @@ export async function PATCH(
 
       return { updatedKyc, updatedUser };
     });
+
+    console.log(
+      `KYC ${status} for user ${kyc.user.email}. Sending notification and email.`
+    );
+    
+    const isVerified = status === "VERIFIED";
+    
+    sendNotification({
+      userId: kyc.userId,
+      title: isVerified
+        ? "KYC Verification Approved"
+        : "KYC Verification Rejected",
+      message: isVerified
+        ? "Your KYC verification has been approved. You now have access to verified account features."
+        : "Your KYC verification was rejected. Please review your submission and try again.",
+      type: isVerified ? "SUCCESS" : "WARNING",
+      link: "/dashboard/user/profile",
+    }).catch(console.error);
+    
+    sendEmail({
+      to: kyc.user.email,
+      subject: isVerified
+        ? "Your KYC Has Been Approved"
+        : "Your KYC Submission Was Rejected",
+      html: notificationTemplate({
+        title: isVerified
+          ? "KYC Verification Approved"
+          : "KYC Verification Rejected",
+    
+        message: isVerified
+          ? `
+            Congratulations. Your identity verification has been successfully approved.
+    
+            You now have access to all features available to verified users.
+          `
+          : `
+            Unfortunately, your KYC submission was not approved.
+    
+            Please review your submitted information and documents, make any necessary corrections, and submit a new verification request.
+          `,
+    
+        buttonText: isVerified
+          ? "Open Dashboard"
+          : "Review Submission",
+    
+        buttonLink: isVerified
+          ? `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/overview`
+          : `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/overview`,
+      }),
+    }).catch(console.error);
 
     return NextResponse.json({
       success: true,
