@@ -16,13 +16,20 @@ export default function Dashboard() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
 
+  useEffect(() => {
+    console.log("Dashboard User:", JSON.stringify(user, null, 2));
+    console.log("Loading:", loading);
+  }, [user, loading])
 
   useEffect(() => {
     if (loading) return;
+
+    
   
     console.log("Dashboard useEffect - user:", user);
 
     if (!user) {
+
       router.replace("/login");
       return;
     }

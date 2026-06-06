@@ -12,7 +12,8 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         if (!loading) {
             const isAllowed =
-                user?.accountType === "INDIVIDUAL";
+                user?.accountType === "INDIVIDUAL" ||
+                user?.accountType === "ENTERPRISE";
 
             if (!user || !isAllowed) {
                 router.replace("/login");
@@ -23,7 +24,8 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
     if (loading) return null;
 
     const isAllowed =
-        user?.accountType === "INDIVIDUAL";
+        user?.accountType === "INDIVIDUAL" ||
+        user?.accountType === "ENTERPRISE";
 
     if (!user || !isAllowed) return null;
 
