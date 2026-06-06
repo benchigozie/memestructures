@@ -88,6 +88,7 @@ export type InvestmentStatus = (typeof InvestmentStatus)[keyof typeof Investment
 export const TransactionIntent = {
   WALLET_FUNDING: 'WALLET_FUNDING',
   DIRECT_INVESTMENT: 'DIRECT_INVESTMENT',
+  WALLET_INVESTMENT: 'WALLET_INVESTMENT',
   WITHDRAWAL_REQUEST: 'WITHDRAWAL_REQUEST'
 } as const
 

@@ -4,7 +4,7 @@ export const funds = [
   {
     slug: "dif",
     name: "Diversified Investment Fund (DIF)",
-    shortName: "DIF",
+    acronym: "DIF",
     type: "AGGRESSIVE",
     description:
       "DIF is a multi-asset investment vehicle designed to capture asymmetric upside while maintaining disciplined risk management through structured diversification.",
@@ -28,7 +28,7 @@ export const funds = [
   {
     slug: "diaf",
     name: "Diversified Investment Asset Fund (DIAF)",
-    shortName: "DIAF",
+    acronym: "DIAF",
     type: "BALANCED",
     description:
       "DIAF is an income-focused investment strategy designed to generate consistent cash flow while preserving capital through diversified income-producing assets.",
@@ -52,7 +52,7 @@ export const funds = [
   {
     slug: "edf",
     name: "Equity And Digital Growth Fund (EDF)",
-    shortName: "EDF",
+    acronym: "EDF",
     type: "AGGRESSIVE",
     description:
       "EDF is a growth-oriented multi-asset portfolio focused on long-term capital appreciation through diversified exposure to traditional and alternative assets.",
@@ -76,7 +76,7 @@ export const funds = [
   {
     slug: "emsf",
     name: "Emerging Markets Strategy Fund (EMSF)",
-    shortName: "EMSF",
+    acronym: "EMSF",
     type: "BALANCED",
     description:
       "EMSF is a short-duration, alternative-focused investment strategy designed to capture high-growth opportunities across real assets, agriculture, and digital markets.",

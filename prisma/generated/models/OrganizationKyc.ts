@@ -165,7 +165,7 @@ export type OrganizationKycGroupByOutputType = {
   _max: OrganizationKycMaxAggregateOutputType | null
 }
 
-type GetOrganizationKycGroupByPayload<T extends OrganizationKycGroupByArgs> = Prisma.PrismaPromise<
+export type GetOrganizationKycGroupByPayload<T extends OrganizationKycGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<OrganizationKycGroupByOutputType, T['by']> &
       {

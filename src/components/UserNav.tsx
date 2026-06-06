@@ -48,7 +48,7 @@ const UserNav = () => {
 
     const handleLogout = async () => {
         try {
-            await logout();
+            logout();
             router.push("/login");
         } catch (error) {
             console.error("Logout failed:", error);
@@ -64,11 +64,13 @@ const UserNav = () => {
         { name: "Overview", href: "/dashboard/user/overview", whiteIcon: "/images/kycwhite.png", blueIcon: "/images/kycblue.png" },
         { name: "Asset Categories", href: "/dashboard/user/assets", whiteIcon: "/images/assetwhite.png", blueIcon: "/images/assetblue.png" },
         { name: "Wallet", href: "/dashboard/user/wallet", whiteIcon: "/images/walletwhite.png", blueIcon: "/images/walletblue.png" },
+        { name: "Transactions", href: "/dashboard/user/transactions", whiteIcon: "/images/transactionwhite.png", blueIcon: "/images/transactionblue.png" },
+
     ]
 
     return (
         <section >
-            <div className="h-screen hidden md:block fixed top-0 left-0 w-56 bg-my-white/80 backdrop-blur-sm border-r border-gray-200 p-4">
+            <div className="h-screen hidden lg:block fixed top-0 left-0 w-56 bg-my-white/80 backdrop-blur-sm border-r border-gray-200 p-4">
                 <div className="flex flex-col justify-between h-full">
                     <nav className="mt-14 flex py-4 gap-2 flex-col">
                         {
@@ -144,7 +146,7 @@ const UserNav = () => {
                             </div>
                             <div className="bg-my-deep-blue w-11 rounded-full h-11"></div>
                         </div>
-                        <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer md:hidden items-end mr-5">
+                        <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer lg:hidden items-end mr-5">
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                             <div className="h-0.5 w-4 bg-my-deep-blue rounded-b-full"></div>

@@ -199,7 +199,7 @@ model Fund {
   slug           String   @unique
   minInvestment  Float
   maxInvestment  Float?
-
+  acronym        String?
   positions      Position[]   
   investments    Investment[]
   isActive       Boolean  @default(true)
@@ -230,6 +230,11 @@ model WalletTransaction {
 
   amount    Float
 
+  coin      String?
+  network   String?
+
+  investmentId String? @unique
+
   reference String? 
   status    TransactionStatus @default(PENDING)
   proofPath   String?
@@ -237,6 +242,7 @@ model WalletTransaction {
   createdAt DateTime @default(now())
 
   wallet    Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  investment   Investment? @relation(fields: [investmentId], references: [id])
 }
 
 enum WalletTransactionType {
@@ -254,6 +260,7 @@ enum InvestmentStatus {
 enum TransactionIntent {
   WALLET_FUNDING
   DIRECT_INVESTMENT
+  WALLET_INVESTMENT
   WITHDRAWAL_REQUEST
 }
 
@@ -273,15 +280,12 @@ model Investment {
   fee         Float
   total       Float
 
-  coin        String?
-  network     String?
-  walletAddress String?
-  proofPath   String?
-
   status      InvestmentStatus @default(PENDING)
 
   user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  fund        Fund @relation(fields: [fundId], references: [id])
+  fund        Fund? @relation(fields: [fundId], references: [id])
+
+  transactions WalletTransaction?
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

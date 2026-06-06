@@ -130,7 +130,7 @@ const page = () => {
                       setToSuccess();
 
                       setTimeout(() => {
-                        router.push("/dashboard/user/overview");
+                        router.push("/dashboard");
                       }, 800);
 
                       console.log("Login successful:", result);

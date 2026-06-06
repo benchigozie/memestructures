@@ -199,7 +199,7 @@ export type PositionGroupByOutputType = {
   _max: PositionMaxAggregateOutputType | null
 }
 
-type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Prisma.PrismaPromise<
+export type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PositionGroupByOutputType, T['by']> &
       {

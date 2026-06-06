@@ -54,17 +54,6 @@ export async function POST(req: Request) {
         data: { balance: { decrement: total } },
       });
 
-      await tx.walletTransaction.create({
-        data: {
-          walletId: wallet.id,
-          type: "WITHDRAWAL",
-          intent: "DIRECT_INVESTMENT",
-          amount: total,
-          status: "COMPLETED",
-          reference: `INV-${Date.now()}`,
-        },
-      });
-
       investment = await tx.investment.create({
         data: {
           userId: user.id,
@@ -74,6 +63,18 @@ export async function POST(req: Request) {
           total,
           method: "WALLET",
           status: "CONFIRMED",
+        },
+      });
+      
+      await tx.walletTransaction.create({
+        data: {
+          walletId: wallet.id,
+          investmentId: investment.id, 
+          type: "WITHDRAWAL",
+          intent: "WALLET_INVESTMENT",
+          amount: total,
+          status: "COMPLETED",
+          reference: `INV-${Date.now()}`,
         },
       });
 

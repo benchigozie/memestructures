@@ -18,13 +18,13 @@ export async function uploadKYCFile(file: File, folder: string) {
     return filePath
 }
 
-export async function uploadInvestmentFile(file: File, folder: string) {
+export async function uploadTransactionFile(file: File, folder: string) {
   const fileName = createSafeFileName(file)
 
   const filePath = `${folder}/${fileName}`
 
   const { error } = await supabase.storage
-    .from("investments")
+    .from("transactions")
     .upload(filePath, file, {
       cacheControl: "3600",
       upsert: false

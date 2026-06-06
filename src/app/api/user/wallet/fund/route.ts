@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     const amount = Number(formData.get("amount"));
     const coin = formData.get("coin") as string;
     const network = formData.get("network") as string;
-    const fundSlug = formData.get("fundName") as string;
     const proof = formData.get("proof") as File | null;
 
     const user = await getUserFromRequest();
@@ -29,7 +28,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: "Complete KYC before investing",
+          error: "Complete KYC before funding your wallet",
         },
         { status: 403 }
       );
@@ -39,7 +38,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: "Minimum investment amount is $5,000",
+          error: "Minimum funding amount is $5,000",
         },
         { status: 400 }
       );
@@ -65,22 +64,6 @@ export async function POST(req: Request) {
       );
     }
 
-    const fund = await prisma.fund.findUnique({
-      where: {
-        slug: fundSlug.toLowerCase(),
-      },
-    });
-
-    if (!fund) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid fund selected",
-        },
-        { status: 400 }
-      );
-    }
-
     const wallet = await prisma.wallet.findUnique({
       where: {
         userId: user.id,
@@ -97,81 +80,61 @@ export async function POST(req: Request) {
       );
     }
 
+    const reference = `WF-${Date.now()}`;
+
     const proofPath = await uploadTransactionFile(
       proof,
-      `investments/${user.id}`
+      `wallet-funding/${user.id}/${reference}`
     );
 
-    const fee = amount * 0.01;
-    const total = amount + fee;
+    const transaction = await prisma.walletTransaction.create({
+      data: {
+        walletId: wallet.id,
 
-    const result = await prisma.$transaction(async (tx) => {
-      const investment = await tx.investment.create({
-        data: {
-          userId: user.id,
-          fundId: fund.id,
-          amount,
-          fee,
-          total,
-          method: "DIRECT",
-          status: "PENDING",
-        },
-      });
+        type: "DEPOSIT",
+        intent: "WALLET_FUNDING",
 
-      const transaction = await tx.walletTransaction.create({
-        data: {
-          walletId: wallet.id,
+        amount,
 
-          investmentId: investment.id,
+        coin,
+        network,
 
-          type: "DEPOSIT",
-          intent: "DIRECT_INVESTMENT",
+        proofPath,
 
-          amount,
+        status: "PENDING",
 
-          coin,
-          network,
-
-          proofPath,
-
-          status: "PENDING",
-
-          reference: `INV-${Date.now()}`,
-        },
-      });
-
-      return {
-        investment,
-        transaction,
-      };
+        reference,
+      },
     });
 
     sendNotification({
       userId: user.id,
-      title: "Investment Submitted",
-      message: `Your investment of $${amount.toLocaleString()} is under review.`,
-      type: "INVESTMENT",
-      link: "/dashboard/user/overview",
+      title: "Wallet Funding Submitted",
+      message: `Your wallet funding request of $${amount.toLocaleString()} has been submitted for review.`,
+      type: "DEPOSIT",
+      link: "/dashboard/user/wallet",
     }).catch(console.error);
 
     sendEmail({
       to: user.email,
-      subject: "Investment Under Review",
+      subject: "Wallet Funding Under Review",
       html: notificationTemplate({
-        title: "Investment Submitted",
+        title: "Wallet Funding Submitted",
         message: `
-          Your investment has been submitted and is awaiting review.
-          You will be notified once it is approved.
+          Your wallet funding request has been submitted
+          and is currently awaiting review.
+
+          Once approved, your wallet balance will be updated.
         `,
-        buttonText: "View Dashboard",
-        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/overview`,
+        buttonText: "View Wallet",
+        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/wallet`,
       }),
     }).catch(console.error);
 
     return NextResponse.json({
       success: true,
-      message: "Investment submitted for review",
-      data: result,
+      message: "Wallet funding submitted for review",
+      data: transaction,
     });
   } catch (err: any) {
     console.error(err);

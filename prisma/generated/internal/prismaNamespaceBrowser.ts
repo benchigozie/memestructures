@@ -208,6 +208,7 @@ export const FundScalarFieldEnum = {
   slug: 'slug',
   minInvestment: 'minInvestment',
   maxInvestment: 'maxInvestment',
+  acronym: 'acronym',
   isActive: 'isActive'
 } as const
 
@@ -232,6 +233,9 @@ export const WalletTransactionScalarFieldEnum = {
   type: 'type',
   intent: 'intent',
   amount: 'amount',
+  coin: 'coin',
+  network: 'network',
+  investmentId: 'investmentId',
   reference: 'reference',
   status: 'status',
   proofPath: 'proofPath',
@@ -249,10 +253,6 @@ export const InvestmentScalarFieldEnum = {
   amount: 'amount',
   fee: 'fee',
   total: 'total',
-  coin: 'coin',
-  network: 'network',
-  walletAddress: 'walletAddress',
-  proofPath: 'proofPath',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

@@ -185,7 +185,7 @@ const AssetInvestment = ({ fund }: { fund: any }) => {
                                             <Field
                                                 name="amount"
                                                 type="number"
-                                                className="w-full outline max-w-sm outline-my-gray/40 focus:outline-my-deep-blue rounded-lg px-4 py-3 mt-2"
+                                                className="w-full outline outline-my-gray/40 focus:outline-my-deep-blue rounded-lg px-4 py-3 mt-2"
                                                 placeholder={`Min $${fund.minInvestment.toLocaleString()}`}
                                             />
 

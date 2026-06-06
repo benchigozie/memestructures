@@ -7,18 +7,29 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 const page = () => {
   const [balance, setBalance] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+  const [transactions, setTransactions] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchWallet = async () => {
       try {
         setLoading(true);
 
-        const res = await fetchWithAuth("/api/user/wallet");
-        const data = await res.json();
+        const [walletRes, transactionRes] = await Promise.all([
+          fetchWithAuth("/api/user/wallet"),
+          fetchWithAuth("/api/user/wallet/transactions?limit=10"),
+        ]);
 
-        if (data.success) {
-          setBalance(data.wallet.balance);
+        const walletData = await walletRes.json();
+        const transactionData = await transactionRes.json();
+
+        if (walletData.success) {
+          setBalance(walletData.wallet.balance);
         }
+
+        if (transactionData.success) {
+          setTransactions(transactionData.transactions);
+        }
+
       } catch (err) {
         console.error("Failed to fetch wallet:", err);
       } finally {
@@ -74,11 +85,59 @@ const page = () => {
         <section className="flex flex-col gap-4 mb-6">
           <div>
             <h2 className="text-lg md:text-xl text-my-deep-blue font-medium mb-2">
-              Transaction History
+              Recent Transactions
             </h2>
 
             <div className="bg-my-white rounded-lg shadow-md shadow-my-gray/10 p-4 md:p-6 border border-gray-100">
-              <p className="text-gray-600">No transactions yet.</p>
+              {transactions.length === 0 ? (
+                <p className="text-gray-600">No transactions yet.</p>
+              ) : (
+                <div className="space-y-3">
+                  {transactions.map((transaction) => (
+                    <div
+                      key={transaction.id}
+                      className="flex items-center justify-between border-b border-gray-100 pb-3"
+                    >
+                      <div>
+                        <p className="font-medium text-my-deep-blue">
+                        {transaction.intent === "DIRECT_INVESTMENT"
+                            ? "Direct Investment"
+                            : transaction.intent === "WALLET_FUNDING"
+                              ? "Wallet Funding"
+                              : transaction.intent === "WALLET_INVESTMENT" ? "Asset Funding through Wallet" : "Withdrawal"}
+                        </p>
+
+                        <p className="text-sm text-gray-500">
+                          {new Date(transaction.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+
+                      <div className="text-right">
+                        <p className="font-medium">
+                          ${transaction.amount.toLocaleString()}
+                        </p>
+
+                        <p
+                          className={`text-sm ${transaction.status === "COMPLETED"
+                            ? "text-green-500"
+                            : transaction.status === "PENDING"
+                              ? "text-yellow-500"
+                              : "text-red-500"
+                            }`}
+                        >
+                          {transaction.status}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Link
+                href="/dashboard/user/transactions"
+                className="inline-block mt-4 duration-300 transition-colors text-my-blue hover:text-my-deep-blue"
+              >
+                View All Transactions →
+              </Link>
             </div>
           </div>
         </section>

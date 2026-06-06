@@ -7,7 +7,8 @@ import { seedFunds } from "./fundSeed";
 
 async function main() {
 
-  /*await seedFunds();
+  await seedFunds();
+  
   console.log("Clearing database...");
 
   await prisma.walletTransaction.deleteMany();
@@ -27,6 +28,8 @@ async function main() {
   const hashedPassword2 = await bcrypt.hash("Admin123" + PEPPER, SALT_ROUNDS);
   const hashedPassword3 = await bcrypt.hash("enterprise123" + PEPPER, SALT_ROUNDS);
   const hashedPassword4 = await bcrypt.hash("individual123" + PEPPER, SALT_ROUNDS);
+  const hashedPassword5 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
+  const hashedPassword6 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
 
 
   const devUser = await prisma.user.create({
@@ -79,6 +82,31 @@ async function main() {
 
   console.log("Individual User inserted.");
 
+
+
+  const User1 = await prisma.user.create({
+    data: {
+      name: "asoya benedict",
+      email: "asoyabenedict@gmail.com",
+      password: hashedPassword5,
+      accountType: "INDIVIDUAL",
+      emailVerified: true,
+      kycStatus: "VERIFIED",
+    },
+  });
+
+  const User2 = await prisma.user.create({
+    data: {
+      name: "ben mark",
+      email: "benmarrk@gmail.com",
+      password: hashedPassword6,
+      accountType: "INDIVIDUAL",
+      emailVerified: true,
+      kycStatus: "VERIFIED",
+    },
+  });
+
+
   const devWallet = await prisma.wallet.create({
     data: { userId: devUser.id },
   });
@@ -94,6 +122,15 @@ async function main() {
   const individualWallet = await prisma.wallet.create({
     data: { userId: individualUser.id },
   });
+
+  const user1Wallet = await prisma.wallet.create({
+    data: { userId: User1.id },
+  });
+
+  const user2Wallet = await prisma.wallet.create({
+    data: { userId: User2.id },
+  });
+
 
   console.log("Wallets created.");
 
@@ -126,11 +163,11 @@ async function main() {
   console.log("Individual wallet funded with $400,000.");
 
   console.log("Seeding complete.");
-  */
+
 
   const user = await prisma.user.findUnique({
     where: {
-      email: "benmarrk@gmail.com",
+      email: "asoyabenedict@gmail.com",
     },
   });
   
@@ -139,6 +176,27 @@ async function main() {
   await prisma.wallet.update({
     where: {
       userId: user.id,
+    },
+    data: {
+      balance: {
+        increment: 400_000_000,
+      },
+    },
+  });
+
+
+
+  const user2 = await prisma.user.findUnique({
+    where: {
+      email: "benmarrk@gmail.com",
+    },
+  });
+  
+  if (!user2) throw new Error("User not found");
+  
+  await prisma.wallet.update({
+    where: {
+      userId: user2.id,
     },
     data: {
       balance: {

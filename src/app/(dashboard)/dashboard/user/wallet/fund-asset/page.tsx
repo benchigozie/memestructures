@@ -206,7 +206,7 @@ const AssetInvestment = () => {
                                             <Field
                                                 as="select"
                                                 name="assetClass"
-                                                className="w-full max-w-sm outline outline-my-gray/40 focus:outline-my-deep-blue rounded-lg px-4 py-3 mt-2"
+                                                className="w-full outline outline-my-gray/40 focus:outline-my-deep-blue rounded-lg px-4 py-3 mt-2"
                                             >
                                                 <option value="">Select asset class</option>
 

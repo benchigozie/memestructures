@@ -270,7 +270,7 @@ export type IndividualKycGroupByOutputType = {
   _max: IndividualKycMaxAggregateOutputType | null
 }
 
-type GetIndividualKycGroupByPayload<T extends IndividualKycGroupByArgs> = Prisma.PrismaPromise<
+export type GetIndividualKycGroupByPayload<T extends IndividualKycGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IndividualKycGroupByOutputType, T['by']> &
       {
