@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 export default function page() {
 
   const [statusFilter, setStatusFilter] = useState<"all" | "pending" | "verified" | "rejected">("all");
-  const [typeFilter, setTypeFilter] = useState<"all" | "deposit" | "withdrawal" | "return">("deposit");
+  const [typeFilter, setTypeFilter] = useState<"all" | "deposit" | "withdrawal" | "return">("all");
 
 
   return (

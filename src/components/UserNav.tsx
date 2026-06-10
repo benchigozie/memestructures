@@ -164,6 +164,13 @@ const UserNav = () => {
                                 </Link>
                             );
                         })}
+                        <button
+
+                            className="py-2 px-6 hover:bg-my-blue-white/30 transition-all text-center"
+                            onClick={() => setShowLogoutPopup(true)}
+                        >
+                            Logout
+                        </button>
                     </div>
 
                 </div>

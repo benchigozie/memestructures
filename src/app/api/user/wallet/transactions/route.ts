@@ -62,7 +62,7 @@ export async function GET(req: Request) {
             fund: {
               select: {
                 name: true,
-                acronym: true,
+                slug: true,
               },
             },
           },
