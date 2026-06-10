@@ -28,8 +28,8 @@ export type OrganizationDocumentMinAggregateOutputType = {
   id: string | null
   kycId: string | null
   type: $Enums.OrganizationDocumentType | null
-  filePath: string | null
   createdAt: Date | null
+  filePath: string | null
   updatedAt: Date | null
 }
 
@@ -37,8 +37,8 @@ export type OrganizationDocumentMaxAggregateOutputType = {
   id: string | null
   kycId: string | null
   type: $Enums.OrganizationDocumentType | null
-  filePath: string | null
   createdAt: Date | null
+  filePath: string | null
   updatedAt: Date | null
 }
 
@@ -46,8 +46,8 @@ export type OrganizationDocumentCountAggregateOutputType = {
   id: number
   kycId: number
   type: number
-  filePath: number
   createdAt: number
+  filePath: number
   updatedAt: number
   _all: number
 }
@@ -57,8 +57,8 @@ export type OrganizationDocumentMinAggregateInputType = {
   id?: true
   kycId?: true
   type?: true
-  filePath?: true
   createdAt?: true
+  filePath?: true
   updatedAt?: true
 }
 
@@ -66,8 +66,8 @@ export type OrganizationDocumentMaxAggregateInputType = {
   id?: true
   kycId?: true
   type?: true
-  filePath?: true
   createdAt?: true
+  filePath?: true
   updatedAt?: true
 }
 
@@ -75,8 +75,8 @@ export type OrganizationDocumentCountAggregateInputType = {
   id?: true
   kycId?: true
   type?: true
-  filePath?: true
   createdAt?: true
+  filePath?: true
   updatedAt?: true
   _all?: true
 }
@@ -157,8 +157,8 @@ export type OrganizationDocumentGroupByOutputType = {
   id: string
   kycId: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt: Date
+  filePath: string
   updatedAt: Date
   _count: OrganizationDocumentCountAggregateOutputType | null
   _min: OrganizationDocumentMinAggregateOutputType | null
@@ -187,8 +187,8 @@ export type OrganizationDocumentWhereInput = {
   id?: Prisma.StringFilter<"OrganizationDocument"> | string
   kycId?: Prisma.StringFilter<"OrganizationDocument"> | string
   type?: Prisma.EnumOrganizationDocumentTypeFilter<"OrganizationDocument"> | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
+  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
   kyc?: Prisma.XOR<Prisma.OrganizationKycScalarRelationFilter, Prisma.OrganizationKycWhereInput>
 }
@@ -197,8 +197,8 @@ export type OrganizationDocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  filePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  filePath?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   kyc?: Prisma.OrganizationKycOrderByWithRelationInput
 }
@@ -210,8 +210,8 @@ export type OrganizationDocumentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrganizationDocumentWhereInput | Prisma.OrganizationDocumentWhereInput[]
   kycId?: Prisma.StringFilter<"OrganizationDocument"> | string
   type?: Prisma.EnumOrganizationDocumentTypeFilter<"OrganizationDocument"> | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
+  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
   kyc?: Prisma.XOR<Prisma.OrganizationKycScalarRelationFilter, Prisma.OrganizationKycWhereInput>
 }, "id">
@@ -220,8 +220,8 @@ export type OrganizationDocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  filePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  filePath?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrganizationDocumentCountOrderByAggregateInput
   _max?: Prisma.OrganizationDocumentMaxOrderByAggregateInput
@@ -235,16 +235,16 @@ export type OrganizationDocumentScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"OrganizationDocument"> | string
   kycId?: Prisma.StringWithAggregatesFilter<"OrganizationDocument"> | string
   type?: Prisma.EnumOrganizationDocumentTypeWithAggregatesFilter<"OrganizationDocument"> | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringWithAggregatesFilter<"OrganizationDocument"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationDocument"> | Date | string
+  filePath?: Prisma.StringWithAggregatesFilter<"OrganizationDocument"> | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationDocument"> | Date | string
 }
 
 export type OrganizationDocumentCreateInput = {
   id?: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
   kyc: Prisma.OrganizationKycCreateNestedOneWithoutDocumentsInput
 }
@@ -253,16 +253,16 @@ export type OrganizationDocumentUncheckedCreateInput = {
   id?: string
   kycId: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
 }
 
 export type OrganizationDocumentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.OrganizationKycUpdateOneRequiredWithoutDocumentsNestedInput
 }
@@ -271,8 +271,8 @@ export type OrganizationDocumentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   kycId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -280,16 +280,16 @@ export type OrganizationDocumentCreateManyInput = {
   id?: string
   kycId: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
 }
 
 export type OrganizationDocumentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -297,8 +297,8 @@ export type OrganizationDocumentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   kycId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -316,8 +316,8 @@ export type OrganizationDocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  filePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  filePath?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -325,8 +325,8 @@ export type OrganizationDocumentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  filePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  filePath?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -334,8 +334,8 @@ export type OrganizationDocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  filePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  filePath?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -388,16 +388,16 @@ export type EnumOrganizationDocumentTypeFieldUpdateOperationsInput = {
 export type OrganizationDocumentCreateWithoutKycInput = {
   id?: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
 }
 
 export type OrganizationDocumentUncheckedCreateWithoutKycInput = {
   id?: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
 }
 
@@ -434,40 +434,40 @@ export type OrganizationDocumentScalarWhereInput = {
   id?: Prisma.StringFilter<"OrganizationDocument"> | string
   kycId?: Prisma.StringFilter<"OrganizationDocument"> | string
   type?: Prisma.EnumOrganizationDocumentTypeFilter<"OrganizationDocument"> | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
+  filePath?: Prisma.StringFilter<"OrganizationDocument"> | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationDocument"> | Date | string
 }
 
 export type OrganizationDocumentCreateManyKycInput = {
   id?: string
   type: $Enums.OrganizationDocumentType
-  filePath: string
   createdAt?: Date | string
+  filePath: string
   updatedAt?: Date | string
 }
 
 export type OrganizationDocumentUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationDocumentUncheckedUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationDocumentUncheckedUpdateManyWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOrganizationDocumentTypeFieldUpdateOperationsInput | $Enums.OrganizationDocumentType
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -477,8 +477,8 @@ export type OrganizationDocumentSelect<ExtArgs extends runtime.Types.Extensions.
   id?: boolean
   kycId?: boolean
   type?: boolean
-  filePath?: boolean
   createdAt?: boolean
+  filePath?: boolean
   updatedAt?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationDocument"]>
@@ -487,8 +487,8 @@ export type OrganizationDocumentSelectCreateManyAndReturn<ExtArgs extends runtim
   id?: boolean
   kycId?: boolean
   type?: boolean
-  filePath?: boolean
   createdAt?: boolean
+  filePath?: boolean
   updatedAt?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationDocument"]>
@@ -497,8 +497,8 @@ export type OrganizationDocumentSelectUpdateManyAndReturn<ExtArgs extends runtim
   id?: boolean
   kycId?: boolean
   type?: boolean
-  filePath?: boolean
   createdAt?: boolean
+  filePath?: boolean
   updatedAt?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationDocument"]>
@@ -507,12 +507,12 @@ export type OrganizationDocumentSelectScalar = {
   id?: boolean
   kycId?: boolean
   type?: boolean
-  filePath?: boolean
   createdAt?: boolean
+  filePath?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kycId" | "type" | "filePath" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationDocument"]>
+export type OrganizationDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kycId" | "type" | "createdAt" | "filePath" | "updatedAt", ExtArgs["result"]["organizationDocument"]>
 export type OrganizationDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }
@@ -532,8 +532,8 @@ export type $OrganizationDocumentPayload<ExtArgs extends runtime.Types.Extension
     id: string
     kycId: string
     type: $Enums.OrganizationDocumentType
-    filePath: string
     createdAt: Date
+    filePath: string
     updatedAt: Date
   }, ExtArgs["result"]["organizationDocument"]>
   composites: {}
@@ -962,8 +962,8 @@ export interface OrganizationDocumentFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationDocument", 'String'>
   readonly kycId: Prisma.FieldRef<"OrganizationDocument", 'String'>
   readonly type: Prisma.FieldRef<"OrganizationDocument", 'OrganizationDocumentType'>
-  readonly filePath: Prisma.FieldRef<"OrganizationDocument", 'String'>
   readonly createdAt: Prisma.FieldRef<"OrganizationDocument", 'DateTime'>
+  readonly filePath: Prisma.FieldRef<"OrganizationDocument", 'String'>
   readonly updatedAt: Prisma.FieldRef<"OrganizationDocument", 'DateTime'>
 }
     

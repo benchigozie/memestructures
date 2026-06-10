@@ -1423,11 +1423,11 @@ export const UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
+  accountType: 'accountType',
   accountStatus: 'accountStatus',
   kycStatus: 'kycStatus',
   emailVerified: 'emailVerified',
   imageUrl: 'imageUrl',
-  accountType: 'accountType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1499,16 +1499,16 @@ export const OrganizationMemberScalarFieldEnum = {
   id: 'id',
   kycId: 'kycId',
   role: 'role',
-  fullName: 'fullName',
   idType: 'idType',
   idNumber: 'idNumber',
-  idFrontPath: 'idFrontPath',
-  idBackPath: 'idBackPath',
   address: 'address',
-  proofOfAddressType: 'proofOfAddressType',
-  proofOfAddressPath: 'proofOfAddressPath',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  idBackPath: 'idBackPath',
+  idFrontPath: 'idFrontPath',
+  proofOfAddressPath: 'proofOfAddressPath',
+  proofOfAddressType: 'proofOfAddressType',
+  fullName: 'fullName'
 } as const
 
 export type OrganizationMemberScalarFieldEnum = (typeof OrganizationMemberScalarFieldEnum)[keyof typeof OrganizationMemberScalarFieldEnum]
@@ -1518,8 +1518,8 @@ export const OrganizationDocumentScalarFieldEnum = {
   id: 'id',
   kycId: 'kycId',
   type: 'type',
-  filePath: 'filePath',
   createdAt: 'createdAt',
+  filePath: 'filePath',
   updatedAt: 'updatedAt'
 } as const
 
@@ -1543,7 +1543,6 @@ export const FundScalarFieldEnum = {
   slug: 'slug',
   minInvestment: 'minInvestment',
   maxInvestment: 'maxInvestment',
-  acronym: 'acronym',
   isActive: 'isActive'
 } as const
 
@@ -1568,12 +1567,13 @@ export const WalletTransactionScalarFieldEnum = {
   type: 'type',
   intent: 'intent',
   amount: 'amount',
-  coin: 'coin',
-  network: 'network',
-  investmentId: 'investmentId',
   reference: 'reference',
   status: 'status',
+  coin: 'coin',
+  network: 'network',
+  walletAddress: 'walletAddress',
   proofPath: 'proofPath',
+  investmentId: 'investmentId',
   createdAt: 'createdAt'
 } as const
 
@@ -1583,14 +1583,14 @@ export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFi
 export const InvestmentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  fundId: 'fundId',
-  method: 'method',
   amount: 'amount',
   fee: 'fee',
   total: 'total',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  fundId: 'fundId',
+  method: 'method'
 } as const
 
 export type InvestmentScalarFieldEnum = (typeof InvestmentScalarFieldEnum)[keyof typeof InvestmentScalarFieldEnum]
@@ -1603,8 +1603,8 @@ export const NotificationScalarFieldEnum = {
   message: 'message',
   type: 'type',
   read: 'read',
-  link: 'link',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  link: 'link'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -1655,6 +1655,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'AccountType'
+ */
+export type EnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountType[]'
+ */
+export type ListEnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType[]'>
+    
+
+
+/**
  * Reference to a field of type 'AccountStatus'
  */
 export type EnumAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountStatus'>
@@ -1686,20 +1700,6 @@ export type ListEnumKycStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
- * Reference to a field of type 'AccountType'
- */
-export type EnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType'>
-    
-
-
-/**
- * Reference to a field of type 'AccountType[]'
- */
-export type ListEnumAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountType[]'>
     
 
 
@@ -1816,20 +1816,6 @@ export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
- * Reference to a field of type 'InvestmentMethod'
- */
-export type EnumInvestmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentMethod'>
-    
-
-
-/**
- * Reference to a field of type 'InvestmentMethod[]'
- */
-export type ListEnumInvestmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentMethod[]'>
-    
-
-
-/**
  * Reference to a field of type 'InvestmentStatus'
  */
 export type EnumInvestmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentStatus'>
@@ -1840,6 +1826,20 @@ export type EnumInvestmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'InvestmentStatus[]'
  */
 export type ListEnumInvestmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InvestmentMethod'
+ */
+export type EnumInvestmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'InvestmentMethod[]'
+ */
+export type ListEnumInvestmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestmentMethod[]'>
     
 
 

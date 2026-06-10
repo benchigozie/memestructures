@@ -1,0 +1,331 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AccountStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+  PENDING
+}
+
+enum KycStatus {
+  UNVERIFIED
+  UNCOMPLETED
+  VERIFIED
+  PENDING
+  REJECTED
+}
+
+enum AccountType {
+  INDIVIDUAL
+  ENTERPRISE
+  ADMIN
+  DEV
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+ model User {
+  id            String   @id @default(cuid())
+  name          String
+  username      String?   @unique
+  email         String   @unique
+  password      String
+  accountStatus AccountStatus @default(ACTIVE)
+  kycStatus     KycStatus @default(UNVERIFIED)
+  emailVerified Boolean  @default(false)
+  imageUrl      String?
+  memberships   Membership[]
+  investments Investment[]
+  wallet        Wallet? 
+  position      Position[]   
+  individualKyc IndividualKyc?
+  accountType   AccountType?
+  notifications  Notification[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deletedAt     DateTime?
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+
+  members   Membership[]
+
+  kyc       OrganizationKyc?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Membership {
+  id             String       @id @default(cuid())
+  userId         String
+  organizationId String
+  role           OrgRole
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id],  onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+}
+
+
+
+model IndividualKyc {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+
+  dob       DateTime
+  gender    String
+
+  idType    String
+  idNumber  String
+
+  idFrontPath     String?
+  idBackPath      String?
+  selfieWithIdPath String?
+
+  country   String
+  state     String
+  city      String
+  address   String
+
+  residenceType String
+  residenceDocPath String?
+
+  user      User @relation(fields: [userId], references: [id],  onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrganizationKyc {
+  id               String   @id @default(cuid())
+  organizationId   String   @unique
+
+  companyName      String
+
+  status           KycStatus @default(UNVERIFIED)
+
+  organization     Organization @relation(fields: [organizationId], references: [id],  onDelete: Cascade)
+
+  members          OrganizationMember[]
+  documents        OrganizationDocument[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+enum KycRole {
+  UBO
+  DIRECTOR
+  OPERATOR
+}
+
+model OrganizationMember {
+  id          String   @id @default(cuid())
+  kycId       String
+  role      KycRole
+
+  fullName   String
+
+  idType      String
+  idNumber    String
+
+  idFrontPath  String?
+  idBackPath   String?
+
+  address     String
+
+  proofOfAddressType String?
+  proofOfAddressPath String?
+
+  kyc         OrganizationKyc @relation(fields: [kycId], references: [id],  onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrganizationDocumentType {
+  CERTIFICATE_OF_INCORPORATION
+  MEMORANDUM_OF_ASSOCIATION
+  PROOF_OF_BUSINESS_ADDRESS
+}
+
+model OrganizationDocument {
+  id          String @id @default(cuid())
+  kycId       String
+
+  type        OrganizationDocumentType
+  filePath     String
+
+  kyc         OrganizationKyc @relation(fields: [kycId], references: [id],  onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+
+  balance   Float    @default(0)
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Fund {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  minInvestment  Float
+  maxInvestment  Float?
+  acronym        String?
+  positions      Position[]   
+  investments    Investment[]
+  isActive       Boolean  @default(true)
+}
+
+model Position {
+  id        String   @id @default(cuid())
+  userId    String
+  fundId    String
+
+  amount    Float    @default(0)
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fund      Fund @relation(fields: [fundId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, fundId]) 
+}
+
+model WalletTransaction {
+  id        String   @id @default(cuid())
+  walletId String
+
+  type      WalletTransactionType
+  intent    TransactionIntent 
+
+  amount    Float
+
+  coin      String?
+  network   String?
+
+  investmentId String? @unique
+
+  reference String? 
+  status    TransactionStatus @default(PENDING)
+  proofPath   String?
+
+  createdAt DateTime @default(now())
+
+  wallet    Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  investment   Investment? @relation(fields: [investmentId], references: [id])
+}
+
+enum WalletTransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  RETURN
+}
+
+enum InvestmentStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+}
+
+enum TransactionIntent {
+  WALLET_FUNDING
+  DIRECT_INVESTMENT
+  WALLET_INVESTMENT
+  WITHDRAWAL_REQUEST
+}
+
+enum InvestmentMethod {
+  WALLET
+  DIRECT
+}
+
+model Investment {
+  id          String   @id @default(cuid())
+  userId      String
+  fundId      String?
+
+  method      InvestmentMethod
+
+  amount      Float
+  fee         Float
+  total       Float
+
+  status      InvestmentStatus @default(PENDING)
+
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fund        Fund? @relation(fields: [fundId], references: [id])
+
+  transactions WalletTransaction?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REJECTED
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String
+
+  title       String
+  message     String
+
+  type        NotificationType
+
+  read        Boolean  @default(false)
+
+  link        String?
+
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, read])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  INVESTMENT
+  DEPOSIT
+  WITHDRAWAL
+}

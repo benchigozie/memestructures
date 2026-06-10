@@ -40,12 +40,13 @@ export type WalletTransactionMinAggregateOutputType = {
   type: $Enums.WalletTransactionType | null
   intent: $Enums.TransactionIntent | null
   amount: number | null
-  coin: string | null
-  network: string | null
-  investmentId: string | null
   reference: string | null
   status: $Enums.TransactionStatus | null
+  coin: string | null
+  network: string | null
+  walletAddress: string | null
   proofPath: string | null
+  investmentId: string | null
   createdAt: Date | null
 }
 
@@ -55,12 +56,13 @@ export type WalletTransactionMaxAggregateOutputType = {
   type: $Enums.WalletTransactionType | null
   intent: $Enums.TransactionIntent | null
   amount: number | null
-  coin: string | null
-  network: string | null
-  investmentId: string | null
   reference: string | null
   status: $Enums.TransactionStatus | null
+  coin: string | null
+  network: string | null
+  walletAddress: string | null
   proofPath: string | null
+  investmentId: string | null
   createdAt: Date | null
 }
 
@@ -70,12 +72,13 @@ export type WalletTransactionCountAggregateOutputType = {
   type: number
   intent: number
   amount: number
-  coin: number
-  network: number
-  investmentId: number
   reference: number
   status: number
+  coin: number
+  network: number
+  walletAddress: number
   proofPath: number
+  investmentId: number
   createdAt: number
   _all: number
 }
@@ -95,12 +98,13 @@ export type WalletTransactionMinAggregateInputType = {
   type?: true
   intent?: true
   amount?: true
-  coin?: true
-  network?: true
-  investmentId?: true
   reference?: true
   status?: true
+  coin?: true
+  network?: true
+  walletAddress?: true
   proofPath?: true
+  investmentId?: true
   createdAt?: true
 }
 
@@ -110,12 +114,13 @@ export type WalletTransactionMaxAggregateInputType = {
   type?: true
   intent?: true
   amount?: true
-  coin?: true
-  network?: true
-  investmentId?: true
   reference?: true
   status?: true
+  coin?: true
+  network?: true
+  walletAddress?: true
   proofPath?: true
+  investmentId?: true
   createdAt?: true
 }
 
@@ -125,12 +130,13 @@ export type WalletTransactionCountAggregateInputType = {
   type?: true
   intent?: true
   amount?: true
-  coin?: true
-  network?: true
-  investmentId?: true
   reference?: true
   status?: true
+  coin?: true
+  network?: true
+  walletAddress?: true
   proofPath?: true
+  investmentId?: true
   createdAt?: true
   _all?: true
 }
@@ -227,12 +233,13 @@ export type WalletTransactionGroupByOutputType = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin: string | null
-  network: string | null
-  investmentId: string | null
   reference: string | null
   status: $Enums.TransactionStatus
+  coin: string | null
+  network: string | null
+  walletAddress: string | null
   proofPath: string | null
+  investmentId: string | null
   createdAt: Date
   _count: WalletTransactionCountAggregateOutputType | null
   _avg: WalletTransactionAvgAggregateOutputType | null
@@ -265,15 +272,16 @@ export type WalletTransactionWhereInput = {
   type?: Prisma.EnumWalletTransactionTypeFilter<"WalletTransaction"> | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFilter<"WalletTransaction"> | $Enums.TransactionIntent
   amount?: Prisma.FloatFilter<"WalletTransaction"> | number
-  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
-  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
-  investmentId?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   reference?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   status?: Prisma.EnumTransactionStatusFilter<"WalletTransaction"> | $Enums.TransactionStatus
+  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  walletAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   proofPath?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  investmentId?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
-  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
   investment?: Prisma.XOR<Prisma.InvestmentNullableScalarRelationFilter, Prisma.InvestmentWhereInput> | null
+  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
 }
 
 export type WalletTransactionOrderByWithRelationInput = {
@@ -282,15 +290,16 @@ export type WalletTransactionOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  coin?: Prisma.SortOrderInput | Prisma.SortOrder
-  network?: Prisma.SortOrderInput | Prisma.SortOrder
-  investmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  coin?: Prisma.SortOrderInput | Prisma.SortOrder
+  network?: Prisma.SortOrderInput | Prisma.SortOrder
+  walletAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   proofPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  investmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  wallet?: Prisma.WalletOrderByWithRelationInput
   investment?: Prisma.InvestmentOrderByWithRelationInput
+  wallet?: Prisma.WalletOrderByWithRelationInput
 }
 
 export type WalletTransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -303,14 +312,15 @@ export type WalletTransactionWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumWalletTransactionTypeFilter<"WalletTransaction"> | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFilter<"WalletTransaction"> | $Enums.TransactionIntent
   amount?: Prisma.FloatFilter<"WalletTransaction"> | number
-  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
-  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   reference?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   status?: Prisma.EnumTransactionStatusFilter<"WalletTransaction"> | $Enums.TransactionStatus
+  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  walletAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   proofPath?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
-  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
   investment?: Prisma.XOR<Prisma.InvestmentNullableScalarRelationFilter, Prisma.InvestmentWhereInput> | null
+  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
 }, "id" | "investmentId">
 
 export type WalletTransactionOrderByWithAggregationInput = {
@@ -319,12 +329,13 @@ export type WalletTransactionOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  coin?: Prisma.SortOrderInput | Prisma.SortOrder
-  network?: Prisma.SortOrderInput | Prisma.SortOrder
-  investmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  coin?: Prisma.SortOrderInput | Prisma.SortOrder
+  network?: Prisma.SortOrderInput | Prisma.SortOrder
+  walletAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   proofPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  investmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.WalletTransactionCountOrderByAggregateInput
   _avg?: Prisma.WalletTransactionAvgOrderByAggregateInput
@@ -342,12 +353,13 @@ export type WalletTransactionScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumWalletTransactionTypeWithAggregatesFilter<"WalletTransaction"> | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentWithAggregatesFilter<"WalletTransaction"> | $Enums.TransactionIntent
   amount?: Prisma.FloatWithAggregatesFilter<"WalletTransaction"> | number
-  coin?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
-  network?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
-  investmentId?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
   reference?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
   status?: Prisma.EnumTransactionStatusWithAggregatesFilter<"WalletTransaction"> | $Enums.TransactionStatus
+  coin?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  network?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  walletAddress?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
   proofPath?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  investmentId?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WalletTransaction"> | Date | string
 }
 
@@ -356,14 +368,15 @@ export type WalletTransactionCreateInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
   createdAt?: Date | string
+  investment?: Prisma.InvestmentCreateNestedOneWithoutWalletTransactionInput
   wallet: Prisma.WalletCreateNestedOneWithoutTransactionsInput
-  investment?: Prisma.InvestmentCreateNestedOneWithoutTransactionsInput
 }
 
 export type WalletTransactionUncheckedCreateInput = {
@@ -372,12 +385,13 @@ export type WalletTransactionUncheckedCreateInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
-  investmentId?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
+  investmentId?: string | null
   createdAt?: Date | string
 }
 
@@ -386,14 +400,15 @@ export type WalletTransactionUpdateInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  investment?: Prisma.InvestmentUpdateOneWithoutWalletTransactionNestedInput
   wallet?: Prisma.WalletUpdateOneRequiredWithoutTransactionsNestedInput
-  investment?: Prisma.InvestmentUpdateOneWithoutTransactionsNestedInput
 }
 
 export type WalletTransactionUncheckedUpdateInput = {
@@ -402,12 +417,13 @@ export type WalletTransactionUncheckedUpdateInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -417,12 +433,13 @@ export type WalletTransactionCreateManyInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
-  investmentId?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
+  investmentId?: string | null
   createdAt?: Date | string
 }
 
@@ -431,10 +448,11 @@ export type WalletTransactionUpdateManyMutationInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -445,12 +463,13 @@ export type WalletTransactionUncheckedUpdateManyInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -470,12 +489,13 @@ export type WalletTransactionCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  coin?: Prisma.SortOrder
-  network?: Prisma.SortOrder
-  investmentId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  coin?: Prisma.SortOrder
+  network?: Prisma.SortOrder
+  walletAddress?: Prisma.SortOrder
   proofPath?: Prisma.SortOrder
+  investmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -489,12 +509,13 @@ export type WalletTransactionMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  coin?: Prisma.SortOrder
-  network?: Prisma.SortOrder
-  investmentId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  coin?: Prisma.SortOrder
+  network?: Prisma.SortOrder
+  walletAddress?: Prisma.SortOrder
   proofPath?: Prisma.SortOrder
+  investmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -504,12 +525,13 @@ export type WalletTransactionMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   intent?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  coin?: Prisma.SortOrder
-  network?: Prisma.SortOrder
-  investmentId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  coin?: Prisma.SortOrder
+  network?: Prisma.SortOrder
+  walletAddress?: Prisma.SortOrder
   proofPath?: Prisma.SortOrder
+  investmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -613,13 +635,14 @@ export type WalletTransactionCreateWithoutWalletInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
   createdAt?: Date | string
-  investment?: Prisma.InvestmentCreateNestedOneWithoutTransactionsInput
+  investment?: Prisma.InvestmentCreateNestedOneWithoutWalletTransactionInput
 }
 
 export type WalletTransactionUncheckedCreateWithoutWalletInput = {
@@ -627,12 +650,13 @@ export type WalletTransactionUncheckedCreateWithoutWalletInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
-  investmentId?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
+  investmentId?: string | null
   createdAt?: Date | string
 }
 
@@ -671,12 +695,13 @@ export type WalletTransactionScalarWhereInput = {
   type?: Prisma.EnumWalletTransactionTypeFilter<"WalletTransaction"> | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFilter<"WalletTransaction"> | $Enums.TransactionIntent
   amount?: Prisma.FloatFilter<"WalletTransaction"> | number
-  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
-  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
-  investmentId?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   reference?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   status?: Prisma.EnumTransactionStatusFilter<"WalletTransaction"> | $Enums.TransactionStatus
+  coin?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  network?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  walletAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   proofPath?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  investmentId?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
 }
 
@@ -685,10 +710,11 @@ export type WalletTransactionCreateWithoutInvestmentInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
   createdAt?: Date | string
   wallet: Prisma.WalletCreateNestedOneWithoutTransactionsInput
@@ -700,10 +726,11 @@ export type WalletTransactionUncheckedCreateWithoutInvestmentInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
   createdAt?: Date | string
 }
@@ -729,10 +756,11 @@ export type WalletTransactionUpdateWithoutInvestmentInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   wallet?: Prisma.WalletUpdateOneRequiredWithoutTransactionsNestedInput
@@ -744,10 +772,11 @@ export type WalletTransactionUncheckedUpdateWithoutInvestmentInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -757,12 +786,13 @@ export type WalletTransactionCreateManyWalletInput = {
   type: $Enums.WalletTransactionType
   intent: $Enums.TransactionIntent
   amount: number
-  coin?: string | null
-  network?: string | null
-  investmentId?: string | null
   reference?: string | null
   status?: $Enums.TransactionStatus
+  coin?: string | null
+  network?: string | null
+  walletAddress?: string | null
   proofPath?: string | null
+  investmentId?: string | null
   createdAt?: Date | string
 }
 
@@ -771,13 +801,14 @@ export type WalletTransactionUpdateWithoutWalletInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  investment?: Prisma.InvestmentUpdateOneWithoutTransactionsNestedInput
+  investment?: Prisma.InvestmentUpdateOneWithoutWalletTransactionNestedInput
 }
 
 export type WalletTransactionUncheckedUpdateWithoutWalletInput = {
@@ -785,12 +816,13 @@ export type WalletTransactionUncheckedUpdateWithoutWalletInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -799,12 +831,13 @@ export type WalletTransactionUncheckedUpdateManyWithoutWalletInput = {
   type?: Prisma.EnumWalletTransactionTypeFieldUpdateOperationsInput | $Enums.WalletTransactionType
   intent?: Prisma.EnumTransactionIntentFieldUpdateOperationsInput | $Enums.TransactionIntent
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  coin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   proofPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  investmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -816,15 +849,16 @@ export type WalletTransactionSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   intent?: boolean
   amount?: boolean
-  coin?: boolean
-  network?: boolean
-  investmentId?: boolean
   reference?: boolean
   status?: boolean
+  coin?: boolean
+  network?: boolean
+  walletAddress?: boolean
   proofPath?: boolean
+  investmentId?: boolean
   createdAt?: boolean
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
 
 export type WalletTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -833,15 +867,16 @@ export type WalletTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   intent?: boolean
   amount?: boolean
-  coin?: boolean
-  network?: boolean
-  investmentId?: boolean
   reference?: boolean
   status?: boolean
+  coin?: boolean
+  network?: boolean
+  walletAddress?: boolean
   proofPath?: boolean
+  investmentId?: boolean
   createdAt?: boolean
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
 
 export type WalletTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -850,15 +885,16 @@ export type WalletTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   intent?: boolean
   amount?: boolean
-  coin?: boolean
-  network?: boolean
-  investmentId?: boolean
   reference?: boolean
   status?: boolean
+  coin?: boolean
+  network?: boolean
+  walletAddress?: boolean
   proofPath?: boolean
+  investmentId?: boolean
   createdAt?: boolean
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
 
 export type WalletTransactionSelectScalar = {
@@ -867,34 +903,35 @@ export type WalletTransactionSelectScalar = {
   type?: boolean
   intent?: boolean
   amount?: boolean
-  coin?: boolean
-  network?: boolean
-  investmentId?: boolean
   reference?: boolean
   status?: boolean
+  coin?: boolean
+  network?: boolean
+  walletAddress?: boolean
   proofPath?: boolean
+  investmentId?: boolean
   createdAt?: boolean
 }
 
-export type WalletTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "walletId" | "type" | "intent" | "amount" | "coin" | "network" | "investmentId" | "reference" | "status" | "proofPath" | "createdAt", ExtArgs["result"]["walletTransaction"]>
+export type WalletTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "walletId" | "type" | "intent" | "amount" | "reference" | "status" | "coin" | "network" | "walletAddress" | "proofPath" | "investmentId" | "createdAt", ExtArgs["result"]["walletTransaction"]>
 export type WalletTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }
 export type WalletTransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }
 export type WalletTransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
   investment?: boolean | Prisma.WalletTransaction$investmentArgs<ExtArgs>
+  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }
 
 export type $WalletTransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "WalletTransaction"
   objects: {
-    wallet: Prisma.$WalletPayload<ExtArgs>
     investment: Prisma.$InvestmentPayload<ExtArgs> | null
+    wallet: Prisma.$WalletPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -902,12 +939,13 @@ export type $WalletTransactionPayload<ExtArgs extends runtime.Types.Extensions.I
     type: $Enums.WalletTransactionType
     intent: $Enums.TransactionIntent
     amount: number
-    coin: string | null
-    network: string | null
-    investmentId: string | null
     reference: string | null
     status: $Enums.TransactionStatus
+    coin: string | null
+    network: string | null
+    walletAddress: string | null
     proofPath: string | null
+    investmentId: string | null
     createdAt: Date
   }, ExtArgs["result"]["walletTransaction"]>
   composites: {}
@@ -1303,8 +1341,8 @@ readonly fields: WalletTransactionFieldRefs;
  */
 export interface Prisma__WalletTransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  wallet<T extends Prisma.WalletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WalletDefaultArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   investment<T extends Prisma.WalletTransaction$investmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WalletTransaction$investmentArgs<ExtArgs>>): Prisma.Prisma__InvestmentClient<runtime.Types.Result.GetResult<Prisma.$InvestmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  wallet<T extends Prisma.WalletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WalletDefaultArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1339,12 +1377,13 @@ export interface WalletTransactionFieldRefs {
   readonly type: Prisma.FieldRef<"WalletTransaction", 'WalletTransactionType'>
   readonly intent: Prisma.FieldRef<"WalletTransaction", 'TransactionIntent'>
   readonly amount: Prisma.FieldRef<"WalletTransaction", 'Float'>
-  readonly coin: Prisma.FieldRef<"WalletTransaction", 'String'>
-  readonly network: Prisma.FieldRef<"WalletTransaction", 'String'>
-  readonly investmentId: Prisma.FieldRef<"WalletTransaction", 'String'>
   readonly reference: Prisma.FieldRef<"WalletTransaction", 'String'>
   readonly status: Prisma.FieldRef<"WalletTransaction", 'TransactionStatus'>
+  readonly coin: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly network: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly walletAddress: Prisma.FieldRef<"WalletTransaction", 'String'>
   readonly proofPath: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly investmentId: Prisma.FieldRef<"WalletTransaction", 'String'>
   readonly createdAt: Prisma.FieldRef<"WalletTransaction", 'DateTime'>
 }
     

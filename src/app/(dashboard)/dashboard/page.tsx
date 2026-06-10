@@ -35,7 +35,7 @@ export default function Dashboard() {
     }
   
     if (user.accountType === "ADMIN" || user.accountType === "DEV") {
-      router.replace("/dashboard/admin");
+      router.replace("/dashboard/admin/kyc");
       return;
     }
   
@@ -49,7 +49,10 @@ export default function Dashboard() {
   );
 
 
-  if (!user) return null;
+  if (!user) {
+    console.log("No user found, returning null");
+    return null;
+  };
 
   console.log("this is user in dashboard: ", user);
 

@@ -42,7 +42,6 @@ export type FundMinAggregateOutputType = {
   slug: string | null
   minInvestment: number | null
   maxInvestment: number | null
-  acronym: string | null
   isActive: boolean | null
 }
 
@@ -52,7 +51,6 @@ export type FundMaxAggregateOutputType = {
   slug: string | null
   minInvestment: number | null
   maxInvestment: number | null
-  acronym: string | null
   isActive: boolean | null
 }
 
@@ -62,7 +60,6 @@ export type FundCountAggregateOutputType = {
   slug: number
   minInvestment: number
   maxInvestment: number
-  acronym: number
   isActive: number
   _all: number
 }
@@ -84,7 +81,6 @@ export type FundMinAggregateInputType = {
   slug?: true
   minInvestment?: true
   maxInvestment?: true
-  acronym?: true
   isActive?: true
 }
 
@@ -94,7 +90,6 @@ export type FundMaxAggregateInputType = {
   slug?: true
   minInvestment?: true
   maxInvestment?: true
-  acronym?: true
   isActive?: true
 }
 
@@ -104,7 +99,6 @@ export type FundCountAggregateInputType = {
   slug?: true
   minInvestment?: true
   maxInvestment?: true
-  acronym?: true
   isActive?: true
   _all?: true
 }
@@ -201,7 +195,6 @@ export type FundGroupByOutputType = {
   slug: string
   minInvestment: number
   maxInvestment: number | null
-  acronym: string | null
   isActive: boolean
   _count: FundCountAggregateOutputType | null
   _avg: FundAvgAggregateOutputType | null
@@ -234,10 +227,9 @@ export type FundWhereInput = {
   slug?: Prisma.StringFilter<"Fund"> | string
   minInvestment?: Prisma.FloatFilter<"Fund"> | number
   maxInvestment?: Prisma.FloatNullableFilter<"Fund"> | number | null
-  acronym?: Prisma.StringNullableFilter<"Fund"> | string | null
   isActive?: Prisma.BoolFilter<"Fund"> | boolean
-  positions?: Prisma.PositionListRelationFilter
   investments?: Prisma.InvestmentListRelationFilter
+  positions?: Prisma.PositionListRelationFilter
 }
 
 export type FundOrderByWithRelationInput = {
@@ -246,10 +238,9 @@ export type FundOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   minInvestment?: Prisma.SortOrder
   maxInvestment?: Prisma.SortOrderInput | Prisma.SortOrder
-  acronym?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
-  positions?: Prisma.PositionOrderByRelationAggregateInput
   investments?: Prisma.InvestmentOrderByRelationAggregateInput
+  positions?: Prisma.PositionOrderByRelationAggregateInput
 }
 
 export type FundWhereUniqueInput = Prisma.AtLeast<{
@@ -261,10 +252,9 @@ export type FundWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Fund"> | string
   minInvestment?: Prisma.FloatFilter<"Fund"> | number
   maxInvestment?: Prisma.FloatNullableFilter<"Fund"> | number | null
-  acronym?: Prisma.StringNullableFilter<"Fund"> | string | null
   isActive?: Prisma.BoolFilter<"Fund"> | boolean
-  positions?: Prisma.PositionListRelationFilter
   investments?: Prisma.InvestmentListRelationFilter
+  positions?: Prisma.PositionListRelationFilter
 }, "id" | "slug">
 
 export type FundOrderByWithAggregationInput = {
@@ -273,7 +263,6 @@ export type FundOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   minInvestment?: Prisma.SortOrder
   maxInvestment?: Prisma.SortOrderInput | Prisma.SortOrder
-  acronym?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   _count?: Prisma.FundCountOrderByAggregateInput
   _avg?: Prisma.FundAvgOrderByAggregateInput
@@ -291,7 +280,6 @@ export type FundScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Fund"> | string
   minInvestment?: Prisma.FloatWithAggregatesFilter<"Fund"> | number
   maxInvestment?: Prisma.FloatNullableWithAggregatesFilter<"Fund"> | number | null
-  acronym?: Prisma.StringNullableWithAggregatesFilter<"Fund"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Fund"> | boolean
 }
 
@@ -301,10 +289,9 @@ export type FundCreateInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
-  positions?: Prisma.PositionCreateNestedManyWithoutFundInput
   investments?: Prisma.InvestmentCreateNestedManyWithoutFundInput
+  positions?: Prisma.PositionCreateNestedManyWithoutFundInput
 }
 
 export type FundUncheckedCreateInput = {
@@ -313,10 +300,9 @@ export type FundUncheckedCreateInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
-  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutFundInput
   investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutFundInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutFundInput
 }
 
 export type FundUpdateInput = {
@@ -325,10 +311,9 @@ export type FundUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  positions?: Prisma.PositionUpdateManyWithoutFundNestedInput
   investments?: Prisma.InvestmentUpdateManyWithoutFundNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutFundNestedInput
 }
 
 export type FundUncheckedUpdateInput = {
@@ -337,10 +322,9 @@ export type FundUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  positions?: Prisma.PositionUncheckedUpdateManyWithoutFundNestedInput
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutFundNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutFundNestedInput
 }
 
 export type FundCreateManyInput = {
@@ -349,7 +333,6 @@ export type FundCreateManyInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
 }
 
@@ -359,7 +342,6 @@ export type FundUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -369,7 +351,6 @@ export type FundUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -379,7 +360,6 @@ export type FundCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   minInvestment?: Prisma.SortOrder
   maxInvestment?: Prisma.SortOrder
-  acronym?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
 }
 
@@ -394,7 +374,6 @@ export type FundMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   minInvestment?: Prisma.SortOrder
   maxInvestment?: Prisma.SortOrder
-  acronym?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
 }
 
@@ -404,7 +383,6 @@ export type FundMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   minInvestment?: Prisma.SortOrder
   maxInvestment?: Prisma.SortOrder
-  acronym?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
 }
 
@@ -416,11 +394,6 @@ export type FundSumOrderByAggregateInput = {
 export type FundScalarRelationFilter = {
   is?: Prisma.FundWhereInput
   isNot?: Prisma.FundWhereInput
-}
-
-export type FundNullableScalarRelationFilter = {
-  is?: Prisma.FundWhereInput | null
-  isNot?: Prisma.FundWhereInput | null
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -451,12 +424,10 @@ export type FundCreateNestedOneWithoutInvestmentsInput = {
   connect?: Prisma.FundWhereUniqueInput
 }
 
-export type FundUpdateOneWithoutInvestmentsNestedInput = {
+export type FundUpdateOneRequiredWithoutInvestmentsNestedInput = {
   create?: Prisma.XOR<Prisma.FundCreateWithoutInvestmentsInput, Prisma.FundUncheckedCreateWithoutInvestmentsInput>
   connectOrCreate?: Prisma.FundCreateOrConnectWithoutInvestmentsInput
   upsert?: Prisma.FundUpsertWithoutInvestmentsInput
-  disconnect?: Prisma.FundWhereInput | boolean
-  delete?: Prisma.FundWhereInput | boolean
   connect?: Prisma.FundWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FundUpdateToOneWithWhereWithoutInvestmentsInput, Prisma.FundUpdateWithoutInvestmentsInput>, Prisma.FundUncheckedUpdateWithoutInvestmentsInput>
 }
@@ -467,7 +438,6 @@ export type FundCreateWithoutPositionsInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
   investments?: Prisma.InvestmentCreateNestedManyWithoutFundInput
 }
@@ -478,7 +448,6 @@ export type FundUncheckedCreateWithoutPositionsInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
   investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutFundInput
 }
@@ -505,7 +474,6 @@ export type FundUpdateWithoutPositionsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   investments?: Prisma.InvestmentUpdateManyWithoutFundNestedInput
 }
@@ -516,7 +484,6 @@ export type FundUncheckedUpdateWithoutPositionsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutFundNestedInput
 }
@@ -527,7 +494,6 @@ export type FundCreateWithoutInvestmentsInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
   positions?: Prisma.PositionCreateNestedManyWithoutFundInput
 }
@@ -538,7 +504,6 @@ export type FundUncheckedCreateWithoutInvestmentsInput = {
   slug: string
   minInvestment: number
   maxInvestment?: number | null
-  acronym?: string | null
   isActive?: boolean
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutFundInput
 }
@@ -565,7 +530,6 @@ export type FundUpdateWithoutInvestmentsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   positions?: Prisma.PositionUpdateManyWithoutFundNestedInput
 }
@@ -576,7 +540,6 @@ export type FundUncheckedUpdateWithoutInvestmentsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   minInvestment?: Prisma.FloatFieldUpdateOperationsInput | number
   maxInvestment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  acronym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   positions?: Prisma.PositionUncheckedUpdateManyWithoutFundNestedInput
 }
@@ -587,13 +550,13 @@ export type FundUncheckedUpdateWithoutInvestmentsInput = {
  */
 
 export type FundCountOutputType = {
-  positions: number
   investments: number
+  positions: number
 }
 
 export type FundCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  positions?: boolean | FundCountOutputTypeCountPositionsArgs
   investments?: boolean | FundCountOutputTypeCountInvestmentsArgs
+  positions?: boolean | FundCountOutputTypeCountPositionsArgs
 }
 
 /**
@@ -609,15 +572,15 @@ export type FundCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * FundCountOutputType without action
  */
-export type FundCountOutputTypeCountPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PositionWhereInput
+export type FundCountOutputTypeCountInvestmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestmentWhereInput
 }
 
 /**
  * FundCountOutputType without action
  */
-export type FundCountOutputTypeCountInvestmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InvestmentWhereInput
+export type FundCountOutputTypeCountPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PositionWhereInput
 }
 
 
@@ -627,10 +590,9 @@ export type FundSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   slug?: boolean
   minInvestment?: boolean
   maxInvestment?: boolean
-  acronym?: boolean
   isActive?: boolean
-  positions?: boolean | Prisma.Fund$positionsArgs<ExtArgs>
   investments?: boolean | Prisma.Fund$investmentsArgs<ExtArgs>
+  positions?: boolean | Prisma.Fund$positionsArgs<ExtArgs>
   _count?: boolean | Prisma.FundCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fund"]>
 
@@ -640,7 +602,6 @@ export type FundSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   slug?: boolean
   minInvestment?: boolean
   maxInvestment?: boolean
-  acronym?: boolean
   isActive?: boolean
 }, ExtArgs["result"]["fund"]>
 
@@ -650,7 +611,6 @@ export type FundSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   slug?: boolean
   minInvestment?: boolean
   maxInvestment?: boolean
-  acronym?: boolean
   isActive?: boolean
 }, ExtArgs["result"]["fund"]>
 
@@ -660,14 +620,13 @@ export type FundSelectScalar = {
   slug?: boolean
   minInvestment?: boolean
   maxInvestment?: boolean
-  acronym?: boolean
   isActive?: boolean
 }
 
-export type FundOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "minInvestment" | "maxInvestment" | "acronym" | "isActive", ExtArgs["result"]["fund"]>
+export type FundOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "minInvestment" | "maxInvestment" | "isActive", ExtArgs["result"]["fund"]>
 export type FundInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  positions?: boolean | Prisma.Fund$positionsArgs<ExtArgs>
   investments?: boolean | Prisma.Fund$investmentsArgs<ExtArgs>
+  positions?: boolean | Prisma.Fund$positionsArgs<ExtArgs>
   _count?: boolean | Prisma.FundCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FundIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -676,8 +635,8 @@ export type FundIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $FundPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Fund"
   objects: {
-    positions: Prisma.$PositionPayload<ExtArgs>[]
     investments: Prisma.$InvestmentPayload<ExtArgs>[]
+    positions: Prisma.$PositionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -685,7 +644,6 @@ export type $FundPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     slug: string
     minInvestment: number
     maxInvestment: number | null
-    acronym: string | null
     isActive: boolean
   }, ExtArgs["result"]["fund"]>
   composites: {}
@@ -1081,8 +1039,8 @@ readonly fields: FundFieldRefs;
  */
 export interface Prisma__FundClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  positions<T extends Prisma.Fund$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fund$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   investments<T extends Prisma.Fund$investmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fund$investmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  positions<T extends Prisma.Fund$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fund$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1117,7 +1075,6 @@ export interface FundFieldRefs {
   readonly slug: Prisma.FieldRef<"Fund", 'String'>
   readonly minInvestment: Prisma.FieldRef<"Fund", 'Float'>
   readonly maxInvestment: Prisma.FieldRef<"Fund", 'Float'>
-  readonly acronym: Prisma.FieldRef<"Fund", 'String'>
   readonly isActive: Prisma.FieldRef<"Fund", 'Boolean'>
 }
     
@@ -1512,30 +1469,6 @@ export type FundDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Fund.positions
- */
-export type Fund$positionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Position
-   */
-  select?: Prisma.PositionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Position
-   */
-  omit?: Prisma.PositionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PositionInclude<ExtArgs> | null
-  where?: Prisma.PositionWhereInput
-  orderBy?: Prisma.PositionOrderByWithRelationInput | Prisma.PositionOrderByWithRelationInput[]
-  cursor?: Prisma.PositionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PositionScalarFieldEnum | Prisma.PositionScalarFieldEnum[]
-}
-
-/**
  * Fund.investments
  */
 export type Fund$investmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1557,6 +1490,30 @@ export type Fund$investmentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.InvestmentScalarFieldEnum | Prisma.InvestmentScalarFieldEnum[]
+}
+
+/**
+ * Fund.positions
+ */
+export type Fund$positionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Position
+   */
+  select?: Prisma.PositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Position
+   */
+  omit?: Prisma.PositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PositionInclude<ExtArgs> | null
+  where?: Prisma.PositionWhereInput
+  orderBy?: Prisma.PositionOrderByWithRelationInput | Prisma.PositionOrderByWithRelationInput[]
+  cursor?: Prisma.PositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PositionScalarFieldEnum | Prisma.PositionScalarFieldEnum[]
 }
 
 /**

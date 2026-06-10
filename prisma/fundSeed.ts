@@ -11,7 +11,7 @@ export async function seedFunds() {
       },
       update: {
         name: fund.name,
-        acronym: fund.acronym,
+        slug: fund.slug,
         minInvestment: fund.minInvestment,
         maxInvestment: fund.maxInvestment,
         isActive: true,

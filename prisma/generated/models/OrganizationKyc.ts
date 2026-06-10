@@ -190,9 +190,9 @@ export type OrganizationKycWhereInput = {
   status?: Prisma.EnumKycStatusFilter<"OrganizationKyc"> | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFilter<"OrganizationKyc"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationKyc"> | Date | string
+  documents?: Prisma.OrganizationDocumentListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   members?: Prisma.OrganizationMemberListRelationFilter
-  documents?: Prisma.OrganizationDocumentListRelationFilter
 }
 
 export type OrganizationKycOrderByWithRelationInput = {
@@ -202,9 +202,9 @@ export type OrganizationKycOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  documents?: Prisma.OrganizationDocumentOrderByRelationAggregateInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
   members?: Prisma.OrganizationMemberOrderByRelationAggregateInput
-  documents?: Prisma.OrganizationDocumentOrderByRelationAggregateInput
 }
 
 export type OrganizationKycWhereUniqueInput = Prisma.AtLeast<{
@@ -217,9 +217,9 @@ export type OrganizationKycWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumKycStatusFilter<"OrganizationKyc"> | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFilter<"OrganizationKyc"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationKyc"> | Date | string
+  documents?: Prisma.OrganizationDocumentListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   members?: Prisma.OrganizationMemberListRelationFilter
-  documents?: Prisma.OrganizationDocumentListRelationFilter
 }, "id" | "organizationId">
 
 export type OrganizationKycOrderByWithAggregationInput = {
@@ -252,9 +252,9 @@ export type OrganizationKycCreateInput = {
   status?: $Enums.KycStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  documents?: Prisma.OrganizationDocumentCreateNestedManyWithoutKycInput
   organization: Prisma.OrganizationCreateNestedOneWithoutKycInput
   members?: Prisma.OrganizationMemberCreateNestedManyWithoutKycInput
-  documents?: Prisma.OrganizationDocumentCreateNestedManyWithoutKycInput
 }
 
 export type OrganizationKycUncheckedCreateInput = {
@@ -264,8 +264,8 @@ export type OrganizationKycUncheckedCreateInput = {
   status?: $Enums.KycStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutKycInput
   documents?: Prisma.OrganizationDocumentUncheckedCreateNestedManyWithoutKycInput
+  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutKycInput
 }
 
 export type OrganizationKycUpdateInput = {
@@ -274,9 +274,9 @@ export type OrganizationKycUpdateInput = {
   status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.OrganizationDocumentUpdateManyWithoutKycNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutKycNestedInput
   members?: Prisma.OrganizationMemberUpdateManyWithoutKycNestedInput
-  documents?: Prisma.OrganizationDocumentUpdateManyWithoutKycNestedInput
 }
 
 export type OrganizationKycUncheckedUpdateInput = {
@@ -286,8 +286,8 @@ export type OrganizationKycUncheckedUpdateInput = {
   status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutKycNestedInput
   documents?: Prisma.OrganizationDocumentUncheckedUpdateManyWithoutKycNestedInput
+  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutKycNestedInput
 }
 
 export type OrganizationKycCreateManyInput = {
@@ -419,8 +419,8 @@ export type OrganizationKycCreateWithoutOrganizationInput = {
   status?: $Enums.KycStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.OrganizationMemberCreateNestedManyWithoutKycInput
   documents?: Prisma.OrganizationDocumentCreateNestedManyWithoutKycInput
+  members?: Prisma.OrganizationMemberCreateNestedManyWithoutKycInput
 }
 
 export type OrganizationKycUncheckedCreateWithoutOrganizationInput = {
@@ -429,8 +429,8 @@ export type OrganizationKycUncheckedCreateWithoutOrganizationInput = {
   status?: $Enums.KycStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutKycInput
   documents?: Prisma.OrganizationDocumentUncheckedCreateNestedManyWithoutKycInput
+  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutKycInput
 }
 
 export type OrganizationKycCreateOrConnectWithoutOrganizationInput = {
@@ -455,8 +455,8 @@ export type OrganizationKycUpdateWithoutOrganizationInput = {
   status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.OrganizationMemberUpdateManyWithoutKycNestedInput
   documents?: Prisma.OrganizationDocumentUpdateManyWithoutKycNestedInput
+  members?: Prisma.OrganizationMemberUpdateManyWithoutKycNestedInput
 }
 
 export type OrganizationKycUncheckedUpdateWithoutOrganizationInput = {
@@ -465,8 +465,8 @@ export type OrganizationKycUncheckedUpdateWithoutOrganizationInput = {
   status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutKycNestedInput
   documents?: Prisma.OrganizationDocumentUncheckedUpdateManyWithoutKycNestedInput
+  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutKycNestedInput
 }
 
 export type OrganizationKycCreateWithoutMembersInput = {
@@ -475,8 +475,8 @@ export type OrganizationKycCreateWithoutMembersInput = {
   status?: $Enums.KycStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutKycInput
   documents?: Prisma.OrganizationDocumentCreateNestedManyWithoutKycInput
+  organization: Prisma.OrganizationCreateNestedOneWithoutKycInput
 }
 
 export type OrganizationKycUncheckedCreateWithoutMembersInput = {
@@ -511,8 +511,8 @@ export type OrganizationKycUpdateWithoutMembersInput = {
   status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutKycNestedInput
   documents?: Prisma.OrganizationDocumentUpdateManyWithoutKycNestedInput
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutKycNestedInput
 }
 
 export type OrganizationKycUncheckedUpdateWithoutMembersInput = {
@@ -587,13 +587,13 @@ export type OrganizationKycUncheckedUpdateWithoutDocumentsInput = {
  */
 
 export type OrganizationKycCountOutputType = {
-  members: number
   documents: number
+  members: number
 }
 
 export type OrganizationKycCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  members?: boolean | OrganizationKycCountOutputTypeCountMembersArgs
   documents?: boolean | OrganizationKycCountOutputTypeCountDocumentsArgs
+  members?: boolean | OrganizationKycCountOutputTypeCountMembersArgs
 }
 
 /**
@@ -609,15 +609,15 @@ export type OrganizationKycCountOutputTypeDefaultArgs<ExtArgs extends runtime.Ty
 /**
  * OrganizationKycCountOutputType without action
  */
-export type OrganizationKycCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OrganizationMemberWhereInput
+export type OrganizationKycCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationDocumentWhereInput
 }
 
 /**
  * OrganizationKycCountOutputType without action
  */
-export type OrganizationKycCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OrganizationDocumentWhereInput
+export type OrganizationKycCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationMemberWhereInput
 }
 
 
@@ -628,9 +628,9 @@ export type OrganizationKycSelect<ExtArgs extends runtime.Types.Extensions.Inter
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  documents?: boolean | Prisma.OrganizationKyc$documentsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   members?: boolean | Prisma.OrganizationKyc$membersArgs<ExtArgs>
-  documents?: boolean | Prisma.OrganizationKyc$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationKycCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationKyc"]>
 
@@ -665,9 +665,9 @@ export type OrganizationKycSelectScalar = {
 
 export type OrganizationKycOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "companyName" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationKyc"]>
 export type OrganizationKycInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  documents?: boolean | Prisma.OrganizationKyc$documentsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   members?: boolean | Prisma.OrganizationKyc$membersArgs<ExtArgs>
-  documents?: boolean | Prisma.OrganizationKyc$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationKycCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationKycIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -680,9 +680,9 @@ export type OrganizationKycIncludeUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type $OrganizationKycPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrganizationKyc"
   objects: {
+    documents: Prisma.$OrganizationDocumentPayload<ExtArgs>[]
     organization: Prisma.$OrganizationPayload<ExtArgs>
     members: Prisma.$OrganizationMemberPayload<ExtArgs>[]
-    documents: Prisma.$OrganizationDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1085,9 +1085,9 @@ readonly fields: OrganizationKycFieldRefs;
  */
 export interface Prisma__OrganizationKycClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  documents<T extends Prisma.OrganizationKyc$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationKyc$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.OrganizationKyc$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationKyc$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  documents<T extends Prisma.OrganizationKyc$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationKyc$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,30 +1524,6 @@ export type OrganizationKycDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * OrganizationKyc.members
- */
-export type OrganizationKyc$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the OrganizationMember
-   */
-  select?: Prisma.OrganizationMemberSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the OrganizationMember
-   */
-  omit?: Prisma.OrganizationMemberOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OrganizationMemberInclude<ExtArgs> | null
-  where?: Prisma.OrganizationMemberWhereInput
-  orderBy?: Prisma.OrganizationMemberOrderByWithRelationInput | Prisma.OrganizationMemberOrderByWithRelationInput[]
-  cursor?: Prisma.OrganizationMemberWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.OrganizationMemberScalarFieldEnum | Prisma.OrganizationMemberScalarFieldEnum[]
-}
-
-/**
  * OrganizationKyc.documents
  */
 export type OrganizationKyc$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1569,6 +1545,30 @@ export type OrganizationKyc$documentsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.OrganizationDocumentScalarFieldEnum | Prisma.OrganizationDocumentScalarFieldEnum[]
+}
+
+/**
+ * OrganizationKyc.members
+ */
+export type OrganizationKyc$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationMember
+   */
+  select?: Prisma.OrganizationMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationMember
+   */
+  omit?: Prisma.OrganizationMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationMemberInclude<ExtArgs> | null
+  where?: Prisma.OrganizationMemberWhereInput
+  orderBy?: Prisma.OrganizationMemberOrderByWithRelationInput | Prisma.OrganizationMemberOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationMemberScalarFieldEnum | Prisma.OrganizationMemberScalarFieldEnum[]
 }
 
 /**

@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <>
         <AdminNav />
-        <main className="md:ml-52 mt-14">{children}</main>
+        <main className="lg:ml-56 mt-15">{children}</main>
       </>
   );
 }

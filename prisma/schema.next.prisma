@@ -155,12 +155,7 @@ model WalletTransaction {
   amount    Float
   reference String?
   status    TransactionStatus     @default(PENDING)
-  coin          String?
-  network       String?
-  walletAddress String?
-  proofPath     String?
-  investmentId String? @unique
-  investment   Investment? @relation(fields: [investmentId], references: [id])
+  proofPath String?
   createdAt DateTime              @default(now())
   wallet    Wallet                @relation(fields: [walletId], references: [id], onDelete: Cascade)
 }
@@ -171,12 +166,15 @@ model Investment {
   amount        Float
   fee           Float
   total         Float
+  coin          String?
+  network       String?
+  walletAddress String?
+  proofPath     String?
   status        InvestmentStatus @default(PENDING)
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
   fundId        String
   method        InvestmentMethod
-  walletTransaction WalletTransaction?
   fund          Fund             @relation(fields: [fundId], references: [id])
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -252,7 +250,6 @@ enum InvestmentStatus {
 enum TransactionIntent {
   WALLET_FUNDING
   DIRECT_INVESTMENT
-  ASSET_FUNDING
   WITHDRAWAL_REQUEST
 }
 

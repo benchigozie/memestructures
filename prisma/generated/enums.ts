@@ -21,10 +21,10 @@ export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
 
 export const KycStatus = {
   UNVERIFIED: 'UNVERIFIED',
-  UNCOMPLETED: 'UNCOMPLETED',
   VERIFIED: 'VERIFIED',
   PENDING: 'PENDING',
-  REJECTED: 'REJECTED'
+  REJECTED: 'REJECTED',
+  UNCOMPLETED: 'UNCOMPLETED'
 } as const
 
 export type KycStatus = (typeof KycStatus)[keyof typeof KycStatus]
@@ -88,7 +88,7 @@ export type InvestmentStatus = (typeof InvestmentStatus)[keyof typeof Investment
 export const TransactionIntent = {
   WALLET_FUNDING: 'WALLET_FUNDING',
   DIRECT_INVESTMENT: 'DIRECT_INVESTMENT',
-  WALLET_INVESTMENT: 'WALLET_INVESTMENT',
+  ASSET_FUNDING: 'ASSET_FUNDING',
   WITHDRAWAL_REQUEST: 'WITHDRAWAL_REQUEST'
 } as const
 

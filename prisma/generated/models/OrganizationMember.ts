@@ -28,48 +28,48 @@ export type OrganizationMemberMinAggregateOutputType = {
   id: string | null
   kycId: string | null
   role: $Enums.KycRole | null
-  fullName: string | null
   idType: string | null
   idNumber: string | null
-  idFrontPath: string | null
-  idBackPath: string | null
   address: string | null
-  proofOfAddressType: string | null
-  proofOfAddressPath: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  idBackPath: string | null
+  idFrontPath: string | null
+  proofOfAddressPath: string | null
+  proofOfAddressType: string | null
+  fullName: string | null
 }
 
 export type OrganizationMemberMaxAggregateOutputType = {
   id: string | null
   kycId: string | null
   role: $Enums.KycRole | null
-  fullName: string | null
   idType: string | null
   idNumber: string | null
-  idFrontPath: string | null
-  idBackPath: string | null
   address: string | null
-  proofOfAddressType: string | null
-  proofOfAddressPath: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  idBackPath: string | null
+  idFrontPath: string | null
+  proofOfAddressPath: string | null
+  proofOfAddressType: string | null
+  fullName: string | null
 }
 
 export type OrganizationMemberCountAggregateOutputType = {
   id: number
   kycId: number
   role: number
-  fullName: number
   idType: number
   idNumber: number
-  idFrontPath: number
-  idBackPath: number
   address: number
-  proofOfAddressType: number
-  proofOfAddressPath: number
   createdAt: number
   updatedAt: number
+  idBackPath: number
+  idFrontPath: number
+  proofOfAddressPath: number
+  proofOfAddressType: number
+  fullName: number
   _all: number
 }
 
@@ -78,48 +78,48 @@ export type OrganizationMemberMinAggregateInputType = {
   id?: true
   kycId?: true
   role?: true
-  fullName?: true
   idType?: true
   idNumber?: true
-  idFrontPath?: true
-  idBackPath?: true
   address?: true
-  proofOfAddressType?: true
-  proofOfAddressPath?: true
   createdAt?: true
   updatedAt?: true
+  idBackPath?: true
+  idFrontPath?: true
+  proofOfAddressPath?: true
+  proofOfAddressType?: true
+  fullName?: true
 }
 
 export type OrganizationMemberMaxAggregateInputType = {
   id?: true
   kycId?: true
   role?: true
-  fullName?: true
   idType?: true
   idNumber?: true
-  idFrontPath?: true
-  idBackPath?: true
   address?: true
-  proofOfAddressType?: true
-  proofOfAddressPath?: true
   createdAt?: true
   updatedAt?: true
+  idBackPath?: true
+  idFrontPath?: true
+  proofOfAddressPath?: true
+  proofOfAddressType?: true
+  fullName?: true
 }
 
 export type OrganizationMemberCountAggregateInputType = {
   id?: true
   kycId?: true
   role?: true
-  fullName?: true
   idType?: true
   idNumber?: true
-  idFrontPath?: true
-  idBackPath?: true
   address?: true
-  proofOfAddressType?: true
-  proofOfAddressPath?: true
   createdAt?: true
   updatedAt?: true
+  idBackPath?: true
+  idFrontPath?: true
+  proofOfAddressPath?: true
+  proofOfAddressType?: true
+  fullName?: true
   _all?: true
 }
 
@@ -199,16 +199,16 @@ export type OrganizationMemberGroupByOutputType = {
   id: string
   kycId: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath: string | null
-  idBackPath: string | null
   address: string
-  proofOfAddressType: string | null
-  proofOfAddressPath: string | null
   createdAt: Date
   updatedAt: Date
+  idBackPath: string | null
+  idFrontPath: string | null
+  proofOfAddressPath: string | null
+  proofOfAddressType: string | null
+  fullName: string
   _count: OrganizationMemberCountAggregateOutputType | null
   _min: OrganizationMemberMinAggregateOutputType | null
   _max: OrganizationMemberMaxAggregateOutputType | null
@@ -236,16 +236,16 @@ export type OrganizationMemberWhereInput = {
   id?: Prisma.StringFilter<"OrganizationMember"> | string
   kycId?: Prisma.StringFilter<"OrganizationMember"> | string
   role?: Prisma.EnumKycRoleFilter<"OrganizationMember"> | $Enums.KycRole
-  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
   idType?: Prisma.StringFilter<"OrganizationMember"> | string
   idNumber?: Prisma.StringFilter<"OrganizationMember"> | string
-  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   address?: Prisma.StringFilter<"OrganizationMember"> | string
-  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
+  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
   kyc?: Prisma.XOR<Prisma.OrganizationKycScalarRelationFilter, Prisma.OrganizationKycWhereInput>
 }
 
@@ -253,16 +253,16 @@ export type OrganizationMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   idType?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
-  idFrontPath?: Prisma.SortOrderInput | Prisma.SortOrder
-  idBackPath?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrder
-  proofOfAddressType?: Prisma.SortOrderInput | Prisma.SortOrder
-  proofOfAddressPath?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  idBackPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  idFrontPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  proofOfAddressPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  proofOfAddressType?: Prisma.SortOrderInput | Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   kyc?: Prisma.OrganizationKycOrderByWithRelationInput
 }
 
@@ -273,16 +273,16 @@ export type OrganizationMemberWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrganizationMemberWhereInput | Prisma.OrganizationMemberWhereInput[]
   kycId?: Prisma.StringFilter<"OrganizationMember"> | string
   role?: Prisma.EnumKycRoleFilter<"OrganizationMember"> | $Enums.KycRole
-  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
   idType?: Prisma.StringFilter<"OrganizationMember"> | string
   idNumber?: Prisma.StringFilter<"OrganizationMember"> | string
-  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   address?: Prisma.StringFilter<"OrganizationMember"> | string
-  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
+  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
   kyc?: Prisma.XOR<Prisma.OrganizationKycScalarRelationFilter, Prisma.OrganizationKycWhereInput>
 }, "id">
 
@@ -290,16 +290,16 @@ export type OrganizationMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   idType?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
-  idFrontPath?: Prisma.SortOrderInput | Prisma.SortOrder
-  idBackPath?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrder
-  proofOfAddressType?: Prisma.SortOrderInput | Prisma.SortOrder
-  proofOfAddressPath?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  idBackPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  idFrontPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  proofOfAddressPath?: Prisma.SortOrderInput | Prisma.SortOrder
+  proofOfAddressType?: Prisma.SortOrderInput | Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   _count?: Prisma.OrganizationMemberCountOrderByAggregateInput
   _max?: Prisma.OrganizationMemberMaxOrderByAggregateInput
   _min?: Prisma.OrganizationMemberMinOrderByAggregateInput
@@ -312,31 +312,31 @@ export type OrganizationMemberScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
   kycId?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
   role?: Prisma.EnumKycRoleWithAggregatesFilter<"OrganizationMember"> | $Enums.KycRole
-  fullName?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
   idType?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
   idNumber?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
-  idFrontPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
-  idBackPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
   address?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
-  proofOfAddressType?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
-  proofOfAddressPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationMember"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationMember"> | Date | string
+  idBackPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
+  idFrontPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
+  proofOfAddressPath?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
+  proofOfAddressType?: Prisma.StringNullableWithAggregatesFilter<"OrganizationMember"> | string | null
+  fullName?: Prisma.StringWithAggregatesFilter<"OrganizationMember"> | string
 }
 
 export type OrganizationMemberCreateInput = {
   id?: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
   kyc: Prisma.OrganizationKycCreateNestedOneWithoutMembersInput
 }
 
@@ -344,31 +344,31 @@ export type OrganizationMemberUncheckedCreateInput = {
   id?: string
   kycId: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
 }
 
 export type OrganizationMemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   kyc?: Prisma.OrganizationKycUpdateOneRequiredWithoutMembersNestedInput
 }
 
@@ -376,63 +376,63 @@ export type OrganizationMemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   kycId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationMemberCreateManyInput = {
   id?: string
   kycId: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
 }
 
 export type OrganizationMemberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationMemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   kycId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationMemberListRelationFilter = {
@@ -449,48 +449,48 @@ export type OrganizationMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   idType?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
-  idFrontPath?: Prisma.SortOrder
-  idBackPath?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  proofOfAddressType?: Prisma.SortOrder
-  proofOfAddressPath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  idBackPath?: Prisma.SortOrder
+  idFrontPath?: Prisma.SortOrder
+  proofOfAddressPath?: Prisma.SortOrder
+  proofOfAddressType?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
 }
 
 export type OrganizationMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   idType?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
-  idFrontPath?: Prisma.SortOrder
-  idBackPath?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  proofOfAddressType?: Prisma.SortOrder
-  proofOfAddressPath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  idBackPath?: Prisma.SortOrder
+  idFrontPath?: Prisma.SortOrder
+  proofOfAddressPath?: Prisma.SortOrder
+  proofOfAddressType?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
 }
 
 export type OrganizationMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   kycId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   idType?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
-  idFrontPath?: Prisma.SortOrder
-  idBackPath?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  proofOfAddressType?: Prisma.SortOrder
-  proofOfAddressPath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  idBackPath?: Prisma.SortOrder
+  idFrontPath?: Prisma.SortOrder
+  proofOfAddressPath?: Prisma.SortOrder
+  proofOfAddressType?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
 }
 
 export type OrganizationMemberCreateNestedManyWithoutKycInput = {
@@ -542,31 +542,31 @@ export type EnumKycRoleFieldUpdateOperationsInput = {
 export type OrganizationMemberCreateWithoutKycInput = {
   id?: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
 }
 
 export type OrganizationMemberUncheckedCreateWithoutKycInput = {
   id?: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
 }
 
 export type OrganizationMemberCreateOrConnectWithoutKycInput = {
@@ -602,76 +602,76 @@ export type OrganizationMemberScalarWhereInput = {
   id?: Prisma.StringFilter<"OrganizationMember"> | string
   kycId?: Prisma.StringFilter<"OrganizationMember"> | string
   role?: Prisma.EnumKycRoleFilter<"OrganizationMember"> | $Enums.KycRole
-  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
   idType?: Prisma.StringFilter<"OrganizationMember"> | string
   idNumber?: Prisma.StringFilter<"OrganizationMember"> | string
-  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   address?: Prisma.StringFilter<"OrganizationMember"> | string
-  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
-  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationMember"> | Date | string
+  idBackPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  idFrontPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressPath?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  proofOfAddressType?: Prisma.StringNullableFilter<"OrganizationMember"> | string | null
+  fullName?: Prisma.StringFilter<"OrganizationMember"> | string
 }
 
 export type OrganizationMemberCreateManyKycInput = {
   id?: string
   role: $Enums.KycRole
-  fullName: string
   idType: string
   idNumber: string
-  idFrontPath?: string | null
-  idBackPath?: string | null
   address: string
-  proofOfAddressType?: string | null
-  proofOfAddressPath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  idBackPath?: string | null
+  idFrontPath?: string | null
+  proofOfAddressPath?: string | null
+  proofOfAddressType?: string | null
+  fullName: string
 }
 
 export type OrganizationMemberUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationMemberUncheckedUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationMemberUncheckedUpdateManyWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumKycRoleFieldUpdateOperationsInput | $Enums.KycRole
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   idType?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idBackPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idFrontPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proofOfAddressType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -680,16 +680,16 @@ export type OrganizationMemberSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   kycId?: boolean
   role?: boolean
-  fullName?: boolean
   idType?: boolean
   idNumber?: boolean
-  idFrontPath?: boolean
-  idBackPath?: boolean
   address?: boolean
-  proofOfAddressType?: boolean
-  proofOfAddressPath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  idBackPath?: boolean
+  idFrontPath?: boolean
+  proofOfAddressPath?: boolean
+  proofOfAddressType?: boolean
+  fullName?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationMember"]>
 
@@ -697,16 +697,16 @@ export type OrganizationMemberSelectCreateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   kycId?: boolean
   role?: boolean
-  fullName?: boolean
   idType?: boolean
   idNumber?: boolean
-  idFrontPath?: boolean
-  idBackPath?: boolean
   address?: boolean
-  proofOfAddressType?: boolean
-  proofOfAddressPath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  idBackPath?: boolean
+  idFrontPath?: boolean
+  proofOfAddressPath?: boolean
+  proofOfAddressType?: boolean
+  fullName?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationMember"]>
 
@@ -714,16 +714,16 @@ export type OrganizationMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   kycId?: boolean
   role?: boolean
-  fullName?: boolean
   idType?: boolean
   idNumber?: boolean
-  idFrontPath?: boolean
-  idBackPath?: boolean
   address?: boolean
-  proofOfAddressType?: boolean
-  proofOfAddressPath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  idBackPath?: boolean
+  idFrontPath?: boolean
+  proofOfAddressPath?: boolean
+  proofOfAddressType?: boolean
+  fullName?: boolean
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationMember"]>
 
@@ -731,19 +731,19 @@ export type OrganizationMemberSelectScalar = {
   id?: boolean
   kycId?: boolean
   role?: boolean
-  fullName?: boolean
   idType?: boolean
   idNumber?: boolean
-  idFrontPath?: boolean
-  idBackPath?: boolean
   address?: boolean
-  proofOfAddressType?: boolean
-  proofOfAddressPath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  idBackPath?: boolean
+  idFrontPath?: boolean
+  proofOfAddressPath?: boolean
+  proofOfAddressType?: boolean
+  fullName?: boolean
 }
 
-export type OrganizationMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kycId" | "role" | "fullName" | "idType" | "idNumber" | "idFrontPath" | "idBackPath" | "address" | "proofOfAddressType" | "proofOfAddressPath" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationMember"]>
+export type OrganizationMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kycId" | "role" | "idType" | "idNumber" | "address" | "createdAt" | "updatedAt" | "idBackPath" | "idFrontPath" | "proofOfAddressPath" | "proofOfAddressType" | "fullName", ExtArgs["result"]["organizationMember"]>
 export type OrganizationMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   kyc?: boolean | Prisma.OrganizationKycDefaultArgs<ExtArgs>
 }
@@ -763,16 +763,16 @@ export type $OrganizationMemberPayload<ExtArgs extends runtime.Types.Extensions.
     id: string
     kycId: string
     role: $Enums.KycRole
-    fullName: string
     idType: string
     idNumber: string
-    idFrontPath: string | null
-    idBackPath: string | null
     address: string
-    proofOfAddressType: string | null
-    proofOfAddressPath: string | null
     createdAt: Date
     updatedAt: Date
+    idBackPath: string | null
+    idFrontPath: string | null
+    proofOfAddressPath: string | null
+    proofOfAddressType: string | null
+    fullName: string
   }, ExtArgs["result"]["organizationMember"]>
   composites: {}
 }
@@ -1200,16 +1200,16 @@ export interface OrganizationMemberFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly kycId: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly role: Prisma.FieldRef<"OrganizationMember", 'KycRole'>
-  readonly fullName: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly idType: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly idNumber: Prisma.FieldRef<"OrganizationMember", 'String'>
-  readonly idFrontPath: Prisma.FieldRef<"OrganizationMember", 'String'>
-  readonly idBackPath: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly address: Prisma.FieldRef<"OrganizationMember", 'String'>
-  readonly proofOfAddressType: Prisma.FieldRef<"OrganizationMember", 'String'>
-  readonly proofOfAddressPath: Prisma.FieldRef<"OrganizationMember", 'String'>
   readonly createdAt: Prisma.FieldRef<"OrganizationMember", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OrganizationMember", 'DateTime'>
+  readonly idBackPath: Prisma.FieldRef<"OrganizationMember", 'String'>
+  readonly idFrontPath: Prisma.FieldRef<"OrganizationMember", 'String'>
+  readonly proofOfAddressPath: Prisma.FieldRef<"OrganizationMember", 'String'>
+  readonly proofOfAddressType: Prisma.FieldRef<"OrganizationMember", 'String'>
+  readonly fullName: Prisma.FieldRef<"OrganizationMember", 'String'>
 }
     
 

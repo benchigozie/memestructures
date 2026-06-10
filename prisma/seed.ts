@@ -26,8 +26,8 @@ async function main() {
 
   const hashedPassword = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
   const hashedPassword2 = await bcrypt.hash("Admin123" + PEPPER, SALT_ROUNDS);
-  const hashedPassword3 = await bcrypt.hash("enterprise123" + PEPPER, SALT_ROUNDS);
-  const hashedPassword4 = await bcrypt.hash("individual123" + PEPPER, SALT_ROUNDS);
+  const hashedPassword3 = await bcrypt.hash("Enterprise123" + PEPPER, SALT_ROUNDS);
+  const hashedPassword4 = await bcrypt.hash("Individual123" + PEPPER, SALT_ROUNDS);
   const hashedPassword5 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
   const hashedPassword6 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
 
@@ -160,7 +160,7 @@ async function main() {
     });
   });
 
-  console.log("Individual wallet funded with $400,000.");
+  
 
   console.log("Seeding complete.");
 
