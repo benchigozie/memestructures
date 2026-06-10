@@ -72,7 +72,7 @@ export async function GET(req: Request) {
 
     const nextCursor =
       transactions.length === limit
-        ? transactions[transactions.length - 1].id
+        ? transactions[transactions.length - 1].id  
         : null;
 
     return NextResponse.json({
