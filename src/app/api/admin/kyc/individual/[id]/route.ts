@@ -50,11 +50,11 @@ export async function GET(
             return NextResponse.json({ error: "Not found" }, { status: 404 });
         }
 
-        const idFrontUrl = await createSignedUrl(kyc.idFrontPath!);
-        const idBackUrl = await createSignedUrl(kyc.idBackPath!);
-        const selfieUrl = await createSignedUrl(kyc.selfieWithIdPath!);
+        const idFrontUrl = await createSignedUrl(kyc.idFrontPath! , "kyc-documents");
+        const idBackUrl = await createSignedUrl(kyc.idBackPath!, "kyc-documents");
+        const selfieUrl = await createSignedUrl(kyc.selfieWithIdPath!, "kyc-documents");
         const residenceUrl = kyc.residenceDocPath
-            ? await createSignedUrl(kyc.residenceDocPath)
+            ? await createSignedUrl(kyc.residenceDocPath, "kyc-documents")
             : null;
 
         //console.log("Generated signed URLs: ", { idFrontUrl, idBackUrl, selfieUrl, residenceUrl })

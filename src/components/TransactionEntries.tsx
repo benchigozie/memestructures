@@ -110,7 +110,7 @@ export default function TransactionEntries({
               `/dashboard/admin/payments/${tx.id}`
             )
           }
-          className="p-4 rounded-xl shadow-lg shadow-my-gray/5 outline outline-my-gray/10 hover:outline-my-gray/30 hover:cursor-pointer transition-all duration-300"
+          className="p-4 rounded-xl cursor-pointer shadow-lg shadow-my-gray/5 outline outline-my-gray/10 hover:outline-my-gray/30 hover:cursor-pointer transition-all duration-300"
         >
           <div className="flex justify-between items-start">
             <div>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { supabase } from "@/lib/superbaseServer";
 import { getUserFromRequest } from "@/lib/getUserFromRequest";
 import { sendNotification } from "@/lib/mail/sendNotification";
 import { sendEmail } from "@/lib/mail/sendEmail";
@@ -7,6 +8,8 @@ import { notificationTemplate } from "@/lib/mail/templates/notificationTemplate"
 import { uploadTransactionFile } from "@/utils/uploadFile";
 
 export async function POST(req: Request) {
+  let proofPath: string | null = null;
+
   try {
     const formData = await req.formData();
 
@@ -19,8 +22,13 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { success: false, error: "Not authenticated" },
-        { status: 401 }
+        {
+          success: false,
+          error: "Not authenticated",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
@@ -30,7 +38,9 @@ export async function POST(req: Request) {
           success: false,
           error: "Complete KYC before funding your wallet",
         },
-        { status: 403 }
+        {
+          status: 403,
+        }
       );
     }
 
@@ -40,7 +50,9 @@ export async function POST(req: Request) {
           success: false,
           error: "Minimum funding amount is $5,000",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
@@ -50,7 +62,9 @@ export async function POST(req: Request) {
           success: false,
           error: "Coin and network are required",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
@@ -60,7 +74,9 @@ export async function POST(req: Request) {
           success: false,
           error: "Proof of payment is required",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
@@ -76,13 +92,15 @@ export async function POST(req: Request) {
           success: false,
           error: "Wallet not found",
         },
-        { status: 404 }
+        {
+          status: 404,
+        }
       );
     }
 
     const reference = `WF-${Date.now()}`;
 
-    const proofPath = await uploadTransactionFile(
+    proofPath = await uploadTransactionFile(
       proof,
       `wallet-funding/${user.id}/${reference}`
     );
@@ -139,10 +157,17 @@ export async function POST(req: Request) {
   } catch (err: any) {
     console.error(err);
 
+    if (proofPath) {
+      await supabase.storage
+        .from("transactions")
+        .remove([proofPath])
+        .catch(console.error);
+    }
+
     return NextResponse.json(
       {
         success: false,
-        error: err.message,
+        error: err.message || "An unexpected error occurred",
       },
       {
         status: 500,

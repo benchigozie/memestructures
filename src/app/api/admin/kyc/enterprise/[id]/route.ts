@@ -36,7 +36,7 @@ export async function GET(
     const documents = await Promise.all(
       kyc.documents.map(async (doc) => ({
         ...doc,
-        url: await createSignedUrl(doc.filePath),
+        url: await createSignedUrl(doc.filePath, "kyc-documents"),
       }))
     );
 
@@ -44,13 +44,13 @@ export async function GET(
       kyc.members.map(async (member) => ({
         ...member,
         idFrontUrl: member.idFrontPath
-          ? await createSignedUrl(member.idFrontPath)
+          ? await createSignedUrl(member.idFrontPath, "kyc-documents")
           : null,
         idBackUrl: member.idBackPath
-          ? await createSignedUrl(member.idBackPath)
+          ? await createSignedUrl(member.idBackPath, "kyc-documents")
           : null,
         proofOfAddressUrl: member.proofOfAddressPath
-          ? await createSignedUrl(member.proofOfAddressPath)
+          ? await createSignedUrl(member.proofOfAddressPath, "kyc-documents")
           : null,
       }))
     );

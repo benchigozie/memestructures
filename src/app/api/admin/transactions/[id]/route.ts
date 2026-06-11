@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
 import { verifyToken } from "@/lib/jwt";
+import { createSignedUrl } from "@/utils/createSignedUrl";
 
 export async function GET(
   req: Request,
@@ -15,8 +16,13 @@ export async function GET(
 
     if (!accessToken) {
       return NextResponse.json(
-        { success: false, error: "Not authenticated" },
-        { status: 401 }
+        {
+          success: false,
+          error: "Not authenticated",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
@@ -29,13 +35,20 @@ export async function GET(
       };
     } catch {
       return NextResponse.json(
-        { success: false, error: "Invalid token" },
-        { status: 401 }
+        {
+          success: false,
+          error: "Invalid token",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
     const dbUser = await prisma.user.findUnique({
-      where: { id: user.id },
+      where: {
+        id: user.id,
+      },
       select: {
         accountType: true,
       },
@@ -51,14 +64,17 @@ export async function GET(
           success: false,
           error: "Forbidden",
         },
-        { status: 403 }
+        {
+          status: 403,
+        }
       );
     }
 
     const transaction =
       await prisma.walletTransaction.findUnique({
-        where: { id },
-
+        where: {
+          id,
+        },
         include: {
           wallet: {
             include: {
@@ -82,13 +98,30 @@ export async function GET(
           success: false,
           error: "Transaction not found",
         },
-        { status: 404 }
+        {
+          status: 404,
+        }
       );
     }
 
+    console.log("Transaction found: ", transaction);
+
+    const proofUrl = transaction.proofPath
+      ? await createSignedUrl(
+          transaction.proofPath,
+          "transactions"
+        )
+      : null;
+
+console.log("Generated proof URL: ", proofUrl);
     return NextResponse.json({
       success: true,
-      data: transaction,
+      data: {
+        ...transaction,
+
+        
+          proofUrl,
+      },
     });
   } catch (error: any) {
     console.error(error);
@@ -98,7 +131,9 @@ export async function GET(
         success: false,
         error: error.message,
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }

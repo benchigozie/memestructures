@@ -14,7 +14,7 @@ type Transaction = {
   reference: string | null;
   proofPath: string | null;
   createdAt: string;
-
+  proofUrl: string;
   wallet: {
     user: {
       id: string;
@@ -42,6 +42,8 @@ export default function TransactionPage() {
         );
 
         const data = await res.json();
+
+        console.log("Transaction data: ", data);
 
         if (data.success) {
           setTransaction(data.data);
@@ -163,7 +165,6 @@ export default function TransactionPage() {
         </div>
       </div>
 
-      {/* Proof */}
       {transaction.proofPath && (
         <div className="bg-white rounded-xl p-5 shadow mt-6">
           <h2 className="font-semibold mb-4">
@@ -171,14 +172,13 @@ export default function TransactionPage() {
           </h2>
 
           <img
-            src={transaction.proofPath}
+            src={transaction.proofUrl}
             alt="Proof"
             className="max-h-150 rounded-lg border"
           />
         </div>
       )}
 
-      {/* Actions */}
       {transaction.status === "PENDING" && (
         <div className="flex gap-3 mt-6">
           <button
