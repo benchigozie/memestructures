@@ -104,7 +104,6 @@ export async function GET(
       );
     }
 
-    console.log("Transaction found: ", transaction);
 
     const proofUrl = transaction.proofPath
       ? await createSignedUrl(
