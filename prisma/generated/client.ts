@@ -106,3 +106,8 @@ export type Investment = Prisma.InvestmentModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model SupportTicket
+ * 
+ */
+export type SupportTicket = Prisma.SupportTicketModel

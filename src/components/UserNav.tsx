@@ -65,7 +65,7 @@ const UserNav = () => {
         { name: "Asset Categories", href: "/dashboard/user/assets", whiteIcon: "/images/assetwhite.png", blueIcon: "/images/assetblue.png" },
         { name: "Wallet", href: "/dashboard/user/wallet", whiteIcon: "/images/walletwhite.png", blueIcon: "/images/walletblue.png" },
         { name: "Transactions", href: "/dashboard/user/transactions", whiteIcon: "/images/transactionwhite.png", blueIcon: "/images/transactionblue.png" },
-
+        { name: "Support", href: "/dashboard/user/support", whiteIcon: "/images/supportwhite.png", blueIcon: "/images/supportblue.png" },
     ]
 
     return (

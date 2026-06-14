@@ -124,3 +124,25 @@ export const NotificationType = {
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const SupportTicketStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type SupportTicketStatus = (typeof SupportTicketStatus)[keyof typeof SupportTicketStatus]
+
+
+export const SupportCategory = {
+  INVESTMENT: 'INVESTMENT',
+  WITHDRAWAL: 'WITHDRAWAL',
+  KYC: 'KYC',
+  ACCOUNT: 'ACCOUNT',
+  TECHNICAL: 'TECHNICAL',
+  OTHER: 'OTHER'
+} as const
+
+export type SupportCategory = (typeof SupportCategory)[keyof typeof SupportCategory]

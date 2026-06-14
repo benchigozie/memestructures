@@ -34,3 +34,20 @@ export async function uploadTransactionFile(file: File, folder: string) {
 
     return filePath
 }
+
+export async function uploadSupportFile(file: File, folder: string) {
+  const fileName = createSafeFileName(file)
+
+  const filePath = `${folder}/${fileName}`
+
+  const { error } = await supabase.storage
+    .from("support-attachments")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false
+    })
+
+  if (error) throw error
+
+    return filePath
+}
