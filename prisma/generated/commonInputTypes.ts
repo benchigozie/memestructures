@@ -440,6 +440,23 @@ export type EnumSupportTicketStatusWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumSupportTicketStatusFilter<$PrismaModel>
 }
 
+export type EnumMessageSenderFilter<$PrismaModel = never> = {
+  equals?: $Enums.MessageSender | Prisma.EnumMessageSenderFieldRefInput<$PrismaModel>
+  in?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel> | $Enums.MessageSender
+}
+
+export type EnumMessageSenderWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MessageSender | Prisma.EnumMessageSenderFieldRefInput<$PrismaModel>
+  in?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMessageSenderWithAggregatesFilter<$PrismaModel> | $Enums.MessageSender
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -877,6 +894,23 @@ export type NestedEnumSupportTicketStatusWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSupportTicketStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSupportTicketStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumMessageSenderFilter<$PrismaModel = never> = {
+  equals?: $Enums.MessageSender | Prisma.EnumMessageSenderFieldRefInput<$PrismaModel>
+  in?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel> | $Enums.MessageSender
+}
+
+export type NestedEnumMessageSenderWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MessageSender | Prisma.EnumMessageSenderFieldRefInput<$PrismaModel>
+  in?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MessageSender[] | Prisma.ListEnumMessageSenderFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMessageSenderWithAggregatesFilter<$PrismaModel> | $Enums.MessageSender
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMessageSenderFilter<$PrismaModel>
 }
 
 

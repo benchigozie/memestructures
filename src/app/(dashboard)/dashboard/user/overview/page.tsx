@@ -20,7 +20,7 @@ const page = () => {
       const data = await res.json();
 
       setDashboardData(data);
-      console.log("Fetched dashboard data:", data);
+     
     };
 
     fetchDashboard();

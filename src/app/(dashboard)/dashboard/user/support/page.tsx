@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import * as Yup from "yup";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import Link from "next/link";
 
 import InProgress from "@/components/InProgress";
 import ErrorResponse from "@/components/ErrorResponse";
@@ -27,6 +28,7 @@ const supportSchema = Yup.object({
     message: Yup.string()
         .required("Message is required")
         .min(20, "Please provide more details"),
+    
 });
 
 const SupportPage = () => {
@@ -40,25 +42,25 @@ const SupportPage = () => {
 
     async function submitTicket(values: SupportFormValues) {
         setFormState("submitting");
-    
+
         const formData = new FormData();
-    
+
         formData.append("subject", values.subject);
         formData.append("category", values.category);
         formData.append("message", values.message);
-    
+
         if (values.attachment) {
             formData.append("attachment", values.attachment);
         }
-    
+
         try {
             const res = await fetchWithAuth("/api/user/support", {
                 method: "POST",
                 body: formData,
             });
-    
+
             const data = await res.json();
-    
+
             if (data.success) {
                 setFormState("success");
                 setResponseMessage(
@@ -72,7 +74,7 @@ const SupportPage = () => {
             }
         } catch (err) {
             console.error(err);
-    
+
             setFormState("error");
             setResponseMessage(
                 "Unexpected error occurred."
@@ -87,12 +89,19 @@ const SupportPage = () => {
                     <h1 className="text-2xl md:text-3xl text-center font-bold text-my-deep-blue">
                         Contact Support
                     </h1>
-
+                   
                     <p className="text-gray-600 text-[17px]">
                         Need help with an investment, withdrawal, KYC verification,
                         or account issue? Send us a message and our support team
                         will get back to you as soon as possible.
                     </p>
+
+                    <Link
+                        href="/dashboard/user/support/tickets"
+                        className="px-4 py-2 border border-my-blue text-my-blue text-center rounded-lg hover:bg-my-blue hover:text-white duration-300 transition-colors"
+                    >
+                        My Tickets
+                    </Link>
                 </section>
 
                 <section>

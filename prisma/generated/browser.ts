@@ -87,3 +87,8 @@ export type Notification = Prisma.NotificationModel
  * 
  */
 export type SupportTicket = Prisma.SupportTicketModel
+/**
+ * Model SupportMessage
+ * 
+ */
+export type SupportMessage = Prisma.SupportMessageModel

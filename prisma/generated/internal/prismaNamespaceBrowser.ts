@@ -64,7 +64,8 @@ export const ModelName = {
   WalletTransaction: 'WalletTransaction',
   Investment: 'Investment',
   Notification: 'Notification',
-  SupportTicket: 'SupportTicket'
+  SupportTicket: 'SupportTicket',
+  SupportMessage: 'SupportMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -281,7 +282,6 @@ export const SupportTicketScalarFieldEnum = {
   userId: 'userId',
   subject: 'subject',
   category: 'category',
-  message: 'message',
   attachmentPath: 'attachmentPath',
   status: 'status',
   createdAt: 'createdAt',
@@ -289,6 +289,18 @@ export const SupportTicketScalarFieldEnum = {
 } as const
 
 export type SupportTicketScalarFieldEnum = (typeof SupportTicketScalarFieldEnum)[keyof typeof SupportTicketScalarFieldEnum]
+
+
+export const SupportMessageScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  senderId: 'senderId',
+  senderType: 'senderType',
+  message: 'message',
+  createdAt: 'createdAt'
+} as const
+
+export type SupportMessageScalarFieldEnum = (typeof SupportMessageScalarFieldEnum)[keyof typeof SupportMessageScalarFieldEnum]
 
 
 export const SortOrder = {

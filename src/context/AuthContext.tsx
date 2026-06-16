@@ -43,8 +43,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
         if (!res.ok) {
+          
+          logout();
           setUser(null);
-          //logout();
           setLoading(false);
           
           return;

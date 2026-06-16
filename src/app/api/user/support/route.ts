@@ -99,19 +99,28 @@ export async function POST(req: Request) {
       );
     }
 
+    console.log("This is message:", message);
+
     const ticket = await prisma.supportTicket.create({
       data: {
         userId: user.id,
-
         subject,
-        category: category as SupportCategory,
-        message,
-
+        category,
         attachmentPath,
-
-        status: "OPEN",
+    
+        messages: {
+          create: {
+            senderType: "USER",
+            message,
+            senderId: user.id,
+          },
+        },
+      },
+      include: {
+        messages: true,
       },
     });
+    
 
     sendNotification({
       userId: user.id,

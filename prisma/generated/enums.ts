@@ -146,3 +146,11 @@ export const SupportCategory = {
 } as const
 
 export type SupportCategory = (typeof SupportCategory)[keyof typeof SupportCategory]
+
+
+export const MessageSender = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+} as const
+
+export type MessageSender = (typeof MessageSender)[keyof typeof MessageSender]
