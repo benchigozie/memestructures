@@ -105,7 +105,7 @@ export default function AssetList() {
           ?.scrollIntoView({
             behavior: "smooth",
             block: "start",
-          });
+          }); 
       }, 100);
     } catch (err) {
       console.error(err);

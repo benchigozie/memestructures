@@ -3,11 +3,10 @@ dotenv.config({ path: ".env.local" });
 
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { seedFunds } from "./fundSeed";
+
 
 async function main() {
 
-  await seedFunds();
   
   console.log("Clearing database...");
 
