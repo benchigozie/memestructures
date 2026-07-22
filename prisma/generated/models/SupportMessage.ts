@@ -191,6 +191,7 @@ export type SupportMessageWhereInput = {
   message?: Prisma.StringFilter<"SupportMessage"> | string
   createdAt?: Prisma.DateTimeFilter<"SupportMessage"> | Date | string
   ticket?: Prisma.XOR<Prisma.SupportTicketScalarRelationFilter, Prisma.SupportTicketWhereInput>
+  sender?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type SupportMessageOrderByWithRelationInput = {
@@ -201,6 +202,7 @@ export type SupportMessageOrderByWithRelationInput = {
   message?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   ticket?: Prisma.SupportTicketOrderByWithRelationInput
+  sender?: Prisma.UserOrderByWithRelationInput
 }
 
 export type SupportMessageWhereUniqueInput = Prisma.AtLeast<{
@@ -214,6 +216,7 @@ export type SupportMessageWhereUniqueInput = Prisma.AtLeast<{
   message?: Prisma.StringFilter<"SupportMessage"> | string
   createdAt?: Prisma.DateTimeFilter<"SupportMessage"> | Date | string
   ticket?: Prisma.XOR<Prisma.SupportTicketScalarRelationFilter, Prisma.SupportTicketWhereInput>
+  sender?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type SupportMessageOrderByWithAggregationInput = {
@@ -242,11 +245,11 @@ export type SupportMessageScalarWhereWithAggregatesInput = {
 
 export type SupportMessageCreateInput = {
   id?: string
-  senderId?: string | null
   senderType: $Enums.MessageSender
   message: string
   createdAt?: Date | string
   ticket: Prisma.SupportTicketCreateNestedOneWithoutMessagesInput
+  sender?: Prisma.UserCreateNestedOneWithoutSupportMessagesInput
 }
 
 export type SupportMessageUncheckedCreateInput = {
@@ -260,11 +263,11 @@ export type SupportMessageUncheckedCreateInput = {
 
 export type SupportMessageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ticket?: Prisma.SupportTicketUpdateOneRequiredWithoutMessagesNestedInput
+  sender?: Prisma.UserUpdateOneWithoutSupportMessagesNestedInput
 }
 
 export type SupportMessageUncheckedUpdateInput = {
@@ -287,7 +290,6 @@ export type SupportMessageCreateManyInput = {
 
 export type SupportMessageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,6 +341,48 @@ export type SupportMessageMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type SupportMessageCreateNestedManyWithoutSenderInput = {
+  create?: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput> | Prisma.SupportMessageCreateWithoutSenderInput[] | Prisma.SupportMessageUncheckedCreateWithoutSenderInput[]
+  connectOrCreate?: Prisma.SupportMessageCreateOrConnectWithoutSenderInput | Prisma.SupportMessageCreateOrConnectWithoutSenderInput[]
+  createMany?: Prisma.SupportMessageCreateManySenderInputEnvelope
+  connect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+}
+
+export type SupportMessageUncheckedCreateNestedManyWithoutSenderInput = {
+  create?: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput> | Prisma.SupportMessageCreateWithoutSenderInput[] | Prisma.SupportMessageUncheckedCreateWithoutSenderInput[]
+  connectOrCreate?: Prisma.SupportMessageCreateOrConnectWithoutSenderInput | Prisma.SupportMessageCreateOrConnectWithoutSenderInput[]
+  createMany?: Prisma.SupportMessageCreateManySenderInputEnvelope
+  connect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+}
+
+export type SupportMessageUpdateManyWithoutSenderNestedInput = {
+  create?: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput> | Prisma.SupportMessageCreateWithoutSenderInput[] | Prisma.SupportMessageUncheckedCreateWithoutSenderInput[]
+  connectOrCreate?: Prisma.SupportMessageCreateOrConnectWithoutSenderInput | Prisma.SupportMessageCreateOrConnectWithoutSenderInput[]
+  upsert?: Prisma.SupportMessageUpsertWithWhereUniqueWithoutSenderInput | Prisma.SupportMessageUpsertWithWhereUniqueWithoutSenderInput[]
+  createMany?: Prisma.SupportMessageCreateManySenderInputEnvelope
+  set?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  disconnect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  delete?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  connect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  update?: Prisma.SupportMessageUpdateWithWhereUniqueWithoutSenderInput | Prisma.SupportMessageUpdateWithWhereUniqueWithoutSenderInput[]
+  updateMany?: Prisma.SupportMessageUpdateManyWithWhereWithoutSenderInput | Prisma.SupportMessageUpdateManyWithWhereWithoutSenderInput[]
+  deleteMany?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
+}
+
+export type SupportMessageUncheckedUpdateManyWithoutSenderNestedInput = {
+  create?: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput> | Prisma.SupportMessageCreateWithoutSenderInput[] | Prisma.SupportMessageUncheckedCreateWithoutSenderInput[]
+  connectOrCreate?: Prisma.SupportMessageCreateOrConnectWithoutSenderInput | Prisma.SupportMessageCreateOrConnectWithoutSenderInput[]
+  upsert?: Prisma.SupportMessageUpsertWithWhereUniqueWithoutSenderInput | Prisma.SupportMessageUpsertWithWhereUniqueWithoutSenderInput[]
+  createMany?: Prisma.SupportMessageCreateManySenderInputEnvelope
+  set?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  disconnect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  delete?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  connect?: Prisma.SupportMessageWhereUniqueInput | Prisma.SupportMessageWhereUniqueInput[]
+  update?: Prisma.SupportMessageUpdateWithWhereUniqueWithoutSenderInput | Prisma.SupportMessageUpdateWithWhereUniqueWithoutSenderInput[]
+  updateMany?: Prisma.SupportMessageUpdateManyWithWhereWithoutSenderInput | Prisma.SupportMessageUpdateManyWithWhereWithoutSenderInput[]
+  deleteMany?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
+}
+
 export type SupportMessageCreateNestedManyWithoutTicketInput = {
   create?: Prisma.XOR<Prisma.SupportMessageCreateWithoutTicketInput, Prisma.SupportMessageUncheckedCreateWithoutTicketInput> | Prisma.SupportMessageCreateWithoutTicketInput[] | Prisma.SupportMessageUncheckedCreateWithoutTicketInput[]
   connectOrCreate?: Prisma.SupportMessageCreateOrConnectWithoutTicketInput | Prisma.SupportMessageCreateOrConnectWithoutTicketInput[]
@@ -385,12 +429,66 @@ export type EnumMessageSenderFieldUpdateOperationsInput = {
   set?: $Enums.MessageSender
 }
 
-export type SupportMessageCreateWithoutTicketInput = {
+export type SupportMessageCreateWithoutSenderInput = {
   id?: string
-  senderId?: string | null
   senderType: $Enums.MessageSender
   message: string
   createdAt?: Date | string
+  ticket: Prisma.SupportTicketCreateNestedOneWithoutMessagesInput
+}
+
+export type SupportMessageUncheckedCreateWithoutSenderInput = {
+  id?: string
+  ticketId: string
+  senderType: $Enums.MessageSender
+  message: string
+  createdAt?: Date | string
+}
+
+export type SupportMessageCreateOrConnectWithoutSenderInput = {
+  where: Prisma.SupportMessageWhereUniqueInput
+  create: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput>
+}
+
+export type SupportMessageCreateManySenderInputEnvelope = {
+  data: Prisma.SupportMessageCreateManySenderInput | Prisma.SupportMessageCreateManySenderInput[]
+  skipDuplicates?: boolean
+}
+
+export type SupportMessageUpsertWithWhereUniqueWithoutSenderInput = {
+  where: Prisma.SupportMessageWhereUniqueInput
+  update: Prisma.XOR<Prisma.SupportMessageUpdateWithoutSenderInput, Prisma.SupportMessageUncheckedUpdateWithoutSenderInput>
+  create: Prisma.XOR<Prisma.SupportMessageCreateWithoutSenderInput, Prisma.SupportMessageUncheckedCreateWithoutSenderInput>
+}
+
+export type SupportMessageUpdateWithWhereUniqueWithoutSenderInput = {
+  where: Prisma.SupportMessageWhereUniqueInput
+  data: Prisma.XOR<Prisma.SupportMessageUpdateWithoutSenderInput, Prisma.SupportMessageUncheckedUpdateWithoutSenderInput>
+}
+
+export type SupportMessageUpdateManyWithWhereWithoutSenderInput = {
+  where: Prisma.SupportMessageScalarWhereInput
+  data: Prisma.XOR<Prisma.SupportMessageUpdateManyMutationInput, Prisma.SupportMessageUncheckedUpdateManyWithoutSenderInput>
+}
+
+export type SupportMessageScalarWhereInput = {
+  AND?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
+  OR?: Prisma.SupportMessageScalarWhereInput[]
+  NOT?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
+  id?: Prisma.StringFilter<"SupportMessage"> | string
+  ticketId?: Prisma.StringFilter<"SupportMessage"> | string
+  senderId?: Prisma.StringNullableFilter<"SupportMessage"> | string | null
+  senderType?: Prisma.EnumMessageSenderFilter<"SupportMessage"> | $Enums.MessageSender
+  message?: Prisma.StringFilter<"SupportMessage"> | string
+  createdAt?: Prisma.DateTimeFilter<"SupportMessage"> | Date | string
+}
+
+export type SupportMessageCreateWithoutTicketInput = {
+  id?: string
+  senderType: $Enums.MessageSender
+  message: string
+  createdAt?: Date | string
+  sender?: Prisma.UserCreateNestedOneWithoutSupportMessagesInput
 }
 
 export type SupportMessageUncheckedCreateWithoutTicketInput = {
@@ -427,16 +525,36 @@ export type SupportMessageUpdateManyWithWhereWithoutTicketInput = {
   data: Prisma.XOR<Prisma.SupportMessageUpdateManyMutationInput, Prisma.SupportMessageUncheckedUpdateManyWithoutTicketInput>
 }
 
-export type SupportMessageScalarWhereInput = {
-  AND?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
-  OR?: Prisma.SupportMessageScalarWhereInput[]
-  NOT?: Prisma.SupportMessageScalarWhereInput | Prisma.SupportMessageScalarWhereInput[]
-  id?: Prisma.StringFilter<"SupportMessage"> | string
-  ticketId?: Prisma.StringFilter<"SupportMessage"> | string
-  senderId?: Prisma.StringNullableFilter<"SupportMessage"> | string | null
-  senderType?: Prisma.EnumMessageSenderFilter<"SupportMessage"> | $Enums.MessageSender
-  message?: Prisma.StringFilter<"SupportMessage"> | string
-  createdAt?: Prisma.DateTimeFilter<"SupportMessage"> | Date | string
+export type SupportMessageCreateManySenderInput = {
+  id?: string
+  ticketId: string
+  senderType: $Enums.MessageSender
+  message: string
+  createdAt?: Date | string
+}
+
+export type SupportMessageUpdateWithoutSenderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ticket?: Prisma.SupportTicketUpdateOneRequiredWithoutMessagesNestedInput
+}
+
+export type SupportMessageUncheckedUpdateWithoutSenderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
+  senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SupportMessageUncheckedUpdateManyWithoutSenderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
+  senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SupportMessageCreateManyTicketInput = {
@@ -449,10 +567,10 @@ export type SupportMessageCreateManyTicketInput = {
 
 export type SupportMessageUpdateWithoutTicketInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   senderType?: Prisma.EnumMessageSenderFieldUpdateOperationsInput | $Enums.MessageSender
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.UserUpdateOneWithoutSupportMessagesNestedInput
 }
 
 export type SupportMessageUncheckedUpdateWithoutTicketInput = {
@@ -481,6 +599,7 @@ export type SupportMessageSelect<ExtArgs extends runtime.Types.Extensions.Intern
   message?: boolean
   createdAt?: boolean
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }, ExtArgs["result"]["supportMessage"]>
 
 export type SupportMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -491,6 +610,7 @@ export type SupportMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   message?: boolean
   createdAt?: boolean
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }, ExtArgs["result"]["supportMessage"]>
 
 export type SupportMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -501,6 +621,7 @@ export type SupportMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   message?: boolean
   createdAt?: boolean
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }, ExtArgs["result"]["supportMessage"]>
 
 export type SupportMessageSelectScalar = {
@@ -515,18 +636,22 @@ export type SupportMessageSelectScalar = {
 export type SupportMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticketId" | "senderId" | "senderType" | "message" | "createdAt", ExtArgs["result"]["supportMessage"]>
 export type SupportMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }
 export type SupportMessageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }
 export type SupportMessageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ticket?: boolean | Prisma.SupportTicketDefaultArgs<ExtArgs>
+  sender?: boolean | Prisma.SupportMessage$senderArgs<ExtArgs>
 }
 
 export type $SupportMessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SupportMessage"
   objects: {
     ticket: Prisma.$SupportTicketPayload<ExtArgs>
+    sender: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -930,6 +1055,7 @@ readonly fields: SupportMessageFieldRefs;
 export interface Prisma__SupportMessageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   ticket<T extends Prisma.SupportTicketDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SupportTicketDefaultArgs<ExtArgs>>): Prisma.Prisma__SupportTicketClient<runtime.Types.Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  sender<T extends Prisma.SupportMessage$senderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SupportMessage$senderArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1363,6 +1489,25 @@ export type SupportMessageDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many SupportMessages to delete.
    */
   limit?: number
+}
+
+/**
+ * SupportMessage.sender
+ */
+export type SupportMessage$senderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

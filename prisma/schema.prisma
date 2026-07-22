@@ -23,6 +23,7 @@ model User {
   deletedAt     DateTime?
   individualKyc IndividualKyc?
   supportTickets SupportTicket[]
+  supportMessages SupportMessage[]
   investments   Investment[]
   memberships   Membership[]
   notifications Notification[]
@@ -124,28 +125,23 @@ model Wallet {
   transactions WalletTransaction[]
 }
 
-model Fund {
-  id            String       @id @default(cuid())
-  name          String
-  slug          String       @unique
-  minInvestment Float
-  maxInvestment Float?
-  isActive      Boolean      @default(true)
-  investments   Investment[]
-  positions     Position[]
-}
 
 model Position {
-  id        String   @id @default(cuid())
-  userId    String
-  fundId    String
-  amount    Float    @default(0)
+  id String @id @default(cuid())
+
+  userId String
+  assetClassId String
+
+  amount Float @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  fund      Fund     @relation(fields: [fundId], references: [id])
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, fundId])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, assetClassId])
 }
 
 model WalletTransaction {
@@ -169,17 +165,24 @@ model WalletTransaction {
 model Investment {
   id            String           @id @default(cuid())
   userId        String
+  assetClassId  String
+
   amount        Float
   fee           Float
   total         Float
+
   status        InvestmentStatus @default(PENDING)
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-  fundId        String
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
   method        InvestmentMethod
+
   walletTransaction WalletTransaction?
-  fund          Fund             @relation(fields: [fundId], references: [id])
-  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id])
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
@@ -330,6 +333,9 @@ model SupportMessage {
   createdAt   DateTime @default(now())
 
   ticket      SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  sender      User? @relation(fields: [senderId], references: [id], onDelete: SetNull)
+
+  @@index([ticketId])
 }
 
 enum MessageSender {
@@ -338,3 +344,169 @@ enum MessageSender {
 }
 
 
+
+
+
+model AssetClass {
+  id String @id @default(cuid())
+
+  // Identity
+  name     String
+  slug     String @unique
+  acronym  String?
+
+  // Marketing
+  headline         String?
+  shortDescription String?
+  description      String @db.Text
+
+  // Branding
+  icon            String?
+  coverImage      String?
+  themeColor      String?
+  backgroundColor String?
+  textColor       String?
+
+  // Investment Details
+  fundType          String?
+  riskProfile       String?
+  allocationSource  String?
+  investmentHorizon String?
+  lockupPeriod      String?
+
+  minimumInvestment Float
+  maximumInvestment Float?
+
+targetAllocationPercent Float?
+  targetReturn     String?
+
+  // Fees
+  managementFee Float?
+  performanceFee Float?
+  hurdleRate Float?
+  highWaterMark String?
+
+  managementFeeDescription String? @db.Text
+  performanceFeeDescription String? @db.Text
+
+  // General Risk
+  riskDisclosure String? @db.Text
+
+  // CMS
+  displayOrder Int @default(0)
+  isPublished Boolean @default(false)
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  criteria AssetClassCriterion[]
+  flowSteps AssetClassFlowStep[]
+  requirements AssetClassRequirement[]
+  universes AssetClassUniverse[]
+  fees AssetClassFee[]
+  investments Investment[]
+  positions Position[]
+}
+
+model AssetClassCriterion {
+  id String @id @default(cuid())
+
+  assetClassId String
+
+  title String
+  description String @db.Text
+  signal String? @db.Text
+
+  displayOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}
+
+model AssetClassFlowStep {
+  id String @id @default(cuid())
+
+  assetClassId String
+
+  title String
+  description String @db.Text
+
+  badge String?
+
+  displayOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}
+
+model AssetClassRequirement {
+  id String @id @default(cuid())
+
+  assetClassId String
+
+  title String @db.Text
+
+  status String?
+
+  displayOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}
+
+model AssetClassUniverse {
+  id String @id @default(cuid())
+
+  assetClassId String
+
+  name String
+  description String @db.Text
+
+  targetAllocation Float?
+
+  displayOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}
+
+
+enum RiskProfile {
+  LOW
+  MODERATE
+  HIGH
+  VERY_HIGH
+}
+
+enum FundType {
+  OPEN_ENDED
+  CLOSED_ENDED
+  HYBRID
+}
+
+model AssetClassFee {
+  id String @id @default(cuid())
+
+  assetClassId String
+
+  name String
+  percentage Float
+  description String @db.Text
+
+  displayOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}

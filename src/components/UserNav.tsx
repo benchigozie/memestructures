@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Bell } from "lucide-react"
+import { Bell, CircleUserRound } from "lucide-react"
 import PopUp from "@/components/PopUp";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
@@ -144,7 +144,9 @@ const UserNav = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="bg-my-deep-blue w-11 rounded-full h-11"></div>
+                            <div className="w-11 rounded-full h-11 flex items-center justify-center cursor-pointer">
+                                <CircleUserRound width={44} height={44} strokeWidth={1.25} />
+                            </div>
                         </div>
                         <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer lg:hidden items-end mr-5">
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>

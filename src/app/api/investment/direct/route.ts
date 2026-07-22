@@ -16,10 +16,12 @@ export async function POST(req: Request) {
     const amount = Number(formData.get("amount"));
     const coin = formData.get("coin") as string;
     const network = formData.get("network") as string;
-    const fundSlug = formData.get("fundName") as string;
+    const assetClassSlug = formData.get("assetClassSlug") as string;
     const proof = formData.get("proof") as File | null;
 
+
     const user = await getUserFromRequest();
+
 
     if (!user) {
       return NextResponse.json(
@@ -33,6 +35,8 @@ export async function POST(req: Request) {
       );
     }
 
+
+
     if (user.kycStatus !== "VERIFIED") {
       return NextResponse.json(
         {
@@ -45,17 +49,21 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!amount || amount < 5000) {
+
+
+    if (!assetClassSlug) {
       return NextResponse.json(
         {
           success: false,
-          error: "Minimum investment amount is $5,000",
+          error: "Investment selection is required",
         },
         {
           status: 400,
         }
       );
     }
+
+
 
     if (!coin || !network) {
       return NextResponse.json(
@@ -69,6 +77,8 @@ export async function POST(req: Request) {
       );
     }
 
+
+
     if (!proof) {
       return NextResponse.json(
         {
@@ -81,17 +91,21 @@ export async function POST(req: Request) {
       );
     }
 
-    const fund = await prisma.fund.findUnique({
+
+
+    const assetClass = await prisma.assetClass.findUnique({
       where: {
-        slug: fundSlug.toLowerCase(),
+        slug: assetClassSlug.toLowerCase(),
       },
     });
 
-    if (!fund) {
+
+
+    if (!assetClass) {
       return NextResponse.json(
         {
           success: false,
-          error: "Invalid fund selected",
+          error: "Invalid investment selected",
         },
         {
           status: 400,
@@ -99,11 +113,46 @@ export async function POST(req: Request) {
       );
     }
 
+
+
+    if (!amount || amount < assetClass.minimumInvestment) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Minimum investment amount is ₦${assetClass.minimumInvestment.toLocaleString()}`,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+
+
+    if (
+      assetClass.maximumInvestment &&
+      amount > assetClass.maximumInvestment
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Maximum investment amount is ₦${assetClass.maximumInvestment.toLocaleString()}`,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+
+
     const wallet = await prisma.wallet.findUnique({
       where: {
         userId: user.id,
       },
     });
+
+
 
     if (!wallet) {
       return NextResponse.json(
@@ -117,39 +166,58 @@ export async function POST(req: Request) {
       );
     }
 
+
+
     proofPath = await uploadTransactionFile(
       proof,
       `investments/${user.id}`
     );
 
+
+
     const fee = amount * 0.01;
     const total = amount + fee;
 
+
+
     const result = await prisma.$transaction(async (tx) => {
+
+
       const investment = await tx.investment.create({
         data: {
           userId: user.id,
-          fundId: fund.id,
+
+          assetClassId: assetClass.id,
+
           amount,
+
           fee,
+
           total,
+
           method: "DIRECT",
+
           status: "PENDING",
         },
       });
 
+
+
       const transaction = await tx.walletTransaction.create({
         data: {
+
           walletId: wallet.id,
 
           investmentId: investment.id,
 
           type: "DEPOSIT",
+
           intent: "DIRECT_INVESTMENT",
 
           amount,
 
           coin,
+
           network,
 
           proofPath,
@@ -160,19 +228,30 @@ export async function POST(req: Request) {
         },
       });
 
+
+
       return {
         investment,
         transaction,
       };
+
     });
+
+
+
+
 
     sendNotification({
       userId: user.id,
       title: "Investment Submitted",
-      message: `Your investment of $${amount.toLocaleString()} is under review.`,
+      message: `Your investment of ₦${amount.toLocaleString()} is under review.`,
       type: "INVESTMENT",
       link: "/dashboard/user/overview",
     }).catch(console.error);
+
+
+
+
 
     sendEmail({
       to: user.email,
@@ -184,24 +263,39 @@ export async function POST(req: Request) {
           You will be notified once it is approved.
         `,
         buttonText: "View Dashboard",
-        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/overview`,
+        buttonLink:
+          `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/user/overview`,
       }),
     }).catch(console.error);
+
+
+
+
 
     return NextResponse.json({
       success: true,
       message: "Investment submitted for review",
       data: result,
     });
+
+
+
   } catch (err: any) {
+
     console.error(err);
 
+
+
     if (proofPath) {
+
       await supabase.storage
         .from("transactions")
         .remove([proofPath])
         .catch(console.error);
+
     }
+
+
 
     return NextResponse.json(
       {
@@ -212,5 +306,6 @@ export async function POST(req: Request) {
         status: 500,
       }
     );
+
   }
 }

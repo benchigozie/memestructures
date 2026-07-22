@@ -37,7 +37,7 @@ export type PositionSumAggregateOutputType = {
 export type PositionMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  fundId: string | null
+  assetClassId: string | null
   amount: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -46,7 +46,7 @@ export type PositionMinAggregateOutputType = {
 export type PositionMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  fundId: string | null
+  assetClassId: string | null
   amount: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,7 +55,7 @@ export type PositionMaxAggregateOutputType = {
 export type PositionCountAggregateOutputType = {
   id: number
   userId: number
-  fundId: number
+  assetClassId: number
   amount: number
   createdAt: number
   updatedAt: number
@@ -74,7 +74,7 @@ export type PositionSumAggregateInputType = {
 export type PositionMinAggregateInputType = {
   id?: true
   userId?: true
-  fundId?: true
+  assetClassId?: true
   amount?: true
   createdAt?: true
   updatedAt?: true
@@ -83,7 +83,7 @@ export type PositionMinAggregateInputType = {
 export type PositionMaxAggregateInputType = {
   id?: true
   userId?: true
-  fundId?: true
+  assetClassId?: true
   amount?: true
   createdAt?: true
   updatedAt?: true
@@ -92,7 +92,7 @@ export type PositionMaxAggregateInputType = {
 export type PositionCountAggregateInputType = {
   id?: true
   userId?: true
-  fundId?: true
+  assetClassId?: true
   amount?: true
   createdAt?: true
   updatedAt?: true
@@ -188,7 +188,7 @@ export type PositionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type PositionGroupByOutputType = {
   id: string
   userId: string
-  fundId: string
+  assetClassId: string
   amount: number
   createdAt: Date
   updatedAt: Date
@@ -220,44 +220,44 @@ export type PositionWhereInput = {
   NOT?: Prisma.PositionWhereInput | Prisma.PositionWhereInput[]
   id?: Prisma.StringFilter<"Position"> | string
   userId?: Prisma.StringFilter<"Position"> | string
-  fundId?: Prisma.StringFilter<"Position"> | string
+  assetClassId?: Prisma.StringFilter<"Position"> | string
   amount?: Prisma.FloatFilter<"Position"> | number
   createdAt?: Prisma.DateTimeFilter<"Position"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Position"> | Date | string
-  fund?: Prisma.XOR<Prisma.FundScalarRelationFilter, Prisma.FundWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  assetClass?: Prisma.XOR<Prisma.AssetClassScalarRelationFilter, Prisma.AssetClassWhereInput>
 }
 
 export type PositionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  fundId?: Prisma.SortOrder
+  assetClassId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  fund?: Prisma.FundOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  assetClass?: Prisma.AssetClassOrderByWithRelationInput
 }
 
 export type PositionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId_fundId?: Prisma.PositionUserIdFundIdCompoundUniqueInput
+  userId_assetClassId?: Prisma.PositionUserIdAssetClassIdCompoundUniqueInput
   AND?: Prisma.PositionWhereInput | Prisma.PositionWhereInput[]
   OR?: Prisma.PositionWhereInput[]
   NOT?: Prisma.PositionWhereInput | Prisma.PositionWhereInput[]
   userId?: Prisma.StringFilter<"Position"> | string
-  fundId?: Prisma.StringFilter<"Position"> | string
+  assetClassId?: Prisma.StringFilter<"Position"> | string
   amount?: Prisma.FloatFilter<"Position"> | number
   createdAt?: Prisma.DateTimeFilter<"Position"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Position"> | Date | string
-  fund?: Prisma.XOR<Prisma.FundScalarRelationFilter, Prisma.FundWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "userId_fundId">
+  assetClass?: Prisma.XOR<Prisma.AssetClassScalarRelationFilter, Prisma.AssetClassWhereInput>
+}, "id" | "userId_assetClassId">
 
 export type PositionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  fundId?: Prisma.SortOrder
+  assetClassId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -274,7 +274,7 @@ export type PositionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PositionScalarWhereWithAggregatesInput | Prisma.PositionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Position"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Position"> | string
-  fundId?: Prisma.StringWithAggregatesFilter<"Position"> | string
+  assetClassId?: Prisma.StringWithAggregatesFilter<"Position"> | string
   amount?: Prisma.FloatWithAggregatesFilter<"Position"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Position"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Position"> | Date | string
@@ -285,14 +285,14 @@ export type PositionCreateInput = {
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  fund: Prisma.FundCreateNestedOneWithoutPositionsInput
   user: Prisma.UserCreateNestedOneWithoutPositionInput
+  assetClass: Prisma.AssetClassCreateNestedOneWithoutPositionsInput
 }
 
 export type PositionUncheckedCreateInput = {
   id?: string
   userId: string
-  fundId: string
+  assetClassId: string
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -303,14 +303,14 @@ export type PositionUpdateInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fund?: Prisma.FundUpdateOneRequiredWithoutPositionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPositionNestedInput
+  assetClass?: Prisma.AssetClassUpdateOneRequiredWithoutPositionsNestedInput
 }
 
 export type PositionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  fundId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetClassId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -319,7 +319,7 @@ export type PositionUncheckedUpdateInput = {
 export type PositionCreateManyInput = {
   id?: string
   userId: string
-  fundId: string
+  assetClassId: string
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -335,7 +335,7 @@ export type PositionUpdateManyMutationInput = {
 export type PositionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  fundId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetClassId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -351,15 +351,15 @@ export type PositionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type PositionUserIdFundIdCompoundUniqueInput = {
+export type PositionUserIdAssetClassIdCompoundUniqueInput = {
   userId: string
-  fundId: string
+  assetClassId: string
 }
 
 export type PositionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  fundId?: Prisma.SortOrder
+  assetClassId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -372,7 +372,7 @@ export type PositionAvgOrderByAggregateInput = {
 export type PositionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  fundId?: Prisma.SortOrder
+  assetClassId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -381,7 +381,7 @@ export type PositionMaxOrderByAggregateInput = {
 export type PositionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  fundId?: Prisma.SortOrder
+  assetClassId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -433,45 +433,45 @@ export type PositionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.PositionScalarWhereInput | Prisma.PositionScalarWhereInput[]
 }
 
-export type PositionCreateNestedManyWithoutFundInput = {
-  create?: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput> | Prisma.PositionCreateWithoutFundInput[] | Prisma.PositionUncheckedCreateWithoutFundInput[]
-  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutFundInput | Prisma.PositionCreateOrConnectWithoutFundInput[]
-  createMany?: Prisma.PositionCreateManyFundInputEnvelope
+export type PositionCreateNestedManyWithoutAssetClassInput = {
+  create?: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput> | Prisma.PositionCreateWithoutAssetClassInput[] | Prisma.PositionUncheckedCreateWithoutAssetClassInput[]
+  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutAssetClassInput | Prisma.PositionCreateOrConnectWithoutAssetClassInput[]
+  createMany?: Prisma.PositionCreateManyAssetClassInputEnvelope
   connect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
 }
 
-export type PositionUncheckedCreateNestedManyWithoutFundInput = {
-  create?: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput> | Prisma.PositionCreateWithoutFundInput[] | Prisma.PositionUncheckedCreateWithoutFundInput[]
-  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutFundInput | Prisma.PositionCreateOrConnectWithoutFundInput[]
-  createMany?: Prisma.PositionCreateManyFundInputEnvelope
+export type PositionUncheckedCreateNestedManyWithoutAssetClassInput = {
+  create?: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput> | Prisma.PositionCreateWithoutAssetClassInput[] | Prisma.PositionUncheckedCreateWithoutAssetClassInput[]
+  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutAssetClassInput | Prisma.PositionCreateOrConnectWithoutAssetClassInput[]
+  createMany?: Prisma.PositionCreateManyAssetClassInputEnvelope
   connect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
 }
 
-export type PositionUpdateManyWithoutFundNestedInput = {
-  create?: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput> | Prisma.PositionCreateWithoutFundInput[] | Prisma.PositionUncheckedCreateWithoutFundInput[]
-  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutFundInput | Prisma.PositionCreateOrConnectWithoutFundInput[]
-  upsert?: Prisma.PositionUpsertWithWhereUniqueWithoutFundInput | Prisma.PositionUpsertWithWhereUniqueWithoutFundInput[]
-  createMany?: Prisma.PositionCreateManyFundInputEnvelope
+export type PositionUpdateManyWithoutAssetClassNestedInput = {
+  create?: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput> | Prisma.PositionCreateWithoutAssetClassInput[] | Prisma.PositionUncheckedCreateWithoutAssetClassInput[]
+  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutAssetClassInput | Prisma.PositionCreateOrConnectWithoutAssetClassInput[]
+  upsert?: Prisma.PositionUpsertWithWhereUniqueWithoutAssetClassInput | Prisma.PositionUpsertWithWhereUniqueWithoutAssetClassInput[]
+  createMany?: Prisma.PositionCreateManyAssetClassInputEnvelope
   set?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   disconnect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   delete?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   connect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
-  update?: Prisma.PositionUpdateWithWhereUniqueWithoutFundInput | Prisma.PositionUpdateWithWhereUniqueWithoutFundInput[]
-  updateMany?: Prisma.PositionUpdateManyWithWhereWithoutFundInput | Prisma.PositionUpdateManyWithWhereWithoutFundInput[]
+  update?: Prisma.PositionUpdateWithWhereUniqueWithoutAssetClassInput | Prisma.PositionUpdateWithWhereUniqueWithoutAssetClassInput[]
+  updateMany?: Prisma.PositionUpdateManyWithWhereWithoutAssetClassInput | Prisma.PositionUpdateManyWithWhereWithoutAssetClassInput[]
   deleteMany?: Prisma.PositionScalarWhereInput | Prisma.PositionScalarWhereInput[]
 }
 
-export type PositionUncheckedUpdateManyWithoutFundNestedInput = {
-  create?: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput> | Prisma.PositionCreateWithoutFundInput[] | Prisma.PositionUncheckedCreateWithoutFundInput[]
-  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutFundInput | Prisma.PositionCreateOrConnectWithoutFundInput[]
-  upsert?: Prisma.PositionUpsertWithWhereUniqueWithoutFundInput | Prisma.PositionUpsertWithWhereUniqueWithoutFundInput[]
-  createMany?: Prisma.PositionCreateManyFundInputEnvelope
+export type PositionUncheckedUpdateManyWithoutAssetClassNestedInput = {
+  create?: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput> | Prisma.PositionCreateWithoutAssetClassInput[] | Prisma.PositionUncheckedCreateWithoutAssetClassInput[]
+  connectOrCreate?: Prisma.PositionCreateOrConnectWithoutAssetClassInput | Prisma.PositionCreateOrConnectWithoutAssetClassInput[]
+  upsert?: Prisma.PositionUpsertWithWhereUniqueWithoutAssetClassInput | Prisma.PositionUpsertWithWhereUniqueWithoutAssetClassInput[]
+  createMany?: Prisma.PositionCreateManyAssetClassInputEnvelope
   set?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   disconnect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   delete?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
   connect?: Prisma.PositionWhereUniqueInput | Prisma.PositionWhereUniqueInput[]
-  update?: Prisma.PositionUpdateWithWhereUniqueWithoutFundInput | Prisma.PositionUpdateWithWhereUniqueWithoutFundInput[]
-  updateMany?: Prisma.PositionUpdateManyWithWhereWithoutFundInput | Prisma.PositionUpdateManyWithWhereWithoutFundInput[]
+  update?: Prisma.PositionUpdateWithWhereUniqueWithoutAssetClassInput | Prisma.PositionUpdateWithWhereUniqueWithoutAssetClassInput[]
+  updateMany?: Prisma.PositionUpdateManyWithWhereWithoutAssetClassInput | Prisma.PositionUpdateManyWithWhereWithoutAssetClassInput[]
   deleteMany?: Prisma.PositionScalarWhereInput | Prisma.PositionScalarWhereInput[]
 }
 
@@ -480,12 +480,12 @@ export type PositionCreateWithoutUserInput = {
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  fund: Prisma.FundCreateNestedOneWithoutPositionsInput
+  assetClass: Prisma.AssetClassCreateNestedOneWithoutPositionsInput
 }
 
 export type PositionUncheckedCreateWithoutUserInput = {
   id?: string
-  fundId: string
+  assetClassId: string
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -523,13 +523,13 @@ export type PositionScalarWhereInput = {
   NOT?: Prisma.PositionScalarWhereInput | Prisma.PositionScalarWhereInput[]
   id?: Prisma.StringFilter<"Position"> | string
   userId?: Prisma.StringFilter<"Position"> | string
-  fundId?: Prisma.StringFilter<"Position"> | string
+  assetClassId?: Prisma.StringFilter<"Position"> | string
   amount?: Prisma.FloatFilter<"Position"> | number
   createdAt?: Prisma.DateTimeFilter<"Position"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Position"> | Date | string
 }
 
-export type PositionCreateWithoutFundInput = {
+export type PositionCreateWithoutAssetClassInput = {
   id?: string
   amount?: number
   createdAt?: Date | string
@@ -537,7 +537,7 @@ export type PositionCreateWithoutFundInput = {
   user: Prisma.UserCreateNestedOneWithoutPositionInput
 }
 
-export type PositionUncheckedCreateWithoutFundInput = {
+export type PositionUncheckedCreateWithoutAssetClassInput = {
   id?: string
   userId: string
   amount?: number
@@ -545,35 +545,35 @@ export type PositionUncheckedCreateWithoutFundInput = {
   updatedAt?: Date | string
 }
 
-export type PositionCreateOrConnectWithoutFundInput = {
+export type PositionCreateOrConnectWithoutAssetClassInput = {
   where: Prisma.PositionWhereUniqueInput
-  create: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput>
+  create: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput>
 }
 
-export type PositionCreateManyFundInputEnvelope = {
-  data: Prisma.PositionCreateManyFundInput | Prisma.PositionCreateManyFundInput[]
+export type PositionCreateManyAssetClassInputEnvelope = {
+  data: Prisma.PositionCreateManyAssetClassInput | Prisma.PositionCreateManyAssetClassInput[]
   skipDuplicates?: boolean
 }
 
-export type PositionUpsertWithWhereUniqueWithoutFundInput = {
+export type PositionUpsertWithWhereUniqueWithoutAssetClassInput = {
   where: Prisma.PositionWhereUniqueInput
-  update: Prisma.XOR<Prisma.PositionUpdateWithoutFundInput, Prisma.PositionUncheckedUpdateWithoutFundInput>
-  create: Prisma.XOR<Prisma.PositionCreateWithoutFundInput, Prisma.PositionUncheckedCreateWithoutFundInput>
+  update: Prisma.XOR<Prisma.PositionUpdateWithoutAssetClassInput, Prisma.PositionUncheckedUpdateWithoutAssetClassInput>
+  create: Prisma.XOR<Prisma.PositionCreateWithoutAssetClassInput, Prisma.PositionUncheckedCreateWithoutAssetClassInput>
 }
 
-export type PositionUpdateWithWhereUniqueWithoutFundInput = {
+export type PositionUpdateWithWhereUniqueWithoutAssetClassInput = {
   where: Prisma.PositionWhereUniqueInput
-  data: Prisma.XOR<Prisma.PositionUpdateWithoutFundInput, Prisma.PositionUncheckedUpdateWithoutFundInput>
+  data: Prisma.XOR<Prisma.PositionUpdateWithoutAssetClassInput, Prisma.PositionUncheckedUpdateWithoutAssetClassInput>
 }
 
-export type PositionUpdateManyWithWhereWithoutFundInput = {
+export type PositionUpdateManyWithWhereWithoutAssetClassInput = {
   where: Prisma.PositionScalarWhereInput
-  data: Prisma.XOR<Prisma.PositionUpdateManyMutationInput, Prisma.PositionUncheckedUpdateManyWithoutFundInput>
+  data: Prisma.XOR<Prisma.PositionUpdateManyMutationInput, Prisma.PositionUncheckedUpdateManyWithoutAssetClassInput>
 }
 
 export type PositionCreateManyUserInput = {
   id?: string
-  fundId: string
+  assetClassId: string
   amount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -584,12 +584,12 @@ export type PositionUpdateWithoutUserInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fund?: Prisma.FundUpdateOneRequiredWithoutPositionsNestedInput
+  assetClass?: Prisma.AssetClassUpdateOneRequiredWithoutPositionsNestedInput
 }
 
 export type PositionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fundId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetClassId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -597,13 +597,13 @@ export type PositionUncheckedUpdateWithoutUserInput = {
 
 export type PositionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fundId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetClassId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PositionCreateManyFundInput = {
+export type PositionCreateManyAssetClassInput = {
   id?: string
   userId: string
   amount?: number
@@ -611,7 +611,7 @@ export type PositionCreateManyFundInput = {
   updatedAt?: Date | string
 }
 
-export type PositionUpdateWithoutFundInput = {
+export type PositionUpdateWithoutAssetClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -619,7 +619,7 @@ export type PositionUpdateWithoutFundInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPositionNestedInput
 }
 
-export type PositionUncheckedUpdateWithoutFundInput = {
+export type PositionUncheckedUpdateWithoutAssetClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -627,7 +627,7 @@ export type PositionUncheckedUpdateWithoutFundInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PositionUncheckedUpdateManyWithoutFundInput = {
+export type PositionUncheckedUpdateManyWithoutAssetClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -640,69 +640,69 @@ export type PositionUncheckedUpdateManyWithoutFundInput = {
 export type PositionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  fundId?: boolean
+  assetClassId?: boolean
   amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["position"]>
 
 export type PositionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  fundId?: boolean
+  assetClassId?: boolean
   amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["position"]>
 
 export type PositionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  fundId?: boolean
+  assetClassId?: boolean
   amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["position"]>
 
 export type PositionSelectScalar = {
   id?: boolean
   userId?: boolean
-  fundId?: boolean
+  assetClassId?: boolean
   amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "fundId" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["position"]>
+export type PositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "assetClassId" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["position"]>
 export type PositionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }
 export type PositionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }
 export type PositionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  assetClass?: boolean | Prisma.AssetClassDefaultArgs<ExtArgs>
 }
 
 export type $PositionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Position"
   objects: {
-    fund: Prisma.$FundPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    assetClass: Prisma.$AssetClassPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    fundId: string
+    assetClassId: string
     amount: number
     createdAt: Date
     updatedAt: Date
@@ -1100,8 +1100,8 @@ readonly fields: PositionFieldRefs;
  */
 export interface Prisma__PositionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  fund<T extends Prisma.FundDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FundDefaultArgs<ExtArgs>>): Prisma.Prisma__FundClient<runtime.Types.Result.GetResult<Prisma.$FundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  assetClass<T extends Prisma.AssetClassDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AssetClassDefaultArgs<ExtArgs>>): Prisma.Prisma__AssetClassClient<runtime.Types.Result.GetResult<Prisma.$AssetClassPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1133,7 +1133,7 @@ export interface Prisma__PositionClient<T, Null = never, ExtArgs extends runtime
 export interface PositionFieldRefs {
   readonly id: Prisma.FieldRef<"Position", 'String'>
   readonly userId: Prisma.FieldRef<"Position", 'String'>
-  readonly fundId: Prisma.FieldRef<"Position", 'String'>
+  readonly assetClassId: Prisma.FieldRef<"Position", 'String'>
   readonly amount: Prisma.FieldRef<"Position", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Position", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Position", 'DateTime'>

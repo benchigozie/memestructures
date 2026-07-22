@@ -31,7 +31,7 @@ export async function GET(req: Request) {
           userId: user.id,
         },
         include: {
-          fund: true,
+          assetClass: true,
         },
       }),
 
@@ -39,6 +39,9 @@ export async function GET(req: Request) {
         where: {
           userId: user.id,
           status: "CONFIRMED",
+        },
+        include: {
+          assetClass: true,
         },
       }),
 
@@ -66,8 +69,8 @@ export async function GET(req: Request) {
     );
 
     const allocation = positions.map((position) => ({
-      name: position.fund.slug.toUpperCase(),
-      fullName: position.fund.name,
+      name: position.assetClass.acronym || position.assetClass.slug.toUpperCase(),
+      fullName: position.assetClass.name,
       amount: position.amount,
       percentage:
         totalPortfolio > 0

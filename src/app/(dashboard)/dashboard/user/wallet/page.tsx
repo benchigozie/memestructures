@@ -58,7 +58,7 @@ const page = () => {
         </section>
 
         <section className="flex flex-col gap-4 mb-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+          <div className="grid grid-cols-2 gap-2 md:gap-4">
             <Link
               href="/dashboard/user/wallet/fund-wallet"
               className="text-center rounded-lg bg-my-deep-blue p-2 text-my-white hover:bg-my-blue duration-300 transition-colors cursor-pointer"
@@ -73,12 +73,14 @@ const page = () => {
               Fund Asset Class
             </Link>
 
+{/*
             <Link
               href="/dashboard/user/wallet/withdraw"
               className="text-center rounded-lg bg-my-deep-blue p-2 text-my-white hover:bg-my-blue duration-300 transition-colors cursor-pointer"
             >
               Withdraw
             </Link>
+            */}
           </div>
         </section>
 

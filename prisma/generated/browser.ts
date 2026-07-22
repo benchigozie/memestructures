@@ -58,11 +58,6 @@ export type OrganizationDocument = Prisma.OrganizationDocumentModel
  */
 export type Wallet = Prisma.WalletModel
 /**
- * Model Fund
- * 
- */
-export type Fund = Prisma.FundModel
-/**
  * Model Position
  * 
  */
@@ -92,3 +87,33 @@ export type SupportTicket = Prisma.SupportTicketModel
  * 
  */
 export type SupportMessage = Prisma.SupportMessageModel
+/**
+ * Model AssetClass
+ * 
+ */
+export type AssetClass = Prisma.AssetClassModel
+/**
+ * Model AssetClassCriterion
+ * 
+ */
+export type AssetClassCriterion = Prisma.AssetClassCriterionModel
+/**
+ * Model AssetClassFlowStep
+ * 
+ */
+export type AssetClassFlowStep = Prisma.AssetClassFlowStepModel
+/**
+ * Model AssetClassRequirement
+ * 
+ */
+export type AssetClassRequirement = Prisma.AssetClassRequirementModel
+/**
+ * Model AssetClassUniverse
+ * 
+ */
+export type AssetClassUniverse = Prisma.AssetClassUniverseModel
+/**
+ * Model AssetClassFee
+ * 
+ */
+export type AssetClassFee = Prisma.AssetClassFeeModel

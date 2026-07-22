@@ -19,6 +19,7 @@ const page = () => {
       const res = await fetchWithAuth("/api/dashboard");
       const data = await res.json();
 
+      
       setDashboardData(data);
      
     };

@@ -41,35 +41,36 @@ export async function GET(req: Request) {
       where: {
         walletId: wallet.id,
       },
-
+    
       orderBy: {
         createdAt: "desc",
       },
-
+    
       take: limit,
-
+    
       ...(cursor && {
         cursor: {
           id: cursor,
         },
         skip: 1,
       }),
-
+    
       include: {
         investment: {
           select: {
             id: true,
-            fund: {
+            assetClass: {
               select: {
+                id: true,
                 name: true,
                 slug: true,
+                acronym: true,
               },
             },
           },
         },
       },
     });
-
     const nextCursor =
       transactions.length === limit
         ? transactions[transactions.length - 1].id  

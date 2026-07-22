@@ -9,18 +9,23 @@ import InProgress from "@/components/InProgress";
 import ErrorResponse from "@/components/ErrorResponse";
 import SuccessResponse from "@/components/SuccessResponse";
 import PopUp from "@/components/PopUp";
-import { funds } from "@/data/funds";
 
 type InvestmentFormValues = {
     amount: string;
     assetClass: string;
 };
 
-const getSchema = (walletBalance: number) =>
+const getSchema = (
+    walletBalance: number,
+    assetClasses: any[]
+) =>
     Yup.object({
         assetClass: Yup.string()
             .required("Asset class is required")
-            .oneOf(funds.map((f) => f.slug), "Invalid asset class selected"),
+            .oneOf(
+                assetClasses.map((a) => a.slug),
+                "Invalid asset class selected"
+            ),
 
         amount: Yup.number()
             .typeError("Enter a valid amount")
@@ -28,12 +33,17 @@ const getSchema = (walletBalance: number) =>
             .test("min-max-check", function (value) {
                 const { assetClass } = this.parent;
 
-                const selectedFund = funds.find((f) => f.slug === assetClass);
+                const selectedAssetClass = assetClasses.find(
+                    (a) => a.slug === assetClass
+                );
 
-                if (!selectedFund || value == null) return false;
+                if (!selectedAssetClass || value == null) {
+                    return false;
+                }
 
                 const fee = value * 0.01;
                 const total = value + fee;
+
 
                 if (total > walletBalance) {
                     return this.createError({
@@ -41,24 +51,30 @@ const getSchema = (walletBalance: number) =>
                     });
                 }
 
-                if (value < selectedFund.minInvestment) {
+
+                if (
+                    value < selectedAssetClass.minimumInvestment
+                ) {
                     return this.createError({
-                        message: `Minimum investment is $${selectedFund.minInvestment.toLocaleString()}`,
+                        message: `Minimum investment is $${selectedAssetClass.minimumInvestment.toLocaleString()}`,
                     });
                 }
 
+
                 if (
-                    selectedFund.maxInvestment &&
-                    value > selectedFund.maxInvestment
+                    selectedAssetClass.maximumInvestment &&
+                    value > selectedAssetClass.maximumInvestment
                 ) {
                     return this.createError({
-                        message: `Maximum investment is $${selectedFund.maxInvestment.toLocaleString()}`,
+                        message: `Maximum investment is $${selectedAssetClass.maximumInvestment.toLocaleString()}`,
                     });
                 }
+
 
                 return true;
             }),
     });
+
 const AssetInvestment = () => {
     const [formState, setFormState] = useState<
         "idle" | "submitting" | "error" | "success"
@@ -71,6 +87,33 @@ const AssetInvestment = () => {
 
     const [walletBalance, setWalletBalance] = useState<number>(0);
     const [loadingWallet, setLoadingWallet] = useState(true);
+    const [assetClasses, setAssetClasses] = useState<any[]>([]);
+    useEffect(() => {
+        console.log("assetClasses state:", assetClasses);
+    }, [assetClasses]);
+
+    const fetchAssetClasses = async () => {
+        try {
+            const res = await fetchWithAuth("/api/asset-classes");
+
+            const data = await res.json();
+
+            console.log("Asset classes fetch response:", data);
+
+            if (!res.ok) {
+                throw new Error("Failed to fetch asset classes");
+              }
+            
+                setAssetClasses(data);
+
+            console.log("Fetched asset classes:", data.assetClasses);
+
+            console.log("Setting asset classes:", data);
+
+        } catch (err) {
+            console.error("Failed fetching asset classes", err);
+        }
+    };
 
     const fetchWallet = async () => {
         try {
@@ -93,14 +136,16 @@ const AssetInvestment = () => {
     };
 
     useEffect(() => {
-        
         fetchWallet();
+        fetchAssetClasses();
     }, []);
 
     const submitInvestment = async (values: InvestmentFormValues) => {
-        const selectedFund = funds.find((f) => f.slug === values.assetClass);
-
-        if (!selectedFund) return;
+        const selectedAssetClass = assetClasses.find(
+            (a) => a.slug === values.assetClass
+        );
+        
+        if (!selectedAssetClass) return;
 
         setFormState("submitting");
 
@@ -112,9 +157,8 @@ const AssetInvestment = () => {
                 },
                 body: JSON.stringify({
                     amount: Number(values.amount),
-                    assetClass: values.assetClass,
+                    assetClass: selectedAssetClass.slug,
                     method: "WALLET",
-                    fundName: selectedFund.slug.toUpperCase(),
                 }),
             });
 
@@ -178,7 +222,9 @@ const AssetInvestment = () => {
                                 assetClass: "",
                             }}
                             validationSchema={
-                                loadingWallet ? undefined : getSchema(walletBalance)
+                                loadingWallet || assetClasses.length === 0
+                                    ? undefined
+                                    : getSchema(walletBalance, assetClasses)
                             }
                             onSubmit={(values) => {
                                 setPendingValues(values);
@@ -191,8 +237,8 @@ const AssetInvestment = () => {
                                 const total = amount + fee;
                                 const insufficientBalance = total > walletBalance;
 
-                                const selectedFund = funds.find(
-                                    (f) => f.slug === values.assetClass
+                                const selectedAssetClass = assetClasses.find(
+                                    (a) => a.slug === values.assetClass
                                 );
 
                                 return (
@@ -210,9 +256,9 @@ const AssetInvestment = () => {
                                             >
                                                 <option value="">Select asset class</option>
 
-                                                {funds.map((f) => (
-                                                    <option key={f.slug} value={f.slug}>
-                                                        {f.name}
+                                                {assetClasses.map((a) => (
+                                                    <option key={a.slug} value={a.slug}>
+                                                        {a.name}
                                                     </option>
                                                 ))}
                                             </Field>
@@ -242,7 +288,7 @@ const AssetInvestment = () => {
                                             />
                                         </div>
 
-                                        {amount > 0 && selectedFund && (
+                                        {amount > 0 && selectedAssetClass && (
                                             <div className="mt-4 text-sm">
                                                 <p>
                                                     1% subscription fee:{" "}
@@ -314,7 +360,9 @@ const AssetInvestment = () => {
                     title="Confirm Investment"
                     message={`Invest $${Number(
                         pendingValues.amount
-                    ).toLocaleString()} into ${funds.find((f) => f.slug === pendingValues.assetClass)?.name
+                    ).toLocaleString()} into ${assetClasses.find(
+                        (a) => a.slug === pendingValues.assetClass
+                    )?.name
                         }?`}
                     onConfirm={handleConfirm}
                     onClose={handleClose}

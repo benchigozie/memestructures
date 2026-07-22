@@ -154,3 +154,22 @@ export const MessageSender = {
 } as const
 
 export type MessageSender = (typeof MessageSender)[keyof typeof MessageSender]
+
+
+export const RiskProfile = {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  VERY_HIGH: 'VERY_HIGH'
+} as const
+
+export type RiskProfile = (typeof RiskProfile)[keyof typeof RiskProfile]
+
+
+export const FundType = {
+  OPEN_ENDED: 'OPEN_ENDED',
+  CLOSED_ENDED: 'CLOSED_ENDED',
+  HYBRID: 'HYBRID'
+} as const
+
+export type FundType = (typeof FundType)[keyof typeof FundType]

@@ -22,7 +22,9 @@ function Hero() {
                         <Link href="/register">
                             <Button buttonText="Invest Now" btnType="primary" className='w-full' />
                         </Link>
-                        <Button buttonText="Join Community" btnType="secondary" className='shadow-sm w-full' />
+                        <Link href="/login">
+                            <Button buttonText="login" btnType="secondary" className='shadow-sm w-full px-8' />
+                        </Link>
                     </div>
                 </div>
                 <HeroCards />

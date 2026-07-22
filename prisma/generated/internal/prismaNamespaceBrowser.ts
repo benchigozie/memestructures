@@ -59,13 +59,18 @@ export const ModelName = {
   OrganizationMember: 'OrganizationMember',
   OrganizationDocument: 'OrganizationDocument',
   Wallet: 'Wallet',
-  Fund: 'Fund',
   Position: 'Position',
   WalletTransaction: 'WalletTransaction',
   Investment: 'Investment',
   Notification: 'Notification',
   SupportTicket: 'SupportTicket',
-  SupportMessage: 'SupportMessage'
+  SupportMessage: 'SupportMessage',
+  AssetClass: 'AssetClass',
+  AssetClassCriterion: 'AssetClassCriterion',
+  AssetClassFlowStep: 'AssetClassFlowStep',
+  AssetClassRequirement: 'AssetClassRequirement',
+  AssetClassUniverse: 'AssetClassUniverse',
+  AssetClassFee: 'AssetClassFee'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -204,22 +209,10 @@ export const WalletScalarFieldEnum = {
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
-export const FundScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  minInvestment: 'minInvestment',
-  maxInvestment: 'maxInvestment',
-  isActive: 'isActive'
-} as const
-
-export type FundScalarFieldEnum = (typeof FundScalarFieldEnum)[keyof typeof FundScalarFieldEnum]
-
-
 export const PositionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  fundId: 'fundId',
+  assetClassId: 'assetClassId',
   amount: 'amount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -250,13 +243,13 @@ export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFi
 export const InvestmentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  assetClassId: 'assetClassId',
   amount: 'amount',
   fee: 'fee',
   total: 'total',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  fundId: 'fundId',
   method: 'method'
 } as const
 
@@ -301,6 +294,114 @@ export const SupportMessageScalarFieldEnum = {
 } as const
 
 export type SupportMessageScalarFieldEnum = (typeof SupportMessageScalarFieldEnum)[keyof typeof SupportMessageScalarFieldEnum]
+
+
+export const AssetClassScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  acronym: 'acronym',
+  headline: 'headline',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  icon: 'icon',
+  coverImage: 'coverImage',
+  themeColor: 'themeColor',
+  backgroundColor: 'backgroundColor',
+  textColor: 'textColor',
+  fundType: 'fundType',
+  riskProfile: 'riskProfile',
+  allocationSource: 'allocationSource',
+  investmentHorizon: 'investmentHorizon',
+  lockupPeriod: 'lockupPeriod',
+  minimumInvestment: 'minimumInvestment',
+  maximumInvestment: 'maximumInvestment',
+  targetAllocationPercent: 'targetAllocationPercent',
+  targetReturn: 'targetReturn',
+  managementFee: 'managementFee',
+  performanceFee: 'performanceFee',
+  hurdleRate: 'hurdleRate',
+  highWaterMark: 'highWaterMark',
+  managementFeeDescription: 'managementFeeDescription',
+  performanceFeeDescription: 'performanceFeeDescription',
+  riskDisclosure: 'riskDisclosure',
+  displayOrder: 'displayOrder',
+  isPublished: 'isPublished',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassScalarFieldEnum = (typeof AssetClassScalarFieldEnum)[keyof typeof AssetClassScalarFieldEnum]
+
+
+export const AssetClassCriterionScalarFieldEnum = {
+  id: 'id',
+  assetClassId: 'assetClassId',
+  title: 'title',
+  description: 'description',
+  signal: 'signal',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassCriterionScalarFieldEnum = (typeof AssetClassCriterionScalarFieldEnum)[keyof typeof AssetClassCriterionScalarFieldEnum]
+
+
+export const AssetClassFlowStepScalarFieldEnum = {
+  id: 'id',
+  assetClassId: 'assetClassId',
+  title: 'title',
+  description: 'description',
+  badge: 'badge',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassFlowStepScalarFieldEnum = (typeof AssetClassFlowStepScalarFieldEnum)[keyof typeof AssetClassFlowStepScalarFieldEnum]
+
+
+export const AssetClassRequirementScalarFieldEnum = {
+  id: 'id',
+  assetClassId: 'assetClassId',
+  title: 'title',
+  status: 'status',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassRequirementScalarFieldEnum = (typeof AssetClassRequirementScalarFieldEnum)[keyof typeof AssetClassRequirementScalarFieldEnum]
+
+
+export const AssetClassUniverseScalarFieldEnum = {
+  id: 'id',
+  assetClassId: 'assetClassId',
+  name: 'name',
+  description: 'description',
+  targetAllocation: 'targetAllocation',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassUniverseScalarFieldEnum = (typeof AssetClassUniverseScalarFieldEnum)[keyof typeof AssetClassUniverseScalarFieldEnum]
+
+
+export const AssetClassFeeScalarFieldEnum = {
+  id: 'id',
+  assetClassId: 'assetClassId',
+  name: 'name',
+  percentage: 'percentage',
+  description: 'description',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssetClassFeeScalarFieldEnum = (typeof AssetClassFeeScalarFieldEnum)[keyof typeof AssetClassFeeScalarFieldEnum]
 
 
 export const SortOrder = {
