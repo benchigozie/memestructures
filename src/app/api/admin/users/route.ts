@@ -23,7 +23,7 @@ export async function GET() {
 
             where:{
                  accountType: "INDIVIDUAL",
-                //createdById: admin.id
+                createdById: admin.id
              },
 
             select: {

@@ -13,11 +13,7 @@ import UserWallet from "@/components/UserWallet";
 import UserInvestments from "@/components/UserInvestments";
 import UserActivity from "@/components/UserActivity";
 
-type UserPageProps = {
-    params: {
-        id: string;
-    };
-};
+import { useParams } from "next/navigation";
 
 export type ManagedUser = {
     id: string;
@@ -45,21 +41,24 @@ export type ManagedUser = {
     }[];
 };
 
-export default function UserPage({
-    params,
-}: UserPageProps) {
+export default function UserPage() {
 
+    const params = useParams();
     const [loading, setLoading] = useState(true);
 
     const [user, setUser] =
         useState<ManagedUser | null>(null);
+
+        const { id } = params as unknown as { id: string };
+
+        
 
     async function fetchUser() {
 
         try {
 
             const res = await fetchWithAuth(
-                `/api/admin/users/${params.id}`
+                `/api/admin/users/${id}`
             );
 
             const data = await res.json();
@@ -112,7 +111,7 @@ export default function UserPage({
 
     return (
 
-        <div className="p-6 space-y-8">
+        <div className="p-6 space-y-4">
 
             <Link
                 href="/dashboard/admin/users"
