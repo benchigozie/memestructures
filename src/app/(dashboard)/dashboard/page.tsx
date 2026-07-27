@@ -30,6 +30,7 @@ export default function Dashboard() {
 
     if (!user) {
 
+      logout();
       router.replace("/login");
       return;
     }

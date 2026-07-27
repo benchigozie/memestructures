@@ -79,6 +79,12 @@ const AdminNav = () => {
             href: "/dashboard/admin/asset-classes",
             whiteIcon: "/images/assetclasswhite.png",
             blueIcon: "/images/assetclassblue.png",
+        },
+        {
+            name: "Users",
+            href: "/dashboard/admin/users",
+            whiteIcon: "/images/userswhite.png",
+            blueIcon: "/images/usersblue.png",
         }
     ];
 

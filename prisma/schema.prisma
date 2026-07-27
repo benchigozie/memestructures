@@ -13,7 +13,7 @@ model User {
   username      String?        @unique
   email         String         @unique
   password      String
-  accountType   AccountType?
+  accountType AccountType @default(INDIVIDUAL)
   accountStatus AccountStatus  @default(ACTIVE)
   kycStatus     KycStatus      @default(UNVERIFIED)
   emailVerified Boolean        @default(false)
@@ -29,6 +29,18 @@ model User {
   notifications Notification[]
   position      Position[]
   wallet        Wallet?
+  
+   createdById String?
+
+ createdBy User? @relation(
+   "CreatedUsers",
+   fields:[createdById],
+   references:[id]
+ )
+
+ createdUsers User[] @relation("CreatedUsers")
+
+ isManaged Boolean @default(false)
 }
 
 model Organization {
@@ -160,6 +172,12 @@ model WalletTransaction {
   investment   Investment? @relation(fields: [investmentId], references: [id])
   createdAt DateTime              @default(now())
   wallet    Wallet                @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  createdById String?
+  createdBy User? @relation(
+ "TransactionCreator",
+ fields:[createdById],
+ references:[id]
+)
 }
 
 model Investment {
@@ -183,6 +201,7 @@ model Investment {
   assetClass AssetClass @relation(fields: [assetClassId], references: [id])
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdById String?
 }
 
 model Notification {
