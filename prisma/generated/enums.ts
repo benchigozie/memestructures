@@ -70,7 +70,9 @@ export type OrganizationDocumentType = (typeof OrganizationDocumentType)[keyof t
 export const WalletTransactionType = {
   DEPOSIT: 'DEPOSIT',
   WITHDRAWAL: 'WITHDRAWAL',
-  RETURN: 'RETURN'
+  RETURN: 'RETURN',
+  ADMIN_CREDIT: 'ADMIN_CREDIT',
+  ADMIN_DEBIT: 'ADMIN_DEBIT'
 } as const
 
 export type WalletTransactionType = (typeof WalletTransactionType)[keyof typeof WalletTransactionType]
@@ -89,7 +91,8 @@ export const TransactionIntent = {
   WALLET_FUNDING: 'WALLET_FUNDING',
   DIRECT_INVESTMENT: 'DIRECT_INVESTMENT',
   WALLET_INVESTMENT: 'WALLET_INVESTMENT',
-  WITHDRAWAL_REQUEST: 'WITHDRAWAL_REQUEST'
+  WITHDRAWAL_REQUEST: 'WITHDRAWAL_REQUEST',
+  ADMIN_ADJUSTMENT: 'ADMIN_ADJUSTMENT'
 } as const
 
 export type TransactionIntent = (typeof TransactionIntent)[keyof typeof TransactionIntent]
@@ -107,7 +110,8 @@ export const TransactionStatus = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   FAILED: 'FAILED',
-  REJECTED: 'REJECTED'
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
 } as const
 
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]

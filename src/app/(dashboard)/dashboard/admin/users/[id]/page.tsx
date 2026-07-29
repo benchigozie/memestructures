@@ -38,6 +38,7 @@ export type ManagedUser = {
         assetClass: {
             name: string;
         };
+        
     }[];
 };
 
@@ -139,9 +140,7 @@ export default function UserPage() {
                 refreshUser={fetchUser}
             />
 
-            <UserActivity
-                user={user}
-            />
+          
 
         </div>
 

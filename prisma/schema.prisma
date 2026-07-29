@@ -30,17 +30,15 @@ model User {
   position      Position[]
   wallet        Wallet?
   
-   createdById String?
+    createdById String?
 
- createdBy User? @relation(
-   "CreatedUsers",
-   fields:[createdById],
-   references:[id]
- )
+  createdBy User? @relation("CreatedUsers", fields: [createdById], references: [id])
 
- createdUsers User[] @relation("CreatedUsers")
+  createdUsers User[] @relation("CreatedUsers")
 
- isManaged Boolean @default(false)
+  createdWalletTransactions WalletTransaction[] @relation("TransactionCreator")
+
+  isManaged Boolean @default(false)
 }
 
 model Organization {
@@ -173,11 +171,9 @@ model WalletTransaction {
   createdAt DateTime              @default(now())
   wallet    Wallet                @relation(fields: [walletId], references: [id], onDelete: Cascade)
   createdById String?
-  createdBy User? @relation(
- "TransactionCreator",
- fields:[createdById],
- references:[id]
-)
+  createdBy User? @relation("TransactionCreator", fields: [createdById], references: [id])
+
+
 }
 
 model Investment {
@@ -264,6 +260,8 @@ enum WalletTransactionType {
   DEPOSIT
   WITHDRAWAL
   RETURN
+  ADMIN_CREDIT
+  ADMIN_DEBIT
 }
 
 enum InvestmentStatus {
@@ -277,6 +275,7 @@ enum TransactionIntent {
   DIRECT_INVESTMENT
   WALLET_INVESTMENT
   WITHDRAWAL_REQUEST
+  ADMIN_ADJUSTMENT
 }
 
 enum InvestmentMethod {
@@ -289,6 +288,7 @@ enum TransactionStatus {
   COMPLETED
   FAILED
   REJECTED
+  CANCELLED
 }
 
 enum NotificationType {

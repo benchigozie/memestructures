@@ -34,7 +34,16 @@ export async function GET() {
                 kycStatus: true,
                 createdAt: true,
                 accountType: true,
+
+                wallet: {
+                    select: {
+                        id: true,
+                        balance: true,
+                    }
+                }
             },
+
+           
 
             orderBy: {
                 createdAt: "desc"

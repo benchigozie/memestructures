@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, ChevronDown, Pencil, Ban } from "lucide-react";
+import { Plus, ChevronDown, Pencil, Ban, UserCheck } from "lucide-react";
 import CreateInvestorForm from "@/components/CreateInvestorForm";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import InProgress from "@/components/InProgress";
 import Link from "next/link";
+import PopUp from "@/components/PopUp";
 
 
 type ManagedUser = {
@@ -27,7 +28,8 @@ export default function Page() {
     const [users, setUsers] = useState<ManagedUser[]>([]);
     const [loading, setLoading] = useState(true);
 
-
+    const [selectedUser, setSelectedUser] =
+        useState<ManagedUser | null>(null);
 
     useEffect(() => {
         fetchUsers();
@@ -50,6 +52,8 @@ export default function Page() {
                 setUsers(data);
             }
 
+            console.log("Fetched users:", data);
+
 
         } catch (err) {
 
@@ -63,6 +67,59 @@ export default function Page() {
 
     }
 
+    async function suspendUser(id: string) {
+
+        try {
+
+            const res = await fetchWithAuth(
+                `/api/admin/users/${id}/toggle`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error);
+            }
+
+            await fetchUsers();
+
+        } catch (err: any) {
+
+            alert(err.message);
+
+        }
+
+    }
+
+    async function enableUser(id: string) {
+
+        try {
+
+            const res = await fetchWithAuth(
+                `/api/admin/users/${id}/toggle`,
+                {
+                    method: "PATCH",
+                }
+            );
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error);
+            }
+
+            await fetchUsers();
+
+        } catch (err: any) {
+
+            alert(err.message);
+
+        }
+
+    }
 
 
     return (
@@ -191,38 +248,60 @@ export default function Page() {
                                 <div className="flex gap-2">
 
 
-                                   
-                                        <Link href={`/dashboard/admin/users/${user.id}`}>
+
+                                    <Link href={`/dashboard/admin/users/${user.id}`}>
                                         <button
-                                        className="
+                                            className="
                             rounded-lg
                             p-2
                             hover:bg-my-blue/10
                             cursor-pointer
                             "
-                                    >
+                                        >
 
                                             <Pencil size={18} />
-                                            </button>
-                                        </Link>
-
-                                    
+                                        </button>
+                                    </Link>
 
 
 
-                                    <button
-                                        className="
-                            rounded-lg
-                            p-2
-                            text-red-500
-                            hover:bg-red-50
-                            cursor-pointer
-                            "
-                                    >
 
-                                        <Ban size={18} />
 
-                                    </button>
+                                    {
+    user.accountStatus === "ACTIVE" ? (
+
+        <button
+            onClick={() => setSelectedUser(user)}
+            className="
+                rounded-lg
+                p-2
+                text-red-500
+                hover:bg-red-50
+                cursor-pointer
+            "
+            title="Suspend account"
+        >
+            <Ban size={18} />
+        </button>
+
+    ) : (
+
+        <button
+            onClick={() => setSelectedUser(user)}
+            className="
+                rounded-lg
+                p-2
+                text-green-600
+                hover:bg-green-50
+                cursor-pointer
+            "
+            title="Re-enable account"
+        >
+            <UserCheck size={18} />
+        </button>
+
+    )
+}
 
 
                                 </div>
@@ -272,7 +351,7 @@ export default function Page() {
                                     </p>
 
                                     <p className="font-medium">
-                                        ₦
+                                        $
                                         {user.wallet?.balance
                                             .toLocaleString()
                                             ??
@@ -309,7 +388,45 @@ export default function Page() {
 
             </div>
 
+            {
+                selectedUser && (
 
+                    <PopUp
+
+                        title={
+                            selectedUser.accountStatus === "ACTIVE"
+                                ? "Suspend Account"
+                                : "Re-enable Account"
+                        }
+
+                        message={
+                            selectedUser.accountStatus === "ACTIVE"
+                                ? `Are you sure you want to disable "${selectedUser.name}"?`
+                                : `Are you sure you want to re-enable "${selectedUser.name}"?`
+                        }
+
+                        onConfirm={async () => {
+
+                            if (selectedUser.accountStatus === "ACTIVE") {
+
+                                await suspendUser(selectedUser.id);
+
+                            } else {
+
+                                await enableUser(selectedUser.id);
+
+                            }
+
+                            setSelectedUser(null);
+
+                        }}
+
+                        onClose={() => setSelectedUser(null)}
+
+                    />
+
+                )
+            }
         </div>
 
     )

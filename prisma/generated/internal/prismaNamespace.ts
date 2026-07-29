@@ -1956,7 +1956,8 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
-  createdById: 'createdById'
+  createdById: 'createdById',
+  isManaged: 'isManaged'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2088,7 +2089,8 @@ export const WalletTransactionScalarFieldEnum = {
   walletAddress: 'walletAddress',
   proofPath: 'proofPath',
   investmentId: 'investmentId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  createdById: 'createdById'
 } as const
 
 export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
@@ -2104,7 +2106,8 @@ export const InvestmentScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  method: 'method'
+  method: 'method',
+  createdById: 'createdById'
 } as const
 
 export type InvestmentScalarFieldEnum = (typeof InvestmentScalarFieldEnum)[keyof typeof InvestmentScalarFieldEnum]

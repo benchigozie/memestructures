@@ -189,6 +189,8 @@ export async function POST(req: Request) {
                     create: {},
                 },
 
+                isManaged: true,
+
             }
 
         });

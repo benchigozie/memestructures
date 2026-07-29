@@ -9,7 +9,6 @@ import InProgress from "./InProgress";
 import ErrorResponse from "./ErrorResponse";
 import SuccessResponse from "./SuccessResponse";
 
-
 type InvestmentFormValues = {
     amount: string;
     coin: string;
