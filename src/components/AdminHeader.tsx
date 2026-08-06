@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuth } from "@/context/AuthContext"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -12,6 +13,7 @@ type NavLink = {
 function AdminHeader() {
 
     const [menuState, setMenuState] = useState<boolean>(false);
+    const [ profileMenuState, setProfileMenuState ] = useState<boolean>(false);
 
     const toggleMenu = () => {
         setMenuState(!menuState);
@@ -24,6 +26,10 @@ function AdminHeader() {
         { name: "Blog", path: "/blog" },
         { name: "Sign Up", path: "/register" },
     ]
+
+    const { user } = useAuth();
+    
+    console.log("These are the user initials: ", user?.initials);
 
     return (
         <section className="fixed top-0 w-full z-30 backdrop-blur-xl bg-my-white/60">

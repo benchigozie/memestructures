@@ -8,6 +8,7 @@ type User = {
   email: string;
   name: string;
   username?: string;
+  initials: string;
   accountType: "INDIVIDUAL" | "ENTERPRISE" | "ADMIN" | "DEV";
   kycStatus: "UNVERIFIED" | "VERIFIED" | "PENDING" | "REJECTED";
 };
@@ -18,6 +19,15 @@ type AuthContextType = {
   setUser: (user: User | null) => void;
   logout: () => void;
 };
+
+const getInitials = (name: string) => {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0].toUpperCase())
+    .join("");
+}
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -38,34 +48,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     async function checkAuth() {
+      setLoading(true);
+
       try {
         const res = await fetchWithAuth("/api/auth/me");
 
-
         if (!res.ok) {
-          
-          logout();
           setUser(null);
-          setLoading(false);
-          
           return;
         }
 
-
         const data = await res.json();
-        setUser(data.user);
-        setLoading(false);
 
+        setUser({
+          ...data.user,
+          initials: getInitials(data.user.name),
+
+        });
 
       } catch {
         setUser(null);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     }
 
     checkAuth();
   }, []);
+
+  useEffect(() => {
+    console.log("AuthProvider:", { loading, user });
+  }, [loading, user]);
 
   return (
     <AuthContext.Provider value={{ user, loading, setUser, logout }}>

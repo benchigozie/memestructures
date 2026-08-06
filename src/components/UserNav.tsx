@@ -8,12 +8,19 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 const UserNav = () => {
     const [currentPage, setCurrentPage] = useState<"overview" | "">("overview");
     const [menuState, setMenuState] = useState<boolean>(false);
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
+    const [profileMenuState, setProfileMenuState] = useState(false);
+
+    const toggleProfileMenu = () => {
+        setProfileMenuState(!profileMenuState);
+    }
+
     useEffect(() => {
         fetchUnreadCount();
 
@@ -67,6 +74,8 @@ const UserNav = () => {
         { name: "Transactions", href: "/dashboard/user/transactions", whiteIcon: "/images/transactionwhite.png", blueIcon: "/images/transactionblue.png" },
         { name: "Support", href: "/dashboard/user/support", whiteIcon: "/images/supportwhite.png", blueIcon: "/images/supportblue.png" },
     ]
+
+    const { user } = useAuth();
 
     return (
         <section >
@@ -144,10 +153,85 @@ const UserNav = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="w-11 rounded-full h-11 flex items-center justify-center cursor-pointer">
-                                <CircleUserRound width={44} height={44} strokeWidth={1.25} />
+                            <div>
+
+                                <button onClick={toggleProfileMenu} className="relative w-11 rounded-full h-11 bg-my-gray/10 flex text-my-deep-blue items-center justify-center cursor-pointer">
+                                    <div>{user?.initials}</div>
+                                </button>
                             </div>
+                            <AnimatePresence>
+                                {
+                                    profileMenuState && (
+                                        <motion.div
+                                            initial={{
+                                                opacity: 0,
+                                                y: -10,
+                                                scale: 0.95
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                                y: 0,
+                                                scale: 1
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                y: -10,
+                                                scale: 0.95
+                                            }}
+                                            transition={{
+                                                duration: 0.18,
+                                                ease: "easeOut"
+                                            }}
+                                            className="flex flex-col items-center py-6 absolute top-full right-4 bg-my-white shadow-lg shadow-my-gray/10 rounded-lg mt-2 z-50"
+                                        >
+
+                                            <div className="w-15 h-15 bg-linear-240 from-my-blue to-my-deep-blue rounded-full flex items-center justify-center text-my-white text-xl font-semibold">
+                                                <div>{user?.initials}</div>
+                                            </div>
+                                            <div className="flex flex-col py-2.5 px-10">
+                                                <p>{user?.name}</p>
+                                                <p>{user?.email}</p>
+                                            </div>
+                                            <div className="px-8 py-2.5 w-full">
+                                                <div className="bg-my-gray/10 h-px w-full"></div>
+                                            </div>
+
+                                            <div className="w-full">
+                                                <Link href={"/dashboard/user/profile"}>
+                                                    <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                        Profile
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                            <div className="w-full">
+                                                <Link href={"/dashboard/user/profile"}>
+                                                    <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                        Account Settings
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                            <div className="w-full">
+                                                <Link href={"/dashboard/user/profile"}>
+                                                    <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                        Change Password
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                            <button
+
+                                                className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer rounded-lg border-my-gray/40 mx-2"
+                                                onClick={() => setShowLogoutPopup(true)}
+                                            >
+                                                Logout
+                                            </button>
+
+                                        </motion.div>
+                                    )
+                                }
+                            </AnimatePresence>
+
                         </div>
+
                         <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer lg:hidden items-end mr-5">
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>

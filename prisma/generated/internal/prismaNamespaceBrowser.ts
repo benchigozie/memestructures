@@ -70,7 +70,8 @@ export const ModelName = {
   AssetClassFlowStep: 'AssetClassFlowStep',
   AssetClassRequirement: 'AssetClassRequirement',
   AssetClassUniverse: 'AssetClassUniverse',
-  AssetClassFee: 'AssetClassFee'
+  AssetClassFee: 'AssetClassFee',
+  NotificationPreference: 'NotificationPreference'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -99,7 +100,7 @@ export const UserScalarFieldEnum = {
   accountStatus: 'accountStatus',
   kycStatus: 'kycStatus',
   emailVerified: 'emailVerified',
-  imageUrl: 'imageUrl',
+  profileImagePath: 'profileImagePath',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
@@ -406,6 +407,21 @@ export const AssetClassFeeScalarFieldEnum = {
 } as const
 
 export type AssetClassFeeScalarFieldEnum = (typeof AssetClassFeeScalarFieldEnum)[keyof typeof AssetClassFeeScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  investmentUpdates: 'investmentUpdates',
+  walletActivity: 'walletActivity',
+  accountSecurity: 'accountSecurity',
+  supportUpdates: 'supportUpdates',
+  platformUpdates: 'platformUpdates',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
 
 
 export const SortOrder = {

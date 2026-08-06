@@ -17,7 +17,7 @@ model User {
   accountStatus AccountStatus  @default(ACTIVE)
   kycStatus     KycStatus      @default(UNVERIFIED)
   emailVerified Boolean        @default(false)
-  imageUrl      String?
+  profileImagePath      String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     DateTime?
@@ -39,6 +39,7 @@ model User {
   createdWalletTransactions WalletTransaction[] @relation("TransactionCreator")
 
   isManaged Boolean @default(false)
+  notificationPreference NotificationPreference?
 }
 
 model Organization {
@@ -528,4 +529,21 @@ model AssetClassFee {
   updatedAt DateTime @updatedAt
 
   assetClass AssetClass @relation(fields: [assetClassId], references: [id], onDelete: Cascade)
+}
+
+model NotificationPreference {
+  id String @id @default(cuid())
+
+  userId String @unique
+
+  investmentUpdates Boolean @default(true)
+  walletActivity Boolean @default(true)
+  accountSecurity Boolean @default(true)
+  supportUpdates Boolean @default(true)
+  platformUpdates Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

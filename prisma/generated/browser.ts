@@ -117,3 +117,8 @@ export type AssetClassUniverse = Prisma.AssetClassUniverseModel
  * 
  */
 export type AssetClassFee = Prisma.AssetClassFeeModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel

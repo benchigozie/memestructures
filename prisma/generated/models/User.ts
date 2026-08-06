@@ -34,7 +34,7 @@ export type UserMinAggregateOutputType = {
   accountStatus: $Enums.AccountStatus | null
   kycStatus: $Enums.KycStatus | null
   emailVerified: boolean | null
-  imageUrl: string | null
+  profileImagePath: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -52,7 +52,7 @@ export type UserMaxAggregateOutputType = {
   accountStatus: $Enums.AccountStatus | null
   kycStatus: $Enums.KycStatus | null
   emailVerified: boolean | null
-  imageUrl: string | null
+  profileImagePath: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -70,7 +70,7 @@ export type UserCountAggregateOutputType = {
   accountStatus: number
   kycStatus: number
   emailVerified: number
-  imageUrl: number
+  profileImagePath: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -90,7 +90,7 @@ export type UserMinAggregateInputType = {
   accountStatus?: true
   kycStatus?: true
   emailVerified?: true
-  imageUrl?: true
+  profileImagePath?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -108,7 +108,7 @@ export type UserMaxAggregateInputType = {
   accountStatus?: true
   kycStatus?: true
   emailVerified?: true
-  imageUrl?: true
+  profileImagePath?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -126,7 +126,7 @@ export type UserCountAggregateInputType = {
   accountStatus?: true
   kycStatus?: true
   emailVerified?: true
-  imageUrl?: true
+  profileImagePath?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -217,7 +217,7 @@ export type UserGroupByOutputType = {
   accountStatus: $Enums.AccountStatus
   kycStatus: $Enums.KycStatus
   emailVerified: boolean
-  imageUrl: string | null
+  profileImagePath: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -256,7 +256,7 @@ export type UserWhereInput = {
   accountStatus?: Prisma.EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFilter<"User"> | $Enums.KycStatus
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
-  imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  profileImagePath?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -273,6 +273,7 @@ export type UserWhereInput = {
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdUsers?: Prisma.UserListRelationFilter
   createdWalletTransactions?: Prisma.WalletTransactionListRelationFilter
+  notificationPreference?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -285,7 +286,7 @@ export type UserOrderByWithRelationInput = {
   accountStatus?: Prisma.SortOrder
   kycStatus?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileImagePath?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -302,6 +303,7 @@ export type UserOrderByWithRelationInput = {
   createdBy?: Prisma.UserOrderByWithRelationInput
   createdUsers?: Prisma.UserOrderByRelationAggregateInput
   createdWalletTransactions?: Prisma.WalletTransactionOrderByRelationAggregateInput
+  notificationPreference?: Prisma.NotificationPreferenceOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -317,7 +319,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accountStatus?: Prisma.EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFilter<"User"> | $Enums.KycStatus
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
-  imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  profileImagePath?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -334,6 +336,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdUsers?: Prisma.UserListRelationFilter
   createdWalletTransactions?: Prisma.WalletTransactionListRelationFilter
+  notificationPreference?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -346,7 +349,7 @@ export type UserOrderByWithAggregationInput = {
   accountStatus?: Prisma.SortOrder
   kycStatus?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileImagePath?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -370,7 +373,7 @@ export type UserScalarWhereWithAggregatesInput = {
   accountStatus?: Prisma.EnumAccountStatusWithAggregatesFilter<"User"> | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusWithAggregatesFilter<"User"> | $Enums.KycStatus
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  profileImagePath?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -388,7 +391,7 @@ export type UserCreateInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -404,6 +407,7 @@ export type UserCreateInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -416,7 +420,7 @@ export type UserUncheckedCreateInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -432,6 +436,7 @@ export type UserUncheckedCreateInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -444,7 +449,7 @@ export type UserUpdateInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -460,6 +465,7 @@ export type UserUpdateInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -472,7 +478,7 @@ export type UserUncheckedUpdateInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -488,6 +494,7 @@ export type UserUncheckedUpdateInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -500,7 +507,7 @@ export type UserCreateManyInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -518,7 +525,7 @@ export type UserUpdateManyMutationInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -535,7 +542,7 @@ export type UserUncheckedUpdateManyInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -568,7 +575,7 @@ export type UserCountOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   kycStatus?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
+  profileImagePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -586,7 +593,7 @@ export type UserMaxOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   kycStatus?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
+  profileImagePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -604,7 +611,7 @@ export type UserMinOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   kycStatus?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
+  profileImagePath?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -837,6 +844,20 @@ export type UserUpdateOneWithoutSupportMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSupportMessagesInput, Prisma.UserUpdateWithoutSupportMessagesInput>, Prisma.UserUncheckedUpdateWithoutSupportMessagesInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationPreferenceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferenceInput, Prisma.UserUncheckedCreateWithoutNotificationPreferenceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPreferenceInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationPreferenceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferenceInput, Prisma.UserUncheckedCreateWithoutNotificationPreferenceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPreferenceInput
+  upsert?: Prisma.UserUpsertWithoutNotificationPreferenceInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationPreferenceInput, Prisma.UserUpdateWithoutNotificationPreferenceInput>, Prisma.UserUncheckedUpdateWithoutNotificationPreferenceInput>
+}
+
 export type UserCreateWithoutCreatedUsersInput = {
   id?: string
   name: string
@@ -847,7 +868,7 @@ export type UserCreateWithoutCreatedUsersInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -862,6 +883,7 @@ export type UserCreateWithoutCreatedUsersInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedUsersInput = {
@@ -874,7 +896,7 @@ export type UserUncheckedCreateWithoutCreatedUsersInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -889,6 +911,7 @@ export type UserUncheckedCreateWithoutCreatedUsersInput = {
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedUsersInput = {
@@ -906,7 +929,7 @@ export type UserCreateWithoutCreatedByInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -921,6 +944,7 @@ export type UserCreateWithoutCreatedByInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedByInput = {
@@ -933,7 +957,7 @@ export type UserUncheckedCreateWithoutCreatedByInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -948,6 +972,7 @@ export type UserUncheckedCreateWithoutCreatedByInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedByInput = {
@@ -981,7 +1006,7 @@ export type UserUpdateWithoutCreatedUsersInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -996,6 +1021,7 @@ export type UserUpdateWithoutCreatedUsersInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedUsersInput = {
@@ -1008,7 +1034,7 @@ export type UserUncheckedUpdateWithoutCreatedUsersInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1023,6 +1049,7 @@ export type UserUncheckedUpdateWithoutCreatedUsersInput = {
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1054,7 +1081,7 @@ export type UserScalarWhereInput = {
   accountStatus?: Prisma.EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFilter<"User"> | $Enums.KycStatus
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
-  imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  profileImagePath?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -1072,7 +1099,7 @@ export type UserCreateWithoutMembershipsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1087,6 +1114,7 @@ export type UserCreateWithoutMembershipsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -1099,7 +1127,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1114,6 +1142,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -1142,7 +1171,7 @@ export type UserUpdateWithoutMembershipsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1157,6 +1186,7 @@ export type UserUpdateWithoutMembershipsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -1169,7 +1199,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1184,6 +1214,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIndividualKycInput = {
@@ -1196,7 +1227,7 @@ export type UserCreateWithoutIndividualKycInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1211,6 +1242,7 @@ export type UserCreateWithoutIndividualKycInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIndividualKycInput = {
@@ -1223,7 +1255,7 @@ export type UserUncheckedCreateWithoutIndividualKycInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1238,6 +1270,7 @@ export type UserUncheckedCreateWithoutIndividualKycInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIndividualKycInput = {
@@ -1266,7 +1299,7 @@ export type UserUpdateWithoutIndividualKycInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1281,6 +1314,7 @@ export type UserUpdateWithoutIndividualKycInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIndividualKycInput = {
@@ -1293,7 +1327,7 @@ export type UserUncheckedUpdateWithoutIndividualKycInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1308,6 +1342,7 @@ export type UserUncheckedUpdateWithoutIndividualKycInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWalletInput = {
@@ -1320,7 +1355,7 @@ export type UserCreateWithoutWalletInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1335,6 +1370,7 @@ export type UserCreateWithoutWalletInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWalletInput = {
@@ -1347,7 +1383,7 @@ export type UserUncheckedCreateWithoutWalletInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1362,6 +1398,7 @@ export type UserUncheckedCreateWithoutWalletInput = {
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWalletInput = {
@@ -1390,7 +1427,7 @@ export type UserUpdateWithoutWalletInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1405,6 +1442,7 @@ export type UserUpdateWithoutWalletInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalletInput = {
@@ -1417,7 +1455,7 @@ export type UserUncheckedUpdateWithoutWalletInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1432,6 +1470,7 @@ export type UserUncheckedUpdateWithoutWalletInput = {
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPositionInput = {
@@ -1444,7 +1483,7 @@ export type UserCreateWithoutPositionInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1459,6 +1498,7 @@ export type UserCreateWithoutPositionInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPositionInput = {
@@ -1471,7 +1511,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1486,6 +1526,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPositionInput = {
@@ -1514,7 +1555,7 @@ export type UserUpdateWithoutPositionInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1529,6 +1570,7 @@ export type UserUpdateWithoutPositionInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionInput = {
@@ -1541,7 +1583,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1556,6 +1598,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedWalletTransactionsInput = {
@@ -1568,7 +1611,7 @@ export type UserCreateWithoutCreatedWalletTransactionsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1583,6 +1626,7 @@ export type UserCreateWithoutCreatedWalletTransactionsInput = {
   wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedWalletTransactionsInput = {
@@ -1595,7 +1639,7 @@ export type UserUncheckedCreateWithoutCreatedWalletTransactionsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1610,6 +1654,7 @@ export type UserUncheckedCreateWithoutCreatedWalletTransactionsInput = {
   position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedWalletTransactionsInput = {
@@ -1638,7 +1683,7 @@ export type UserUpdateWithoutCreatedWalletTransactionsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1653,6 +1698,7 @@ export type UserUpdateWithoutCreatedWalletTransactionsInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedWalletTransactionsInput = {
@@ -1665,7 +1711,7 @@ export type UserUncheckedUpdateWithoutCreatedWalletTransactionsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1680,6 +1726,7 @@ export type UserUncheckedUpdateWithoutCreatedWalletTransactionsInput = {
   position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInvestmentsInput = {
@@ -1692,7 +1739,7 @@ export type UserCreateWithoutInvestmentsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1707,6 +1754,7 @@ export type UserCreateWithoutInvestmentsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInvestmentsInput = {
@@ -1719,7 +1767,7 @@ export type UserUncheckedCreateWithoutInvestmentsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1734,6 +1782,7 @@ export type UserUncheckedCreateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInvestmentsInput = {
@@ -1762,7 +1811,7 @@ export type UserUpdateWithoutInvestmentsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1777,6 +1826,7 @@ export type UserUpdateWithoutInvestmentsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvestmentsInput = {
@@ -1789,7 +1839,7 @@ export type UserUncheckedUpdateWithoutInvestmentsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1804,6 +1854,7 @@ export type UserUncheckedUpdateWithoutInvestmentsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1816,7 +1867,7 @@ export type UserCreateWithoutNotificationsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1831,6 +1882,7 @@ export type UserCreateWithoutNotificationsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1843,7 +1895,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1858,6 +1910,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1886,7 +1939,7 @@ export type UserUpdateWithoutNotificationsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1901,6 +1954,7 @@ export type UserUpdateWithoutNotificationsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1913,7 +1967,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1928,6 +1982,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSupportTicketsInput = {
@@ -1940,7 +1995,7 @@ export type UserCreateWithoutSupportTicketsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1955,6 +2010,7 @@ export type UserCreateWithoutSupportTicketsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -1967,7 +2023,7 @@ export type UserUncheckedCreateWithoutSupportTicketsInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1982,6 +2038,7 @@ export type UserUncheckedCreateWithoutSupportTicketsInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -2010,7 +2067,7 @@ export type UserUpdateWithoutSupportTicketsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2025,6 +2082,7 @@ export type UserUpdateWithoutSupportTicketsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -2037,7 +2095,7 @@ export type UserUncheckedUpdateWithoutSupportTicketsInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2052,6 +2110,7 @@ export type UserUncheckedUpdateWithoutSupportTicketsInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSupportMessagesInput = {
@@ -2064,7 +2123,7 @@ export type UserCreateWithoutSupportMessagesInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2079,6 +2138,7 @@ export type UserCreateWithoutSupportMessagesInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSupportMessagesInput = {
@@ -2091,7 +2151,7 @@ export type UserUncheckedCreateWithoutSupportMessagesInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2106,6 +2166,7 @@ export type UserUncheckedCreateWithoutSupportMessagesInput = {
   wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSupportMessagesInput = {
@@ -2134,7 +2195,7 @@ export type UserUpdateWithoutSupportMessagesInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2149,6 +2210,7 @@ export type UserUpdateWithoutSupportMessagesInput = {
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportMessagesInput = {
@@ -2161,7 +2223,7 @@ export type UserUncheckedUpdateWithoutSupportMessagesInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2169,6 +2231,135 @@ export type UserUncheckedUpdateWithoutSupportMessagesInput = {
   isManaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
   supportTickets?: Prisma.SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+  investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  position?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationPreferenceInput = {
+  id?: string
+  name: string
+  username?: string | null
+  email: string
+  password: string
+  accountType?: $Enums.AccountType
+  accountStatus?: $Enums.AccountStatus
+  kycStatus?: $Enums.KycStatus
+  emailVerified?: boolean
+  profileImagePath?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  isManaged?: boolean
+  individualKyc?: Prisma.IndividualKycCreateNestedOneWithoutUserInput
+  supportTickets?: Prisma.SupportTicketCreateNestedManyWithoutUserInput
+  supportMessages?: Prisma.SupportMessageCreateNestedManyWithoutSenderInput
+  investments?: Prisma.InvestmentCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  position?: Prisma.PositionCreateNestedManyWithoutUserInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput
+  createdWalletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutNotificationPreferenceInput = {
+  id?: string
+  name: string
+  username?: string | null
+  email: string
+  password: string
+  accountType?: $Enums.AccountType
+  accountStatus?: $Enums.AccountStatus
+  kycStatus?: $Enums.KycStatus
+  emailVerified?: boolean
+  profileImagePath?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: string | null
+  isManaged?: boolean
+  individualKyc?: Prisma.IndividualKycUncheckedCreateNestedOneWithoutUserInput
+  supportTickets?: Prisma.SupportTicketUncheckedCreateNestedManyWithoutUserInput
+  supportMessages?: Prisma.SupportMessageUncheckedCreateNestedManyWithoutSenderInput
+  investments?: Prisma.InvestmentUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  position?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput
+  createdWalletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutNotificationPreferenceInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferenceInput, Prisma.UserUncheckedCreateWithoutNotificationPreferenceInput>
+}
+
+export type UserUpsertWithoutNotificationPreferenceInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPreferenceInput, Prisma.UserUncheckedUpdateWithoutNotificationPreferenceInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferenceInput, Prisma.UserUncheckedCreateWithoutNotificationPreferenceInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationPreferenceInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPreferenceInput, Prisma.UserUncheckedUpdateWithoutNotificationPreferenceInput>
+}
+
+export type UserUpdateWithoutNotificationPreferenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  accountType?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+  accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isManaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  individualKyc?: Prisma.IndividualKycUpdateOneWithoutUserNestedInput
+  supportTickets?: Prisma.SupportTicketUpdateManyWithoutUserNestedInput
+  supportMessages?: Prisma.SupportMessageUpdateManyWithoutSenderNestedInput
+  investments?: Prisma.InvestmentUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  position?: Prisma.PositionUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
+  createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationPreferenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  accountType?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+  accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isManaged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  individualKyc?: Prisma.IndividualKycUncheckedUpdateOneWithoutUserNestedInput
+  supportTickets?: Prisma.SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+  supportMessages?: Prisma.SupportMessageUncheckedUpdateManyWithoutSenderNestedInput
   investments?: Prisma.InvestmentUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -2188,7 +2379,7 @@ export type UserCreateManyCreatedByInput = {
   accountStatus?: $Enums.AccountStatus
   kycStatus?: $Enums.KycStatus
   emailVerified?: boolean
-  imageUrl?: string | null
+  profileImagePath?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2205,7 +2396,7 @@ export type UserUpdateWithoutCreatedByInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2220,6 +2411,7 @@ export type UserUpdateWithoutCreatedByInput = {
   wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedByInput = {
@@ -2232,7 +2424,7 @@ export type UserUncheckedUpdateWithoutCreatedByInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2247,6 +2439,7 @@ export type UserUncheckedUpdateWithoutCreatedByInput = {
   wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput
   createdWalletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationPreference?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCreatedByInput = {
@@ -2259,7 +2452,7 @@ export type UserUncheckedUpdateManyWithoutCreatedByInput = {
   accountStatus?: Prisma.EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
   kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2370,7 +2563,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accountStatus?: boolean
   kycStatus?: boolean
   emailVerified?: boolean
-  imageUrl?: boolean
+  profileImagePath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -2387,6 +2580,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>
   createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>
   createdWalletTransactions?: boolean | Prisma.User$createdWalletTransactionsArgs<ExtArgs>
+  notificationPreference?: boolean | Prisma.User$notificationPreferenceArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2400,7 +2594,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   accountStatus?: boolean
   kycStatus?: boolean
   emailVerified?: boolean
-  imageUrl?: boolean
+  profileImagePath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -2419,7 +2613,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   accountStatus?: boolean
   kycStatus?: boolean
   emailVerified?: boolean
-  imageUrl?: boolean
+  profileImagePath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -2438,7 +2632,7 @@ export type UserSelectScalar = {
   accountStatus?: boolean
   kycStatus?: boolean
   emailVerified?: boolean
-  imageUrl?: boolean
+  profileImagePath?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -2446,7 +2640,7 @@ export type UserSelectScalar = {
   isManaged?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "accountType" | "accountStatus" | "kycStatus" | "emailVerified" | "imageUrl" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "isManaged", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "accountType" | "accountStatus" | "kycStatus" | "emailVerified" | "profileImagePath" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "isManaged", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   individualKyc?: boolean | Prisma.User$individualKycArgs<ExtArgs>
   supportTickets?: boolean | Prisma.User$supportTicketsArgs<ExtArgs>
@@ -2459,6 +2653,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>
   createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>
   createdWalletTransactions?: boolean | Prisma.User$createdWalletTransactionsArgs<ExtArgs>
+  notificationPreference?: boolean | Prisma.User$notificationPreferenceArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2482,6 +2677,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     createdUsers: Prisma.$UserPayload<ExtArgs>[]
     createdWalletTransactions: Prisma.$WalletTransactionPayload<ExtArgs>[]
+    notificationPreference: Prisma.$NotificationPreferencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2493,7 +2689,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accountStatus: $Enums.AccountStatus
     kycStatus: $Enums.KycStatus
     emailVerified: boolean
-    imageUrl: string | null
+    profileImagePath: string | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -2904,6 +3100,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdBy<T extends Prisma.User$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdUsers<T extends Prisma.User$createdUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdWalletTransactions<T extends Prisma.User$createdWalletTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdWalletTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationPreference<T extends Prisma.User$notificationPreferenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationPreferenceArgs<ExtArgs>>): Prisma.Prisma__NotificationPreferenceClient<runtime.Types.Result.GetResult<Prisma.$NotificationPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2942,7 +3139,7 @@ export interface UserFieldRefs {
   readonly accountStatus: Prisma.FieldRef<"User", 'AccountStatus'>
   readonly kycStatus: Prisma.FieldRef<"User", 'KycStatus'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
-  readonly imageUrl: Prisma.FieldRef<"User", 'String'>
+  readonly profileImagePath: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -3595,6 +3792,25 @@ export type User$createdWalletTransactionsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.WalletTransactionScalarFieldEnum | Prisma.WalletTransactionScalarFieldEnum[]
+}
+
+/**
+ * User.notificationPreference
+ */
+export type User$notificationPreferenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationPreference
+   */
+  select?: Prisma.NotificationPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationPreference
+   */
+  omit?: Prisma.NotificationPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationPreferenceInclude<ExtArgs> | null
+  where?: Prisma.NotificationPreferenceWhereInput
 }
 
 /**

@@ -7,18 +7,25 @@ import { useState, useEffect } from "react"
 import PopUp from "@/components/PopUp";
 import { useAuth } from "@/context/AuthContext";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const AdminNav = () => {
-    const [currentPage, setCurrentPage] = useState<"KYC" | "home" | "payments">("KYC");
-    const [menuState, setMenuState] = useState<boolean>(false);
+    const [menuState, setMenuState] = useState(false);
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
+    const [profileMenuState, setProfileMenuState] = useState(false);
+
+    const pathname = usePathname();
+    const { user } = useAuth();
 
     useEffect(() => {
         fetchUnreadCount();
-
     }, []);
+
+    const toggleProfileMenu = () => {
+        setProfileMenuState(!profileMenuState);
+    }
 
     const fetchUnreadCount = async () => {
         try {
@@ -38,7 +45,8 @@ const AdminNav = () => {
             await fetchWithAuth("/api/notifications/mark-read", {
                 method: "PATCH",
             });
-            setUnreadCount?.(0);
+
+            setUnreadCount(0);
         } catch (err) {
             console.error(err);
         }
@@ -59,7 +67,7 @@ const AdminNav = () => {
     const toggleMenu = () => {
         console.log("toggling menu");
         setMenuState(!menuState);
-    }
+    };
 
     const navLinks = [
         {
@@ -85,62 +93,51 @@ const AdminNav = () => {
             href: "/dashboard/admin/users",
             whiteIcon: "/images/userswhite.png",
             blueIcon: "/images/usersblue.png",
-        }
+        },
     ];
 
     return (
-        <section >
+        <section>
             <div className="h-screen hidden lg:block fixed top-0 left-0 w-56 bg-my-white/80 backdrop-blur-sm border-r border-gray-200 p-4">
                 <div className="flex flex-col justify-between h-full">
                     <nav className="mt-14 flex py-4 gap-2 flex-col">
-                        {
-                            navLinks.map((page) => (
+                        {navLinks.map((page) => {
+                            const isActive = pathname === page.href;
+
+                            return (
                                 <Link
                                     key={page.name}
                                     href={page.href}
-                                    className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-300 ${currentPage === page.name
+                                    className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-300 ${isActive
                                         ? "bg-my-deep-blue text-white"
                                         : "text-my-deep-blue hover:bg-gray-200"
                                         }`}
-                                    onClick={() => setCurrentPage(page.name as "KYC" | "home")}
                                 >
-                                    <div>
-                                        {
-                                            currentPage === page.name ?
-                                                <Image
-                                                    src={page.whiteIcon}
-                                                    alt={`${page.name} icon`}
-                                                    width={20}
-                                                    height={20}
-                                                />
-                                                :
-                                                <Image
-                                                    src={page.blueIcon}
-                                                    alt={`${page.name} icon`}
-                                                    width={20}
-                                                    height={20}
-                                                />
-                                        }
-                                    </div>
+                                    <Image
+                                        src={isActive ? page.whiteIcon : page.blueIcon}
+                                        alt={`${page.name} icon`}
+                                        width={20}
+                                        height={20}
+                                    />
+
                                     <p>{page.name}</p>
                                 </Link>
-                            ))
-                        }
-
+                            );
+                        })}
                     </nav>
+
                     <div
                         className="py-2 px-4 cursor-pointer hover:bg-my-gray/10 outline outline-my-deep-blue/30 rounded-lg mt-auto"
                         onClick={() => setShowLogoutPopup(true)}
                     >
-                        <button>
-                            Logout
-                        </button>
+                        <button>Logout</button>
                     </div>
                 </div>
             </div>
+
             <section className="fixed top-0 w-full z-30 backdrop-blur-xl bg-my-white/60">
                 <div className="w-full flex h-15 justify-between items-center lg:py-3 py-2 px-4 mx-auto relative">
-                    <Link href="/" className="">
+                    <Link href="/">
                         <Image
                             src="/images/memestructureslogo.png"
                             alt="Meme Structures Logo"
@@ -148,6 +145,7 @@ const AdminNav = () => {
                             height={40}
                         />
                     </Link>
+
                     <div className="flex items-center gap-3">
                         <div className="flex items-center gap-3">
                             <div className="text-my-deep-blue relative">
@@ -164,50 +162,124 @@ const AdminNav = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="bg-my-deep-blue w-11 rounded-full h-11"></div>
+                            <div>
+
+                                <button onClick={toggleProfileMenu} className="relative w-11 rounded-full h-11 bg-my-gray/10 flex text-my-deep-blue items-center justify-center cursor-pointer">
+                                    <div>{user?.initials}</div>
+                                </button>
+                            </div>
+                            <AnimatePresence>
+                                {
+                                    profileMenuState && (
+                                        <motion.div
+                                            initial={{
+                                                opacity: 0,
+                                                y: -10,
+                                                scale: 0.95
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                                y: 0,
+                                                scale: 1
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                y: -10,
+                                                scale: 0.95
+                                            }}
+                                            transition={{
+                                                duration: 0.18,
+                                                ease: "easeOut"
+                                            }}
+                                            className="flex flex-col items-center py-6 absolute top-full right-4 bg-my-white shadow-lg shadow-my-gray/10 rounded-lg mt-2 z-50"
+                                        >
+
+                                            <div className="w-15 h-15 bg-linear-240 from-my-blue to-my-deep-blue rounded-full flex items-center justify-center text-my-white text-xl font-semibold">
+                                                <div>{user?.initials}</div>
+                                            </div>
+                                            <div className="flex flex-col py-2.5 px-10">
+                                                <p>{user?.name}</p>
+                                                <p>{user?.email}</p>
+                                            </div>
+                                            <div className="px-8 py-2.5 w-full">
+                                                <div className="bg-my-gray/10 h-px w-full"></div>
+                                            </div>
+
+                                            <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                <Link href={"/dashboard/admin/profile"}>
+                                                    Profile
+                                                </Link>
+                                            </button>
+                                            <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                <Link href={"/dashboard/admin/profile"}>
+                                                    Account Settings
+                                                </Link>
+                                            </button>
+                                            <button className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer">
+                                                <Link href={"/dashboard/admin/profile"}>
+                                                    Change Password
+                                                </Link>
+                                            </button>
+                                            <button
+
+                                                className="py-2.5 px-10 hover:bg-my-blue-white/30 transition-all text-center w-full cursor-pointer rounded-lg border-my-gray/40 mx-2"
+                                                onClick={() => setShowLogoutPopup(true)}
+                                            >
+                                                Logout
+                                            </button>
+
+                                        </motion.div>
+                                    )
+                                }
+                            </AnimatePresence>
+
                         </div>
+
                         <div onClick={toggleMenu} className="flex flex-col space-y-1 cursor-pointer lg:hidden items-end mr-5">
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                             <div className="h-0.5 w-6 bg-my-deep-blue rounded-b-full"></div>
                             <div className="h-0.5 w-4 bg-my-deep-blue rounded-b-full"></div>
                         </div>
                     </div>
-                    <div onClick={toggleMenu} className={`mt-3 mx-auto duration-500 top-full bg-my-white  absolute py-6 w-[90vw] rounded-2xl flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"}`}>
-                        {navLinks.map((link) => {
-                            return (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="py-2 px-6 hover:bg-my-blue-white/30 transition-all text-center"
-                                >
-                                    {link.name}
-                                </Link>
+                  
 
-                            );
-                        })}
+                    <div
+                        onClick={toggleMenu}
+                        className={`mt-3 mx-auto duration-500 top-full bg-my-white absolute py-6 w-[90vw] rounded-2xl flex flex-col border border-my-blue-white ${menuState
+                            ? "opacity-100 visible"
+                            : "opacity-0 invisible"
+                            }`}
+                    >
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="py-2 px-6 hover:bg-my-blue-white/30 transition-all text-center"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+
                         <button
-
                             className="py-2 px-6 hover:bg-my-blue-white/30 transition-all text-center"
                             onClick={() => setShowLogoutPopup(true)}
                         >
                             Logout
                         </button>
                     </div>
-
                 </div>
-                {
-                    showLogoutPopup && (
-                        <PopUp
-                            title="Confirm Logout"
-                            message="Are you sure you want to log out of your account?"
-                            onClose={() => setShowLogoutPopup(false)}
-                            onConfirm={handleLogout}
-                        />
-                    )
-                }
+
+                {showLogoutPopup && (
+                    <PopUp
+                        title="Confirm Logout"
+                        message="Are you sure you want to log out of your account?"
+                        onClose={() => setShowLogoutPopup(false)}
+                        onConfirm={handleLogout}
+                    />
+                )}
             </section>
         </section>
-    )
-}
+    );
+};
 
-export default AdminNav
+export default AdminNav;

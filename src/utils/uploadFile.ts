@@ -51,3 +51,23 @@ export async function uploadSupportFile(file: File, folder: string) {
 
     return filePath
 }
+
+export async function uploadProfileImage(
+  file: File,
+  folder: string
+) {
+  const fileName = createSafeFileName(file);
+
+  const filePath = `${folder}/${fileName}`;
+
+  const { error } = await supabase.storage
+      .from("images")
+      .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: true,
+      });
+
+  if (error) throw error;
+
+  return filePath;
+}

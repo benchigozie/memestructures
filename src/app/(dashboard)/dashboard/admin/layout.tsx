@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import AdminNav from "@/components/AdminNav";
+import InProgress from "@/components/InProgress";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -20,7 +21,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
   }, [user, loading, router]);
 
-  if (loading) return null;
+  if (loading) return <InProgress message="Loading your dashboard" />;
 
   const isAllowed =
     user?.accountType === "ADMIN" || user?.accountType === "DEV";
