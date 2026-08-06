@@ -10,7 +10,7 @@ type User = {
   username?: string;
   initials: string;
   accountType: "INDIVIDUAL" | "ENTERPRISE" | "ADMIN" | "DEV";
-  kycStatus: "UNVERIFIED" | "VERIFIED" | "PENDING" | "REJECTED";
+  kycStatus: "UNVERIFIED" | "VERIFIED" | "PENDING" | "REJECTED" | "UNCOMPLETED";
 };
 
 type AuthContextType = {

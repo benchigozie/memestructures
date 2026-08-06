@@ -29,6 +29,7 @@ async function main() {
   const hashedPassword4 = await bcrypt.hash("Individual123" + PEPPER, SALT_ROUNDS);
   const hashedPassword5 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
   const hashedPassword6 = await bcrypt.hash("Mrbarbie1" + PEPPER, SALT_ROUNDS);
+  const hashedPassword7 = await bcrypt.hash("Unverified123" + PEPPER, SALT_ROUNDS);
 
 
   const devUser = await prisma.user.create({
@@ -105,6 +106,17 @@ async function main() {
     },
   });
 
+  const UnverifiedUser = await prisma.user.create({
+    data: {
+      name: "mr Unverified",
+      email: "unverified@gmail.com",
+      password: hashedPassword7,
+      accountType: "INDIVIDUAL",
+      emailVerified: true,
+      kycStatus: "UNVERIFIED",
+    },
+  });
+
 
   const devWallet = await prisma.wallet.create({
     data: { userId: devUser.id },
@@ -128,6 +140,10 @@ async function main() {
 
   const user2Wallet = await prisma.wallet.create({
     data: { userId: User2.id },
+  });
+
+  const UnverifiedUserWallet = await prisma.wallet.create({
+    data: { userId: UnverifiedUser.id },
   });
 
 

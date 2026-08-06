@@ -8,7 +8,7 @@ import AccountType from "@/components/AccountType";
 import IndividualKYC from "@/components/IndividualKYC";
 import InProgress from "@/components/InProgress";
 import EnterpriseKYC from "@/components/EnterpriseKYC";
-
+import KYCStatus from "@/components/KYCStatus";
 
 export default function Dashboard() {
 
@@ -26,8 +26,8 @@ export default function Dashboard() {
       return
     };
 
-    
-  
+
+
     console.log("Dashboard useEffect - user:", user);
 
     if (!user) {
@@ -35,13 +35,13 @@ export default function Dashboard() {
       router.replace("/login");
       return;
     }
-  
+
     if (user.accountType === "ADMIN" || user.accountType === "DEV") {
       console.log("User is admin or dev, redirecting to admin KYC page");
       router.replace("/dashboard/admin/kyc");
       return;
     }
-  
+
     if (user.username && user.accountType && user.kycStatus === "VERIFIED") {
       console.log("User has username, account type, and is verified, redirecting to user overview");
       router.replace("/dashboard/user/overview");
@@ -50,7 +50,7 @@ export default function Dashboard() {
 
   if (loading) return (
     console.log("Dashboard is loading 2, showing InProgress component"),
-    <InProgress message="Loading your dashboard"/>
+    <InProgress message="Loading your dashboard" />
   );
 
 
@@ -61,8 +61,8 @@ export default function Dashboard() {
 
   console.log("this is user in dashboard: ", user);
 
-  
-  if (user && (user.accountType === "INDIVIDUAL" || user.accountType === "ENTERPRISE" ) && !user?.username) {
+
+  if (user && (user.accountType === "INDIVIDUAL" || user.accountType === "ENTERPRISE") && !user?.username) {
     console.log("User is individual or enterprise and has no username, showing ChooseUsername component");
     return <ChooseUsername />;
   }
@@ -72,15 +72,33 @@ export default function Dashboard() {
     return <AccountType />;
   }
 
-  if (user.kycStatus !== "VERIFIED" && user.accountType === "INDIVIDUAL") {
-    console.log("User is individual and not verified, showing IndividualKYC component");
+  if (
+    user.accountType === "INDIVIDUAL" &&
+    (
+      user.kycStatus === "UNVERIFIED" ||
+      user.kycStatus === "UNCOMPLETED"
+    )
+  ) {
+    return <IndividualKYC />;
+  }
+
+
+  if (
+    user.accountType === "INDIVIDUAL" &&
+    (
+      user.kycStatus === "PENDING" ||
+      user.kycStatus === "REJECTED"
+    )
+  ) {
     return (
-      <IndividualKYC/>
+      <KYCStatus
+        status={user.kycStatus}
+      />
     );
   }
 
   if (user.kycStatus !== "VERIFIED" && user.accountType === "ENTERPRISE") {
-     console.log("User is enterprise and not verified, showing EnterpriseKYC component");
+    console.log("User is enterprise and not verified, showing EnterpriseKYC component");
     return (
       <EnterpriseKYC />
     );
