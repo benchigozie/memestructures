@@ -108,7 +108,7 @@ export async function GET(
       accountStatus: user.accountStatus,
       kycStatus: user.kycStatus,
       emailVerified: user.emailVerified,
-      imageUrl: user.imageUrl,
+     
 
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
