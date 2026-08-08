@@ -175,8 +175,6 @@ export default function KycStatusCard({
             "
         >
     
-            {/* Welcome Message */}
-    
             <div>
     
                 <h1
