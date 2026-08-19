@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import InProgress from "@/components/InProgress";
+import InProgress from "@/components/InProgress";import { getInitials } from "@/utils/getInitials";
 
 
 const loginSchema = Yup.object({
@@ -54,6 +54,7 @@ const page = () => {
 
   useEffect(() => {
     if (user) {
+      console.log("User is logged in, redirecting to dashboard from login page useeffect");
       router.replace("/dashboard");
     }
   }, [user, router]);
@@ -125,13 +126,12 @@ const page = () => {
                     if (result.success) {
 
                       resetForm();
-                      setUser(result.user);
+                      setUser({
+                        ...result.user,
+                        initials: getInitials(result.user.name),
+                    });
 
                       setToSuccess();
-
-                      setTimeout(() => {
-                        router.push("/dashboard");
-                      }, 800);
 
                       console.log("Login successful:", result);
                       console.log("redirecting to dashboard enshiii");

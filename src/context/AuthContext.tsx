@@ -2,6 +2,7 @@
 
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { createContext, useContext, useEffect, useState } from "react";
+import { getInitials } from "@/utils/getInitials";
 
 type User = {
   id: string;
@@ -20,14 +21,7 @@ type AuthContextType = {
   logout: () => void;
 };
 
-const getInitials = (name: string) => {
-  return name
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((word) => word[0].toUpperCase())
-    .join("");
-}
+
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -63,7 +57,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser({
           ...data.user,
           initials: getInitials(data.user.name),
-
         });
 
       } catch {
