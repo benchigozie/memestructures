@@ -18,7 +18,7 @@ function FixedCTA() {
                     <p className="text-xs">CURRENT GROWTH</p>
                     <p className="text-xl text-my-blue">+39.4% YTD</p>
                 </div>
-                <Link href="/register">
+                <Link href="/login">
                     <button className="bg-my-blue cursor-pointer text-sm text-my-white font-semibold px-4 md:px-6 py-2.5 md:py-4 rounded-full shadow-lg hover:shadow-my-blue/40 transition-shadow duration-300 flex gap-2">
 
                         <p>Invest Now</p>
