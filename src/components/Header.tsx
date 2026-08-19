@@ -57,9 +57,9 @@ function Header() {
                     })}
                 </div>
                 <div className="lg:flex hidden">
-                    <Link href="/register">
+                    <Link href="/login">
                         <button className="px-5 py-3 bg-my-blue-white text-my-blue rounded-full font-semibold transition-colors duration-300 hover:cursor-pointer">
-                            Sign Up
+                            Log in
                         </button>
                     </Link>
                 </div>

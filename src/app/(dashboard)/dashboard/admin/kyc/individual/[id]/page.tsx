@@ -88,7 +88,7 @@ export default function IndividualKycPage() {
                 <div className="flex justify-between items-start">
                     <button
                         onClick={() => router.back()}
-                        className="hidden md:flex gap-1 items-center text-sm cursor-pointer bg-my-blue text-my-white shadow-md shadow-my-gray/10 rounded-md px-4 py-2 hover:bg-gray-200 hover:text-my-deep-blue transition-all duration-300"
+                        className="hidden md:flex gap-1 items-center cursor-pointer text-my-blue rounded-md hover:text-my-deep-blue transition-all duration-300 mb-2"
                     >
                         <ArrowLeft size={16} />
                         <span>Back</span>

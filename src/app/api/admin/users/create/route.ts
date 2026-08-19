@@ -183,6 +183,8 @@ export async function POST(req: Request) {
 
                 kycStatus,
 
+                emailVerified: true,
+
                 createdById: creator.id,
 
                 wallet: {

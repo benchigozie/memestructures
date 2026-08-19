@@ -232,8 +232,8 @@ const page = () => {
                       >
                         Login
                       </button>
-                      <p className="mt-2 text-center">Dont have an account? <span className="text-my-blue cursor-pointer"><Link href="/register">Create Account</Link></span></p>
-                      <p className="mt-2 text-sm text-center text-my-gray/70">Forgot Your Password? <span className="text-my-blue/80 cursor-pointer"><Link href="/forgot-password">Reset</Link></span></p>
+                      {/*<p className="mt-2 text-center">Dont have an account? <span className="text-my-blue cursor-pointer"><Link href="/register">Create Account</Link></span></p>*/}
+                      <p className="mt-2 text-[15px] text-center text-my-gray/70">Forgot Your Password? <span className="text-my-blue/80 cursor-pointer"><Link href="/forgot-password">Reset</Link></span></p>
                     </div>
                   </Form>
                 )}

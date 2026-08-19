@@ -102,7 +102,9 @@ const AdminNav = () => {
                 <div className="flex flex-col justify-between h-full">
                     <nav className="mt-14 flex py-4 gap-2 flex-col">
                         {navLinks.map((page) => {
-                            const isActive = pathname === page.href;
+                            const isActive =
+                            pathname === page.href ||
+                            pathname.startsWith(`${page.href}/`);
 
                             return (
                                 <Link

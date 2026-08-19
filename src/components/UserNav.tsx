@@ -7,15 +7,19 @@ import PopUp from "@/components/PopUp";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 const UserNav = () => {
-    const [currentPage, setCurrentPage] = useState<"overview" | "">("overview");
+    
     const [menuState, setMenuState] = useState<boolean>(false);
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
     const [profileMenuState, setProfileMenuState] = useState(false);
+    const pathname = usePathname();
+    
+    
 
     const toggleProfileMenu = () => {
         setProfileMenuState(!profileMenuState);
@@ -82,39 +86,31 @@ const UserNav = () => {
             <div className="h-screen hidden lg:block fixed top-0 left-0 w-56 bg-my-white/80 backdrop-blur-sm border-r border-gray-200 p-4">
                 <div className="flex flex-col justify-between h-full">
                     <nav className="mt-14 flex py-4 gap-2 flex-col">
-                        {
-                            navLinks.map((page) => (
+                    {navLinks.map((page) => {
+                            const isActive =
+                            pathname === page.href ||
+                            pathname.startsWith(`${page.href}/`);
+
+                            return (
                                 <Link
                                     key={page.name}
                                     href={page.href}
-                                    className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-300 ${currentPage === page.name
+                                    className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-300 ${isActive
                                         ? "bg-my-deep-blue text-white"
                                         : "text-my-deep-blue hover:bg-gray-200"
                                         }`}
-                                    onClick={() => setCurrentPage(page.name as "overview" | "")}
                                 >
-                                    <div>
-                                        {
-                                            currentPage === page.name ?
-                                                <Image
-                                                    src={page.whiteIcon}
-                                                    alt={`${page.name} icon`}
-                                                    width={20}
-                                                    height={20}
-                                                />
-                                                :
-                                                <Image
-                                                    src={page.blueIcon}
-                                                    alt={`${page.name} icon`}
-                                                    width={20}
-                                                    height={20}
-                                                />
-                                        }
-                                    </div>
+                                    <Image
+                                        src={isActive ? page.whiteIcon : page.blueIcon}
+                                        alt={`${page.name} icon`}
+                                        width={20}
+                                        height={20}
+                                    />
+
                                     <p>{page.name}</p>
                                 </Link>
-                            ))
-                        }
+                            );
+                        })}
 
                     </nav>
                     <div
@@ -239,14 +235,28 @@ const UserNav = () => {
                         </div>
                     </div>
                     <div onClick={toggleMenu} className={`mt-3 mx-auto duration-500 top-full bg-my-white  absolute py-6 w-[90vw] rounded-2xl flex flex-col border border-my-blue-white ${menuState ? "opacity-100 visible" : "opacity-0 invisible"}`}>
-                        {navLinks.map((link) => {
+                    {navLinks.map((page) => {
+                            const isActive =
+                            pathname === page.href ||
+                            pathname.startsWith(`${page.href}/`);
+
                             return (
                                 <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="py-2 px-6 hover:bg-my-blue-white/30 transition-all text-center"
+                                    key={page.name}
+                                    href={page.href}
+                                    className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-300 ${isActive
+                                        ? "bg-my-deep-blue text-white"
+                                        : "text-my-deep-blue hover:bg-gray-200"
+                                        }`}
                                 >
-                                    {link.name}
+                                    <Image
+                                        src={isActive ? page.whiteIcon : page.blueIcon}
+                                        alt={`${page.name} icon`}
+                                        width={20}
+                                        height={20}
+                                    />
+
+                                    <p>{page.name}</p>
                                 </Link>
                             );
                         })}

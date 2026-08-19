@@ -81,7 +81,7 @@ export default function EnterpriseKycPage() {
       <div className="flex justify-between items-start">
         <button
           onClick={() => router.back()}
-          className="hidden md:flex gap-1 items-center text-sm bg-my-blue text-white px-4 py-2 rounded"
+className="hidden md:flex gap-1 items-center cursor-pointer text-my-blue rounded-md hover:text-my-deep-blue transition-all duration-300 mb-2"
         >
           <ArrowLeft size={16} />
           Back

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import InProgress from "@/components/InProgress";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import PopUp from "@/components/PopUp";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 type Transaction = {
   id: string;
@@ -130,6 +132,14 @@ export default function TransactionPage() {
 
   return (
     <div className="p-4 md:p-6 max-w-5xl">
+       <Link
+                href="/dashboard/admin/payments"
+                className="inline-flex items-center gap-2 text-my-blue hover:text-my-deep-blue mb-2"
+            >
+                <ArrowLeft size={18} />
+
+                Back to Clients
+            </Link>
       <h1 className="text-2xl font-bold text-my-deep-blue">
         Transaction Details
       </h1>
