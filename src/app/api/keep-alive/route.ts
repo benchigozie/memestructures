@@ -8,7 +8,7 @@ export async function GET(request: Request) {
       prisma.assetClass.count({
         where: { isPublished: true },
       }),
-    ]); // <-- Added the missing closing bracket and parenthesis here
+    ]); 
 
     return NextResponse.json(
       { 

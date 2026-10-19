@@ -484,6 +484,23 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
+export type EnumOtpPurposeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtpPurpose | Prisma.EnumOtpPurposeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel> | $Enums.OtpPurpose
+}
+
+export type EnumOtpPurposeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtpPurpose | Prisma.EnumOtpPurposeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtpPurposeWithAggregatesFilter<$PrismaModel> | $Enums.OtpPurpose
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -954,6 +971,23 @@ export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedIntFilter<$PrismaModel>
   _max?: Prisma.NestedIntFilter<$PrismaModel>
+}
+
+export type NestedEnumOtpPurposeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtpPurpose | Prisma.EnumOtpPurposeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel> | $Enums.OtpPurpose
+}
+
+export type NestedEnumOtpPurposeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtpPurpose | Prisma.EnumOtpPurposeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtpPurpose[] | Prisma.ListEnumOtpPurposeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtpPurposeWithAggregatesFilter<$PrismaModel> | $Enums.OtpPurpose
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOtpPurposeFilter<$PrismaModel>
 }
 
 

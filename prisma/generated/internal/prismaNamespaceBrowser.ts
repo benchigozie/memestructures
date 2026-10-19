@@ -71,7 +71,8 @@ export const ModelName = {
   AssetClassRequirement: 'AssetClassRequirement',
   AssetClassUniverse: 'AssetClassUniverse',
   AssetClassFee: 'AssetClassFee',
-  NotificationPreference: 'NotificationPreference'
+  NotificationPreference: 'NotificationPreference',
+  OtpToken: 'OtpToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,6 +423,19 @@ export const NotificationPreferenceScalarFieldEnum = {
 } as const
 
 export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
+
+
+export const OtpTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  codeHash: 'codeHash',
+  purpose: 'purpose',
+  expiresAt: 'expiresAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt'
+} as const
+
+export type OtpTokenScalarFieldEnum = (typeof OtpTokenScalarFieldEnum)[keyof typeof OtpTokenScalarFieldEnum]
 
 
 export const SortOrder = {

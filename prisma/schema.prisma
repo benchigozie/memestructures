@@ -40,6 +40,7 @@ model User {
 
   isManaged Boolean @default(false)
   notificationPreference NotificationPreference?
+  otpTokens OtpToken[]
 }
 
 model Organization {
@@ -546,4 +547,24 @@ model NotificationPreference {
   updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model OtpToken {
+  id        String     @id @default(cuid())
+  userId    String
+  codeHash  String     // Hashed OTP code for security
+  purpose   OtpPurpose
+  expiresAt DateTime
+  attempts  Int        @default(0)
+  createdAt DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, purpose])
+}
+
+enum OtpPurpose {
+  LOGIN_VERIFICATION
+  PASSWORD_RESET
+  SECURITY_CHECK
 }

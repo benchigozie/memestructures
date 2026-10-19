@@ -177,3 +177,12 @@ export const FundType = {
 } as const
 
 export type FundType = (typeof FundType)[keyof typeof FundType]
+
+
+export const OtpPurpose = {
+  LOGIN_VERIFICATION: 'LOGIN_VERIFICATION',
+  PASSWORD_RESET: 'PASSWORD_RESET',
+  SECURITY_CHECK: 'SECURITY_CHECK'
+} as const
+
+export type OtpPurpose = (typeof OtpPurpose)[keyof typeof OtpPurpose]

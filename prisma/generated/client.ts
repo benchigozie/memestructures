@@ -146,3 +146,8 @@ export type AssetClassFee = Prisma.AssetClassFeeModel
  * 
  */
 export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
+ * Model OtpToken
+ * 
+ */
+export type OtpToken = Prisma.OtpTokenModel
