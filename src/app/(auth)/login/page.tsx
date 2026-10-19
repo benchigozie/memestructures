@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import InProgress from "@/components/InProgress";
+import OtpInput from "@/components/OtpInput";
 import { getInitials } from "@/utils/getInitials";
 
 const loginSchema = Yup.object({
@@ -212,24 +213,18 @@ const Page = () => {
               >
                 {({ isSubmitting }) => (
                   <Form>
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="code" className="text-my-gray/85 text-[15px]">6-Digit Verification Code</label>
-                        <Field
-                          name="code"
-                          type="text"
-                          id="code"
-                          maxLength={6}
-                          placeholder="123456"
-                          className="mt-1 w-full text-center text-2xl tracking-widest rounded-xl outline outline-my-blue/15 focus:outline-my-blue/40 px-4 py-3"
-                        />
-                        <ErrorMessage name="code" component="p" className="text-sm text-red-400 mt-1 text-center" />
+                    <div className="space-y-6">
+                      <div className="flex flex-col items-center">
+                        <label htmlFor="code" className="text-my-gray/85 text-[15px] mb-3 block text-center font-medium">
+                          6-Digit Verification Code
+                        </label>
+                        <OtpInput name="code" length={6} />
                       </div>
 
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300"
+                        className="w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300 shadow-md shadow-my-blue/20"
                       >
                         Verify & Login
                       </button>
