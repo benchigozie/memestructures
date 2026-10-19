@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
-import { generateAccessToken, generateRefreshToken } from "@/lib/jwt";
-import { sendNotification } from "@/lib/mail/sendNotification";
-import { sendEmail } from "@/lib/mail/sendEmail";
-import { notificationTemplate } from "@/lib/mail/templates/notificationTemplate";
+import crypto from "crypto";
+import { sendOtpEmail } from "@/lib/mail/sendOTPMail";
 
 export async function POST(req: Request) {
     try {
@@ -21,7 +19,6 @@ export async function POST(req: Request) {
         }
 
         const normalizedIdentifier = identifier.trim().toLowerCase();
-
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         let user;
@@ -51,7 +48,7 @@ export async function POST(req: Request) {
             );
         }
 
-        const PEPPER = process.env.BCRYPT_PEPPER;
+        const PEPPER = process.env.BCRYPT_PEPPER || "";
         const passwordMatches = await bcrypt.compare(password + PEPPER, user.password);
 
         console.log("Password match result:", passwordMatches);
@@ -63,72 +60,45 @@ export async function POST(req: Request) {
             );
         }
 
-        const accessToken = generateAccessToken({ id: user.id, email: user.email });
-        const refreshToken = generateRefreshToken({ id: user.id });
+        // --- OTP GENERATION ---
+        // 1. Delete any active existing login OTPs for this user
+        await prisma.otpToken.deleteMany({
+            where: { userId: user.id, purpose: "LOGIN_VERIFICATION" },
+        }).catch(() => {});
 
-        const ip =
-            req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-            req.headers.get("x-real-ip") ||
-            "Unknown";
+        // 2. Generate secure 6-digit code
+        const rawCode = crypto.randomInt(100000, 999999).toString();
 
-        const userAgent =
-            req.headers.get("user-agent") || "Unknown device";
+        // 3. Hash code for DB storage
+        const salt = await bcrypt.genSalt(10);
+        const codeHash = await bcrypt.hash(rawCode, salt);
+        const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 mins TTL
 
-        const loginTime = new Date().toLocaleString();
+        // 4. Save token to OtpToken model
+        await prisma.otpToken.create({
+            data: {
+                userId: user.id,
+                codeHash,
+                purpose: "LOGIN_VERIFICATION",
+                expiresAt,
+            },
+        });
 
-        console.log(`Login successful for user ${user.email}. About to sned notification and email. IP: ${ip}, User Agent: ${userAgent}, Time: ${loginTime}`);
-        sendNotification({
-            userId: user.id,
-            title: "Login Successful",
-            message: `Your account was accessed successfully from ${ip}.`,
-            type: "INFO",
-            link: "/dashboard",
-        }).catch(console.error);
+        // 5. Send code via Email (matching your signup pattern)
+        sendOtpEmail(user.email, rawCode).catch(console.error);
 
-        sendEmail({
-            to: user.email,
-            subject: "New Login Detected",
-            html: notificationTemplate({
-                title: "New Login Detected",
-                message: `
-                    We detected a successful login to your Memestructures account.<br /><br />
-              
-                    <strong>IP Address:</strong> ${ip}<br />
-                    <strong>Device:</strong> ${userAgent}<br />
-                    <strong>Time:</strong> ${loginTime}<br /><br />  
+        console.log(`[OTP Dispatched] Code sent to email for user: ${user.email}`);
 
-                    If this was you, no further action is required.
-                    If you do not recognize this activity, please change your password immediately and contact support.
-                  `,
-                buttonText: "Open Dashboard",
-                buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
-            }),
-        }).catch(console.error);
-
-        const response = NextResponse.json(
+        return NextResponse.json(
             {
                 success: true,
-                message: "Logged in successfully",
-                user: { id: user.id, name: user.name, email: user.email, username: user.username, kycStatus: user.kycStatus, accountType: user.accountType },
+                requiresOtp: true,
+                message: "Password verified. Please enter the verification code sent to your email.",
+                userId: user.id,
+                email: user.email,
             },
             { status: 200 }
         );
-
-        response.cookies.set("accessToken", accessToken, {
-            httpOnly: true,
-            path: "/",
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 5 * 60,
-        });
-
-        response.cookies.set("refreshToken", refreshToken, {
-            httpOnly: true,
-            path: "/",
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 30 * 60,
-        });
-
-        return response;
 
     } catch (error) {
         console.error("Login error:", error);
