@@ -21,6 +21,7 @@
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "@sanity/client": "^7.14.1",
+    "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^4.22.0",
     "@supabase/supabase-js": "^2.103.0",
     "bcrypt": "^6.0.0",
@@ -69,6 +70,6 @@
     "tailwindcss": "^4",
     "ts-jest": "^29.4.6",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }
