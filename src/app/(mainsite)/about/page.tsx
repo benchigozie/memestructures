@@ -13,7 +13,6 @@ function page() {
         <div>
             <AboutHero />
             <Team />
-            <JoinCommunity />
         </div>
     )
 }

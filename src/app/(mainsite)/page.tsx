@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <div>
       
-        <FixedCTA />
+        
         <Hero />
-        <Results />
+        
         <YieldStrategy />
         <CapitalVehicles />
         <InvestorProfile />
