@@ -28,7 +28,7 @@ const FAQs = () => {
     return (
         <section className='bg-my-white mt-18'>
             <div className='max-w-6xl mx-auto px-4'>
-                <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>FAQs</h2>
+                <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>FAQs</h2>
                 <div className='grid grid-cols-1 gap-2 md:gap-3 mt-14'>
                     {
                         cards.map((card, i) => {

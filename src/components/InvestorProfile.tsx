@@ -17,7 +17,7 @@ function InvestorProfile() {
     return (
         <section className='bg-my-white mt-16 md:mt-24' >
             <div className='max-w-6xl mx-auto px-4'>
-                <h2 className='text-3xl md:text-5xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Qualified Investor Profile</h2>
+                <h2 className='text-3xl md:text-4xl text-my-deep-blue font-bold mt-1 md:mt-5 text-center'>Qualified Investor Profile</h2>
                 <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
                  { cards.map((card) => (
                     <div
