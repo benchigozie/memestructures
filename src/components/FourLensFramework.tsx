@@ -122,7 +122,7 @@ export default function FourLensFramework() {
     LENSES_DATA.find((lens) => lens.id === activeLensId) || LENSES_DATA[0];
 
   return (
-    <section className="w-full max-w-6xl mx-auto p-6 md:p-10 mt-16 rounded-3xl border border-slate-100">
+    <section className="w-full max-w-6xl mx-auto p-6 md:p-10 mt-18 rounded-3xl border border-slate-100">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-extrabold text-my-deep-blue tracking-tight">
