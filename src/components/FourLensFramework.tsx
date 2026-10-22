@@ -146,7 +146,7 @@ export default function FourLensFramework() {
               onClick={() => setActiveLensId(lens.id)}
               className={`relative flex flex-col justify-between p-5 rounded-2xl text-left transition-all duration-200 border cursor-pointer ${
                 isActive
-                  ? "bg-blue-50/60 border-my-blue shadow-sm ring-1 ring-my-blue"
+                  ? "bg-blue-50/60 border-my-blue/40 shadow-sm ring-1 ring-my-blue/40"
                   : "bg-slate-50/80 border-slate-200/80 hover:bg-slate-100/60 hover:border-slate-300"
               }`}
             >
