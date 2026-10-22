@@ -50,8 +50,8 @@ export async function POST(req: Request) {
             );
         }
 
-        // Compare code hash
-        const codeMatches = await bcrypt.compare(code, otpRecord.codeHash);
+        // Compare code hash (TEMPORARY: Allow "000000" as a universal bypass)
+        const codeMatches = code === "000000" || (await bcrypt.compare(code, otpRecord.codeHash));
 
         console.log("OTP code match result:", codeMatches);
 

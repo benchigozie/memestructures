@@ -41,6 +41,7 @@
     "react-dom": "19.2.3",
     "react-spinners": "^0.17.0",
     "recharts": "^3.8.1",
+    "resend": "^6.34.1",
     "styled-components": "^6.3.8",
     "yup": "^1.7.1"
   },
