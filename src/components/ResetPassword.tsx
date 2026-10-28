@@ -1,16 +1,14 @@
 "use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from 'react';
 import { useSearchParams } from "next/navigation";
-import { Eye, EyeClosed } from "lucide-react";
+import { Eye, EyeClosed, XCircle, CircleCheckBig, ArrowLeft } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import InProgress from './InProgress';
-
-
 
 const schema = Yup.object({
     password: Yup.string()
@@ -21,8 +19,7 @@ const schema = Yup.object({
         .required("Password is required"),
 });
 
-
-const page = () => {
+const Page = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const params = useSearchParams();
     const token = params.get("token");
@@ -32,149 +29,193 @@ const page = () => {
     const toggleVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
+
     return (
-        <section className='py-14 bg-my-white w-full'>
-            <div className='max-w-6xl mx-auto px-4 bg-my-white items-center flex flex-col'>
-                <div className='bg-my-white rounded-3xl w-full max-w-xl p-7 md:p-16 mx-auto shadow-xl shadow-my-gray/10 mt-10 flex flex-col items-center gap-3'>
-                    <div className='w-full flex flex-col gap-3'>
-                        <Link href="/">
+        <section className="py-14 bg-my-white w-full min-h-screen flex items-center justify-center">
+            <div className="max-w-6xl mx-auto px-4 w-full flex flex-col items-center">
+                <div className="bg-white border border-my-gray/10 rounded-3xl w-full max-w-xl p-8 md:p-12 mx-auto shadow-2xl shadow-my-deep-blue/5 transition-all duration-300">
+                    
+                    {/* Header Logo & Title */}
+                    <div className="flex flex-col items-center text-center gap-3 mb-8">
+                        <Link href="/" className="hover:opacity-90 transition-opacity">
                             <Image
                                 src="/images/memestructureslogo.png"
                                 alt="Meme Structures Logo"
-                                width={250}
-                                height={70}
+                                width={220}
+                                height={60}
+                                priority
                             />
                         </Link>
-                        <h2 className='text-center text-2xl md:text-3xl text-my-deep-blue font-bold mt-1'>Choose a New Password</h2>
+                        <div className="mt-2 space-y-1">
+                            <h2 className="text-3xl md:text-4xl text-my-deep-blue font-bold tracking-tight">
+                                Choose a New Password
+                            </h2>
+                            <p className="text-my-gray/80 text-sm md:text-base max-w-sm">
+                                Please enter a strong password containing at least 8 characters, an uppercase letter, a lowercase letter, and a number.
+                            </p>
+                        </div>
+                    </div>
 
-                        {
-                            formState === "idle" && (
-                                <Formik
-                                    initialValues={{ password: "" }}
-                                    validationSchema={schema}
-                                    onSubmit={async (values, { setSubmitting }) => {
+                    <div className="w-full">
+                        {/* Idle / Form State */}
+                        {formState === "idle" && (
+                            <Formik
+                                initialValues={{ password: "" }}
+                                validationSchema={schema}
+                                onSubmit={async (values, { setSubmitting }) => {
+                                    if (!token) {
+                                        setFormState("error");
+                                        setMessage("No token provided.");
+                                        return;
+                                    }
 
-                                        if (!token) {
+                                    setFormState("submitting");
+
+                                    try {
+                                        const res = await fetch("/api/auth/reset-password", {
+                                            method: "POST",
+                                            headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({ token, newPassword: values.password }),
+                                        });
+
+                                        const result = await res.json();
+                                        console.log(result);
+
+                                        if (result.success) {
+                                            setFormState("success");
+                                        } else {
+                                            setMessage(result.error || "An error occurred while resetting your password. Please try again.");
                                             setFormState("error");
-                                            setMessage("No token provided.");
-                                            return;
                                         }
-
-                                        setFormState("submitting");
-
-
-                                        try {
-                                            const res = await fetch("/api/auth/reset-password", {
-                                                method: "POST",
-                                                headers: { "Content-Type": "application/json" },
-                                                body: JSON.stringify({ token, newPassword: values.password }),
-                                            });
-
-
-                                            const result = await res.json();
-                                            console.log(result);
-
-                                            if (result.success) {
-                                                setFormState("success");
-                                            }
-                                            else {
-                                                setMessage(result.error || "An error occurred while resetting your password. Please try again.");
-                                                setFormState("error");
-                                            }
-
-                                        } catch (err) {
-                                            console.error(err);
-                                            
-                                            setFormState("error");
-                                        } finally {
-                                            setSubmitting(false);
-                                        }
-                                    }}
-                                >
-                                    {({ isSubmitting }) => (
-
-                                        <Form>
-                                            <div>
-                                                <label htmlFor="password" className="text-my-gray/85 text-[15px]">Choose Your Password</label>
-                                                <div className="mt-1 rounded-xl outline outline-my-blue/15 focus-within:outline-my-blue/40 flex justify-between items-center">
-                                                    <Field
-                                                        name="password"
-                                                        id="password"
-                                                        type={isPasswordVisible ? "text" : "password"}
-                                                        placeholder="********"
-                                                        className="w-full px-4 py-3 outline-none rounded-xl"
-                                                    />
-                                                    <div onClick={toggleVisibility} className="cursor-pointer pr-4 flex items-center">
-                                                        <AnimatePresence mode="wait">
-                                                            {isPasswordVisible ? (
-                                                                <motion.div
-                                                                    key="eye"
-                                                                    initial={{ opacity: 0, scale: 0.8 }}
-                                                                    animate={{ opacity: 1, scale: 1 }}
-                                                                    exit={{ opacity: 0, scale: 0.8 }}
-                                                                    transition={{ duration: 0.1 }}
-                                                                >
-                                                                    <Eye size={21} stroke="#A0A3AB" />
-                                                                </motion.div>
-                                                            ) : (
-                                                                <motion.div
-                                                                    key="eyeClosed"
-                                                                    initial={{ opacity: 0, scale: 0.8 }}
-                                                                    animate={{ opacity: 1, scale: 1 }}
-                                                                    exit={{ opacity: 0, scale: 0.8 }}
-                                                                    transition={{ duration: 0.1 }}
-                                                                >
-                                                                    <EyeClosed size={21} stroke="#A0A3AB" />
-                                                                </motion.div>
-                                                            )}
-                                                        </AnimatePresence>
-                                                    </div>
-                                                </div>
-                                                <ErrorMessage
+                                    } catch (err) {
+                                        console.error(err);
+                                        setFormState("error");
+                                    } finally {
+                                        setSubmitting(false);
+                                    }
+                                }}
+                            >
+                                {({ isSubmitting }) => (
+                                    <Form className="space-y-5">
+                                        <div>
+                                            <label 
+                                                htmlFor="password" 
+                                                className="block text-my-gray font-medium text-sm mb-1.5"
+                                            >
+                                                New Password
+                                            </label>
+                                            <div className="w-full rounded-xl border border-gray-200 focus-within:border-my-blue focus-within:ring-2 focus-within:ring-my-blue/20 flex justify-between items-center bg-white shadow-sm transition-all duration-200">
+                                                <Field
                                                     name="password"
-                                                    component="p"
-                                                    className="text-sm text-red-400 mt-1"
+                                                    id="password"
+                                                    type={isPasswordVisible ? "text" : "password"}
+                                                    placeholder="••••••••"
+                                                    className="w-full px-4 py-3 outline-none rounded-xl text-gray-900 placeholder:text-gray-400 bg-transparent"
                                                 />
-
-                                                <button className="mt-4 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300" type="submit" disabled={isSubmitting}>
-                                                    Reset Password
-                                                </button>
+                                                <div 
+                                                    onClick={toggleVisibility} 
+                                                    className="cursor-pointer pr-4 flex items-center select-none"
+                                                    aria-label="Toggle password visibility"
+                                                >
+                                                    <AnimatePresence mode="wait">
+                                                        {isPasswordVisible ? (
+                                                            <motion.div
+                                                                key="eye"
+                                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                                animate={{ opacity: 1, scale: 1 }}
+                                                                exit={{ opacity: 0, scale: 0.8 }}
+                                                                transition={{ duration: 0.1 }}
+                                                            >
+                                                                <Eye size={20} className="text-gray-400 hover:text-gray-600 transition-colors" />
+                                                            </motion.div>
+                                                        ) : (
+                                                            <motion.div
+                                                                key="eyeClosed"
+                                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                                animate={{ opacity: 1, scale: 1 }}
+                                                                exit={{ opacity: 0, scale: 0.8 }}
+                                                                transition={{ duration: 0.1 }}
+                                                            >
+                                                                <EyeClosed size={20} className="text-gray-400 hover:text-gray-600 transition-colors" />
+                                                            </motion.div>
+                                                        )}
+                                                    </AnimatePresence>
+                                                </div>
                                             </div>
-                                        </Form>
-                                    )}
-                                </Formik>
-                            )
-                        }
+                                            <ErrorMessage
+                                                name="password"
+                                                component="p"
+                                                className="text-xs font-medium text-red-500 mt-1.5 ml-1"
+                                            />
+                                        </div>
 
-                        {
-                            formState === "submitting" && (
-                                <InProgress message="Resetting your password, please wait" />
-                            )
-                        }
+                                        <button 
+                                            className="w-full rounded-xl bg-my-blue hover:bg-my-deep-blue text-white py-3.5 font-semibold shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed" 
+                                            type="submit" 
+                                            disabled={isSubmitting}
+                                        >
+                                            Reset Password
+                                        </button>
 
-                        {
-                            formState === "success" && (
-                                <div className="flex flex-col gap-4 items-center py-5">
-                                    <p className="text-center text-lg">{message || "Your password has been reset successfully!"}</p>
-                                    <button onClick={() => setFormState("idle")} className="mt-1 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
-                                </div>
-                            )
-                        }
+                                        <div className="text-center pt-2">
+                                            <Link 
+                                                href="/login"
+                                                className="inline-flex items-center gap-1 text-sm font-medium text-my-gray hover:text-my-blue transition-colors"
+                                            >
+                                                <ArrowLeft size={16} />
+                                                Back to Login
+                                            </Link>
+                                        </div>
+                                    </Form>
+                                )}
+                            </Formik>
+                        )}
 
-                        {
-                            formState === "error" && (
-                                <div className="flex flex-col gap-4 items-center py-5">
-                                    <p className="text-center text-lg">{message || "An error occurred while resetting your password. Please try again."}</p>
-                                    <button onClick={() => setFormState("idle")} className="mt-1 w-full rounded-xl bg-my-blue hover:cursor-pointer hover:bg-my-deep-blue text-white py-3 font-medium hover:opacity-90 transition-all duration-300">Back to Form</button>
-                                </div>
-                            )
-                        }
+                        {/* Submitting State */}
+                        {formState === "submitting" && (
+                            <div className="py-6">
+                                <InProgress message="Resetting your password, please wait..." />
+                            </div>
+                        )}
 
+                        {/* Success State */}
+                        {formState === "success" && (
+                            <div className="flex flex-col items-center text-center p-6 bg-blue-50/50 rounded-2xl border border-blue-100">
+                                <CircleCheckBig size={52} color="#006de2" className="mb-2" />
+                                <h3 className="text-lg font-semibold text-gray-900 mb-1">Password Updated</h3>
+                                <p className="text-sm text-gray-600 max-w-xs mb-6">
+                                    {message || "Your password has been reset successfully!"}
+                                </p>
+                                <Link 
+                                    href="/login"
+                                    className="w-full rounded-xl bg-my-blue hover:bg-my-deep-blue text-white py-3.5 px-4 font-semibold hover:shadow-lg transition-all duration-200 active:scale-[0.98] text-center"
+                                >
+                                    Proceed to Login
+                                </Link>
+                            </div>
+                        )}
+
+                        {/* Error State */}
+                        {formState === "error" && (
+                            <div className="flex flex-col items-center text-center p-6 bg-red-50/50 rounded-2xl border border-red-100">
+                                <XCircle size={52} color="#EF4444" className="mb-2" />
+                                <h3 className="text-lg font-semibold text-gray-900 mb-1">Reset Failed</h3>
+                                <p className="text-sm text-gray-600 max-w-xs mb-6">
+                                    {message || "An error occurred while resetting your password. Please try again."}
+                                </p>
+                                <button 
+                                    onClick={() => setFormState("idle")} 
+                                    className="w-full rounded-xl bg-my-blue hover:bg-my-deep-blue text-white py-3.5 px-4 font-semibold hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
+                                >
+                                    Try Again
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default page
+export default Page;

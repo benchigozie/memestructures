@@ -27,7 +27,6 @@ function Hero() {
                         </Link>
                     </div>
                 </div>
-                <HeroCards />
             </div>
         </section>
     )

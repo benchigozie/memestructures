@@ -24,7 +24,6 @@ export default function Home() {
         <OnboardingProcess />
         <CTA />
         <FAQs />
-        <JoinCommunity />
      
     </div>
   );

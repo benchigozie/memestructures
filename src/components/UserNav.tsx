@@ -182,7 +182,20 @@ const UserNav = () => {
                                         >
 
                                             <div className="w-15 h-15 bg-linear-240 from-my-blue to-my-deep-blue rounded-full flex items-center justify-center text-my-white text-xl font-semibold">
-                                                <div>{user?.initials}</div>
+                                                {
+                                                    user.profileImageUrl ? (
+                                                        <Image
+                                                            src={user.profileImageUrl}
+                                                            alt="Profile Image"
+                                                            width={60}
+                                                            height={60}
+                                                            className="rounded-full object-cover w-15 h-15"
+                                                        />
+                                                    ) : (
+                                                        <div>{user?.initials}</div>
+                                                    )
+                                                }
+                                                
                                             </div>
                                             <div className="flex flex-col py-2.5 px-10">
                                                 <p>{user?.name}</p>
