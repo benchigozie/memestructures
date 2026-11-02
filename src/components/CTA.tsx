@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Button from "./Button"
+import Link from "next/link"
 
 function CTA() {
     return (
@@ -24,15 +25,21 @@ function CTA() {
 
                     <div className="relative z-10 max-w-3xl space-y-4">
                         <h2 className="text-my-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                            Secure your slot and start investing today.
+                            Invest With Patience, Manage With Discipline
                         </h2>
-                        <p className="text-base sm:text-lg md:text-xl text-my-white/70 max-w-2xl mx-auto leading-relaxed">
-                            Join a community of sophisticated investors who invest with structure in alternative assets and benefit from professional management.
+                        <p className="text-base md:text-xl text-my-white/70 max-w-2xl mx-auto leading-relaxed">
+                            MemeStructures exists to bring structure to long-term capital allocation
+                        </p>
+                        <p className="text-base text-my-white/70 max-w-2xl mx-auto leading-relaxed">
+                           Through disciplined research, selective deployment and aligned incentives, we manage member capital with a focus on long-term opportunity.
                         </p>
                     </div>
 
+
                     <div className="relative z-10 pt-2 flex items-center justify-center">
-                        <Button buttonText="Sign In" btnType="primary" />
+                    <Link href="/login">
+                        <Button buttonText="Member Login" btnType="primary" />
+                        </Link>
                     </div>
                 </div>
             </div>

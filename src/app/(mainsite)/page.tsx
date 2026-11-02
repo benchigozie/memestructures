@@ -1,3 +1,4 @@
+import CTA from "@/components/CTA";
 import FAQs from "@/components/FAQs";
 import FourLensFramework from "@/components/FourLensFramework";
 import Hero from "@/components/Hero";
@@ -9,14 +10,15 @@ import StructureBeforeDeployment from "@/components/StructureBeforeDeployment";
 export default function Home() {
   return (
     <div>
-         
+ 
+        
         <Hero />
         <StructureBeforeDeployment />
         
         <FourLensFramework />
         <InvestorProfile />
         <OnboardingProcess />
-      
+      <CTA />
         <FAQs />
      
     </div>
