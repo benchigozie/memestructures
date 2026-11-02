@@ -13,7 +13,7 @@ export default function StructureBeforeDeployment() {
   const [activeTab, setActiveTab] = useState("four-lens");
 
   return (
-    <section className="bg-my-white py-16 md:py-20">
+    <section className="bg-my-white py-10 md:py-14">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
