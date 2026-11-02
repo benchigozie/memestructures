@@ -182,7 +182,7 @@ const UserNav = () => {
                                         >
 
                                             <div className="w-15 h-15 bg-linear-240 from-my-blue to-my-deep-blue rounded-full flex items-center justify-center text-my-white text-xl font-semibold">
-                                                {
+                                                {/*
                                                     user.profileImageUrl ? (
                                                         <Image
                                                             src={user.profileImageUrl}
@@ -194,7 +194,9 @@ const UserNav = () => {
                                                     ) : (
                                                         <div>{user?.initials}</div>
                                                     )
+                                                        */
                                                 }
+                                                <div>{user?.initials}</div>
                                                 
                                             </div>
                                             <div className="flex flex-col py-2.5 px-10">
